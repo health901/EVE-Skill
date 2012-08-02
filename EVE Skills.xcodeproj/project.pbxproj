@@ -1,0 +1,301 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF62B5CE15CB274D00190CF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF62B5CD15CB274D00190CF6 /* Cocoa.framework */; };
+		BF62B5D815CB274D00190CF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5D615CB274D00190CF6 /* InfoPlist.strings */; };
+		BF62B5DA15CB274D00190CF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5D915CB274D00190CF6 /* main.m */; };
+		BF62B5DE15CB274D00190CF6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5DC15CB274D00190CF6 /* Credits.rtf */; };
+		BF62B5E115CB274D00190CF6 /* VGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */; };
+		BF62B5E415CB274D00190CF6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5E215CB274D00190CF6 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BF62B5C915CB274D00190CF6 /* EVE Skills.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EVE Skills.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF62B5CD15CB274D00190CF6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		BF62B5D015CB274D00190CF6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		BF62B5D115CB274D00190CF6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BF62B5D215CB274D00190CF6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BF62B5D515CB274D00190CF6 /* EVE Skills-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EVE Skills-Info.plist"; sourceTree = "<group>"; };
+		BF62B5D715CB274D00190CF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BF62B5D915CB274D00190CF6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BF62B5DB15CB274D00190CF6 /* EVE Skills-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EVE Skills-Prefix.pch"; sourceTree = "<group>"; };
+		BF62B5DD15CB274D00190CF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGAppDelegate.h; sourceTree = "<group>"; };
+		BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGAppDelegate.m; sourceTree = "<group>"; };
+		BF62B5E315CB274D00190CF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF62B5C615CB274D00190CF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF62B5CE15CB274D00190CF6 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BF62B5BE15CB274D00190CF6 = {
+			isa = PBXGroup;
+			children = (
+				BF62B5D315CB274D00190CF6 /* EVE Skills */,
+				BF62B5CC15CB274D00190CF6 /* Frameworks */,
+				BF62B5CA15CB274D00190CF6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BF62B5CA15CB274D00190CF6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF62B5C915CB274D00190CF6 /* EVE Skills.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF62B5CC15CB274D00190CF6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF62B5CD15CB274D00190CF6 /* Cocoa.framework */,
+				BF62B5CF15CB274D00190CF6 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF62B5CF15CB274D00190CF6 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF62B5D015CB274D00190CF6 /* AppKit.framework */,
+				BF62B5D115CB274D00190CF6 /* CoreData.framework */,
+				BF62B5D215CB274D00190CF6 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		BF62B5D315CB274D00190CF6 /* EVE Skills */ = {
+			isa = PBXGroup;
+			children = (
+				BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */,
+				BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */,
+				BF62B5E215CB274D00190CF6 /* MainMenu.xib */,
+				BF62B5D415CB274D00190CF6 /* Supporting Files */,
+			);
+			path = "EVE Skills";
+			sourceTree = "<group>";
+		};
+		BF62B5D415CB274D00190CF6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BF62B5D515CB274D00190CF6 /* EVE Skills-Info.plist */,
+				BF62B5D615CB274D00190CF6 /* InfoPlist.strings */,
+				BF62B5D915CB274D00190CF6 /* main.m */,
+				BF62B5DB15CB274D00190CF6 /* EVE Skills-Prefix.pch */,
+				BF62B5DC15CB274D00190CF6 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BF62B5C815CB274D00190CF6 /* EVE Skills */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF62B5E715CB274D00190CF6 /* Build configuration list for PBXNativeTarget "EVE Skills" */;
+			buildPhases = (
+				BF62B5C515CB274D00190CF6 /* Sources */,
+				BF62B5C615CB274D00190CF6 /* Frameworks */,
+				BF62B5C715CB274D00190CF6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "EVE Skills";
+			productName = "EVE Skills";
+			productReference = BF62B5C915CB274D00190CF6 /* EVE Skills.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BF62B5C015CB274D00190CF6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = VG;
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Vincent Garrigues";
+			};
+			buildConfigurationList = BF62B5C315CB274D00190CF6 /* Build configuration list for PBXProject "EVE Skills" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BF62B5BE15CB274D00190CF6;
+			productRefGroup = BF62B5CA15CB274D00190CF6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF62B5C815CB274D00190CF6 /* EVE Skills */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BF62B5C715CB274D00190CF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF62B5D815CB274D00190CF6 /* InfoPlist.strings in Resources */,
+				BF62B5DE15CB274D00190CF6 /* Credits.rtf in Resources */,
+				BF62B5E415CB274D00190CF6 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BF62B5C515CB274D00190CF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF62B5DA15CB274D00190CF6 /* main.m in Sources */,
+				BF62B5E115CB274D00190CF6 /* VGAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BF62B5D615CB274D00190CF6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF62B5D715CB274D00190CF6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BF62B5DC15CB274D00190CF6 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF62B5DD15CB274D00190CF6 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		BF62B5E215CB274D00190CF6 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF62B5E315CB274D00190CF6 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BF62B5E515CB274D00190CF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BF62B5E615CB274D00190CF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		BF62B5E815CB274D00190CF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EVE Skills/EVE Skills-Prefix.pch";
+				INFOPLIST_FILE = "EVE Skills/EVE Skills-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BF62B5E915CB274D00190CF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EVE Skills/EVE Skills-Prefix.pch";
+				INFOPLIST_FILE = "EVE Skills/EVE Skills-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BF62B5C315CB274D00190CF6 /* Build configuration list for PBXProject "EVE Skills" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF62B5E515CB274D00190CF6 /* Debug */,
+				BF62B5E615CB274D00190CF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF62B5E715CB274D00190CF6 /* Build configuration list for PBXNativeTarget "EVE Skills" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF62B5E815CB274D00190CF6 /* Debug */,
+				BF62B5E915CB274D00190CF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BF62B5C015CB274D00190CF6 /* Project object */;
+}
