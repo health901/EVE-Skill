@@ -12,7 +12,10 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    // Initializing Core Data
+    _coreDataController = [[CoreDataController alloc] init];
+    [_coreDataController loadPersistentStores];
+    
 }
 
 @end

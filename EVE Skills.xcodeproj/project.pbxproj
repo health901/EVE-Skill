@@ -14,7 +14,8 @@
 		BF62B5E115CB274D00190CF6 /* VGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */; };
 		BF62B5E415CB274D00190CF6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5E215CB274D00190CF6 /* MainMenu.xib */; };
 		BF62B5F715CB28B700190CF6 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5ED15CB28B700190CF6 /* CoreDataController.m */; };
-		BF62B5F815CB28B700190CF6 /* DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5EE15CB28B700190CF6 /* DataModel.xcdatamodel */; };
+		BFDD80B415CC612100116A65 /* EVE_Database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BFDD80B315CC612100116A65 /* EVE_Database.sqlite */; };
+		BFDD80B515CC62A000116A65 /* EVE_Database.sqlite in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B315CC612100116A65 /* EVE_Database.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		BF62B5EC15CB28B700190CF6 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
 		BF62B5ED15CB28B700190CF6 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
 		BF62B5EE15CB28B700190CF6 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		BFDD80B315CC612100116A65 /* EVE_Database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = EVE_Database.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */,
 				BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */,
 				BF62B5E215CB274D00190CF6 /* MainMenu.xib */,
+				BFDD80B115CC60F300116A65 /* Resources */,
 				BF62B5D415CB274D00190CF6 /* Supporting Files */,
 			);
 			path = "EVE Skills";
@@ -117,6 +120,14 @@
 			);
 			name = Shared;
 			path = ../../Shared;
+			sourceTree = "<group>";
+		};
+		BFDD80B115CC60F300116A65 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BFDD80B315CC612100116A65 /* EVE_Database.sqlite */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +185,7 @@
 				BF62B5D815CB274D00190CF6 /* InfoPlist.strings in Resources */,
 				BF62B5DE15CB274D00190CF6 /* Credits.rtf in Resources */,
 				BF62B5E415CB274D00190CF6 /* MainMenu.xib in Resources */,
+				BFDD80B415CC612100116A65 /* EVE_Database.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,10 +196,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFDD80B515CC62A000116A65 /* EVE_Database.sqlite in Sources */,
 				BF62B5DA15CB274D00190CF6 /* main.m in Sources */,
 				BF62B5E115CB274D00190CF6 /* VGAppDelegate.m in Sources */,
 				BF62B5F715CB28B700190CF6 /* CoreDataController.m in Sources */,
-				BF62B5F815CB28B700190CF6 /* DataModel.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
