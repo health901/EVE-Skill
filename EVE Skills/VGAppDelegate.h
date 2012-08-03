@@ -11,8 +11,6 @@
 
 @interface VGAppDelegate : NSObject <NSApplicationDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
-
 @property (nonatomic, strong, readonly) CoreDataController *coreDataController;
 
 @end

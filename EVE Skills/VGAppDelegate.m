@@ -7,6 +7,13 @@
 //
 
 #import "VGAppDelegate.h"
+#import "VGManagerWindowController.h"
+
+@interface VGAppDelegate () {
+    VGManagerWindowController *_managerWC;
+}
+
+@end
 
 @implementation VGAppDelegate
 
@@ -15,6 +22,10 @@
     // Initializing Core Data
     _coreDataController = [[CoreDataController alloc] init];
     [_coreDataController loadPersistentStores];
+    
+    // Character manager
+    _managerWC = [[VGManagerWindowController alloc] initWithWindowNibName:@"VGManagerWindowController"];
+    [_managerWC.window makeKeyAndOrderFront:nil];
     
 }
 

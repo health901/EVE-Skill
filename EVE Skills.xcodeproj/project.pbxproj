@@ -13,9 +13,15 @@
 		BF62B5DE15CB274D00190CF6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5DC15CB274D00190CF6 /* Credits.rtf */; };
 		BF62B5E115CB274D00190CF6 /* VGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */; };
 		BF62B5E415CB274D00190CF6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5E215CB274D00190CF6 /* MainMenu.xib */; };
-		BF62B5F715CB28B700190CF6 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5ED15CB28B700190CF6 /* CoreDataController.m */; };
 		BFDD80B415CC612100116A65 /* EVE_Database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BFDD80B315CC612100116A65 /* EVE_Database.sqlite */; };
 		BFDD80B515CC62A000116A65 /* EVE_Database.sqlite in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B315CC612100116A65 /* EVE_Database.sqlite */; };
+		BFDD80BE15CC728000116A65 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B815CC728000116A65 /* CoreDataController.m */; };
+		BFDD80BF15CC728000116A65 /* DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */; };
+		BFDD80C015CC728000116A65 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80BB15CC728000116A65 /* Group.m */; };
+		BFDD80C115CC728000116A65 /* Skill.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80BD15CC728000116A65 /* Skill.m */; };
+		BFDD80D415CC76BA00116A65 /* VGManagerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80D215CC76BA00116A65 /* VGManagerWindowController.m */; };
+		BFDD80D515CC76BA00116A65 /* VGManagerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFDD80D315CC76BA00116A65 /* VGManagerWindowController.xib */; };
+		BFDD80D815CC804500116A65 /* VGAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80D715CC804500116A65 /* VGAPICall.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,10 +38,19 @@
 		BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGAppDelegate.h; sourceTree = "<group>"; };
 		BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGAppDelegate.m; sourceTree = "<group>"; };
 		BF62B5E315CB274D00190CF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		BF62B5EC15CB28B700190CF6 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
-		BF62B5ED15CB28B700190CF6 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
-		BF62B5EE15CB28B700190CF6 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		BFDD80B315CC612100116A65 /* EVE_Database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = EVE_Database.sqlite; sourceTree = "<group>"; };
+		BFDD80B715CC728000116A65 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
+		BFDD80B815CC728000116A65 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
+		BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		BFDD80BA15CC728000116A65 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		BFDD80BB15CC728000116A65 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		BFDD80BC15CC728000116A65 /* Skill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skill.h; sourceTree = "<group>"; };
+		BFDD80BD15CC728000116A65 /* Skill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Skill.m; sourceTree = "<group>"; };
+		BFDD80D115CC76BA00116A65 /* VGManagerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGManagerWindowController.h; sourceTree = "<group>"; };
+		BFDD80D215CC76BA00116A65 /* VGManagerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGManagerWindowController.m; sourceTree = "<group>"; };
+		BFDD80D315CC76BA00116A65 /* VGManagerWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGManagerWindowController.xib; sourceTree = "<group>"; };
+		BFDD80D615CC804500116A65 /* VGAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGAPICall.h; sourceTree = "<group>"; };
+		BFDD80D715CC804500116A65 /* VGAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGAPICall.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,9 +104,10 @@
 		BF62B5D315CB274D00190CF6 /* EVE Skills */ = {
 			isa = PBXGroup;
 			children = (
-				BF62B5EB15CB28B700190CF6 /* Shared */,
+				BFDD80B615CC728000116A65 /* Shared */,
 				BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */,
 				BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */,
+				BFDD80D015CC76A200116A65 /* UI */,
 				BF62B5E215CB274D00190CF6 /* MainMenu.xib */,
 				BFDD80B115CC60F300116A65 /* Resources */,
 				BF62B5D415CB274D00190CF6 /* Supporting Files */,
@@ -111,23 +127,38 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BF62B5EB15CB28B700190CF6 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				BF62B5EC15CB28B700190CF6 /* CoreDataController.h */,
-				BF62B5ED15CB28B700190CF6 /* CoreDataController.m */,
-				BF62B5EE15CB28B700190CF6 /* DataModel.xcdatamodel */,
-			);
-			name = Shared;
-			path = ../../Shared;
-			sourceTree = "<group>";
-		};
 		BFDD80B115CC60F300116A65 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				BFDD80B315CC612100116A65 /* EVE_Database.sqlite */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		BFDD80B615CC728000116A65 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BFDD80B715CC728000116A65 /* CoreDataController.h */,
+				BFDD80B815CC728000116A65 /* CoreDataController.m */,
+				BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */,
+				BFDD80BA15CC728000116A65 /* Group.h */,
+				BFDD80BB15CC728000116A65 /* Group.m */,
+				BFDD80BC15CC728000116A65 /* Skill.h */,
+				BFDD80BD15CC728000116A65 /* Skill.m */,
+				BFDD80D615CC804500116A65 /* VGAPICall.h */,
+				BFDD80D715CC804500116A65 /* VGAPICall.m */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		BFDD80D015CC76A200116A65 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				BFDD80D115CC76BA00116A65 /* VGManagerWindowController.h */,
+				BFDD80D215CC76BA00116A65 /* VGManagerWindowController.m */,
+				BFDD80D315CC76BA00116A65 /* VGManagerWindowController.xib */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +217,7 @@
 				BF62B5DE15CB274D00190CF6 /* Credits.rtf in Resources */,
 				BF62B5E415CB274D00190CF6 /* MainMenu.xib in Resources */,
 				BFDD80B415CC612100116A65 /* EVE_Database.sqlite in Resources */,
+				BFDD80D515CC76BA00116A65 /* VGManagerWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,7 +231,12 @@
 				BFDD80B515CC62A000116A65 /* EVE_Database.sqlite in Sources */,
 				BF62B5DA15CB274D00190CF6 /* main.m in Sources */,
 				BF62B5E115CB274D00190CF6 /* VGAppDelegate.m in Sources */,
-				BF62B5F715CB28B700190CF6 /* CoreDataController.m in Sources */,
+				BFDD80BE15CC728000116A65 /* CoreDataController.m in Sources */,
+				BFDD80BF15CC728000116A65 /* DataModel.xcdatamodel in Sources */,
+				BFDD80C015CC728000116A65 /* Group.m in Sources */,
+				BFDD80C115CC728000116A65 /* Skill.m in Sources */,
+				BFDD80D415CC76BA00116A65 /* VGManagerWindowController.m in Sources */,
+				BFDD80D815CC804500116A65 /* VGAPICall.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
