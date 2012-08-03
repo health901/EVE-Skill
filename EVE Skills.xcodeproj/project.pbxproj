@@ -13,6 +13,8 @@
 		BF62B5DE15CB274D00190CF6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5DC15CB274D00190CF6 /* Credits.rtf */; };
 		BF62B5E115CB274D00190CF6 /* VGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */; };
 		BF62B5E415CB274D00190CF6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5E215CB274D00190CF6 /* MainMenu.xib */; };
+		BF62B5F715CB28B700190CF6 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5ED15CB28B700190CF6 /* CoreDataController.m */; };
+		BF62B5F815CB28B700190CF6 /* DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5EE15CB28B700190CF6 /* DataModel.xcdatamodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,9 @@
 		BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGAppDelegate.h; sourceTree = "<group>"; };
 		BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGAppDelegate.m; sourceTree = "<group>"; };
 		BF62B5E315CB274D00190CF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		BF62B5EC15CB28B700190CF6 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
+		BF62B5ED15CB28B700190CF6 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
+		BF62B5EE15CB28B700190CF6 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +87,7 @@
 		BF62B5D315CB274D00190CF6 /* EVE Skills */ = {
 			isa = PBXGroup;
 			children = (
+				BF62B5EB15CB28B700190CF6 /* Shared */,
 				BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */,
 				BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */,
 				BF62B5E215CB274D00190CF6 /* MainMenu.xib */,
@@ -100,6 +106,17 @@
 				BF62B5DC15CB274D00190CF6 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BF62B5EB15CB28B700190CF6 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BF62B5EC15CB28B700190CF6 /* CoreDataController.h */,
+				BF62B5ED15CB28B700190CF6 /* CoreDataController.m */,
+				BF62B5EE15CB28B700190CF6 /* DataModel.xcdatamodel */,
+			);
+			name = Shared;
+			path = ../../Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +186,8 @@
 			files = (
 				BF62B5DA15CB274D00190CF6 /* main.m in Sources */,
 				BF62B5E115CB274D00190CF6 /* VGAppDelegate.m in Sources */,
+				BF62B5F715CB28B700190CF6 /* CoreDataController.m in Sources */,
+				BF62B5F815CB28B700190CF6 /* DataModel.xcdatamodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +313,7 @@
 				BF62B5E915CB274D00190CF6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
