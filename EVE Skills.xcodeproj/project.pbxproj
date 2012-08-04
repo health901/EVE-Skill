@@ -22,6 +22,11 @@
 		BFDD80D415CC76BA00116A65 /* VGManagerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80D215CC76BA00116A65 /* VGManagerWindowController.m */; };
 		BFDD80D515CC76BA00116A65 /* VGManagerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFDD80D315CC76BA00116A65 /* VGManagerWindowController.xib */; };
 		BFDD80D815CC804500116A65 /* VGAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80D715CC804500116A65 /* VGAPICall.m */; };
+		BFDD80DB15CC839500116A65 /* VGAPIController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80DA15CC839500116A65 /* VGAPIController.m */; };
+		BFDD80E015CC909A00116A65 /* VGKeyInfoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80DF15CC909A00116A65 /* VGKeyInfoQuery.m */; };
+		BFDD80FB15CC929400116A65 /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80F615CC929400116A65 /* API.m */; };
+		BFDD80FC15CC929400116A65 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80F815CC929400116A65 /* Character.m */; };
+		BFDD80FD15CC929400116A65 /* Corporation.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80FA15CC929400116A65 /* Corporation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +56,16 @@
 		BFDD80D315CC76BA00116A65 /* VGManagerWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGManagerWindowController.xib; sourceTree = "<group>"; };
 		BFDD80D615CC804500116A65 /* VGAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGAPICall.h; sourceTree = "<group>"; };
 		BFDD80D715CC804500116A65 /* VGAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGAPICall.m; sourceTree = "<group>"; };
+		BFDD80D915CC839500116A65 /* VGAPIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGAPIController.h; sourceTree = "<group>"; };
+		BFDD80DA15CC839500116A65 /* VGAPIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGAPIController.m; sourceTree = "<group>"; };
+		BFDD80DE15CC909A00116A65 /* VGKeyInfoQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGKeyInfoQuery.h; sourceTree = "<group>"; };
+		BFDD80DF15CC909A00116A65 /* VGKeyInfoQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGKeyInfoQuery.m; sourceTree = "<group>"; };
+		BFDD80F515CC929400116A65 /* API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
+		BFDD80F615CC929400116A65 /* API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = API.m; sourceTree = "<group>"; };
+		BFDD80F715CC929400116A65 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		BFDD80F815CC929400116A65 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
+		BFDD80F915CC929400116A65 /* Corporation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Corporation.h; sourceTree = "<group>"; };
+		BFDD80FA15CC929400116A65 /* Corporation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Corporation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,15 +153,9 @@
 		BFDD80B615CC728000116A65 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				BFDD80B715CC728000116A65 /* CoreDataController.h */,
-				BFDD80B815CC728000116A65 /* CoreDataController.m */,
-				BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */,
-				BFDD80BA15CC728000116A65 /* Group.h */,
-				BFDD80BB15CC728000116A65 /* Group.m */,
-				BFDD80BC15CC728000116A65 /* Skill.h */,
-				BFDD80BD15CC728000116A65 /* Skill.m */,
-				BFDD80D615CC804500116A65 /* VGAPICall.h */,
-				BFDD80D715CC804500116A65 /* VGAPICall.m */,
+				BFDD80E215CC924100116A65 /* Core Data */,
+				BFDD80E115CC922A00116A65 /* API Controller & Call */,
+				BFDD80DD15CC906F00116A65 /* Query parsers */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -159,6 +168,46 @@
 				BFDD80D315CC76BA00116A65 /* VGManagerWindowController.xib */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		BFDD80DD15CC906F00116A65 /* Query parsers */ = {
+			isa = PBXGroup;
+			children = (
+				BFDD80DE15CC909A00116A65 /* VGKeyInfoQuery.h */,
+				BFDD80DF15CC909A00116A65 /* VGKeyInfoQuery.m */,
+			);
+			name = "Query parsers";
+			sourceTree = "<group>";
+		};
+		BFDD80E115CC922A00116A65 /* API Controller & Call */ = {
+			isa = PBXGroup;
+			children = (
+				BFDD80D915CC839500116A65 /* VGAPIController.h */,
+				BFDD80DA15CC839500116A65 /* VGAPIController.m */,
+				BFDD80D615CC804500116A65 /* VGAPICall.h */,
+				BFDD80D715CC804500116A65 /* VGAPICall.m */,
+			);
+			name = "API Controller & Call";
+			sourceTree = "<group>";
+		};
+		BFDD80E215CC924100116A65 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				BFDD80F515CC929400116A65 /* API.h */,
+				BFDD80F615CC929400116A65 /* API.m */,
+				BFDD80F715CC929400116A65 /* Character.h */,
+				BFDD80F815CC929400116A65 /* Character.m */,
+				BFDD80F915CC929400116A65 /* Corporation.h */,
+				BFDD80FA15CC929400116A65 /* Corporation.m */,
+				BFDD80B715CC728000116A65 /* CoreDataController.h */,
+				BFDD80B815CC728000116A65 /* CoreDataController.m */,
+				BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */,
+				BFDD80BA15CC728000116A65 /* Group.h */,
+				BFDD80BB15CC728000116A65 /* Group.m */,
+				BFDD80BC15CC728000116A65 /* Skill.h */,
+				BFDD80BD15CC728000116A65 /* Skill.m */,
+			);
+			name = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +286,11 @@
 				BFDD80C115CC728000116A65 /* Skill.m in Sources */,
 				BFDD80D415CC76BA00116A65 /* VGManagerWindowController.m in Sources */,
 				BFDD80D815CC804500116A65 /* VGAPICall.m in Sources */,
+				BFDD80DB15CC839500116A65 /* VGAPIController.m in Sources */,
+				BFDD80E015CC909A00116A65 /* VGKeyInfoQuery.m in Sources */,
+				BFDD80FB15CC929400116A65 /* API.m in Sources */,
+				BFDD80FC15CC929400116A65 /* Character.m in Sources */,
+				BFDD80FD15CC929400116A65 /* Corporation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

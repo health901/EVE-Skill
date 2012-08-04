@@ -8,9 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "CoreDataController.h"
+#import "VGAPIController.h"
 
 @interface VGAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (nonatomic, strong, readonly) CoreDataController *coreDataController;
+@property (nonatomic, strong, readonly) VGAPIController *apiController;
 
 @end
