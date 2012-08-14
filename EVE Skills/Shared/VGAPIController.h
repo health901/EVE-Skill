@@ -20,4 +20,6 @@
 
 - (void)addAPIWithKeyID:(NSString *)keyID vCode:(NSString *)vCode;
 
+- (void)addPortraitForCharacterID:(NSString *)characterID;
+
 @end

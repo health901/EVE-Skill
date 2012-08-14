@@ -25,4 +25,7 @@
 - (void)callAPIWithDictionary:(NSDictionary *)dictionary
             completionHandler:(void (^)(NSURLResponse *urlResponse, NSData *data, NSError *error))handler;
 
+- (NSData *)callAPIWithDictionarySync:(NSDictionary *)dictionary
+                                error:(NSError **)error;
+
 @end

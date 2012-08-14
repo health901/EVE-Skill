@@ -91,4 +91,63 @@
                            completionHandler:handler];
 }
 
+- (NSData *)callAPIWithDictionarySync:(NSDictionary *)dictionary
+                                error:(NSError **)error
+{
+    // Getting the apiUrl
+    if (![dictionary objectForKey:@"apiURL"]) {
+        NSLog(@"threadedCallAPI : error, no 'apiURL' specified.");
+        abort();
+    }
+    NSURL *url = [NSURL URLWithString:[dictionary objectForKey:@"apiURL"]];
+    
+    
+    
+    // setup request
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:url];
+    [request setHTTPMethod:@"POST"];
+    
+    // set headers
+    NSString *contentType = [NSString stringWithFormat:@"text/plain"];
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    
+    // POST variables
+    NSMutableString *post = [[NSMutableString alloc] init];
+    
+    // If dictionary has more than one entry, it means there are variables
+    if ([dictionary count] > 1) {
+        
+        // Getting all keys except 'apiUrl'
+        NSArray *keys = [[dictionary keysOfEntriesPassingTest:^BOOL(id key, id obj, BOOL *stop) {
+            return ![(NSString *)key isEqualToString:@"apiUrl"];
+        }] allObjects];;
+        
+        for (int i = 0; i < [keys count]; i++) {
+            NSString *key = [keys objectAtIndex:i];
+            
+            if (i > 0) {
+                [post appendFormat:@"&%@=%@", key, [dictionary objectForKey:key]];
+            } else {
+                [post appendFormat:@"%@=%@", key, [dictionary objectForKey:key]];
+            }
+            
+        }
+    }
+    
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding];
+    
+    //NSLog(@"post : %@", post);
+    
+    // HTTP BODY
+    [request setValue:@"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%ld", [postData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    
+    return [NSURLConnection sendSynchronousRequest:request
+                                 returningResponse:nil
+                                             error:error];
+}
+
 @end

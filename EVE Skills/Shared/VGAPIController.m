@@ -10,6 +10,8 @@
 #import "VGAppDelegate.h"
 #import "VGKeyInfoQuery.h"
 
+#import "Character.h"
+
 @interface VGAPIController () {
     BOOL _initialized;
     
@@ -62,6 +64,8 @@
     // this must be called in com.vincentgarrigues.apiControllerQueue
     assert(dispatch_get_current_queue() == self.dispatchQueue);
     
+    NSLog(@"apiKeyStart");
+    
     // send the start notification
     [[NSNotificationCenter defaultCenter] postNotificationName:APICALL_QUERY_DID_START_NOTIFICATION
                                                         object:self];
@@ -77,34 +81,46 @@
     void (^keyInfoQueryHandler)(NSError*);
     
     keyInfoQueryHandler = ^(NSError *error) {
-        // TODO handle the returned NSError
+        // handle the returned NSError
+        if (error) {
+            NSLog(@"Error keyInfoQueryHandler : %@, %@", error, [error userInfo]);
+            NSAlert *alert = [NSAlert alertWithError:error];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [alert runModal];
+            });
+        }
         
         // save the MOC
         [_apiControllerContext performBlock:^{
             NSError *saveError = nil;
             if (![_apiControllerContext save:&saveError]) {
                 NSLog(@"Error saving context : %@, %@", saveError, [saveError userInfo]);
+                NSAlert *alert = [NSAlert alertWithError:saveError];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [alert runModal];
+                });
             }
         }];
-        
-        // send the end notification
-        [[NSNotificationCenter defaultCenter] postNotificationName:APICALL_QUERY_DID_END_NOTIFICATION
-                                                            object:self];
     };
     
     apiCallHandler = ^(NSURLResponse *urlResponse,
                        NSData *data,
-                       NSError *error) {        
+                       NSError *error) {
+        // send the end notification
+        [[NSNotificationCenter defaultCenter] postNotificationName:APICALL_QUERY_DID_END_NOTIFICATION
+                                                            object:self];
+        
+        NSLog(@"apiKeyEnd");
+        
         if (!data) {
             NSLog(@"Error : recieved data is nil : %@, %@", error, [error userInfo]);
-            abort();
+            return;
         }
         
         // Log dispatch
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"apiCallHandler data = '%@'", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         });
-        
         
         dispatch_async(self.dispatchQueue, ^{
             VGKeyInfoQuery *keyInfoQuery = [[VGKeyInfoQuery alloc] initWithData:data];
@@ -120,6 +136,77 @@
     // call the API with the already defined variables dictionnary and handler block
     [_apiCall callAPIWithDictionary:dictionary
                   completionHandler:apiCallHandler];
+}
+
+- (void)addPortraitForCharacterID:(NSString *)characterID
+{
+    // this must be called in com.vincentgarrigues.apiControllerQueue
+    assert(dispatch_get_current_queue() == self.dispatchQueue);
+    
+    NSLog(@"addPortraitForCharacterID:%@", characterID);
+    
+    // send the start notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:APICALL_QUERY_DID_START_NOTIFICATION
+                                                        object:self];
+    
+    // create the variables dictionnary
+    NSMutableString *urlString = [[NSMutableString alloc] init];
+    [urlString appendString:API_IMAGE_QUERY];
+    [urlString appendFormat:@"Character/%@_512.jpg", characterID];
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                urlString, @"apiURL", nil];
+    
+    // call the API synchronously with the already defined variables dictionnary and handler block
+    NSError *apiCallError = nil;
+    NSData *data = [_apiCall callAPIWithDictionarySync:dictionary
+                                                 error:&apiCallError];
+    
+    // send the end notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:APICALL_QUERY_DID_END_NOTIFICATION
+                                                        object:self];
+    
+    // data check
+    if (!data) {
+        NSLog(@"Error : recieved data is nil : %@, %@", apiCallError, [apiCallError userInfo]);
+        return;
+    }
+    
+    // get Character managed object
+    __block Character *character = nil;
+    [_apiControllerContext performBlockAndWait:^{
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character" inManagedObjectContext:_apiControllerContext];
+        [fetchRequest setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", characterID];
+        [fetchRequest setPredicate:predicate];
+        
+        NSError *error = nil;
+        NSArray *fetchedObjects = [_apiControllerContext executeFetchRequest:fetchRequest error:&error];
+        if (fetchedObjects == nil) {
+            NSLog(@"Error while fetching Character with characterID = '%@' : %@, %@", characterID, error, [error userInfo]);
+        }
+        
+        character = [fetchedObjects lastObject];
+    }];
+    
+    // set character portrait
+    if (character) {
+        NSImage *portrait = [[NSImage alloc] initWithData:data];
+        character.image = portrait;
+    }
+    
+    // save the MOC
+    [_apiControllerContext performBlock:^{
+        NSError *saveError = nil;
+        if (![_apiControllerContext save:&saveError]) {
+            NSLog(@"Error saving context : %@, %@", saveError, [saveError userInfo]);
+            NSAlert *alert = [NSAlert alertWithError:saveError];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [alert runModal];
+            });
+        }
+    }];
 }
 
 @end
