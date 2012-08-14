@@ -9,6 +9,9 @@
 #import "VGAppDelegate.h"
 #import "VGManagerWindowController.h"
 
+//
+#import "VGSkillTree.h"
+
 // temp imports
 #import "Character.h"
 
@@ -63,6 +66,25 @@
         }
     });
     
+    // load skill tree code
+//    VGSkillTree *skillTree = [[VGSkillTree alloc] init];
+//    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        [skillTree downloadAndGenerateSkillTree:^(NSError *error) {
+//            NSAlert *alert = nil;
+//            if (error) {
+//                alert = [NSAlert alertWithError:error];
+//            } else {
+//                alert = [NSAlert alertWithMessageText:@"Skill Tree loaded"
+//                                        defaultButton:@"OK"
+//                                      alternateButton:nil
+//                                          otherButton:nil
+//                            informativeTextWithFormat:@""];
+//            }
+//            [alert runModal];
+//            exit(0);
+//        }];
+//    });
+
 }
 
 #pragma mark -

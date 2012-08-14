@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF590E8C15DAAFC70036E10A /* VGSkillTree.m in Sources */ = {isa = PBXBuildFile; fileRef = BF590E8B15DAAFC40036E10A /* VGSkillTree.m */; };
 		BF62B5CE15CB274D00190CF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF62B5CD15CB274D00190CF6 /* Cocoa.framework */; };
 		BF62B5D815CB274D00190CF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5D615CB274D00190CF6 /* InfoPlist.strings */; };
 		BF62B5DA15CB274D00190CF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5D915CB274D00190CF6 /* main.m */; };
 		BF62B5DE15CB274D00190CF6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5DC15CB274D00190CF6 /* Credits.rtf */; };
 		BF62B5E115CB274D00190CF6 /* VGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */; };
 		BF62B5E415CB274D00190CF6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5E215CB274D00190CF6 /* MainMenu.xib */; };
-		BFDD80B415CC612100116A65 /* EVE_Database.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BFDD80B315CC612100116A65 /* EVE_Database.sqlite */; };
-		BFDD80B515CC62A000116A65 /* EVE_Database.sqlite in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B315CC612100116A65 /* EVE_Database.sqlite */; };
 		BFDD80BE15CC728000116A65 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B815CC728000116A65 /* CoreDataController.m */; };
 		BFDD80BF15CC728000116A65 /* DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */; };
 		BFDD80C015CC728000116A65 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80BB15CC728000116A65 /* Group.m */; };
@@ -30,6 +29,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF590E8715DAA9470036E10A /* Portrait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = Portrait.h; sourceTree = "<group>"; };
+		BF590E8815DAA9470036E10A /* Portrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = Portrait.m; sourceTree = "<group>"; };
+		BF590E8A15DAAFC40036E10A /* VGSkillTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGSkillTree.h; sourceTree = "<group>"; };
+		BF590E8B15DAAFC40036E10A /* VGSkillTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGSkillTree.m; sourceTree = "<group>"; };
 		BF62B5C915CB274D00190CF6 /* EVE Skills.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EVE Skills.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF62B5CD15CB274D00190CF6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BF62B5D015CB274D00190CF6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -43,7 +46,6 @@
 		BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGAppDelegate.h; sourceTree = "<group>"; };
 		BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGAppDelegate.m; sourceTree = "<group>"; };
 		BF62B5E315CB274D00190CF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		BFDD80B315CC612100116A65 /* EVE_Database.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = EVE_Database.sqlite; sourceTree = "<group>"; };
 		BFDD80B715CC728000116A65 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
 		BFDD80B815CC728000116A65 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
 		BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -119,6 +121,8 @@
 		BF62B5D315CB274D00190CF6 /* EVE Skills */ = {
 			isa = PBXGroup;
 			children = (
+				BF590E8A15DAAFC40036E10A /* VGSkillTree.h */,
+				BF590E8B15DAAFC40036E10A /* VGSkillTree.m */,
 				BFDD80B615CC728000116A65 /* Shared */,
 				BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */,
 				BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */,
@@ -145,7 +149,6 @@
 		BFDD80B115CC60F300116A65 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BFDD80B315CC612100116A65 /* EVE_Database.sqlite */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -197,6 +200,8 @@
 				BFDD80F615CC929400116A65 /* API.m */,
 				BFDD80F715CC929400116A65 /* Character.h */,
 				BFDD80F815CC929400116A65 /* Character.m */,
+				BF590E8715DAA9470036E10A /* Portrait.h */,
+				BF590E8815DAA9470036E10A /* Portrait.m */,
 				BFDD80F915CC929400116A65 /* Corporation.h */,
 				BFDD80FA15CC929400116A65 /* Corporation.m */,
 				BFDD80B715CC728000116A65 /* CoreDataController.h */,
@@ -265,7 +270,6 @@
 				BF62B5D815CB274D00190CF6 /* InfoPlist.strings in Resources */,
 				BF62B5DE15CB274D00190CF6 /* Credits.rtf in Resources */,
 				BF62B5E415CB274D00190CF6 /* MainMenu.xib in Resources */,
-				BFDD80B415CC612100116A65 /* EVE_Database.sqlite in Resources */,
 				BFDD80D515CC76BA00116A65 /* VGManagerWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,7 +281,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFDD80B515CC62A000116A65 /* EVE_Database.sqlite in Sources */,
 				BF62B5DA15CB274D00190CF6 /* main.m in Sources */,
 				BF62B5E115CB274D00190CF6 /* VGAppDelegate.m in Sources */,
 				BFDD80BE15CC728000116A65 /* CoreDataController.m in Sources */,
@@ -291,6 +294,7 @@
 				BFDD80FB15CC929400116A65 /* API.m in Sources */,
 				BFDD80FC15CC929400116A65 /* Character.m in Sources */,
 				BFDD80FD15CC929400116A65 /* Corporation.m in Sources */,
+				BF590E8C15DAAFC70036E10A /* VGSkillTree.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

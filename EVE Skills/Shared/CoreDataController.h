@@ -12,6 +12,7 @@
 @property (nonatomic, readonly) NSPersistentStore *iCloudStore;
 @property (nonatomic, readonly) NSPersistentStore *fallbackStore;
 @property (nonatomic, readonly) NSPersistentStore *localStore;
+@property (nonatomic, readonly) NSPersistentStore *skillStore;
 
 @property (nonatomic, readonly) NSURL *ubiquityURL;
 @property (nonatomic, readonly) id currentUbiquityToken;

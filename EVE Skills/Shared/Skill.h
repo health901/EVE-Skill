@@ -2,13 +2,14 @@
 //  Skill.h
 //  EVE Skills_old
 //
-//  Created by Vincent Garrigues on 03/08/12.
+//  Created by Vincent Garrigues on 14/08/12.
 //
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Group;
 
 @interface Skill : NSManagedObject
 
@@ -18,15 +19,6 @@
 @property (nonatomic, retain) NSString * primaryAttribute;
 @property (nonatomic, retain) NSNumber * rank;
 @property (nonatomic, retain) NSString * desc;
-@property (nonatomic, retain) NSManagedObject *group;
-@property (nonatomic, retain) NSSet *queue;
-@end
-
-@interface Skill (CoreDataGeneratedAccessors)
-
-- (void)addQueueObject:(NSManagedObject *)value;
-- (void)removeQueueObject:(NSManagedObject *)value;
-- (void)addQueue:(NSSet *)values;
-- (void)removeQueue:(NSSet *)values;
+@property (nonatomic, retain) Group *group;
 
 @end

@@ -11,6 +11,7 @@
 #import "VGKeyInfoQuery.h"
 
 #import "Character.h"
+#import "Portrait.h"
 
 @interface VGAPIController () {
     BOOL _initialized;
@@ -76,32 +77,6 @@
                                 vCode, @"vCode",
                                 API_KEYINFO_QUERY, @"apiURL", nil];
     
-    // creating the handling blocks
-    void (^keyInfoQueryHandler)(NSError*);
-    
-    keyInfoQueryHandler = ^(NSError *error) {
-        // handle the returned NSError
-        if (error) {
-            NSLog(@"Error keyInfoQueryHandler : %@, %@", error, [error userInfo]);
-            NSAlert *alert = [NSAlert alertWithError:error];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [alert runModal];
-            });
-        }
-        
-        // save the MOC
-        [_apiControllerContext performBlock:^{
-            NSError *saveError = nil;
-            if (![_apiControllerContext save:&saveError]) {
-                NSLog(@"Error saving context : %@, %@", saveError, [saveError userInfo]);
-                NSAlert *alert = [NSAlert alertWithError:saveError];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [alert runModal];
-                });
-            }
-        }];
-    };
-    
     // call the API synchronously with the already defined variables dictionnary and handler block
     NSError *apiCallError = nil;
     NSData *data = [_apiCall callAPIWithDictionarySync:dictionary
@@ -124,6 +99,44 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"apiCallHandler data = '%@'", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     });
+    
+    // creating the handling block
+    void (^keyInfoQueryHandler)(NSError*);
+    
+    keyInfoQueryHandler = ^(NSError *error) {
+        // handle the returned NSError
+        if (error) {
+            NSLog(@"Error keyInfoQueryHandler : %@, %@", error, [error userInfo]);
+            NSAlert *alert = nil;
+            
+            if (data) {
+                alert = [NSAlert alertWithMessageText:@"API Call error"
+                                        defaultButton:@"OK"
+                                      alternateButton:nil
+                                          otherButton:nil
+                            informativeTextWithFormat:@"%@",
+                         [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+            } else {
+                alert = [NSAlert alertWithError:error];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [alert runModal];
+            });
+        }
+        
+        // save the MOC
+        [_apiControllerContext performBlock:^{
+            NSError *saveError = nil;
+            if (![_apiControllerContext save:&saveError]) {
+                NSLog(@"Error saving context : %@, %@", saveError, [saveError userInfo]);
+                NSAlert *alert = [NSAlert alertWithError:saveError];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [alert runModal];
+                });
+            }
+        }];
+    };
     
     dispatch_async(self.dispatchQueue, ^{
         VGKeyInfoQuery *keyInfoQuery = [[VGKeyInfoQuery alloc] initWithData:data];
@@ -194,12 +207,38 @@
     
     // set character portrait
     if (character) {
-        NSImage *portrait = [[NSImage alloc] initWithData:data];
-        character.image = portrait;
+        Portrait *portrait = nil;
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Portrait" inManagedObjectContext:_apiControllerContext];
+        [fetchRequest setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", character.characterID];
+        [fetchRequest setPredicate:predicate];
+        
+        NSError *error = nil;
+        NSArray *fetchedObjects = [_apiControllerContext executeFetchRequest:fetchRequest error:&error];
+        if (fetchedObjects == nil) {
+            NSLog(@"Error while fetching portrait for characterID = '%@' : %@, %@", characterID, error, [error userInfo]);
+        }
+        
+        if ([fetchedObjects count] > 0) {
+            NSLog(@"Portrait already in DB");
+            portrait = [fetchedObjects lastObject];
+        } else {
+            portrait = [NSEntityDescription insertNewObjectForEntityForName:@"Portrait"
+                                                     inManagedObjectContext:self.apiControllerContext];
+        }
+        
+        NSImage *image = [[NSImage alloc] initWithData:data];
+        portrait.image = image;
+        
+//        [_apiControllerContext assignObject:portrait
+//                          toPersistentStore:_appDelegate.coreDataController.localStore];
     }
     
     // save the MOC
-    [_apiControllerContext performBlock:^{
+    [_apiControllerContext performBlockAndWait:^{
         NSError *saveError = nil;
         if (![_apiControllerContext save:&saveError]) {
             NSLog(@"Error saving context : %@, %@", saveError, [saveError userInfo]);

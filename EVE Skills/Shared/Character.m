@@ -1,9 +1,9 @@
 //
 //  Character.m
-//  EVE Database
+//  EVE Skills_old
 //
-//  Created by Vincent Garrigues on 04/08/12.
-//  Copyright (c) 2012 Vincent Garrigues. All rights reserved.
+//  Created by Vincent Garrigues on 14/08/12.
+//
 //
 
 #import "Character.h"
@@ -16,10 +16,8 @@
 @dynamic characterID;
 @dynamic enabled;
 @dynamic characterName;
-@dynamic image;
 @dynamic timestamp;
 @dynamic corporation;
 @dynamic api;
-@dynamic queue;
 
 @end

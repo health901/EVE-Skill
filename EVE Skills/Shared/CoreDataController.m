@@ -9,7 +9,8 @@
 NSString * kiCloudPersistentStoreFilename = @"iCloudStore.sqlite";
 NSString * kFallbackPersistentStoreFilename = @"fallbackStore.sqlite"; //used when iCloud is not available
 NSString * kSeedStoreFilename = @"seedStore.sqlite"; //holds the seed API, Character and Corporation records
-NSString * kLocalStoreFilename = @"EVE_Database.sqlite"; //holds the skills information
+NSString * kLocalStoreFilename = @"localStore.sqlite"; //holds the queue and portrait information
+NSString * kSkillStoreFilename = @"skillStore.sqlite"; //holds the skill and group information
 NSString * test = @"test";
 
 #define SEED_ICLOUD_STORE NO
@@ -21,6 +22,7 @@ static NSOperationQueue *_presentedItemOperationQueue;
 
 - (BOOL)iCloudAvailable;
 
+- (BOOL)loadSkillStore:(NSError *__autoreleasing *)error;
 - (BOOL)loadLocalPersistentStore:(NSError *__autoreleasing *)error;
 - (BOOL)loadFallbackStore:(NSError * __autoreleasing *)error;
 - (BOOL)loadiCloudStore:(NSError * __autoreleasing *)error;
@@ -134,6 +136,53 @@ static NSOperationQueue *_presentedItemOperationQueue;
     });
 }
 
+- (BOOL)loadSkillStore:(NSError *__autoreleasing *)error {
+    BOOL success = YES;
+    NSError *localError = nil;
+    
+    if (_skillStore) {
+        return success;
+    }
+    
+    NSFileManager *fm = [[NSFileManager alloc] init];
+    
+    //load the store file containing the skills
+    NSURL *storeURL = [[self applicationSandboxStoresDirectory] URLByAppendingPathComponent:kSkillStoreFilename];
+    
+    if (NO == [fm fileExistsAtPath:[storeURL path]]) {
+        // TODO maybe download the skill store here ?
+        
+//        NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"skillStore"
+//                                                   withExtension:@"sqlite"];
+//        if (nil == bundleURL) {
+//            NSLog(@"Local store not found in bundle, this is likely a build issue, make sure the store file is being copied as a bundle resource.");
+//            abort();
+//        }
+//        
+//        success = [fm copyItemAtURL:bundleURL toURL:storeURL error:&localError];
+//        if (NO == success) {
+//            NSLog(@"Trouble copying the local store file from the bundle: %@", localError);
+//            abort();
+//        }
+    }
+    
+    _skillStore = [_psc addPersistentStoreWithType:NSSQLiteStoreType
+                                     configuration:@"SkillConfig"
+                                               URL:storeURL
+                                           options:nil
+                                             error:&localError];
+    
+    success = (_localStore != nil);
+    if (success == NO) {
+        //ruh roh
+        if (localError && (error != NULL)) {
+            *error = localError;
+        }
+    }
+    
+    return success;
+}
+
 - (BOOL)loadLocalPersistentStore:(NSError *__autoreleasing *)error {
 
     BOOL success = YES;
@@ -143,27 +192,9 @@ static NSOperationQueue *_presentedItemOperationQueue;
         return success;
     }
     
-    NSFileManager *fm = [[NSFileManager alloc] init];
+    //load the store file containing the skills
+    NSURL *storeURL = [self localStoreURL];
     
-    //load the store file containing the 50 states
-    NSURL *storeURL = [[self applicationSandboxStoresDirectory] URLByAppendingPathComponent:kLocalStoreFilename];
-    
-    if (NO == [fm fileExistsAtPath:[storeURL path]]) {
-        //copy it from the bundle
-        NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"EVE_Database" withExtension:@"sqlite"];
-        if (nil == bundleURL) {
-            NSLog(@"Local store not found in bundle, this is likely a build issue, make sure the store file is being copied as a bundle resource.");
-            abort();
-        }
-        
-        success = [fm copyItemAtURL:bundleURL toURL:storeURL error:&localError];
-        if (NO == success) {
-            NSLog(@"Trouble copying the local store file from the bundle: %@", localError);
-            abort();
-        }
-    }
-    
-    //add the store, use the "LocalConfiguration" to make sure state entities all end up in this store and that no iCloud entities end up in it
     _localStore = [_psc addPersistentStoreWithType:NSSQLiteStoreType
                                      configuration:@"LocalConfig"
                                                URL:storeURL
@@ -237,6 +268,12 @@ static NSOperationQueue *_presentedItemOperationQueue;
 - (void)asyncLoadPersistentStores {
     NSError *error = nil;
     if ([self loadLocalPersistentStore:&error]) {
+        NSLog(@"Added skill store");
+    } else {
+        NSLog(@"Unable to add skill persistent store: %@", error);
+    }
+    error = nil;
+    if ([self loadSkillStore:&error]) {
         NSLog(@"Added local store");
     } else {
         NSLog(@"Unable to add local persistent store: %@", error);
@@ -326,6 +363,15 @@ static NSOperationQueue *_presentedItemOperationQueue;
 
 - (void)dropStores {
     NSError *error = nil;
+    
+    if (_localStore) {
+        if ([_psc removePersistentStore:_localStore error:&error]) {
+            NSLog(@"Removed local store");
+            _localStore = nil;
+        } else {
+            NSLog(@"Error removing local store: %@", error);
+        }
+    }
     
     if (_fallbackStore) {
         if ([_psc removePersistentStore:_fallbackStore error:&error]) {
@@ -694,6 +740,11 @@ static NSOperationQueue *_presentedItemOperationQueue;
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSURL *bundleURL = [mainBundle URLForResource:@"seedStore" withExtension:@"sqlite"];
     return bundleURL;
+}
+
+- (NSURL *)localStoreURL {
+    NSURL *storeURL = [[self applicationSandboxStoresDirectory] URLByAppendingPathComponent:kLocalStoreFilename];
+    return storeURL;
 }
 
 - (NSURL *)fallbackStoreURL {
