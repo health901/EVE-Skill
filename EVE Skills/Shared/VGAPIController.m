@@ -77,7 +77,6 @@
                                 API_KEYINFO_QUERY, @"apiURL", nil];
     
     // creating the handling blocks
-    void (^apiCallHandler)(NSURLResponse*, NSData*, NSError*);
     void (^keyInfoQueryHandler)(NSError*);
     
     keyInfoQueryHandler = ^(NSError *error) {
@@ -103,39 +102,38 @@
         }];
     };
     
-    apiCallHandler = ^(NSURLResponse *urlResponse,
-                       NSData *data,
-                       NSError *error) {
-        // send the end notification
-        [[NSNotificationCenter defaultCenter] postNotificationName:APICALL_QUERY_DID_END_NOTIFICATION
-                                                            object:self];
-        
-        NSLog(@"apiKeyEnd");
-        
-        if (!data) {
-            NSLog(@"Error : recieved data is nil : %@, %@", error, [error userInfo]);
-            return;
-        }
-        
-        // Log dispatch
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"apiCallHandler data = '%@'", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-        });
-        
-        dispatch_async(self.dispatchQueue, ^{
-            VGKeyInfoQuery *keyInfoQuery = [[VGKeyInfoQuery alloc] initWithData:data];
-            
-            keyInfoQuery.keyID = keyID;
-            keyInfoQuery.vCode = vCode;
-            
-            [keyInfoQuery readAndInsertDataInContext:_apiControllerContext
-                                   completionHandler:keyInfoQueryHandler];
-        });
-    };
+    // call the API synchronously with the already defined variables dictionnary and handler block
+    NSError *apiCallError = nil;
+    NSData *data = [_apiCall callAPIWithDictionarySync:dictionary
+                                                 error:&apiCallError];
     
-    // call the API with the already defined variables dictionnary and handler block
-    [_apiCall callAPIWithDictionary:dictionary
-                  completionHandler:apiCallHandler];
+    // send the end notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:APICALL_QUERY_DID_END_NOTIFICATION
+                                                        object:self];
+        
+    if (!data) {
+        NSLog(@"Error : recieved data is nil : %@, %@", apiCallError, [apiCallError userInfo]);
+        NSAlert *alert = [NSAlert alertWithError:apiCallError];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [alert runModal];
+        });
+        return;
+    }
+    
+    // Log dispatch
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"apiCallHandler data = '%@'", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    });
+    
+    dispatch_async(self.dispatchQueue, ^{
+        VGKeyInfoQuery *keyInfoQuery = [[VGKeyInfoQuery alloc] initWithData:data];
+        
+        keyInfoQuery.keyID = keyID;
+        keyInfoQuery.vCode = vCode;
+        
+        [keyInfoQuery readAndInsertDataInContext:_apiControllerContext
+                               completionHandler:keyInfoQueryHandler];
+    });
 }
 
 - (void)addPortraitForCharacterID:(NSString *)characterID
@@ -168,6 +166,10 @@
     // data check
     if (!data) {
         NSLog(@"Error : recieved data is nil : %@, %@", apiCallError, [apiCallError userInfo]);
+        NSAlert *alert = [NSAlert alertWithError:apiCallError];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [alert runModal];
+        });
         return;
     }
     
