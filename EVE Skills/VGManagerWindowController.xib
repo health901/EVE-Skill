@@ -517,6 +517,7 @@
 			</object>
 			<object class="NSArrayController" id="40914651">
 				<bool key="NSEditable">YES</bool>
+				<bool key="NSAutomaticallyPreparesContent">YES</bool>
 				<object class="_NSManagedProxy" key="_NSManagedProxy">
 					<string key="NSEntityName">Character</string>
 				</object>

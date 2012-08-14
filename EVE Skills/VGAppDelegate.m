@@ -9,6 +9,9 @@
 #import "VGAppDelegate.h"
 #import "VGManagerWindowController.h"
 
+// temp imports
+#import "Character.h"
+
 @interface VGAppDelegate () {
     VGManagerWindowController *_managerWC;
 }
@@ -32,7 +35,6 @@
     });
     
     // Notifications
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(apiControllerContextDidSave:)
                                                  name:NSManagedObjectContextDidSaveNotification
@@ -41,6 +43,25 @@
     // Character manager
     _managerWC = [[VGManagerWindowController alloc] initWithWindowNibName:@"VGManagerWindowController"];
     [_managerWC.window makeKeyAndOrderFront:nil];
+    
+    // Check if there are characters in the DB
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character" inManagedObjectContext:_coreDataController.mainThreadContext];
+        [fetchRequest setEntity:entity];
+        
+        NSError *error = nil;
+        NSArray *fetchedObjects = [_coreDataController.mainThreadContext executeFetchRequest:fetchRequest error:&error];
+        if (fetchedObjects == nil) {
+            NSLog(@"fetchedObjects == nil");
+        } else if ([fetchedObjects count] > 0){
+            for (Character *character in fetchedObjects) {
+                NSLog(@"%@ | %@", character.characterName, ([character.enabled boolValue] ? @"YES" : @"NO"));
+            }
+        } else {
+            NSLog(@"No characters in DB");
+        }
+    });
     
 }
 

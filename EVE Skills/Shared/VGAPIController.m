@@ -100,6 +100,12 @@
             abort();
         }
         
+        // Log dispatch
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"apiCallHandler data = '%@'", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        });
+        
+        
         dispatch_async(self.dispatchQueue, ^{
             VGKeyInfoQuery *keyInfoQuery = [[VGKeyInfoQuery alloc] initWithData:data];
             
