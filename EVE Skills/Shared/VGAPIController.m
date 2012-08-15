@@ -50,7 +50,8 @@
     
     // MOC
     _apiControllerContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    [_apiControllerContext setPersistentStoreCoordinator:_appDelegate.coreDataController.psc];
+    [_apiControllerContext setParentContext:_appDelegate.coreDataController.mainThreadContext];
+//    [_apiControllerContext setPersistentStoreCoordinator:_appDelegate.coreDataController.psc];
     
     // API call
     _apiCall = [[VGAPICall alloc] init];

@@ -113,6 +113,7 @@
 - (void)apiControllerContextDidSave:(NSNotification *)note
 {
     [_coreDataController.mainThreadContext performBlock:^{
+        NSLog(@"[_coreDataController.mainThreadContext mergeChangesFromContextDidSaveNotification:note];");
         [_coreDataController.mainThreadContext mergeChangesFromContextDidSaveNotification:note];
 
     }];
@@ -194,11 +195,29 @@
     
     NSManagedObjectContext *moc = _coreDataController.mainThreadContext;
     [moc performBlockAndWait:^{
-        NSError *error;
+        NSError *error = nil;
         if ([moc commitEditing]) {
             if ([moc hasChanges]) {
                 if ([moc save:&error]) {
+                    if (error) {
+                        NSAlert *alert = [NSAlert alertWithError:error];
+                        [alert runModal];
+                    }
                     
+                    BOOL errorResult = [[NSApplication sharedApplication] presentError:error];
+                    
+                    if (errorResult == YES) {
+                        reply = NSTerminateCancel;
+                    }  else {
+                        NSInteger alertReturn = NSRunAlertPanel(nil,
+                                                          @"Could not save changes while quitting. Quit anyway?",
+                                                          @"Quit",
+                                                          @"Cancel",
+                                                          nil);
+                        if (alertReturn == NSAlertAlternateReturn) {
+                            reply = NSTerminateCancel;
+                        }
+                    }
                 }
             }
         }

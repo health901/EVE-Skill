@@ -124,6 +124,15 @@
     // If rows are selected in the table view, we delete them
     if ([[self.characterTableView selectedRowIndexes] count] > 0) {
         [self.characterArrayController removeObjectsAtArrangedObjectIndexes:[self.characterTableView selectedRowIndexes]];
+        
+//        [self.coreDataController.mainThreadContext performBlock:^{
+//            NSError *error = nil;
+//            [self.coreDataController.mainThreadContext save:&error];
+//            if (error) {
+//                NSAlert *alert = [NSAlert alertWithError:error];
+//                [alert runModal];
+//            }
+//        }];
     }
 }
 
