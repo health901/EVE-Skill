@@ -8,6 +8,7 @@
 
 #import "VGAppDelegate.h"
 #import "VGManagerWindowController.h"
+#import "VGSkillQueueViewController.h"
 
 
 //
@@ -20,11 +21,15 @@
     // Window controllers
     VGManagerWindowController *_managerWindowController;
     
+    // View controllers
+    VGSkillQueueViewController *_skillQueueViewController;
+    
     // Menu bar
     NSStatusItem *_statusItem;
     NSMenu *_menu;
     
     // Menu items
+    NSMenuItem *_skillQueueMenuItem;
     NSMenuItem *_managerMenuItem;
     NSMenuItem *_quitMenuItem;
 }
@@ -144,6 +149,13 @@
     _menu = [[NSMenu alloc] initWithTitle:@"EVE Skill"];
     [_statusItem setMenu:_menu];
     
+    // skill queue
+    _skillQueueViewController = [[VGSkillQueueViewController alloc] initWithNibName:@"VGSkillQueueViewController" bundle:nil];
+    _skillQueueMenuItem = [[NSMenuItem alloc] initWithTitle:@"Skill queue"
+                                                     action:NULL
+                                              keyEquivalent:@""];
+    _skillQueueMenuItem.view = _skillQueueViewController.view;
+    
     // menu items
     _managerMenuItem = [[NSMenuItem alloc] initWithTitle:@"Character manager"
                                                   action:@selector(managerAction)
@@ -164,6 +176,7 @@
     [_menu removeAllItems];
     
     // Add the bottom items
+    [_menu addItem:_skillQueueMenuItem];
     [_menu addItem:[NSMenuItem separatorItem]];
     [_menu addItem:_managerMenuItem];
     [_menu addItem:[NSMenuItem separatorItem]];
