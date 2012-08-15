@@ -16,6 +16,7 @@
 @end
 
 @implementation VGManagerWindowController
+@synthesize characterTableView = _characterTableView;
 @synthesize coreDataController = _coreDataController;
 @synthesize keyID = _keyID;
 @synthesize vCode = _vCode;
@@ -61,7 +62,7 @@
                                                       object:self.coreDataController.mainThreadContext
                                                        queue:nil
                                                   usingBlock:^(NSNotification *note) {
-                                                      NSLog(@"mainThreadContext : NSManagedObjectContextObjectsDidChangeNotification");
+                                                      [self.characterTableView reloadData];
                                                       
     }];
     

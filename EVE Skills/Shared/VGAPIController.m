@@ -205,7 +205,7 @@
         character = [fetchedObjects lastObject];
     }];
     
-    // set character portrait
+    // add character portrait to the DB
     if (character) {
         Portrait *portrait = nil;
         
@@ -222,6 +222,7 @@
             NSLog(@"Error while fetching portrait for characterID = '%@' : %@, %@", characterID, error, [error userInfo]);
         }
         
+        // Is there a portrait in the DB, if not we create a new one
         if ([fetchedObjects count] > 0) {
             NSLog(@"Portrait already in DB");
             portrait = [fetchedObjects lastObject];
@@ -230,11 +231,10 @@
                                                      inManagedObjectContext:self.apiControllerContext];
         }
         
+        // Set image for portrait
         NSImage *image = [[NSImage alloc] initWithData:data];
         portrait.image = image;
-        
-//        [_apiControllerContext assignObject:portrait
-//                          toPersistentStore:_appDelegate.coreDataController.localStore];
+        portrait.characterID = character.characterID;
     }
     
     // save the MOC

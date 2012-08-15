@@ -94,13 +94,7 @@
 {
     [_coreDataController.mainThreadContext performBlock:^{
         [_coreDataController.mainThreadContext mergeChangesFromContextDidSaveNotification:note];
-        
-//        dispatch_sync(dispatch_get_current_queue(), ^{
-//            NSError *saveError = nil;
-//            if (![_coreDataController.mainThreadContext save:&saveError]) {
-//                NSLog(@"Error saving mainThreadContext : %@, %@", saveError, [saveError userInfo]);
-//            }
-//        });
+
     }];
 }
 

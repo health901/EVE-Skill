@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BF590E8C15DAAFC70036E10A /* VGSkillTree.m in Sources */ = {isa = PBXBuildFile; fileRef = BF590E8B15DAAFC40036E10A /* VGSkillTree.m */; };
+		BF590EA615DB97660036E10A /* VGCharacterIDToImageValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = BF590EA515DB97660036E10A /* VGCharacterIDToImageValueTransformer.m */; };
 		BF62B5CE15CB274D00190CF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF62B5CD15CB274D00190CF6 /* Cocoa.framework */; };
 		BF62B5D815CB274D00190CF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5D615CB274D00190CF6 /* InfoPlist.strings */; };
 		BF62B5DA15CB274D00190CF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5D915CB274D00190CF6 /* main.m */; };
@@ -33,6 +34,8 @@
 		BF590E8815DAA9470036E10A /* Portrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = Portrait.m; sourceTree = "<group>"; };
 		BF590E8A15DAAFC40036E10A /* VGSkillTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGSkillTree.h; sourceTree = "<group>"; };
 		BF590E8B15DAAFC40036E10A /* VGSkillTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGSkillTree.m; sourceTree = "<group>"; };
+		BF590EA415DB97660036E10A /* VGCharacterIDToImageValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterIDToImageValueTransformer.h; sourceTree = "<group>"; };
+		BF590EA515DB97660036E10A /* VGCharacterIDToImageValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterIDToImageValueTransformer.m; sourceTree = "<group>"; };
 		BF62B5C915CB274D00190CF6 /* EVE Skills.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EVE Skills.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF62B5CD15CB274D00190CF6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BF62B5D015CB274D00190CF6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -82,6 +85,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF590EA215DB972B0036E10A /* Value Transformers */ = {
+			isa = PBXGroup;
+			children = (
+				BF590EA415DB97660036E10A /* VGCharacterIDToImageValueTransformer.h */,
+				BF590EA515DB97660036E10A /* VGCharacterIDToImageValueTransformer.m */,
+			);
+			name = "Value Transformers";
+			sourceTree = "<group>";
+		};
+		BF590EA315DB97360036E10A /* Windoz Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BFDD80D115CC76BA00116A65 /* VGManagerWindowController.h */,
+				BFDD80D215CC76BA00116A65 /* VGManagerWindowController.m */,
+				BFDD80D315CC76BA00116A65 /* VGManagerWindowController.xib */,
+			);
+			name = "Windoz Controllers";
+			sourceTree = "<group>";
+		};
 		BF62B5BE15CB274D00190CF6 = {
 			isa = PBXGroup;
 			children = (
@@ -166,9 +188,8 @@
 		BFDD80D015CC76A200116A65 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				BFDD80D115CC76BA00116A65 /* VGManagerWindowController.h */,
-				BFDD80D215CC76BA00116A65 /* VGManagerWindowController.m */,
-				BFDD80D315CC76BA00116A65 /* VGManagerWindowController.xib */,
+				BF590EA215DB972B0036E10A /* Value Transformers */,
+				BF590EA315DB97360036E10A /* Windoz Controllers */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -295,6 +316,7 @@
 				BFDD80FC15CC929400116A65 /* Character.m in Sources */,
 				BFDD80FD15CC929400116A65 /* Corporation.m in Sources */,
 				BF590E8C15DAAFC70036E10A /* VGSkillTree.m in Sources */,
+				BF590EA615DB97660036E10A /* VGCharacterIDToImageValueTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

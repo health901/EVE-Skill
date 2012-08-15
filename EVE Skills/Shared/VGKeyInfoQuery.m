@@ -206,13 +206,6 @@
         _currentCharacter.timestamp     = [NSDate date];
         _currentCharacter.api           = _currentAPI;
         
-        // get the character's portrait
-        NSString *tmpCharacterID = [NSString stringWithString:_currentCharacter.characterID];
-        dispatch_async(dispatch_get_current_queue(), ^{
-            
-            [_appDelegate.apiController addPortraitForCharacterID:tmpCharacterID];
-        });
-        
         // is this Character's Corporation already in the MOC
         _currentCorporation = [self corporationWithCorporationID:[attributeDict objectForKey:@"corporationID"]];
         

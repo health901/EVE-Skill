@@ -11,6 +11,9 @@
 
 @interface VGManagerWindowController : NSWindowController
 
+// GUI
+@property (strong) IBOutlet NSTableView *characterTableView;
+
 // Core Data
 @property (nonatomic, strong, readonly) CoreDataController *coreDataController;
 

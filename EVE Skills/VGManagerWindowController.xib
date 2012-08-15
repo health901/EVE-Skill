@@ -549,6 +549,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">characterTableView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="1003957417"/>
+					</object>
+					<int key="connectionID">144</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="410794333"/>
 						<reference key="destination" ref="1001"/>
@@ -656,6 +664,7 @@
 									<reference key="NSSuperview" ref="598732390"/>
 									<reference key="NSNextKeyView" ref="1009525724"/>
 									<string key="NSReuseIdentifierKey">_NS:9</string>
+									<int key="NSTag">100</int>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSImageCell" key="NSCell" id="136651601">
 										<int key="NSCellFlags">134217728</int>
@@ -755,6 +764,26 @@
 						</object>
 					</object>
 					<int key="connectionID">107</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: objectValue.characterID</string>
+						<reference key="source" ref="1023476061"/>
+						<reference key="destination" ref="598732390"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="1023476061"/>
+							<reference key="NSDestination" ref="598732390"/>
+							<string key="NSLabel">value: objectValue.characterID</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">objectValue.characterID</string>
+							<dictionary key="NSOptions">
+								<boolean value="YES" key="NSValidatesImmediately"/>
+								<string key="NSValueTransformerName">VGCharacterIDToImageValueTransformer</string>
+							</dictionary>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">143</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -2397,7 +2426,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">139</int>
+			<int key="maxID">144</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2434,6 +2463,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="arrayController">NSArrayController</string>
 						<string key="authenticationFailureTextField">NSTextField</string>
+						<string key="characterTableView">NSTableView</string>
 						<string key="eveOnlineApiTextField">NSTextField</string>
 						<string key="progressIndicator">NSProgressIndicator</string>
 						<string key="tableView">NSTableView</string>
@@ -2446,6 +2476,10 @@
 						<object class="IBToOneOutletInfo" key="authenticationFailureTextField">
 							<string key="name">authenticationFailureTextField</string>
 							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="characterTableView">
+							<string key="name">characterTableView</string>
+							<string key="candidateClassName">NSTableView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="eveOnlineApiTextField">
 							<string key="name">eveOnlineApiTextField</string>
