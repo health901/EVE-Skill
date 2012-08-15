@@ -185,7 +185,9 @@
         _currentAPI.keyID       = self.keyID;
         _currentAPI.vCode       = self.vCode;
         _currentAPI.accessMask  = [attributeDict objectForKey:@"accessMask"];
-        _currentAPI.expires     = [NSDate dateWithString:[NSString stringWithFormat:@"%@ +0000", [attributeDict objectForKey:@"expires"]]];
+        NSDate *expiresTmp = [NSDate dateWithString:[NSString stringWithFormat:@"%@ +0000",
+                                                     [attributeDict objectForKey:@"expires"]]];
+        _currentAPI.expires     =  (expiresTmp ? expiresTmp : [NSDate dateWithTimeIntervalSince1970:0]);
         _currentAPI.timestamp   = [NSDate date];
     }
     

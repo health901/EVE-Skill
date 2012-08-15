@@ -8,6 +8,7 @@
 
 #import "VGCharacterIDToImageValueTransformer.h"
 #import "VGAppDelegate.h"
+#import "VGAppNotifications.h"
 #import "Portrait.h"
 
 @interface VGCharacterIDToImageValueTransformer () {
@@ -47,7 +48,7 @@
         _appDelegate = (VGAppDelegate *)[NSApp delegate];
         
         _moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        [_moc setPersistentStoreCoordinator:_appDelegate.coreDataController.psc];
+        [_moc setParentContext:_appDelegate.coreDataController.mainThreadContext];
     }
     return self;
 }
@@ -98,12 +99,12 @@
 {
     if (!value) {
         NSLog(@"VGCharacterIDToImageValueTransformer -transformedValue: Value is nil.");
-        return nil;
+        return [NSImage imageNamed:NSImageNameUserGuest];
     }
     
     if (![value isKindOfClass:[NSString class]]) {
         NSLog(@"VGCharacterIDToImageValueTransformer -transformedValue: Value is not an NSString but %@", [value class]);
-        return nil;
+        return [NSImage imageNamed:NSImageNameUserGuest];
     }
     
     NSLog(@"VGCharacterIDToImageValueTransformer searching for image with characterID = '%@'",
@@ -116,7 +117,28 @@
         NSLog(@"VGCharacterIDToImageValueTransformer image not in the DB for characterID = '%@'",
               value);
         
-        dispatch_async(_appDelegate.apiController.dispatchQueue, ^{
+        // check if the dispatch group is nil
+        if (!_appDelegate.apiController.portraitDispatchGroup) {
+            NSLog(@"Creating portraitDispatchGroup");
+            _appDelegate.apiController.portraitDispatchGroup = dispatch_group_create();
+            
+            // wait in another thread for the group to finish
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSLog(@"Waiting for the end of portraitDispatchGroup...");
+                dispatch_group_wait(_appDelegate.apiController.portraitDispatchGroup,
+                                    DISPATCH_TIME_FOREVER);
+                NSLog(@"portraitDispatchGroup ended !");
+                _appDelegate.apiController.portraitDispatchGroup = nil;
+                
+                // post the notification for the character manager
+                [[NSNotificationCenter defaultCenter] postNotificationName:MANAGER_SHOULD_RELOAD_DATA_NOTIFICATION
+                                                                    object:self];
+            });
+        }
+        
+        dispatch_group_async(_appDelegate.apiController.portraitDispatchGroup,
+                             _appDelegate.apiController.dispatchQueue,
+                             ^{
             [_appDelegate.apiController addPortraitForCharacterID:(NSString *)value];
         });
         

@@ -37,6 +37,7 @@
     if (self) {
         _dispatchQueue = dispatch_queue_create("com.vincentgarrigues.apiControllerQueue",
                                                DISPATCH_QUEUE_SERIAL);
+        _portraitDispatchGroup = nil;
         _appDelegate = (VGAppDelegate *)[NSApp delegate];
         _initialized = NO;
     }
@@ -113,7 +114,7 @@
     // this must be called in com.vincentgarrigues.apiControllerQueue
     assert(dispatch_get_current_queue() == self.dispatchQueue);
     
-    NSLog(@"apiKeyStart");
+    NSLog(@"addAPIWithKeyID:%@ vCode:%@", keyID, vCode);
     
     // create the variables dictionnary
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:

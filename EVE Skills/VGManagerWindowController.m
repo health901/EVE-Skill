@@ -8,6 +8,7 @@
 
 #import "VGManagerWindowController.h"
 #import "VGAppDelegate.h"
+#import "VGAppNotifications.h"
 
 @interface VGManagerWindowController () {
     VGAppDelegate *_appDelegate;
@@ -57,23 +58,30 @@
                                                        queue:nil
                                                   usingBlock:^(NSNotification *note) {
         self.animateProgress = NO;
-                                                  }];
+    }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:MANAGER_SHOULD_RELOAD_DATA_NOTIFICATION
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+        [self.characterTableView reloadData];
+    }];
     
     [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
                                                       object:_appDelegate.apiController.apiControllerContext
                                                        queue:nil
                                                   usingBlock:^(NSNotification *note) {
         NSLog(@"apiControllerContext - NSManagedObjectContextDidSaveNotification");
-                                                      
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.characterTableView reloadData];
-        });
+
     }];
     
     
     // FIXME : temporary debug values
     self.keyID = @"1161457";
     self.vCode = @"P1DO18zfr5KNQ6E1HBXrPdaffDOg3FEcTflyx5anw144dDp7VGff9FL12mAjzoE4";
+    
+//    self.keyID = @"1180252";
+//    self.vCode = @"wuz6GqnXxG1Uib4eGzV6V0dZpIPGLVEqmKqLAYTMB5lTzHhAKWCnuJGX2hjdAv7i";
 }
 
 #pragma mark -

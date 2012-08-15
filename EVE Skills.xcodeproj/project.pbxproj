@@ -30,8 +30,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BF590E8715DAA9470036E10A /* Portrait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = Portrait.h; sourceTree = "<group>"; };
-		BF590E8815DAA9470036E10A /* Portrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; path = Portrait.m; sourceTree = "<group>"; };
+		BF4A829515DBEC69003AD68C /* VGAppNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGAppNotifications.h; sourceTree = "<group>"; };
+		BF590E8715DAA9470036E10A /* Portrait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Portrait.h; sourceTree = "<group>"; };
+		BF590E8815DAA9470036E10A /* Portrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Portrait.m; sourceTree = "<group>"; };
 		BF590E8A15DAAFC40036E10A /* VGSkillTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGSkillTree.h; sourceTree = "<group>"; };
 		BF590E8B15DAAFC40036E10A /* VGSkillTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGSkillTree.m; sourceTree = "<group>"; };
 		BF590EA415DB97660036E10A /* VGCharacterIDToImageValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterIDToImageValueTransformer.h; sourceTree = "<group>"; };
@@ -157,6 +158,7 @@
 				BFDD80D015CC76A200116A65 /* UI */,
 				BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */,
 				BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */,
+				BF4A829515DBEC69003AD68C /* VGAppNotifications.h */,
 				BF62B5E215CB274D00190CF6 /* MainMenu.xib */,
 				BFDD80B115CC60F300116A65 /* Resources */,
 				BF62B5D415CB274D00190CF6 /* Supporting Files */,
