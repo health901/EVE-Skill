@@ -22,6 +22,8 @@
     VGAPICall *_apiCall;
 }
 
+- (NSData *)callAPIWithDictionaryAsync:(NSDictionary *)dict;
+
 @end
 
 @implementation VGAPIController
@@ -58,6 +60,51 @@
 }
 
 #pragma mark -
+#pragma mark - Private methods
+
+- (NSData *)callAPIWithDictionaryAsync:(NSDictionary *)dict
+{
+    // send the start notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:APICALL_QUERY_DID_START_NOTIFICATION
+                                                        object:self];
+    
+    // call the API synchronously with the already defined variables dictionnary and handler block
+    NSError *apiCallError = nil;
+    NSHTTPURLResponse *response = nil;
+    NSData *data = [_apiCall callAPIWithDictionarySync:dict
+                                              response:&response
+                                                 error:&apiCallError];
+    
+    if (!data) {
+        NSLog(@"Error : recieved data is nil : %@, %@", apiCallError, [apiCallError userInfo]);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSAlert *alert = [NSAlert alertWithError:apiCallError];
+            [alert runModal];
+        });
+        return nil;
+    }
+    
+    if ([response statusCode] != 200) {
+        NSLog(@"[response statusCode] = %lu", [response statusCode]);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSAlert *alert = [NSAlert alertWithMessageText:@"Server error"
+                                             defaultButton:@"OK"
+                                           alternateButton:nil
+                                               otherButton:nil
+                                 informativeTextWithFormat:@"HTML status code %lu", [response statusCode]];
+            [alert runModal];
+        });
+        return nil;
+    }
+    
+    // send the end notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:APICALL_QUERY_DID_END_NOTIFICATION
+                                                        object:self];
+    
+    return data;
+}
+
+#pragma mark -
 #pragma mark - API calls
 
 - (void)addAPIWithKeyID:(NSString *)keyID vCode:(NSString *)vCode
@@ -67,33 +114,15 @@
     
     NSLog(@"apiKeyStart");
     
-    // send the start notification
-    [[NSNotificationCenter defaultCenter] postNotificationName:APICALL_QUERY_DID_START_NOTIFICATION
-                                                        object:self];
-    
     // create the variables dictionnary
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                 keyID, @"keyID",
                                 vCode, @"vCode",
                                 API_KEYINFO_QUERY, @"apiURL", nil];
     
-    // call the API synchronously with the already defined variables dictionnary and handler block
-    NSError *apiCallError = nil;
-    NSData *data = [_apiCall callAPIWithDictionarySync:dictionary
-                                                 error:&apiCallError];
+    NSData *data = [self callAPIWithDictionaryAsync:dictionary];
     
-    // send the end notification
-    [[NSNotificationCenter defaultCenter] postNotificationName:APICALL_QUERY_DID_END_NOTIFICATION
-                                                        object:self];
-        
-    if (!data) {
-        NSLog(@"Error : recieved data is nil : %@, %@", apiCallError, [apiCallError userInfo]);
-        NSAlert *alert = [NSAlert alertWithError:apiCallError];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [alert runModal];
-        });
-        return;
-    }
+    if (!data) return;
     
     // Log dispatch
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -156,10 +185,6 @@
     
     NSLog(@"addPortraitForCharacterID:%@", characterID);
     
-    // send the start notification
-    [[NSNotificationCenter defaultCenter] postNotificationName:APICALL_QUERY_DID_START_NOTIFICATION
-                                                        object:self];
-    
     // create the variables dictionnary
     NSMutableString *urlString = [[NSMutableString alloc] init];
     [urlString appendString:API_IMAGE_QUERY];
@@ -167,24 +192,9 @@
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                 urlString, @"apiURL", nil];
     
-    // call the API synchronously with the already defined variables dictionnary and handler block
-    NSError *apiCallError = nil;
-    NSData *data = [_apiCall callAPIWithDictionarySync:dictionary
-                                                 error:&apiCallError];
+    NSData *data = [self callAPIWithDictionaryAsync:dictionary];
     
-    // send the end notification
-    [[NSNotificationCenter defaultCenter] postNotificationName:APICALL_QUERY_DID_END_NOTIFICATION
-                                                        object:self];
-    
-    // data check
-    if (!data) {
-        NSLog(@"Error : recieved data is nil : %@, %@", apiCallError, [apiCallError userInfo]);
-        NSAlert *alert = [NSAlert alertWithError:apiCallError];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [alert runModal];
-        });
-        return;
-    }
+    if (!data) return;
     
     // get Character managed object
     __block Character *character = nil;

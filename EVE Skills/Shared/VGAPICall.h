@@ -26,6 +26,7 @@
             completionHandler:(void (^)(NSURLResponse *urlResponse, NSData *data, NSError *error))handler;
 
 - (NSData *)callAPIWithDictionarySync:(NSDictionary *)dictionary
+                             response:(NSHTTPURLResponse **)response
                                 error:(NSError **)error;
 
 @end

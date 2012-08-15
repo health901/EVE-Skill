@@ -18,6 +18,7 @@
 @implementation VGManagerWindowController
 @synthesize characterTableView = _characterTableView;
 @synthesize coreDataController = _coreDataController;
+@synthesize tableSortDescriptors = _tableSortDescriptors;
 @synthesize keyID = _keyID;
 @synthesize vCode = _vCode;
 @synthesize animateProgress = _animateProgress;
@@ -58,8 +59,8 @@
         self.animateProgress = NO;
     }];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextObjectsDidChangeNotification
-                                                      object:self.coreDataController.mainThreadContext
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
+                                                      object:_appDelegate.apiController.apiControllerContext
                                                        queue:nil
                                                   usingBlock:^(NSNotification *note) {
                                                       [self.characterTableView reloadData];
@@ -73,7 +74,7 @@
 }
 
 #pragma mark -
-#pragma mark - CoreDataController
+#pragma mark - Core Data
 
 - (CoreDataController *)coreDataController
 {
@@ -81,6 +82,19 @@
         _coreDataController = ((VGAppDelegate *)[NSApp delegate]).coreDataController;
     }
     return _coreDataController;
+}
+
+- (NSArray *)tableSortDescriptors
+{
+    if (_tableSortDescriptors) {
+        return _tableSortDescriptors;
+    }
+    
+    _tableSortDescriptors = [NSArray arrayWithObjects:
+                             [NSSortDescriptor sortDescriptorWithKey:@"api.keyID" ascending:YES],
+                             [NSSortDescriptor sortDescriptorWithKey:@"characterName" ascending:YES], nil];
+    
+    return _tableSortDescriptors;
 }
 
 #pragma mark -

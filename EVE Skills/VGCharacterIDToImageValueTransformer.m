@@ -106,21 +106,22 @@
         return nil;
     }
     
-    NSImage *_image = nil;
+    NSLog(@"VGCharacterIDToImageValueTransformer searching for image with characterID = '%@'",
+          value);
+    
+    NSImage *_image = [self imageWithCharacterID:(NSString *)value];
     
     if (!_image) {
-        NSLog(@"VGCharacterIDToImageValueTransformer searching for image with characterID = '%@'", value);
+        // Image is not in the DB, we have to download it
+        NSLog(@"VGCharacterIDToImageValueTransformer image not in the DB for characterID = '%@'",
+              value);
         
-        _image = [self imageWithCharacterID:(NSString *)value];
+        dispatch_async(_appDelegate.apiController.dispatchQueue, ^{
+            [_appDelegate.apiController addPortraitForCharacterID:(NSString *)value];
+        });
         
-        if (!_image) {
-            NSLog(@"VGCharacterIDToImageValueTransformer image not in the DB for characterID = '%@'", value);
-            
-            // Image is not in the DB, we have to download it
-            dispatch_async(_appDelegate.apiController.dispatchQueue, ^{
-                [_appDelegate.apiController addPortraitForCharacterID:(NSString *)value];
-            });
-        }
+        // Return a template image instead
+        _image = [NSImage imageNamed:NSImageNameUserGuest];
     }
     
     return _image;

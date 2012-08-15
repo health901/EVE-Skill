@@ -73,7 +73,8 @@
                                                      forKey:@"apiURL"];
     
     NSError *error = nil;
-    NSData *data = [apiCall callAPIWithDictionarySync:dict error:&error];
+    NSHTTPURLResponse *response = nil;
+    NSData *data = [apiCall callAPIWithDictionarySync:dict response:&response error:&error];
     if (!data) {
         NSLog(@"Error : Data recieved is nil : %@, %@", error, [error userInfo]);
         dispatch_async(dispatch_get_main_queue(), ^{

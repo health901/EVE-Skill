@@ -92,6 +92,7 @@
 }
 
 - (NSData *)callAPIWithDictionarySync:(NSDictionary *)dictionary
+                             response:(NSHTTPURLResponse **)response
                                 error:(NSError **)error
 {
     // Getting the apiUrl
@@ -146,7 +147,7 @@
     [request setHTTPBody:postData];
     
     return [NSURLConnection sendSynchronousRequest:request
-                                 returningResponse:nil
+                                 returningResponse:response
                                              error:error];
 }
 

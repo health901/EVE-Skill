@@ -16,6 +16,7 @@
 
 // Core Data
 @property (nonatomic, strong, readonly) CoreDataController *coreDataController;
+@property (nonatomic, strong, readonly) NSArray *tableSortDescriptors;
 
 // KVO
 @property (strong) NSString *keyID;
