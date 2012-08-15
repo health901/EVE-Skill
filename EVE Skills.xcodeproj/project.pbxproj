@@ -94,14 +94,23 @@
 			name = "Value Transformers";
 			sourceTree = "<group>";
 		};
-		BF590EA315DB97360036E10A /* Windoz Controllers */ = {
+		BF590EA315DB97360036E10A /* Window Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				BFDD80D115CC76BA00116A65 /* VGManagerWindowController.h */,
 				BFDD80D215CC76BA00116A65 /* VGManagerWindowController.m */,
 				BFDD80D315CC76BA00116A65 /* VGManagerWindowController.xib */,
 			);
-			name = "Windoz Controllers";
+			name = "Window Controllers";
+			sourceTree = "<group>";
+		};
+		BF590EA715DBA4310036E10A /* Local DB */ = {
+			isa = PBXGroup;
+			children = (
+				BF590E8A15DAAFC40036E10A /* VGSkillTree.h */,
+				BF590E8B15DAAFC40036E10A /* VGSkillTree.m */,
+			);
+			name = "Local DB";
 			sourceTree = "<group>";
 		};
 		BF62B5BE15CB274D00190CF6 = {
@@ -143,12 +152,11 @@
 		BF62B5D315CB274D00190CF6 /* EVE Skills */ = {
 			isa = PBXGroup;
 			children = (
-				BF590E8A15DAAFC40036E10A /* VGSkillTree.h */,
-				BF590E8B15DAAFC40036E10A /* VGSkillTree.m */,
+				BF590EA715DBA4310036E10A /* Local DB */,
 				BFDD80B615CC728000116A65 /* Shared */,
+				BFDD80D015CC76A200116A65 /* UI */,
 				BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */,
 				BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */,
-				BFDD80D015CC76A200116A65 /* UI */,
 				BF62B5E215CB274D00190CF6 /* MainMenu.xib */,
 				BFDD80B115CC60F300116A65 /* Resources */,
 				BF62B5D415CB274D00190CF6 /* Supporting Files */,
@@ -189,7 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				BF590EA215DB972B0036E10A /* Value Transformers */,
-				BF590EA315DB97360036E10A /* Windoz Controllers */,
+				BF590EA315DB97360036E10A /* Window Controllers */,
 			);
 			name = UI;
 			sourceTree = "<group>";

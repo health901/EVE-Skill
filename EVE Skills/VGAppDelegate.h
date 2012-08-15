@@ -15,4 +15,6 @@
 @property (nonatomic, strong, readonly) CoreDataController *coreDataController;
 @property (nonatomic, strong, readonly) VGAPIController *apiController;
 
+- (void)openManagerWindow;
+
 @end

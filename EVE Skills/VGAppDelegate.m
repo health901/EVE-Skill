@@ -9,6 +9,7 @@
 #import "VGAppDelegate.h"
 #import "VGManagerWindowController.h"
 
+
 //
 #import "VGSkillTree.h"
 
@@ -16,10 +17,27 @@
 #import "Character.h"
 
 @interface VGAppDelegate () {
-    VGManagerWindowController *_managerWC;
+    // Window controllers
+    VGManagerWindowController *_managerWindowController;
+    
+    // Menu bar
+    NSStatusItem *_statusItem;
+    NSMenu *_menu;
+    
+    // Menu items
+    NSMenuItem *_managerMenuItem;
+    NSMenuItem *_quitMenuItem;
 }
 
 - (void)apiControllerContextDidSave:(NSNotification *)note;
+
+// MenuBar
+- (void)setupMenu;
+- (void)refreshMenu;
+
+// MenuBar actions
+- (void)managerAction;
+- (void)quitAction;
 
 @end
 
@@ -37,6 +55,9 @@
         [_apiController initialize];
     });
     
+    // MenuBarController
+    [self setupMenu];
+    
     // Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(apiControllerContextDidSave:)
@@ -44,11 +65,10 @@
                                                object:_apiController.apiControllerContext];
     
     // Character manager
-    _managerWC = [[VGManagerWindowController alloc] initWithWindowNibName:@"VGManagerWindowController"];
-    [_managerWC.window makeKeyAndOrderFront:nil];
+    [self openManagerWindow];
     
     // Check if there are characters in the DB
-    dispatch_async(dispatch_get_main_queue(), ^{
+    [_coreDataController.mainThreadContext performBlock:^{
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character" inManagedObjectContext:_coreDataController.mainThreadContext];
         [fetchRequest setEntity:entity];
@@ -64,7 +84,7 @@
         } else {
             NSLog(@"No characters in DB");
         }
-    });
+    }];
     
     // load skill tree code
 //    VGSkillTree *skillTree = [[VGSkillTree alloc] init];
@@ -96,6 +116,73 @@
         [_coreDataController.mainThreadContext mergeChangesFromContextDidSaveNotification:note];
 
     }];
+}
+
+#pragma mark -
+#pragma mark - Public methods
+
+- (void)openManagerWindow
+{
+    if (!_managerWindowController) {
+        _managerWindowController = [[VGManagerWindowController alloc] initWithWindowNibName:@"VGManagerWindowController"];
+    }
+    
+    [_managerWindowController.window makeKeyAndOrderFront:nil];
+}
+
+#pragma mark -
+#pragma mark - Menubar
+
+- (void)setupMenu
+{
+    // status item
+    _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    [_statusItem setTitle:@"EVE"];
+    [_statusItem setToolTip:@"EVE Skills"];
+    [_statusItem setEnabled:YES];
+    [_statusItem setHighlightMode:YES];
+    [_statusItem setTarget:self];
+    
+    // menu
+    _menu = [[NSMenu alloc] initWithTitle:@"EVE Skill"];
+    [_statusItem setMenu:_menu];
+    
+    // menu items
+    _managerMenuItem = [[NSMenuItem alloc] initWithTitle:@"Character manager"
+                                                  action:@selector(managerAction)
+                                           keyEquivalent:@""];
+    [_managerMenuItem setEnabled:YES];
+    
+    _quitMenuItem = [[NSMenuItem alloc] initWithTitle:@"Quit"
+                                               action:@selector(quitAction)
+                                        keyEquivalent:@""];
+    [_quitMenuItem setEnabled:YES];
+    
+    [self refreshMenu];
+}
+
+- (void)refreshMenu
+{
+    // clear the menu
+    [_menu removeAllItems];
+    
+    // Add the bottom items
+    [_menu addItem:[NSMenuItem separatorItem]];
+    [_menu addItem:_managerMenuItem];
+    [_menu addItem:[NSMenuItem separatorItem]];
+    [_menu addItem:_quitMenuItem];
+}
+
+- (void)managerAction
+{
+    NSLog(@"managerAction");
+    [self openManagerWindow];
+}
+
+- (void)quitAction
+{
+    NSLog(@"quitAction");
+    [(NSApplication *)NSApp terminate:self];
 }
 
 #pragma mark -

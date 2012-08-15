@@ -120,8 +120,6 @@
             dispatch_async(_appDelegate.apiController.dispatchQueue, ^{
                 [_appDelegate.apiController addPortraitForCharacterID:(NSString *)value];
             });
-        } else {
-            NSLog(@"VGCharacterIDToImageValueTransformer image found in the DB for characterID = '%@'", value);
         }
     }
     
