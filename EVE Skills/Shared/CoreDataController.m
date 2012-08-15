@@ -794,6 +794,22 @@ static NSOperationQueue *_presentedItemOperationQueue;
     completionHandler(NULL);
 }
 
+#pragma mark - Saving
+
+- (void)saveMainThreadContext
+{
+    [self.mainThreadContext performBlock:^{
+        NSError *error = nil;
+        if (![self.mainThreadContext save:&error]) {
+            NSLog(@"Error while saving main thread context : %@, %@", error, [error userInfo]);
+            NSAlert *alert = [NSAlert alertWithError:error];
+            [alert runModal];
+        } else {
+            NSLog(@"mainThreadContext saved !");
+        }
+    }];
+}
+
 #pragma mark -
 
 @end

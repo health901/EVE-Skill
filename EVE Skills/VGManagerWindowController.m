@@ -124,15 +124,6 @@
     // If rows are selected in the table view, we delete them
     if ([[self.characterTableView selectedRowIndexes] count] > 0) {
         [self.characterArrayController removeObjectsAtArrangedObjectIndexes:[self.characterTableView selectedRowIndexes]];
-        
-//        [self.coreDataController.mainThreadContext performBlock:^{
-//            NSError *error = nil;
-//            [self.coreDataController.mainThreadContext save:&error];
-//            if (error) {
-//                NSAlert *alert = [NSAlert alertWithError:error];
-//                [alert runModal];
-//            }
-//        }];
     }
 }
 
@@ -141,6 +132,12 @@
     dispatch_async(_appDelegate.apiController.dispatchQueue, ^{
         [_appDelegate.apiController addAPIWithKeyID:self.keyID vCode:self.vCode];
     });
+}
+
+- (IBAction)applyAction:(id)sender
+{
+    [_coreDataController saveMainThreadContext];
+    [self.window performClose:self];
 }
 
 @end

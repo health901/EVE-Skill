@@ -18,6 +18,11 @@
 @property (nonatomic, readonly) id currentUbiquityToken;
 
 /*
+ Asynchronously saves the main thread context
+ */
+- (void)saveMainThreadContext;
+
+/*
  Called by the AppDelegate whenever the application becomes active.
  We use this signal to check to see if the container identifier has
  changed.

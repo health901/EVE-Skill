@@ -27,5 +27,6 @@
 
 - (IBAction)deleteAction:(id)sender;
 - (IBAction)queryAction:(id)sender;
+- (IBAction)applyAction:(id)sender;
 
 @end

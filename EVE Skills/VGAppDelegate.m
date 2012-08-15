@@ -112,11 +112,7 @@
 
 - (void)apiControllerContextDidSave:(NSNotification *)note
 {
-    [_coreDataController.mainThreadContext performBlock:^{
-        NSLog(@"[_coreDataController.mainThreadContext mergeChangesFromContextDidSaveNotification:note];");
-        [_coreDataController.mainThreadContext mergeChangesFromContextDidSaveNotification:note];
-
-    }];
+//    [_coreDataController saveMainThreadContext];
 }
 
 #pragma mark -
@@ -198,11 +194,7 @@
         NSError *error = nil;
         if ([moc commitEditing]) {
             if ([moc hasChanges]) {
-                if ([moc save:&error]) {
-                    if (error) {
-                        NSAlert *alert = [NSAlert alertWithError:error];
-                        [alert runModal];
-                    }
+                if (![moc save:&error]) {
                     
                     BOOL errorResult = [[NSApplication sharedApplication] presentError:error];
                     
