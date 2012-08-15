@@ -17,6 +17,7 @@
 // Core Data
 @property (nonatomic, strong, readonly) CoreDataController *coreDataController;
 @property (nonatomic, strong, readonly) NSArray *tableSortDescriptors;
+@property (strong) IBOutlet NSArrayController *characterArrayController;
 
 // KVO
 @property (strong) NSString *keyID;
@@ -24,6 +25,7 @@
 @property  BOOL animateProgress;
 @property  BOOL authErrorHidden;
 
+- (IBAction)deleteAction:(id)sender;
 - (IBAction)queryAction:(id)sender;
 
 @end

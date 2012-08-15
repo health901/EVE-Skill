@@ -57,14 +57,17 @@
                                                        queue:nil
                                                   usingBlock:^(NSNotification *note) {
         self.animateProgress = NO;
-    }];
+                                                  }];
     
     [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
                                                       object:_appDelegate.apiController.apiControllerContext
                                                        queue:nil
                                                   usingBlock:^(NSNotification *note) {
-                                                      [self.characterTableView reloadData];
+        NSLog(@"apiControllerContext - NSManagedObjectContextDidSaveNotification");
                                                       
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.characterTableView reloadData];
+        });
     }];
     
     
@@ -98,7 +101,31 @@
 }
 
 #pragma mark -
+#pragma mark - Key shortcuts
+
+- (void)keyDown:(NSEvent *)theEvent
+{
+    // If the delete key is pressed, we remove the selected characters
+    unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+    if(key == NSDeleteCharacter) {
+        NSLog(@"keyDown | key == NSDeleteCharacter");
+        
+        [self deleteAction:nil];
+    } else {
+        [super keyDown:theEvent];
+    }
+}
+
+#pragma mark -
 #pragma mark - IBActions
+
+- (IBAction)deleteAction:(id)sender
+{
+    // If rows are selected in the table view, we delete them
+    if ([[self.characterTableView selectedRowIndexes] count] > 0) {
+        [self.characterArrayController removeObjectsAtArrangedObjectIndexes:[self.characterTableView selectedRowIndexes]];
+    }
+}
 
 - (void)queryAction:(id)sender
 {
