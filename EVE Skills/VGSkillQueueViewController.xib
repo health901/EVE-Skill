@@ -149,7 +149,7 @@
 											</object>
 										</object>
 										<double key="NSRowHeight">48</double>
-										<int key="NSTvFlags">37748736</int>
+										<int key="NSTvFlags">306184192</int>
 										<reference key="NSDelegate"/>
 										<reference key="NSDataSource"/>
 										<int key="NSColumnAutoresizingStyle">4</int>
@@ -175,6 +175,7 @@
 								<string key="NSFrame">{{-100, -100}, {16, 272}}</string>
 								<reference key="NSSuperview" ref="921328581"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="857931068"/>
 								<string key="NSReuseIdentifierKey">_NS:58</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								<reference key="NSTarget" ref="921328581"/>
@@ -187,7 +188,7 @@
 								<string key="NSFrame">{{-100, -100}, {480, 16}}</string>
 								<reference key="NSSuperview" ref="921328581"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="725197716"/>
+								<reference key="NSNextKeyView" ref="362296732"/>
 								<string key="NSReuseIdentifierKey">_NS:60</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								<int key="NSsFlags">1</int>
@@ -199,7 +200,7 @@
 						<string key="NSFrameSize">{303, 132}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="362296732"/>
+						<reference key="NSNextKeyView" ref="725197716"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSsFlags">153600</int>
 						<reference key="NSVScroller" ref="725197716"/>
@@ -339,7 +340,7 @@
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{50, 28}, {247, 17}}</string>
 									<reference key="NSSuperview" ref="449812473"/>
-									<reference key="NSNextKeyView" ref="857931068"/>
+									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:1535</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="409949225">

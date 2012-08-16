@@ -109,6 +109,15 @@
 }
 
 #pragma mark -
+#pragma mark - NSTableViewDelegate
+
+- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row
+{
+    // Disable row selection
+    return NO;
+}
+
+#pragma mark -
 #pragma mark - Core Data
 
 - (CoreDataController *)coreDataController

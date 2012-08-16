@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "VGAppDelegate.h"
 
-@interface VGSkillQueueViewController : NSViewController
+@interface VGSkillQueueViewController : NSViewController <NSTableViewDelegate>
 
 // GUI
 @property (strong) IBOutlet NSTableView *characterTableView;
