@@ -7,3 +7,4 @@
 //
 
 #define MANAGER_SHOULD_RELOAD_DATA_NOTIFICATION @"managerShouldReloadDataNotification"
+#define SKILL_QUEUE_SHOULD_RELOAD_DATA_NOTIFICATION @"skillQueueShouldReloadDataNotification"

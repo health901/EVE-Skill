@@ -20,12 +20,12 @@
     NSXMLParser *_xmlParser;
     NSMutableString *_currentString;
     
-    // Core Data stuff
-    NSManagedObjectContext *_moc;
-    
     API *_currentAPI;
     Character *_currentCharacter;
     Corporation *_currentCorporation;
+    
+    // Core Data stuff
+    NSManagedObjectContext *_moc;
     
     // Completion handler
     void (^_completionHandler)(NSError *);
@@ -38,7 +38,6 @@
 @end
 
 @implementation VGKeyInfoQuery
-@synthesize keyID = _keyID;
 
 
 #pragma mark -
@@ -79,83 +78,103 @@
 
 - (API *)apiWithKeyID:(NSString *)keyID
 {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"API"
-                                              inManagedObjectContext:_moc];
-    [fetchRequest setEntity:entity];
+    __block API *api = nil;
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"keyID == %@", keyID];
-    [fetchRequest setPredicate:predicate];
+    [_moc performBlockAndWait:^{
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"API"
+                                                  inManagedObjectContext:_moc];
+        [fetchRequest setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"keyID == %@", keyID];
+        [fetchRequest setPredicate:predicate];
+        
+        NSError *error = nil;
+        NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
+        
+        if (fetchedObjects == nil) {
+            NSLog(@"apiWithKeyID: '%@' error fetching objects: %@, %@",
+                  keyID, error, [error userInfo]);
+            return;
+        }
+        
+        if ([fetchedObjects count] == 0) {
+            NSLog(@"No API in DB with keyID = '%@'", keyID);
+            return;
+        }
+        
+        api = [fetchedObjects lastObject];
+    }];
     
-    NSError *error = nil;
-    NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
     
-    if (fetchedObjects == nil) {
-        NSLog(@"apiWithKeyID: '%@' error fetching objects: %@, %@",
-              keyID, error, [error userInfo]);
-        return nil;
-    }
     
-    if ([fetchedObjects count] == 0) {
-        // no objects with specified ID found
-        return nil;
-    }
-    
-    return [fetchedObjects lastObject];
+    return api;
 }
 
 - (Character *)characterWithCharacterID:(NSString *)characterID
 {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character"
-                                              inManagedObjectContext:_moc];
-    [fetchRequest setEntity:entity];
+    __block Character *character = nil;
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", characterID];
-    [fetchRequest setPredicate:predicate];
+    [_moc performBlockAndWait:^{
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character"
+                                                  inManagedObjectContext:_moc];
+        [fetchRequest setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", characterID];
+        [fetchRequest setPredicate:predicate];
+        
+        NSError *error = nil;
+        NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
+        
+        if (fetchedObjects == nil) {
+            NSLog(@"characterWithCharacterID: '%@' error fetching objects: %@, %@",
+                  characterID, error, [error userInfo]);
+            return;
+        }
+        
+        if ([fetchedObjects count] == 0) {
+            NSLog(@"No Character in DB with characterID = '%@'", characterID);
+            return;
+        }
+        
+        character = [fetchedObjects lastObject];
+    }];
     
-    NSError *error = nil;
-    NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
-    
-    if (fetchedObjects == nil) {
-        NSLog(@"characterWithCharacterID: '%@' error fetching objects: %@, %@",
-              characterID, error, [error userInfo]);
-        return nil;
-    }
-    
-    if ([fetchedObjects count] == 0) {
-        // no objects with specified ID found
-        return nil;
-    }
-    
-    return [fetchedObjects lastObject];
+    return character;
 }
 
 - (Corporation *)corporationWithCorporationID:(NSString *)corporationID
 {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Corporation"
-                                              inManagedObjectContext:_moc];
-    [fetchRequest setEntity:entity];
+    __block Corporation *corporation = nil;
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"corporationID == %@", corporationID];
-    [fetchRequest setPredicate:predicate];
+    [_moc performBlockAndWait:^{
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Corporation"
+                                                  inManagedObjectContext:_moc];
+        [fetchRequest setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"corporationID == %@", corporationID];
+        [fetchRequest setPredicate:predicate];
+        
+        NSError *error = nil;
+        NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
+        
+        if (fetchedObjects == nil) {
+            NSLog(@"corporationWithCorporationID: '%@' error fetching objects: %@, %@",
+                  corporationID, error, [error userInfo]);
+            return;
+        }
+        
+        if ([fetchedObjects count] == 0) {
+            NSLog(@"No corporation in DB with corporationID = '%@'", corporationID);
+            return;
+        }
+        
+        corporation = [fetchedObjects lastObject];
+    }];
     
-    NSError *error = nil;
-    NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
-    
-    if (fetchedObjects == nil) {
-        NSLog(@"corporationWithCorporationID: '%@' error fetching objects: %@, %@",
-              corporationID, error, [error userInfo]);
-        return nil;
-    }
-    
-    if ([fetchedObjects count] == 0) {
-        // no objects with specified ID found
-        return nil;
-    }
-    
-    return [fetchedObjects lastObject];
+    return corporation;
 }
 
 #pragma mark -
@@ -229,7 +248,11 @@
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
+    if (!_currentString) {
+        _currentString = [[NSMutableString alloc] init];
+    }
     
+    [_currentString appendString:string];
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName

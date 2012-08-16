@@ -12,7 +12,7 @@
 @interface VGAPIController : NSObject
 
 @property (nonatomic, readonly) dispatch_queue_t dispatchQueue;
-@property (strong) dispatch_group_t portraitDispatchGroup;
+@property (strong) dispatch_group_t dispatchGroup;
 @property (nonatomic, readonly) NSManagedObjectContext *apiControllerContext;
 
 // this function must be called in the controller's dispatch queue
@@ -20,6 +20,8 @@
 - (void)initialize;
 
 - (void)addAPIWithKeyID:(NSString *)keyID vCode:(NSString *)vCode;
+
+- (void)addQueueWithCharacterID:(NSString *)characterID;
 
 - (void)addPortraitForCharacterID:(NSString *)characterID;
 

@@ -70,6 +70,7 @@
         
         NSError *error = nil;
         NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
+        
         if (fetchedObjects == nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"Error while fetching Portrait with characterID = '%@' : %@, %@",
@@ -98,37 +99,37 @@
 - (id)transformedValue:(id)value
 {
     if (!value) {
-        NSLog(@"VGCharacterIDToImageValueTransformer -transformedValue: Value is nil.");
+        NSLog(@"characterIDToImage -transformedValue: Value is nil.");
         return [NSImage imageNamed:NSImageNameUserGuest];
     }
     
     if (![value isKindOfClass:[NSString class]]) {
-        NSLog(@"VGCharacterIDToImageValueTransformer -transformedValue: Value is not an NSString but %@", [value class]);
+        NSLog(@"characterIDToImage -transformedValue: Value is not an NSString but %@", [value class]);
         return [NSImage imageNamed:NSImageNameUserGuest];
     }
     
-    NSLog(@"VGCharacterIDToImageValueTransformer searching for image with characterID = '%@'",
+    NSLog(@"characterIDToImage searching for image with characterID = '%@'",
           value);
     
     NSImage *_image = [self imageWithCharacterID:(NSString *)value];
     
     if (!_image) {
         // Image is not in the DB, we have to download it
-        NSLog(@"VGCharacterIDToImageValueTransformer image not in the DB for characterID = '%@'",
+        NSLog(@"characterIDToImage image not in the DB for characterID = '%@'",
               value);
         
         // check if the dispatch group is nil
-        if (!_appDelegate.apiController.portraitDispatchGroup) {
-            NSLog(@"Creating portraitDispatchGroup");
-            _appDelegate.apiController.portraitDispatchGroup = dispatch_group_create();
+        if (!_appDelegate.apiController.dispatchGroup) {
+            NSLog(@"Creating dispatchGroup");
+            _appDelegate.apiController.dispatchGroup = dispatch_group_create();
             
             // wait in another thread for the group to finish
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSLog(@"Waiting for the end of portraitDispatchGroup...");
-                dispatch_group_wait(_appDelegate.apiController.portraitDispatchGroup,
+                NSLog(@"Waiting for the end of dispatchGroup...");
+                dispatch_group_wait(_appDelegate.apiController.dispatchGroup,
                                     DISPATCH_TIME_FOREVER);
-                NSLog(@"portraitDispatchGroup ended !");
-                _appDelegate.apiController.portraitDispatchGroup = nil;
+                NSLog(@"dispatchGroup empty !");
+                _appDelegate.apiController.dispatchGroup = nil;
                 
                 // post the notification for the character manager
                 [[NSNotificationCenter defaultCenter] postNotificationName:MANAGER_SHOULD_RELOAD_DATA_NOTIFICATION
@@ -136,7 +137,8 @@
             });
         }
         
-        dispatch_group_async(_appDelegate.apiController.portraitDispatchGroup,
+        // start the download
+        dispatch_group_async(_appDelegate.apiController.dispatchGroup,
                              _appDelegate.apiController.dispatchQueue,
                              ^{
             [_appDelegate.apiController addPortraitForCharacterID:(NSString *)value];

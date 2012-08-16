@@ -9,7 +9,7 @@
 #import "VGSkillQueueViewController.h"
 
 #define QUEUE_CELL_DEFAULT_WIDTH 300
-#define QUEUE_CELL_DEFAULT_HEIGHT 48
+#define QUEUE_CELL_DEFAULT_HEIGHT 66
 
 @interface VGSkillQueueViewController () {
     // App Delegate
@@ -103,9 +103,21 @@
     // Notifications
     [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextObjectsDidChangeNotification object:_appDelegate.coreDataController.mainThreadContext queue:nil usingBlock:^(NSNotification *note) {
         [self resizeToFitEnabledCharacters];
-        
     }];
     
+    [[NSNotificationCenter defaultCenter] addObserverForName:SKILL_QUEUE_SHOULD_RELOAD_DATA_NOTIFICATION
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+        [self.characterTableView reloadData];
+    }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:MANAGER_SHOULD_RELOAD_DATA_NOTIFICATION
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      [self.characterTableView reloadData];
+                                                  }];
 }
 
 #pragma mark -

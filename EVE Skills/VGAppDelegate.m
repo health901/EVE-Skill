@@ -69,9 +69,6 @@
                                                  name:NSManagedObjectContextDidSaveNotification
                                                object:_apiController.apiControllerContext];
     
-    // Character manager
-    [self openManagerWindow];
-    
     // Check if there are characters in the DB
     [_coreDataController.mainThreadContext performBlock:^{
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -90,6 +87,9 @@
             NSLog(@"No characters in DB");
         }
     }];
+    
+    // Character manager
+//    [self openManagerWindow];
     
     // load skill tree code
 //    VGSkillTree *skillTree = [[VGSkillTree alloc] init];
