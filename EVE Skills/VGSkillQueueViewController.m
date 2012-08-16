@@ -78,8 +78,7 @@
             newFrame.origin.x       = 0;
             newFrame.origin.y       = 0;
             newFrame.size.width     = QUEUE_CELL_DEFAULT_WIDTH + 3;
-            newFrame.size.height    = characterCount * QUEUE_CELL_DEFAULT_HEIGHT +
-                                      (characterCount - 1) * 2;
+            newFrame.size.height    = characterCount * (QUEUE_CELL_DEFAULT_HEIGHT + 2);
         } else {
             newFrame.origin.x       = 0;
             newFrame.origin.y       = 0;
@@ -98,15 +97,11 @@
 {
     [super loadView];
     
-    // Autoresizing
-//    [self.view setAutoresizingMask:(NSViewHeightSizable | NSViewWidthSizable)];
-    
     // resize to fit the number of characters
     [self resizeToFitEnabledCharacters];
     
     // Notifications
     [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextObjectsDidChangeNotification object:_appDelegate.coreDataController.mainThreadContext queue:nil usingBlock:^(NSNotification *note) {
-        
         [self resizeToFitEnabledCharacters];
         
     }];
