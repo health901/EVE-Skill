@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "CoreDataController.h"
 #import "VGAPIController.h"
+#import "VGAppNotifications.h"
 
 @interface VGAppDelegate : NSObject <NSApplicationDelegate>
 
