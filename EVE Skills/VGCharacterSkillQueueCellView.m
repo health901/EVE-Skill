@@ -179,6 +179,19 @@
             
             if (arrowShaped) {
                 // The skill is bigger than the rectangle, we draw a shape
+                CGContextSaveGState(context);
+                
+                CGGradientRef gradient;
+                size_t num_locations = 2;
+                CGFloat locations[2] = { 0.0, 1.0 };
+                CGFloat components[8] =
+                    {1.0, 0.0, 0.0, 1,  // Start color
+                     1.0, 0.0, 0.0, 0}; // End color
+                
+                gradient = CGGradientCreateWithColorComponents(CGColorSpaceCreateDeviceRGB(), components, locations, num_locations);
+                
+                CGPoint start = CGPointMake(xPos, 0.0f);
+                CGPoint end = CGPointMake(xPos, height);
                 
                 CGContextBeginPath(context);
                 CGContextMoveToPoint(context, xPos, 0);
@@ -186,7 +199,19 @@
                 CGContextAddLineToPoint(context, width              , height/2);
                 CGContextAddLineToPoint(context, width - ARROW_SIZE , height);
                 CGContextAddLineToPoint(context, xPos               , height);
-                CGContextFillPath(context);
+//                CGContextFillPath(context);
+                
+                CGContextClip(context);
+                
+                CGContextDrawLinearGradient(context, gradient, start, end, 0) ;
+                
+                
+//                CGContextDrawLinearGradient(context, glossGradient, topCenter, midCenter, 0);
+                
+                
+                
+                
+                CGContextRestoreGState(context);
                 
             } else {
                 // fill the skill's rectangle
