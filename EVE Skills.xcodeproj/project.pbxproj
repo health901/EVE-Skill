@@ -23,6 +23,8 @@
 		BFADFD3915DD2F4F005D082D /* Queue+VGEVE.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD3815DD2F4F005D082D /* Queue+VGEVE.m */; };
 		BFADFD3C15DD2FCF005D082D /* QueueElement+VGEVE.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD3B15DD2FCF005D082D /* QueueElement+VGEVE.m */; };
 		BFADFD3F15DD3AF3005D082D /* VGSkillQueueQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD3E15DD3AF3005D082D /* VGSkillQueueQuery.m */; };
+		BFADFD4215DD54FB005D082D /* VGCurrentSkillTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD4115DD54FB005D082D /* VGCurrentSkillTextField.m */; };
+		BFADFD4515DD5801005D082D /* VGCharacterSkillQueueCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD4415DD5801005D082D /* VGCharacterSkillQueueCellView.m */; };
 		BFDD80BE15CC728000116A65 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B815CC728000116A65 /* CoreDataController.m */; };
 		BFDD80BF15CC728000116A65 /* DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */; };
 		BFDD80C015CC728000116A65 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80BB15CC728000116A65 /* Group.m */; };
@@ -73,6 +75,10 @@
 		BFADFD3B15DD2FCF005D082D /* QueueElement+VGEVE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QueueElement+VGEVE.m"; sourceTree = "<group>"; };
 		BFADFD3D15DD3AF3005D082D /* VGSkillQueueQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSkillQueueQuery.h; sourceTree = "<group>"; };
 		BFADFD3E15DD3AF3005D082D /* VGSkillQueueQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGSkillQueueQuery.m; sourceTree = "<group>"; };
+		BFADFD4015DD54FB005D082D /* VGCurrentSkillTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCurrentSkillTextField.h; sourceTree = "<group>"; };
+		BFADFD4115DD54FB005D082D /* VGCurrentSkillTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCurrentSkillTextField.m; sourceTree = "<group>"; };
+		BFADFD4315DD5801005D082D /* VGCharacterSkillQueueCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterSkillQueueCellView.h; sourceTree = "<group>"; };
+		BFADFD4415DD5801005D082D /* VGCharacterSkillQueueCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterSkillQueueCellView.m; sourceTree = "<group>"; };
 		BFDD80B715CC728000116A65 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
 		BFDD80B815CC728000116A65 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
 		BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -226,6 +232,10 @@
 		BFDD80D015CC76A200116A65 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BFADFD4015DD54FB005D082D /* VGCurrentSkillTextField.h */,
+				BFADFD4115DD54FB005D082D /* VGCurrentSkillTextField.m */,
+				BFADFD4315DD5801005D082D /* VGCharacterSkillQueueCellView.h */,
+				BFADFD4415DD5801005D082D /* VGCharacterSkillQueueCellView.m */,
 				BF590EA215DB972B0036E10A /* Value Transformers */,
 				BF590EA315DB97360036E10A /* Window Controllers */,
 			);
@@ -373,6 +383,8 @@
 				BFADFD3915DD2F4F005D082D /* Queue+VGEVE.m in Sources */,
 				BFADFD3C15DD2FCF005D082D /* QueueElement+VGEVE.m in Sources */,
 				BFADFD3F15DD3AF3005D082D /* VGSkillQueueQuery.m in Sources */,
+				BFADFD4215DD54FB005D082D /* VGCurrentSkillTextField.m in Sources */,
+				BFADFD4515DD5801005D082D /* VGCharacterSkillQueueCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

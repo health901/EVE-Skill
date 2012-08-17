@@ -19,10 +19,22 @@
 // it creates the MOC
 - (void)initialize;
 
+// Downloads and creates/replaces the API and Character associated with keyID and vCode
 - (void)addAPIWithKeyID:(NSString *)keyID vCode:(NSString *)vCode;
 
+// Downloads and creates/replaces the Queue and QueueElement associated with characterID
 - (void)addQueueWithCharacterID:(NSString *)characterID;
 
+// Downloads and creates/replaces the Portrait associated with characterID
 - (void)addPortraitForCharacterID:(NSString *)characterID;
+
+/* 
+ Downloads and creates/replaces the Queue and QueueElement for all Character
+    - If enabled == YES, then only Character with enabled attribute set to YES will have their
+    associated Queue and QueueElement refreshed (ie created/replaced)
+    - If enabled == NO, then all Character will have their associated Queue and QueueElement
+    refreshed (ie created/replaced)
+ */
+- (void)refreshQueueForCharacterEnabled:(BOOL)enabled;
 
 @end

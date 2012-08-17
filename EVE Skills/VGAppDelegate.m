@@ -30,6 +30,7 @@
     
     // Menu items
     NSMenuItem *_skillQueueMenuItem;
+    NSMenuItem *_refreshMenuItem;
     NSMenuItem *_managerMenuItem;
     NSMenuItem *_quitMenuItem;
 }
@@ -41,6 +42,7 @@
 - (void)refreshMenu;
 
 // MenuBar actions
+- (void)refreshAction;
 - (void)managerAction;
 - (void)quitAction;
 
@@ -68,6 +70,14 @@
                                              selector:@selector(apiControllerContextDidSave:)
                                                  name:NSManagedObjectContextDidSaveNotification
                                                object:_apiController.apiControllerContext];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:APICALL_QUERY_DID_START_NOTIFICATION object:nil queue:nil usingBlock:^(NSNotification *note) {
+        _refreshMenuItem.image = [NSImage imageNamed:NSImageNameRefreshTemplate];
+    }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:APICALL_QUERY_DID_END_NOTIFICATION object:nil queue:nil usingBlock:^(NSNotification *note) {
+        _refreshMenuItem.image = nil;
+    }];
     
     // Check if there are characters in the DB
     [_coreDataController.mainThreadContext performBlock:^{
@@ -157,15 +167,17 @@
     _skillQueueMenuItem.view = _skillQueueViewController.view;
     
     // menu items
+    _refreshMenuItem = [[NSMenuItem alloc] initWithTitle:@"Refresh"
+                                                  action:@selector(refreshAction)
+                                           keyEquivalent:@""];
+    
     _managerMenuItem = [[NSMenuItem alloc] initWithTitle:@"Character manager"
                                                   action:@selector(managerAction)
                                            keyEquivalent:@""];
-    [_managerMenuItem setEnabled:YES];
     
     _quitMenuItem = [[NSMenuItem alloc] initWithTitle:@"Quit"
                                                action:@selector(quitAction)
                                         keyEquivalent:@""];
-    [_quitMenuItem setEnabled:YES];
     
     [self refreshMenu];
 }
@@ -178,9 +190,16 @@
     // Add the bottom items
     [_menu addItem:_skillQueueMenuItem];
     [_menu addItem:[NSMenuItem separatorItem]];
+    [_menu addItem:_refreshMenuItem];
     [_menu addItem:_managerMenuItem];
     [_menu addItem:[NSMenuItem separatorItem]];
     [_menu addItem:_quitMenuItem];
+}
+
+- (void)refreshAction
+{
+    NSLog(@"refreshAction");
+    [_apiController refreshQueueForCharacterEnabled:YES];
 }
 
 - (void)managerAction

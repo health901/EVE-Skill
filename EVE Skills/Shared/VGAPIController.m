@@ -365,4 +365,41 @@
     }];
 }
 
+- (void)refreshQueueForCharacterEnabled:(BOOL)enabled
+{
+    // Fetch the Characters
+    [_apiControllerContext performBlock:^{
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character" inManagedObjectContext:_apiControllerContext];
+        [fetchRequest setEntity:entity];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"enabled == %@", [NSNumber numberWithBool:YES]];
+        [fetchRequest setPredicate:predicate];
+        
+        NSError *error = nil;
+        NSArray *fetchedObjects = [_apiControllerContext executeFetchRequest:fetchRequest error:&error];
+        
+        if (fetchedObjects == nil) {
+            NSLog(@"Error fetching Character : %@, %@", error, [error userInfo]);
+            return;
+        }
+        
+        dispatch_group_t dispatchGroup = dispatch_group_create();
+        
+        for (Character *character in fetchedObjects) {
+            dispatch_group_async(dispatchGroup, self.dispatchQueue, ^{
+                [self addQueueWithCharacterID:character.characterID];
+            });
+        }
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSLog(@"-refreshQueueForCharacterEnabled: Waiting for the end of dispatchGroup...");
+            dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER);
+            NSLog(@"-refreshQueueForCharacterEnabled: dispatchGroup empty !");
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:SKILL_QUEUE_SHOULD_RELOAD_DATA_NOTIFICATION object:self];
+        });
+    }];
+}
+
 @end

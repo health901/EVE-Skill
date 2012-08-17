@@ -9,9 +9,8 @@
 #import "VGCharacterIDToCurrentSkillNameValueTransformer.h"
 #import "VGAppDelegate.h"
 #import "Skill.h"
-#import "Queue.h"
-#import "QueueElement.h"
-#import "Skill.h"
+#import "Queue+VGEVE.h"
+#import "QueueElement+VGEVE.h"
 
 @interface VGCharacterIDToCurrentSkillNameValueTransformer () {
     // App delegate
@@ -148,14 +147,16 @@
     }
     
     if (queue.elements) {
+        // There is a queue, we find the first element of the queue
         __block QueueElement *firstQueueElement = nil;
         [queue.elements enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
-            NSLog(@"[((QueueElement *)obj).position intValue] = %d", [((QueueElement *)obj).position intValue]);
             if ([((QueueElement *)obj).position intValue] == 0) {
                 firstQueueElement = obj;
                 *stop = YES;
             }
         }];
+        
+        // If there is a first element in the queue, find the associated skill
         if (firstQueueElement) {
             // Fetch the skill
             [_moc performBlockAndWait:^{
@@ -185,10 +186,12 @@
             }];
             
         } else {
+            // There is not first element, the queue is empty
+            
             _string = @"Skill queue empty";
         }
     } else {
-        _string = @"queue.elements == nil";
+        _string = @"Fetching...";
         
     }
     
