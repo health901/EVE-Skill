@@ -41,6 +41,9 @@
 
 - (void)apiControllerContextDidSave:(NSNotification *)note;
 
+// Preferences
+- (void)loadAppDefaultPreferences;
+
 // MenuBar
 - (void)setupMenu;
 - (void)refreshMenu;
@@ -51,8 +54,8 @@
 - (void)quitAction;
 
 // Timer actions
-- (void)skillQueueTimeTimerAction;
-- (void)skillQueueReloadTimerAction;
+- (void)skillQueueTimeTimerAction:(NSTimer*)theTimer;
+- (void)skillQueueReloadTimerAction:(NSTimer*)theTimer;
 
 @end
 
@@ -60,6 +63,9 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    // App preferences
+    [self loadAppDefaultPreferences];
+    
     // Initializing Core Data
     _coreDataController = [[CoreDataController alloc] init];
     [_coreDataController loadPersistentStores];
@@ -107,12 +113,13 @@
     }];
     
     // Timers
-    _skillQueueReloadTimer = [NSTimer timerWithTimeInterval:1.0*60*60 target:self selector:@selector(skillQueueReloadTimerAction) userInfo:nil repeats:YES];
+    _skillQueueReloadTimer = [NSTimer timerWithTimeInterval:1.0*60*60 target:self selector:@selector(skillQueueReloadTimerAction:) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:_skillQueueReloadTimer forMode:NSRunLoopCommonModes];
-    [_skillQueueReloadTimer fire];
     
-    _skillQueueTimeTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(skillQueueTimeTimerAction) userInfo:nil repeats:YES];
+    _skillQueueTimeTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(skillQueueTimeTimerAction:) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:_skillQueueTimeTimer forMode:NSRunLoopCommonModes];
+    
+    [_skillQueueReloadTimer fire];
     [_skillQueueTimeTimer fire];
     
     // Character manager
@@ -140,6 +147,20 @@
 }
 
 #pragma mark -
+#pragma mark - Application defaults
+
+- (void)loadAppDefaultPreferences
+{
+    NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSArchiver archivedDataWithRootObject:[NSColor colorWithCalibratedRed:58.0/255 green:139.0/255 blue:176.0/255 alpha:1.0]], @"colorSkill1",
+                                 [NSArchiver archivedDataWithRootObject:[NSColor colorWithCalibratedRed:34.0/255 green:112.0/255 blue:157.0/255 alpha:1.0]], @"colorSkill2",
+                                 [NSArchiver archivedDataWithRootObject:[NSColor yellowColor]], @"colorWarning",
+                                 [NSArchiver archivedDataWithRootObject:[NSColor redColor]], @"colorError", nil];
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+}
+
+#pragma mark -
 #pragma mark - Private methods
 
 - (void)apiControllerContextDidSave:(NSNotification *)note
@@ -162,12 +183,13 @@
 #pragma mark -
 #pragma mark - Timer actions
 
-- (void)skillQueueTimeTimerAction
+- (void)skillQueueTimeTimerAction:(NSTimer*)theTimer
 {
-    NSLog(@"tick");
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVE_SKILLS_TIMER_TICK
+                                                        object:self];
 }
 
-- (void)skillQueueReloadTimerAction
+- (void)skillQueueReloadTimerAction:(NSTimer*)theTimer
 {
     [_apiController refreshQueueForCharacterEnabled:YES];
 }

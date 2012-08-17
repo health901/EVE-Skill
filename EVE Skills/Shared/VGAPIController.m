@@ -393,6 +393,7 @@
         }
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
             NSLog(@"-refreshQueueForCharacterEnabled: Waiting for the end of dispatchGroup...");
             dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER);
             NSLog(@"-refreshQueueForCharacterEnabled: dispatchGroup empty !");

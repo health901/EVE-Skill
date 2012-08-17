@@ -10,6 +10,12 @@
 
 @interface Queue (VGEVE)
 
+// Returns YES only if the first skill in the queue is training
+//- (BOOL)isTraining;
+//
+// Returns an ordered by 'position' array of QueueElement if -isTraining returns YES
+//- (NSArray *)queueElementArray;
+
 - (NSString *)timeRemainingStringValue;
 
 @end
