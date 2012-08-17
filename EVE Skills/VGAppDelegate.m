@@ -33,6 +33,10 @@
     NSMenuItem *_refreshMenuItem;
     NSMenuItem *_managerMenuItem;
     NSMenuItem *_quitMenuItem;
+    
+    // Timers
+    NSTimer *_skillQueueReloadTimer;    // refresh characters skill queue
+    NSTimer *_skillQueueTimeTimer;      // timer for the remaining time counter refresh
 }
 
 - (void)apiControllerContextDidSave:(NSNotification *)note;
@@ -45,6 +49,10 @@
 - (void)refreshAction;
 - (void)managerAction;
 - (void)quitAction;
+
+// Timer actions
+- (void)skillQueueTimeTimerAction;
+- (void)skillQueueReloadTimerAction;
 
 @end
 
@@ -98,6 +106,15 @@
         }
     }];
     
+    // Timers
+    _skillQueueReloadTimer = [NSTimer timerWithTimeInterval:1.0*60*60 target:self selector:@selector(skillQueueReloadTimerAction) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:_skillQueueReloadTimer forMode:NSRunLoopCommonModes];
+    [_skillQueueReloadTimer fire];
+    
+    _skillQueueTimeTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(skillQueueTimeTimerAction) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:_skillQueueTimeTimer forMode:NSRunLoopCommonModes];
+    [_skillQueueTimeTimer fire];
+    
     // Character manager
 //    [self openManagerWindow];
     
@@ -140,6 +157,19 @@
     }
     
     [_managerWindowController.window makeKeyAndOrderFront:nil];
+}
+
+#pragma mark -
+#pragma mark - Timer actions
+
+- (void)skillQueueTimeTimerAction
+{
+    NSLog(@"tick");
+}
+
+- (void)skillQueueReloadTimerAction
+{
+    [_apiController refreshQueueForCharacterEnabled:YES];
 }
 
 #pragma mark -
