@@ -12,6 +12,8 @@
 #import "Queue+VGEVE.h"
 #import "QueueElement+VGEVE.h"
 
+#define ARROW_SIZE 3
+
 @interface VGCharacterSkillQueueCellView () {
     // App delegate
     VGAppDelegate *_appDelegate;
@@ -137,9 +139,14 @@
         [self fetchQueue];
     }
     
+    [[NSGraphicsContext currentContext] saveGraphicsState];
+    [[NSGraphicsContext currentContext] setShouldAntialias: NO];
+    
     CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
-    CGFloat width = self.frame.size.width;
-    CGFloat height = self.frame.size.height;
+    CGFloat width = self.frame.size.width - 1;
+    CGFloat height = self.frame.size.height - 1;
+    
+    BOOL arrowShaped = NO;
     
     // Draw the skills in the queue
     if (_queue != nil && _queue.elements != nil && _queue.elements.count > 0 && _queueElementArray){
@@ -168,22 +175,46 @@
                                                [(NSColor *)[NSUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"colorSkill2"]] CGColor]);
             }
             
-            // fill the skill's rectangle
-            CGContextFillRect(context, CGRectMake(xPos, 0.0, skillWidth, height));
-            xPos += skillWidth;
+            arrowShaped = xPos + skillWidth > width;
+            
+            if (arrowShaped) {
+                // The skill is bigger than the rectangle, we draw a shape
+                
+                CGContextBeginPath(context);
+                CGContextMoveToPoint(context, xPos, 0);
+                CGContextAddLineToPoint(context, width - ARROW_SIZE , 0);
+                CGContextAddLineToPoint(context, width              , height/2);
+                CGContextAddLineToPoint(context, width - ARROW_SIZE , height);
+                CGContextAddLineToPoint(context, xPos               , height);
+                CGContextFillPath(context);
+                
+            } else {
+                // fill the skill's rectangle
+                CGContextFillRect(context, CGRectMake(xPos, 0.0, skillWidth, height));
+                xPos += skillWidth;
+            }
         }
     }
     
+    CGFloat xShift = 0;
+    CGFloat yShift = 0;
+    
     // Draw the empty queue
-    
     CGContextSetRGBStrokeColor(context, 0, 0, 0, 1.0);
-    CGContextStrokeRect(context, CGRectMake(0, 0, width, height));
+    if (arrowShaped) {
+        CGContextBeginPath(context);
+        CGContextMoveToPoint(context, 0, 0);
+        CGContextAddLineToPoint(context, width - ARROW_SIZE + xShift, 0 + yShift);
+        CGContextAddLineToPoint(context, width + xShift             , height/2 + yShift);
+        CGContextAddLineToPoint(context, width - ARROW_SIZE + xShift, height + yShift);
+        CGContextAddLineToPoint(context, 0 + xShift                 , height + yShift);
+        CGContextAddLineToPoint(context, 0 + xShift                 , 0 + yShift);
+        CGContextStrokePath(context);
+    } else {
+        CGContextStrokeRect(context, CGRectMake(0, 0, width, height));
+    }
     
-    // Drawing code here.
-    NSLog(@"HELLO");
-    NSLog(@"_character          = %@", _character);
-    NSLog(@"_queue              = %@", _queue);
-    NSLog(@"_queueElementArray  = %@", _queueElementArray);
+    [[NSGraphicsContext currentContext] restoreGraphicsState];
 }
 
 - (void)drawEmptyQueue
