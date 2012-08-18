@@ -151,11 +151,10 @@
 
 - (void)loadAppDefaultPreferences
 {
-    NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSArchiver archivedDataWithRootObject:[NSColor colorWithCalibratedRed:58.0/255 green:139.0/255 blue:176.0/255 alpha:1.0]], @"colorSkill1",
-                                 [NSArchiver archivedDataWithRootObject:[NSColor colorWithCalibratedRed:34.0/255 green:112.0/255 blue:157.0/255 alpha:1.0]], @"colorSkill2",
-                                 [NSArchiver archivedDataWithRootObject:[NSColor yellowColor]], @"colorWarning",
-                                 [NSArchiver archivedDataWithRootObject:[NSColor redColor]], @"colorError", nil];
+    NSDictionary *appDefaults = @{@"colorSkill1": [NSArchiver archivedDataWithRootObject:[NSColor colorWithCalibratedRed:58.0/255 green:139.0/255 blue:176.0/255 alpha:1.0]],
+                                 @"colorSkill2": [NSArchiver archivedDataWithRootObject:[NSColor colorWithCalibratedRed:34.0/255 green:112.0/255 blue:157.0/255 alpha:1.0]],
+                                 @"colorWarning": [NSArchiver archivedDataWithRootObject:[NSColor yellowColor]],
+                                 @"colorError": [NSArchiver archivedDataWithRootObject:[NSColor redColor]]};
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
 }

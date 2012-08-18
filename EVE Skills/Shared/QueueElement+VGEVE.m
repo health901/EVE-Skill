@@ -10,4 +10,9 @@
 
 @implementation QueueElement (VGEVE)
 
+- (NSString *)timeRemainingStringValue
+{
+    return @"NOT IMPLEMENTED";
+}
+
 @end

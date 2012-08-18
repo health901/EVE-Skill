@@ -147,13 +147,13 @@
         
         // fill the attributes of the object
         NSDate *dateTmp = nil;
-        dateTmp = [NSDate dateWithString:[NSString stringWithFormat:@"%@ +0000", [attributeDict objectForKey:@"startTime"]]];
+        dateTmp = [NSDate dateWithString:[NSString stringWithFormat:@"%@ +0000", attributeDict[@"startTime"]]];
         _currentQueueElement.startTime = (dateTmp ? dateTmp : [NSDate dateWithTimeIntervalSince1970:0]);
-        dateTmp = [NSDate dateWithString:[NSString stringWithFormat:@"%@ +0000", [attributeDict objectForKey:@"endTime"]]];
+        dateTmp = [NSDate dateWithString:[NSString stringWithFormat:@"%@ +0000", attributeDict[@"endTime"]]];
         _currentQueueElement.endTime = (dateTmp ? dateTmp : [NSDate dateWithTimeIntervalSince1970:0]);
-        _currentQueueElement.position = [NSNumber numberWithInt:[[attributeDict objectForKey:@"queuePosition"] intValue]];
-        _currentQueueElement.skillLevel = [NSNumber numberWithInt:[[attributeDict objectForKey:@"level"] intValue]];
-        _currentQueueElement.skillID = [attributeDict objectForKey:@"typeID"];
+        _currentQueueElement.position = @([attributeDict[@"queuePosition"] intValue]);
+        _currentQueueElement.skillLevel = @([attributeDict[@"level"] intValue]);
+        _currentQueueElement.skillID = attributeDict[@"typeID"];
         
         _currentQueueElement.queue = _currentQueue;
     }

@@ -54,7 +54,7 @@
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character" inManagedObjectContext:_appDelegate.coreDataController.mainThreadContext];
         [fetchRequest setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"enabled == %@", [NSNumber numberWithBool:YES]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"enabled == %@", @YES];
         [fetchRequest setPredicate:predicate];
         
         NSError *error = nil;
@@ -151,9 +151,8 @@
         return _tableSortDescriptors;
     }
     
-    _tableSortDescriptors = [NSArray arrayWithObjects:
-                             [NSSortDescriptor sortDescriptorWithKey:@"api.keyID" ascending:YES],
-                             [NSSortDescriptor sortDescriptorWithKey:@"characterName" ascending:YES], nil];
+    _tableSortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"api.keyID" ascending:YES],
+                             [NSSortDescriptor sortDescriptorWithKey:@"characterName" ascending:YES]];
     
     return _tableSortDescriptors;
 }

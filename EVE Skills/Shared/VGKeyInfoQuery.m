@@ -203,9 +203,9 @@
         // fill the attributes of the object
         _currentAPI.keyID       = self.keyID;
         _currentAPI.vCode       = self.vCode;
-        _currentAPI.accessMask  = [attributeDict objectForKey:@"accessMask"];
+        _currentAPI.accessMask  = attributeDict[@"accessMask"];
         NSDate *expiresTmp = [NSDate dateWithString:[NSString stringWithFormat:@"%@ +0000",
-                                                     [attributeDict objectForKey:@"expires"]]];
+                                                     attributeDict[@"expires"]]];
         _currentAPI.expires     =  (expiresTmp ? expiresTmp : [NSDate dateWithTimeIntervalSince1970:0]);
         _currentAPI.timestamp   = [NSDate date];
     }
@@ -213,7 +213,7 @@
     // each 'row' element represents a character associated with this API
     if ([elementName isEqualToString:@"row"]) {
         // is this Character already in the MOC
-        _currentCharacter = [self characterWithCharacterID:[attributeDict objectForKey:@"characterID"]];
+        _currentCharacter = [self characterWithCharacterID:attributeDict[@"characterID"]];
         
         if (!_currentCharacter) {
             // this Character is not in the MOC, we create it
@@ -222,13 +222,13 @@
         }
         
         // fill the attributes of the object
-        _currentCharacter.characterID   = [attributeDict objectForKey:@"characterID"];
-        _currentCharacter.characterName = [attributeDict objectForKey:@"characterName"];
+        _currentCharacter.characterID   = attributeDict[@"characterID"];
+        _currentCharacter.characterName = attributeDict[@"characterName"];
         _currentCharacter.timestamp     = [NSDate date];
         _currentCharacter.api           = _currentAPI;
         
         // is this Character's Corporation already in the MOC
-        _currentCorporation = [self corporationWithCorporationID:[attributeDict objectForKey:@"corporationID"]];
+        _currentCorporation = [self corporationWithCorporationID:attributeDict[@"corporationID"]];
         
         if (!_currentCorporation) {
             // this Character's Corporation is not in the MOC, we create it
@@ -237,8 +237,8 @@
         }
         
         // fill the attributes of the object
-        _currentCorporation.corporationID   = [attributeDict objectForKey:@"corporationID"];
-        _currentCorporation.corporationName = [attributeDict objectForKey:@"corporationName"];
+        _currentCorporation.corporationID   = attributeDict[@"corporationID"];
+        _currentCorporation.corporationName = attributeDict[@"corporationName"];
         _currentCorporation.timestamp       = [NSDate date];
         
         // set the Character's Corporation

@@ -36,11 +36,11 @@
             completionHandler:(void (^)(NSURLResponse *urlResponse, NSData *data, NSError *error))handler {
     
     // Getting the apiUrl
-    if (![dictionary objectForKey:@"apiURL"]) {
+    if (!dictionary[@"apiURL"]) {
         NSLog(@"threadedCallAPI : error, no 'apiURL' specified.");
         abort();
     }
-    NSURL *url = [NSURL URLWithString:[dictionary objectForKey:@"apiURL"]];
+    NSURL *url = [NSURL URLWithString:dictionary[@"apiURL"]];
     
     
     
@@ -65,12 +65,12 @@
         }] allObjects];;
         
         for (int i = 0; i < [keys count]; i++) {
-            NSString *key = [keys objectAtIndex:i];
+            NSString *key = keys[i];
             
             if (i > 0) {
-                [post appendFormat:@"&%@=%@", key, [dictionary objectForKey:key]];
+                [post appendFormat:@"&%@=%@", key, dictionary[key]];
             } else {
-                [post appendFormat:@"%@=%@", key, [dictionary objectForKey:key]];
+                [post appendFormat:@"%@=%@", key, dictionary[key]];
             }
             
         }
@@ -96,11 +96,11 @@
                                 error:(NSError **)error
 {
     // Getting the apiUrl
-    if (![dictionary objectForKey:@"apiURL"]) {
+    if (!dictionary[@"apiURL"]) {
         NSLog(@"threadedCallAPI : error, no 'apiURL' specified.");
         abort();
     }
-    NSURL *url = [NSURL URLWithString:[dictionary objectForKey:@"apiURL"]];
+    NSURL *url = [NSURL URLWithString:dictionary[@"apiURL"]];
     
     
     
@@ -125,12 +125,12 @@
         }] allObjects];;
         
         for (int i = 0; i < [keys count]; i++) {
-            NSString *key = [keys objectAtIndex:i];
+            NSString *key = keys[i];
             
             if (i > 0) {
-                [post appendFormat:@"&%@=%@", key, [dictionary objectForKey:key]];
+                [post appendFormat:@"&%@=%@", key, dictionary[key]];
             } else {
-                [post appendFormat:@"%@=%@", key, [dictionary objectForKey:key]];
+                [post appendFormat:@"%@=%@", key, dictionary[key]];
             }
             
         }

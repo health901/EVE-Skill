@@ -151,10 +151,9 @@
     NSLog(@"addAPIWithKeyID:%@ vCode:%@", keyID, vCode);
     
     // create the variables dictionnary
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                keyID, @"keyID",
-                                vCode, @"vCode",
-                                API_KEYINFO_QUERY, @"apiURL", nil];
+    NSDictionary *dictionary = @{@"keyID": keyID,
+                                @"vCode": vCode,
+                                @"apiURL": API_KEYINFO_QUERY};
     
     NSData *data = [self callAPIWithDictionaryAsync:dictionary];
     
@@ -226,11 +225,10 @@
     }
     
     // create the variables dictionnary
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                character.api.keyID, @"keyID",
-                                character.api.vCode, @"vCode",
-                                character.characterID, @"characterID",
-                                API_SKILLQUEUE_QUERY, @"apiURL", nil];
+    NSDictionary *dictionary = @{@"keyID": character.api.keyID,
+                                @"vCode": character.api.vCode,
+                                @"characterID": character.characterID,
+                                @"apiURL": API_SKILLQUEUE_QUERY};
     
     // synchronously download the skill queue
     NSData *data = [self callAPIWithDictionaryAsync:dictionary];
@@ -294,8 +292,7 @@
     NSMutableString *urlString = [[NSMutableString alloc] init];
     [urlString appendString:API_IMAGE_QUERY];
     [urlString appendFormat:@"Character/%@_512.jpg", characterID];
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                urlString, @"apiURL", nil];
+    NSDictionary *dictionary = @{@"apiURL": urlString};
     
     NSData *data = [self callAPIWithDictionaryAsync:dictionary];
     
@@ -373,7 +370,7 @@
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character" inManagedObjectContext:_apiControllerContext];
         [fetchRequest setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"enabled == %@", [NSNumber numberWithBool:YES]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"enabled == %@", @YES];
         [fetchRequest setPredicate:predicate];
         
         NSError *error = nil;

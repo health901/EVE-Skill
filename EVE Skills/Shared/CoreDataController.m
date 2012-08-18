@@ -487,7 +487,7 @@ static NSOperationQueue *_presentedItemOperationQueue;
 - (void)reLoadiCloudStore:(NSPersistentStore *)store readOnly:(BOOL)readOnly {
     NSMutableDictionary *options = [[NSMutableDictionary alloc] initWithDictionary:[store options]];
     if (readOnly) {
-        [options setObject:[NSNumber numberWithBool:YES] forKey:NSReadOnlyPersistentStoreOption];
+        options[NSReadOnlyPersistentStoreOption] = @YES;
     }
     
     NSError *error = nil;
@@ -522,18 +522,18 @@ static NSOperationQueue *_presentedItemOperationQueue;
         [countExprDesc setExpression:countExpr];
         [countExprDesc setExpressionResultType:NSInteger64AttributeType];
         
-        NSAttributeDescription *emailAttr = [[[[[_psc managedObjectModel] entitiesByName] objectForKey:@"Person"] propertiesByName] objectForKey:@"emailAddress"];
-        [fr setPropertiesToFetch:[NSArray arrayWithObjects:emailAttr, countExprDesc, nil]];
-        [fr setPropertiesToGroupBy:[NSArray arrayWithObject:emailAttr]];
+        NSAttributeDescription *emailAttr = [[[_psc managedObjectModel] entitiesByName][@"Person"] propertiesByName][@"emailAddress"];
+        [fr setPropertiesToFetch:@[emailAttr, countExprDesc]];
+        [fr setPropertiesToGroupBy:@[emailAttr]];
         
         [fr setResultType:NSDictionaryResultType];
         
         NSArray *countDictionaries = [moc executeFetchRequest:fr error:&error];
         NSMutableArray *emailsWithDupes = [[NSMutableArray alloc] init];
         for (NSDictionary *dict in countDictionaries) {
-            NSNumber *count = [dict objectForKey:@"count"];
+            NSNumber *count = dict[@"count"];
             if ([count integerValue] > 1) {
-                [emailsWithDupes addObject:[dict objectForKey:@"emailAddress"]];
+                [emailsWithDupes addObject:dict[@"emailAddress"]];
             }
         }
         
@@ -548,7 +548,7 @@ static NSOperationQueue *_presentedItemOperationQueue;
         [fr setPredicate:p];
         
         NSSortDescriptor *emailSort = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
-        [fr setSortDescriptors:[NSArray arrayWithObject:emailSort]];
+        [fr setSortDescriptors:@[emailSort]];
         
         NSUInteger batchSize = 500; //can be set 100-10000 objects depending on individual object size and available device memory
         [fr setFetchBatchSize:batchSize];
@@ -614,7 +614,7 @@ static NSOperationQueue *_presentedItemOperationQueue;
     
     NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
     NSPersistentStoreCoordinator *seedPSC = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
-    NSDictionary *seedStoreOptions = @{ NSReadOnlyPersistentStoreOption : [NSNumber numberWithBool:YES] };
+    NSDictionary *seedStoreOptions = @{ NSReadOnlyPersistentStoreOption : @YES };
     NSPersistentStore *seedStore = [seedPSC addPersistentStoreWithType:NSSQLiteStoreType
                                                          configuration:nil
                                                                    URL:seedStoreURL
@@ -795,11 +795,11 @@ static NSOperationQueue *_presentedItemOperationQueue;
     } else {
         foldersByToken = [NSMutableDictionary dictionary];
     }
-    NSString *storeDirectoryUUID = [foldersByToken objectForKey:token];
+    NSString *storeDirectoryUUID = foldersByToken[token];
     if (storeDirectoryUUID == nil) {
         NSUUID *uuid = [[NSUUID alloc] init];
         storeDirectoryUUID = [uuid UUIDString];
-        [foldersByToken setObject:storeDirectoryUUID forKey:token];
+        foldersByToken[token] = storeDirectoryUUID;
         tokenData = [NSKeyedArchiver archivedDataWithRootObject:foldersByToken];
         [tokenData writeToFile:[tokenURL path] atomically:YES];
     }

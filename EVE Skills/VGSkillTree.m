@@ -69,8 +69,7 @@
     
     VGAPICall *apiCall = [[VGAPICall alloc] init];
     
-    NSDictionary *dict = [NSDictionary dictionaryWithObject:@"https://api.eveonline.com/eve/SkillTree.xml.aspx"
-                                                     forKey:@"apiURL"];
+    NSDictionary *dict = @{@"apiURL": @"https://api.eveonline.com/eve/SkillTree.xml.aspx"};
     
     NSError *error = nil;
     NSHTTPURLResponse *response = nil;
@@ -170,19 +169,19 @@
     attributes:(NSDictionary *)attributeDict {
     // rowset : Save the name of the current rowset
     if ([elementName isEqualToString:@"rowset"]) {
-        if ([(NSString *)[attributeDict objectForKey:@"name"] isEqualToString:@"skillGroups"]) {
+        if ([(NSString *)attributeDict[@"name"] isEqualToString:@"skillGroups"]) {
             _currentRowset = @"skillGroups";
         }
         
-        if ([(NSString *)[attributeDict objectForKey:@"name"] isEqualToString:@"skills"]) {
+        if ([(NSString *)attributeDict[@"name"] isEqualToString:@"skills"]) {
             _currentRowset = @"skills";
         }
         
-        if ([(NSString *)[attributeDict objectForKey:@"name"] isEqualToString:@"requiredSkills"]) {
+        if ([(NSString *)attributeDict[@"name"] isEqualToString:@"requiredSkills"]) {
             _currentRowset = @"requiredSkills";
         }
         
-        if ([(NSString *)[attributeDict objectForKey:@"name"] isEqualToString:@"skillBonusCollection"]) {
+        if ([(NSString *)attributeDict[@"name"] isEqualToString:@"skillBonusCollection"]) {
             _currentRowset = @"skillBonusCollection";
         }
     }
@@ -191,7 +190,7 @@
     if ([elementName isEqualToString:@"row"]) {
         if ([_currentRowset isEqualToString:@"skillGroups"]) {
             // is this group already in the MOC
-            _currentGroup = [self groupWithGroupID:[attributeDict objectForKey:@"groupID"]];
+            _currentGroup = [self groupWithGroupID:attributeDict[@"groupID"]];
             
             if (!_currentGroup) {
                 // this group is not in the MOC, we create it
@@ -199,14 +198,14 @@
                                                               inManagedObjectContext:_skillTreeMOC];
                 
                 // fill the attributes of the object
-                _currentGroup.groupID   = [attributeDict objectForKey:@"groupID"];
-                _currentGroup.groupName = [attributeDict objectForKey:@"groupName"];
+                _currentGroup.groupID   = attributeDict[@"groupID"];
+                _currentGroup.groupName = attributeDict[@"groupName"];
             }
         }
         
         if ([_currentRowset isEqualToString:@"skills"]) {
             // is this skill already in the MOC
-            _currentSkill = [self skillWithSkillID:[attributeDict objectForKey:@"typeID"]];
+            _currentSkill = [self skillWithSkillID:attributeDict[@"typeID"]];
             
             if (!_currentSkill) {
                 // this skill is not in the MOC, we create it
@@ -214,8 +213,8 @@
                                                               inManagedObjectContext:_skillTreeMOC];
                 
                 // fill the attributes of the object
-                _currentSkill.skillID   = [attributeDict objectForKey:@"typeID"];
-                _currentSkill.skillName = [attributeDict objectForKey:@"typeName"];
+                _currentSkill.skillID   = attributeDict[@"typeID"];
+                _currentSkill.skillName = attributeDict[@"typeName"];
                 _currentSkill.group     = _currentGroup;
                 
                 // the rest of the attributes will be filled in didEndElement:
@@ -249,7 +248,7 @@
     
     // rank : rank of the skill
     if ([elementName isEqualToString:@"rank"]) {
-        _currentSkill.rank = [NSNumber numberWithInt:[_currentString intValue]];
+        _currentSkill.rank = @([_currentString intValue]);
     }
     
     // primaryAttribute : primary attribute of the skill

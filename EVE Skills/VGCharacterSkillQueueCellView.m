@@ -122,7 +122,7 @@
             NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"position"
                                                                              ascending:YES];
             
-            self->_queueElementArray = [self->_queue.elements.allObjects sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+            self->_queueElementArray = [self->_queue.elements.allObjects sortedArrayUsingDescriptors:@[sortDescriptor]];
         }
     }];
 }
@@ -154,7 +154,7 @@
         CGFloat xPos = 0;
         
         for (int i = 0; i < _queueElementArray.count; i++) {
-            QueueElement *queueElement = [_queueElementArray objectAtIndex:i];
+            QueueElement *queueElement = _queueElementArray[i];
             
             double timeInterval;
             if (i == 0) {

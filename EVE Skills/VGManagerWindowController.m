@@ -101,9 +101,8 @@
         return _tableSortDescriptors;
     }
     
-    _tableSortDescriptors = [NSArray arrayWithObjects:
-                             [NSSortDescriptor sortDescriptorWithKey:@"api.keyID" ascending:YES],
-                             [NSSortDescriptor sortDescriptorWithKey:@"characterName" ascending:YES], nil];
+    _tableSortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"api.keyID" ascending:YES],
+                             [NSSortDescriptor sortDescriptorWithKey:@"characterName" ascending:YES]];
     
     return _tableSortDescriptors;
 }
