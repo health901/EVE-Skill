@@ -70,10 +70,16 @@
     _coreDataController = [[CoreDataController alloc] init];
     [_coreDataController loadPersistentStores];
     
-    // Initializing API Call
+    // Initializing API Controller
     _apiController = [[VGAPIController alloc] init];
     dispatch_async(_apiController.dispatchQueue, ^{
         [_apiController initialize];
+    });
+    
+    // Initializing user notification controller
+    _userNotificationController = [[VGUserNotificationController alloc] init];
+    dispatch_async(_userNotificationController.dispatchQueue, ^{
+        [_userNotificationController reloadAllNotifications];
     });
     
     // MenuBarController
@@ -84,14 +90,6 @@
                                              selector:@selector(apiControllerContextDidSave:)
                                                  name:NSManagedObjectContextDidSaveNotification
                                                object:_apiController.apiControllerContext];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:APICALL_QUERY_DID_START_NOTIFICATION object:nil queue:nil usingBlock:^(NSNotification *note) {
-        _refreshMenuItem.image = [NSImage imageNamed:NSImageNameRefreshTemplate];
-    }];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:APICALL_QUERY_DID_END_NOTIFICATION object:nil queue:nil usingBlock:^(NSNotification *note) {
-        _refreshMenuItem.image = nil;
-    }];
     
     // Check if there are characters in the DB
     [_coreDataController.mainThreadContext performBlock:^{
@@ -241,8 +239,8 @@
     // Add the bottom items
     [_menu addItem:_skillQueueMenuItem];
     [_menu addItem:[NSMenuItem separatorItem]];
-    [_menu addItem:_refreshMenuItem];
     [_menu addItem:_managerMenuItem];
+    [_menu addItem:_refreshMenuItem];
     [_menu addItem:[NSMenuItem separatorItem]];
     [_menu addItem:_quitMenuItem];
 }

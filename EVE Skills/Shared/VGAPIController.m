@@ -381,6 +381,7 @@
             return;
         }
         
+        // Refresh the queue of each character
         dispatch_group_t dispatchGroup = dispatch_group_create();
         
         for (Character *character in fetchedObjects) {

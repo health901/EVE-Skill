@@ -10,11 +10,13 @@
 #import "CoreDataController.h"
 #import "VGAPIController.h"
 #import "VGAppNotifications.h"
+#import "VGUserNotificationController.h"
 
 @interface VGAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (nonatomic, strong, readonly) CoreDataController *coreDataController;
 @property (nonatomic, strong, readonly) VGAPIController *apiController;
+@property (nonatomic, strong, readonly) VGUserNotificationController *userNotificationController;
 
 - (void)openManagerWindow;
 
