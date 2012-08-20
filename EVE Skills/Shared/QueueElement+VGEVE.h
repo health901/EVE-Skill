@@ -10,6 +10,4 @@
 
 @interface QueueElement (VGEVE)
 
-- (NSString *)timeRemainingStringValue;
-
 @end

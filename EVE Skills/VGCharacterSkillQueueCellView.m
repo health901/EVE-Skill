@@ -8,6 +8,7 @@
 
 #import "VGCharacterSkillQueueCellView.h"
 #import "VGAppDelegate.h"
+#import "VGSkillDetailViewController.h"
 #import "Character.h"
 #import "Queue+VGEVE.h"
 #import "QueueElement+VGEVE.h"
@@ -26,6 +27,13 @@
     Character *_character;
     Queue *_queue;
     NSArray *_queueElementArray;
+    
+    // Mouse tracking
+    NSTrackingArea *_trackingArea;
+    
+    // Popover
+    VGSkillDetailViewController *_skillDetailViewController;
+    NSPopover *_skillDetailPopover;
 }
 
 // Core Data
@@ -65,9 +73,17 @@
     _queue = nil;
     _queueElementArray = nil;
     
-    // Focus ring
-//    [self setFocusRingType:NSFocusRingTypeNone];
-//    [self.superview setFocusRingType:NSFocusRingTypeNone];
+    // Mouse tracking
+    _trackingArea = [[NSTrackingArea alloc] initWithRect:self.bounds
+                                                 options:(NSTrackingMouseEnteredAndExited | NSTrackingActiveInActiveApp)
+                                                   owner:self
+                                                userInfo:nil];
+    [self addTrackingArea:_trackingArea];
+    
+    // Popover
+    _skillDetailViewController = [[VGSkillDetailViewController alloc] initWithNibName:@"VGSkillDetailViewController" bundle:nil];
+    _skillDetailPopover = [[NSPopover alloc] init];
+    _skillDetailPopover.contentViewController = _skillDetailViewController;
     
     // Notifications
     [[NSNotificationCenter defaultCenter] addObserverForName:EVE_SKILLS_TIMER_TICK object:nil queue:nil usingBlock:^(NSNotification *note) {
@@ -77,6 +93,94 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:SKILL_QUEUE_SHOULD_RELOAD_DATA_NOTIFICATION object:nil queue:nil usingBlock:^(NSNotification *note) {
         [self fetchQueue];
     }];
+}
+
+#pragma mark -
+#pragma mark - Mouse tracking
+
+- (void)mouseEntered:(NSEvent *)theEvent
+{
+    NSLog(@"mouseEntered");
+    // Search for the Skill and QueueElement under the mouse pointer
+    if (_queue != nil && _queue.elements != nil && _queue.elements.count > 0 && _queueElementArray){
+        
+        CGFloat width = self.frame.size.width - 1;
+        CGFloat height = self.frame.size.height - 1;
+        CGFloat xPos = 0;
+        
+        NSPoint point = theEvent.locationInWindow;
+        
+        for (int i = 0; i < _queueElementArray.count; i++) {
+            QueueElement *queueElement = _queueElementArray[i];
+            
+            double timeInterval;
+            if (i == 0) {
+                timeInterval = [queueElement.endTime timeIntervalSinceDate:[NSDate date]];
+            } else {
+                timeInterval = [queueElement.endTime timeIntervalSinceDate:queueElement.startTime];
+            }
+            
+            // width of the skill
+            CGFloat skillWidth = width * timeInterval / (60*60*24);
+            
+            if (point.x >= xPos && point.x < xPos + skillWidth) {
+                // Search for the associated skill and display the popover
+                [_moc performBlock:^{
+                    _skillDetailViewController.skill = nil;
+                    _skillDetailViewController.queueElement = nil;
+                    
+                    // Search for the skill
+                    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+                    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Skill" inManagedObjectContext:_moc];
+                    [fetchRequest setEntity:entity];
+                    
+                    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"skillID == %@", queueElement.skillID];
+                    [fetchRequest setPredicate:predicate];
+                    
+                    NSError *error = nil;
+                    NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
+                    if (fetchedObjects == nil) {
+                        NSLog(@"Error fetching skill with skillID = '%@' : %@, %@",
+                              queueElement.skillID, error, [error userInfo]);
+                    }
+                    
+                    if (fetchedObjects.count == 0) {
+                        dispatch_sync(dispatch_get_main_queue(), ^{
+                            NSAlert *alert = [NSAlert alertWithMessageText:@"Skill not found in DB"
+                                                             defaultButton:@"OK"
+                                                           alternateButton:nil
+                                                               otherButton:nil
+                                                 informativeTextWithFormat:@"skillID == '%@'", queueElement.skillID];
+                            [alert runModal];
+                        });
+                    }
+                    
+                    _skillDetailViewController.skill = fetchedObjects.lastObject;
+                    _skillDetailViewController.queueElement = queueElement;
+                    
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        // Display the popover
+                        
+                        [_skillDetailPopover showRelativeToRect:CGRectMake(xPos, 0.0, skillWidth, height)
+                                                         ofView:self
+                                                  preferredEdge:NSMinYEdge];
+                    });
+                }];
+                
+                return;
+            }
+            
+            xPos += skillWidth;
+        }
+        
+    }
+}
+
+- (void)mouseExited:(NSEvent *)theEvent
+{
+    NSLog(@"mouseExited");
+    
+    [_skillDetailPopover performClose:self];
 }
 
 #pragma mark -
@@ -175,7 +279,8 @@
                                                [(NSColor *)[NSUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"colorSkill2"]] CGColor]);
             }
             
-            arrowShaped = xPos + skillWidth > width;
+//            arrowShaped = xPos + skillWidth > width;
+            arrowShaped = NO;
             
             if (arrowShaped) {
                 // The skill is bigger than the rectangle, we draw a shape

@@ -2,7 +2,7 @@
 //  QueueElement.h
 //  EVE Skills
 //
-//  Created by Vincent Garrigues on 16/08/12.
+//  Created by Vincent Garrigues on 20/08/12.
 //  Copyright (c) 2012 Vincent Garrigues. All rights reserved.
 //
 
@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * skillID;
 @property (nonatomic, retain) NSNumber * skillLevel;
 @property (nonatomic, retain) NSNumber * position;
+@property (nonatomic, retain) NSString * timeRemaining;
 @property (nonatomic, retain) Queue *queue;
 
 @end

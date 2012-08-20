@@ -8,8 +8,8 @@
 
 #import "VGSkillQueueViewController.h"
 
-#define QUEUE_CELL_DEFAULT_WIDTH 300
-#define QUEUE_CELL_DEFAULT_HEIGHT 66
+#define QUEUE_CELL_DEFAULT_WIDTH 336
+#define QUEUE_CELL_DEFAULT_HEIGHT 91
 
 @interface VGSkillQueueViewController () {
     // App Delegate
