@@ -13,7 +13,7 @@
 - (NSString *)timeRemaining
 {
     if (self.startTime == nil || self.endTime == nil) {
-        return @"self.startTime == nil || self.endTime == nil";
+        return nil;
     }
     
     NSCalendar *calendar = [NSCalendar currentCalendar];

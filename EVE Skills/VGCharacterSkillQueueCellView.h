@@ -7,10 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Character.h"
+#import "Queue+VGEVE.h"
 
 @interface VGCharacterSkillQueueCellView : NSView {
     
 }
+
+@property (strong, nonatomic) Queue *queue;
 
 @end

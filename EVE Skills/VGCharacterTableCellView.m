@@ -57,11 +57,14 @@
     // Notifications
     [[NSNotificationCenter defaultCenter] addObserverForName:EVE_SKILLS_TIMER_TICK object:nil queue:nil usingBlock:^(NSNotification *note) {
         // Timer tick
-        self.timeRemaining = [_currentQueueElement timeRemaining];
+        self.timeRemaining = [_queue timeRemaining];
     }];
     
     [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification object:self.appDelegate.coreDataController.mainThreadContext queue:nil usingBlock:^(NSNotification *note) {
         // mainThreadContext did save, should we update ?
+        
+        [self loadPortrait];
+        [self loadQueue];
     }];
     
     [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextObjectsDidChangeNotification object:self.appDelegate.coreDataController.mainThreadContext queue:nil usingBlock:^(NSNotification *note) {
@@ -175,6 +178,8 @@
         } else {
             // Queue in the DB
             _queue = fetchedObjects.lastObject;
+            self.skillQueueView.queue = _queue;
+            
             _currentQueueElement = nil;
             _currentSkill = nil;
             self.currentSkillName = nil;
@@ -219,7 +224,8 @@
             }
             
             _currentSkill = fetchedObjects.lastObject;
-            self.currentSkillName = _currentSkill.skillName;
+            self.currentSkillName = [NSString stringWithFormat:@"%@ %@",
+                                     _currentSkill.skillName, _currentQueueElement.skillLevel.stringValue];
         }
     }];
 }

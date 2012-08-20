@@ -15,7 +15,7 @@
 {
     // Is the skill queue empty
     if (self.elements.count == 0) {
-        return @"Skill queue empty !";
+        return nil;
     }
     
     // get the ordered array of skills in the training queue

@@ -16,18 +16,6 @@
 #define ARROW_SIZE 3
 
 @interface VGCharacterSkillQueueCellView () {
-    // App delegate
-    VGAppDelegate *_appDelegate;
-    
-    // Dispatch queue
-//    dispatch_queue_t dispatchQueue;
-    
-    // Core Data
-    NSManagedObjectContext *_moc;
-    Character *_character;
-    Queue *_queue;
-    NSArray *_queueElementArray;
-    
     // Mouse tracking
     NSTrackingArea *_trackingArea;
     
@@ -36,11 +24,9 @@
     NSPopover *_skillDetailPopover;
 }
 
-// Core Data
-- (void)fetchQueue;
-
-// Drawing
-- (void)drawEmptyQueue;
+@property (strong, nonatomic) VGAppDelegate *appDelegate;
+@property (strong, nonatomic) NSManagedObjectContext *moc;
+@property (strong, nonatomic) NSArray *queueElementArrayOrdered;
 
 @end
 
@@ -63,15 +49,7 @@
 {
     [super viewWillMoveToSuperview:newSuperview];
     
-    // Initializations
-    _appDelegate = (VGAppDelegate *)[NSApp delegate];
     
-    _moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    [_moc setParentContext:_appDelegate.coreDataController.mainThreadContext];
-    
-    _character = nil;
-    _queue = nil;
-    _queueElementArray = nil;
     
     // Mouse tracking
     _trackingArea = [[NSTrackingArea alloc] initWithRect:self.bounds
@@ -89,10 +67,6 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:EVE_SKILLS_TIMER_TICK object:nil queue:nil usingBlock:^(NSNotification *note) {
         [self setNeedsDisplayInRect:[self visibleRect]];
     }];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:SKILL_QUEUE_SHOULD_RELOAD_DATA_NOTIFICATION object:nil queue:nil usingBlock:^(NSNotification *note) {
-        [self fetchQueue];
-    }];
 }
 
 #pragma mark -
@@ -102,7 +76,7 @@
 {
     NSLog(@"mouseEntered");
     // Search for the Skill and QueueElement under the mouse pointer
-    if (_queue != nil && _queue.elements != nil && _queue.elements.count > 0 && _queueElementArray){
+    if (self.queue != nil && self.queue.elements != nil && self.queue.elements.count > 0 && self.queueElementArrayOrdered){
         
         CGFloat width = self.frame.size.width - 1;
         CGFloat height = self.frame.size.height - 1;
@@ -110,8 +84,8 @@
         
         NSPoint point = theEvent.locationInWindow;
         
-        for (int i = 0; i < _queueElementArray.count; i++) {
-            QueueElement *queueElement = _queueElementArray[i];
+        for (int i = 0; i < self.queueElementArrayOrdered.count; i++) {
+            QueueElement *queueElement = self.queueElementArrayOrdered[i];
             
             double timeInterval;
             if (i == 0) {
@@ -125,7 +99,7 @@
             
             if (point.x >= xPos && point.x < xPos + skillWidth) {
                 // Search for the associated skill and display the popover
-                [_moc performBlock:^{
+                [self.moc performBlock:^{
                     _skillDetailViewController.skill = nil;
                     _skillDetailViewController.queueElement = nil;
                     
@@ -186,49 +160,51 @@
 #pragma mark -
 #pragma mark - Core Data
 
-- (void)fetchQueue
+- (VGAppDelegate *)appDelegate
 {
-    // Get the Queue associated with the Character
-    [_moc performBlock:^{
-        // If _character is nil, return immediately
-        if (_character == nil) {
-            return;
-        }
-        
-        // objectValue is an NSString and not nil, we create a MOC and fetch the character's Queue
-        
-        
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Queue" inManagedObjectContext:_moc];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", _character.characterID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
-        
-        if (fetchedObjects == nil) {
-            NSLog(@"Error fetching Queue with characterID = '%@' : %@, %@",
-                  _character.characterID, error, [error userInfo]);
-        }
-        
-        // If there is no Queue object, we call the API
-        if (fetchedObjects.count == 0) {
-            NSLog(@"NOT IMPLEMENTED");
-            abort();
-        }
-        
-        // We found the queue object
-        self->_queue = fetchedObjects.lastObject;
-        
-        if (self->_queue.elements != nil && self->_queue.elements.count > 0) {
-            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"position"
-                                                                             ascending:YES];
-            
-            self->_queueElementArray = [self->_queue.elements.allObjects sortedArrayUsingDescriptors:@[sortDescriptor]];
-        }
-    }];
+    if (_appDelegate == nil) {
+        _appDelegate = (VGAppDelegate *)[NSApp delegate];
+    }
+    
+    return _appDelegate;
+}
+
+- (NSManagedObjectContext *)moc
+{
+    if (_moc == nil) {
+        _moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        [_moc setParentContext:self.appDelegate.coreDataController.mainThreadContext];
+    }
+    
+    return _moc;
+}
+
+- (NSArray *)queueElementArrayOrdered
+{
+    if (self.queue == nil) {
+        _queueElementArrayOrdered = nil;
+        return nil;
+    }
+    
+    if (_queueElementArrayOrdered == nil) {
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"position" ascending:YES];
+        _queueElementArrayOrdered = [self.queue.elements sortedArrayUsingDescriptors:@[sortDescriptor]];
+    }
+    
+    return _queueElementArrayOrdered;
+}
+
+#pragma mark -
+#pragma mark - Queue
+
+- (void)setQueue:(Queue *)queue
+{
+    [self willChangeValueForKey:@"queue"];
+    _queue = queue;
+    _queueElementArrayOrdered = nil;
+    [self didChangeValueForKey:@"queue"];
+    
+    [self setNeedsDisplayInRect:[self visibleRect]];
 }
 
 #pragma mark -
@@ -236,13 +212,6 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    // Check if the character has changed
-    if (_character != [(NSTableCellView *)self.superview objectValue]) {
-        _character = [(NSTableCellView *)self.superview objectValue];
-        _queue = nil;
-        [self fetchQueue];
-    }
-    
     [[NSGraphicsContext currentContext] saveGraphicsState];
     [[NSGraphicsContext currentContext] setShouldAntialias: NO];
     
@@ -253,12 +222,12 @@
     BOOL arrowShaped = NO;
     
     // Draw the skills in the queue
-    if (_queue != nil && _queue.elements != nil && _queue.elements.count > 0 && _queueElementArray){
+    if (self.queue != nil && self.queue.elements != nil && self.queue.elements.count > 0 && self.queueElementArrayOrdered){
         // Drawing
         CGFloat xPos = 0;
         
-        for (int i = 0; i < _queueElementArray.count; i++) {
-            QueueElement *queueElement = _queueElementArray[i];
+        for (int i = 0; i < self.queueElementArrayOrdered.count; i++) {
+            QueueElement *queueElement = self.queueElementArrayOrdered[i];
             
             double timeInterval;
             if (i == 0) {
