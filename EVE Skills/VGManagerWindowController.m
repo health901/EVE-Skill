@@ -72,16 +72,8 @@
                                                        queue:nil
                                                   usingBlock:^(NSNotification *note) {
         NSLog(@"apiControllerContext - NSManagedObjectContextDidSaveNotification");
-
+                                                      
     }];
-    
-    
-    // FIXME : temporary debug values
-    self.keyID = @"1161457";
-    self.vCode = @"P1DO18zfr5KNQ6E1HBXrPdaffDOg3FEcTflyx5anw144dDp7VGff9FL12mAjzoE4";
-    
-//    self.keyID = @"1180252";
-//    self.vCode = @"wuz6GqnXxG1Uib4eGzV6V0dZpIPGLVEqmKqLAYTMB5lTzHhAKWCnuJGX2hjdAv7i";
 }
 
 #pragma mark -

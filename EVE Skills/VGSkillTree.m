@@ -243,7 +243,7 @@
  qualifiedName:(NSString *)qName {
     // description : description of the skill
     if ([elementName isEqualToString:@"description"]) {
-        _currentSkill.desc = _currentString;
+        _currentSkill.desc = [_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }
     
     // rank : rank of the skill
