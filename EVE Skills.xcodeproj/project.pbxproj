@@ -84,6 +84,7 @@
 		BFADFD4415DD5801005D082D /* VGCharacterSkillQueueCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterSkillQueueCellView.m; sourceTree = "<group>"; };
 		BFB6E37415E3BC52004A9EE4 /* VGManagerTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGManagerTableCellView.h; sourceTree = "<group>"; };
 		BFB6E37515E3BC52004A9EE4 /* VGManagerTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGManagerTableCellView.m; sourceTree = "<group>"; };
+		BFD5DFC615E3D05E004D4E5A /* EVE Skills.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EVE Skills.entitlements"; sourceTree = "<group>"; };
 		BFDD80B715CC728000116A65 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
 		BFDD80B815CC728000116A65 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
 		BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -184,6 +185,7 @@
 		BF62B5D315CB274D00190CF6 /* EVE Skills */ = {
 			isa = PBXGroup;
 			children = (
+				BFD5DFC615E3D05E004D4E5A /* EVE Skills.entitlements */,
 				BF590EA715DBA4310036E10A /* Local DB */,
 				BFDD80B615CC728000116A65 /* Shared */,
 				BFDD80D015CC76A200116A65 /* UI */,
@@ -480,11 +482,14 @@
 		BF62B5E815CB274D00190CF6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "EVE Skills/EVE Skills.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EVE Skills/EVE Skills-Prefix.pch";
 				INFOPLIST_FILE = "EVE Skills/EVE Skills-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -492,11 +497,14 @@
 		BF62B5E915CB274D00190CF6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "EVE Skills/EVE Skills.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EVE Skills/EVE Skills-Prefix.pch";
 				INFOPLIST_FILE = "EVE Skills/EVE Skills-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
