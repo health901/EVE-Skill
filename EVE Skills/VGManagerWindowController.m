@@ -60,19 +60,11 @@
         self.animateProgress = NO;
     }];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:MANAGER_SHOULD_RELOAD_DATA_NOTIFICATION
-                                                      object:nil
-                                                       queue:nil
-                                                  usingBlock:^(NSNotification *note) {
-        [self.characterTableView reloadData];
-    }];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextObjectsDidChangeNotification
                                                       object:_appDelegate.apiController.apiControllerContext
                                                        queue:nil
                                                   usingBlock:^(NSNotification *note) {
-        NSLog(@"apiControllerContext - NSManagedObjectContextDidSaveNotification");
-                                                      
+        [self.characterTableView reloadData];
     }];
 }
 

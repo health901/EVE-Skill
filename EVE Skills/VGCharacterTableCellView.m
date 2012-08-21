@@ -138,7 +138,11 @@
         if (fetchedObjects.count == 0) {
             // No portrait in DB, download the portrait
             dispatch_async(_appDelegate.apiController.dispatchQueue, ^{
-                [_appDelegate.apiController addPortraitForCharacterID:_character.characterID];
+                [_appDelegate.apiController addPortraitForCharacterID:_character.characterID completionHandler:^(NSError *error, NSImage *image) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.imageView.image = image;
+                    });
+                }];
             });
         } else {
             // Portrait in the DB

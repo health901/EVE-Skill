@@ -285,8 +285,11 @@
 }
 
 - (void)addPortraitForCharacterID:(NSString *)characterID
+                completionHandler:(void (^)(NSError *error, NSImage *image))completionHandler
 {
     NSLog(@"addPortraitForCharacterID:%@", characterID);
+    
+    __block NSError *completionError = nil;
     
     // create the variables dictionnary
     NSMutableString *urlString = [[NSMutableString alloc] init];
@@ -318,6 +321,7 @@
     }];
     
     // add character portrait to the DB
+    __block NSImage *image = nil;
     if (character) {
         Portrait *portrait = nil;
         
@@ -344,7 +348,7 @@
         }
         
         // Set image for portrait
-        NSImage *image = [[NSImage alloc] initWithData:data];
+        image = [[NSImage alloc] initWithData:data];
         portrait.image = image;
         portrait.characterID = character.characterID;
     }
@@ -360,6 +364,8 @@
             });
         }
     }];
+    
+    completionHandler(completionError, image);
 }
 
 - (void)refreshQueueForCharacterEnabled:(BOOL)enabled
@@ -396,7 +402,6 @@
             dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER);
             NSLog(@"-refreshQueueForCharacterEnabled: dispatchGroup empty !");
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:SKILL_QUEUE_SHOULD_RELOAD_DATA_NOTIFICATION object:self];
         });
     }];
 }

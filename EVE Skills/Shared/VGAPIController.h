@@ -26,7 +26,8 @@
 - (void)addQueueWithCharacterID:(NSString *)characterID;
 
 // Downloads and creates/replaces the Portrait associated with characterID
-- (void)addPortraitForCharacterID:(NSString *)characterID;
+- (void)addPortraitForCharacterID:(NSString *)characterID
+                completionHandler:(void (^)(NSError *error, NSImage *image))completionHandler;
 
 /* 
  Downloads and creates/replaces the Queue and QueueElement for all Character

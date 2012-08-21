@@ -11,25 +11,22 @@
 		BF3A2A0715E24209007EE82C /* VGSkillDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF3A2A0515E24209007EE82C /* VGSkillDetailViewController.xib */; };
 		BF3A2A0A15E25AAC007EE82C /* QueueElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A0915E25AAC007EE82C /* QueueElement.m */; };
 		BF3A2A0D15E25AAD007EE82C /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A0C15E25AAD007EE82C /* Queue.m */; };
-		BF3A2A1015E26A2B007EE82C /* VGCharacterIDToTimeRemainingValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A0F15E26A2B007EE82C /* VGCharacterIDToTimeRemainingValueTransformer.m */; };
 		BF3A2A1715E26DC8007EE82C /* VGCharacterTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A1615E26DC8007EE82C /* VGCharacterTableCellView.m */; };
 		BF3A2A1A15E28A53007EE82C /* VGUserNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A1915E28A53007EE82C /* VGUserNotificationController.m */; };
 		BF4A829A15DBF742003AD68C /* VGSkillQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4A829815DBF742003AD68C /* VGSkillQueueViewController.m */; };
 		BF4A829B15DBF742003AD68C /* VGSkillQueueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF4A829915DBF742003AD68C /* VGSkillQueueViewController.xib */; };
 		BF590E8C15DAAFC70036E10A /* VGSkillTree.m in Sources */ = {isa = PBXBuildFile; fileRef = BF590E8B15DAAFC40036E10A /* VGSkillTree.m */; };
-		BF590EA615DB97660036E10A /* VGCharacterIDToImageValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = BF590EA515DB97660036E10A /* VGCharacterIDToImageValueTransformer.m */; };
 		BF62B5CE15CB274D00190CF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF62B5CD15CB274D00190CF6 /* Cocoa.framework */; };
 		BF62B5D815CB274D00190CF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5D615CB274D00190CF6 /* InfoPlist.strings */; };
 		BF62B5DA15CB274D00190CF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5D915CB274D00190CF6 /* main.m */; };
 		BF62B5DE15CB274D00190CF6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5DC15CB274D00190CF6 /* Credits.rtf */; };
 		BF62B5E115CB274D00190CF6 /* VGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */; };
 		BF62B5E415CB274D00190CF6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5E215CB274D00190CF6 /* MainMenu.xib */; };
-		BFADFD1C15DD2141005D082D /* VGCharacterIDToCurrentSkillNameValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD1B15DD2141005D082D /* VGCharacterIDToCurrentSkillNameValueTransformer.m */; };
 		BFADFD3915DD2F4F005D082D /* Queue+VGEVE.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD3815DD2F4F005D082D /* Queue+VGEVE.m */; };
 		BFADFD3C15DD2FCF005D082D /* QueueElement+VGEVE.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD3B15DD2FCF005D082D /* QueueElement+VGEVE.m */; };
 		BFADFD3F15DD3AF3005D082D /* VGSkillQueueQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD3E15DD3AF3005D082D /* VGSkillQueueQuery.m */; };
-		BFADFD4215DD54FB005D082D /* VGCurrentSkillTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD4115DD54FB005D082D /* VGCurrentSkillTextField.m */; };
 		BFADFD4515DD5801005D082D /* VGCharacterSkillQueueCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD4415DD5801005D082D /* VGCharacterSkillQueueCellView.m */; };
+		BFB6E37615E3BC52004A9EE4 /* VGManagerTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6E37515E3BC52004A9EE4 /* VGManagerTableCellView.m */; };
 		BFDD80BE15CC728000116A65 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B815CC728000116A65 /* CoreDataController.m */; };
 		BFDD80BF15CC728000116A65 /* DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */; };
 		BFDD80C015CC728000116A65 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80BB15CC728000116A65 /* Group.m */; };
@@ -52,8 +49,6 @@
 		BF3A2A0915E25AAC007EE82C /* QueueElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueueElement.m; sourceTree = "<group>"; };
 		BF3A2A0B15E25AAD007EE82C /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
 		BF3A2A0C15E25AAD007EE82C /* Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Queue.m; sourceTree = "<group>"; };
-		BF3A2A0E15E26A2B007EE82C /* VGCharacterIDToTimeRemainingValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterIDToTimeRemainingValueTransformer.h; sourceTree = "<group>"; };
-		BF3A2A0F15E26A2B007EE82C /* VGCharacterIDToTimeRemainingValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterIDToTimeRemainingValueTransformer.m; sourceTree = "<group>"; };
 		BF3A2A1515E26DC8007EE82C /* VGCharacterTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterTableCellView.h; sourceTree = "<group>"; };
 		BF3A2A1615E26DC8007EE82C /* VGCharacterTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterTableCellView.m; sourceTree = "<group>"; };
 		BF3A2A1815E28A52007EE82C /* VGUserNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGUserNotificationController.h; sourceTree = "<group>"; };
@@ -66,8 +61,6 @@
 		BF590E8815DAA9470036E10A /* Portrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Portrait.m; sourceTree = "<group>"; };
 		BF590E8A15DAAFC40036E10A /* VGSkillTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGSkillTree.h; sourceTree = "<group>"; };
 		BF590E8B15DAAFC40036E10A /* VGSkillTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGSkillTree.m; sourceTree = "<group>"; };
-		BF590EA415DB97660036E10A /* VGCharacterIDToImageValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterIDToImageValueTransformer.h; sourceTree = "<group>"; };
-		BF590EA515DB97660036E10A /* VGCharacterIDToImageValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterIDToImageValueTransformer.m; sourceTree = "<group>"; };
 		BF62B5C915CB274D00190CF6 /* EVE Skills.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EVE Skills.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF62B5CD15CB274D00190CF6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BF62B5D015CB274D00190CF6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -81,18 +74,16 @@
 		BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGAppDelegate.h; sourceTree = "<group>"; };
 		BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGAppDelegate.m; sourceTree = "<group>"; };
 		BF62B5E315CB274D00190CF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		BFADFD1A15DD2140005D082D /* VGCharacterIDToCurrentSkillNameValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterIDToCurrentSkillNameValueTransformer.h; sourceTree = "<group>"; };
-		BFADFD1B15DD2141005D082D /* VGCharacterIDToCurrentSkillNameValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterIDToCurrentSkillNameValueTransformer.m; sourceTree = "<group>"; };
 		BFADFD3715DD2F4F005D082D /* Queue+VGEVE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Queue+VGEVE.h"; sourceTree = "<group>"; };
 		BFADFD3815DD2F4F005D082D /* Queue+VGEVE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Queue+VGEVE.m"; sourceTree = "<group>"; };
 		BFADFD3A15DD2FCF005D082D /* QueueElement+VGEVE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QueueElement+VGEVE.h"; sourceTree = "<group>"; };
 		BFADFD3B15DD2FCF005D082D /* QueueElement+VGEVE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QueueElement+VGEVE.m"; sourceTree = "<group>"; };
 		BFADFD3D15DD3AF3005D082D /* VGSkillQueueQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSkillQueueQuery.h; sourceTree = "<group>"; };
 		BFADFD3E15DD3AF3005D082D /* VGSkillQueueQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGSkillQueueQuery.m; sourceTree = "<group>"; };
-		BFADFD4015DD54FB005D082D /* VGCurrentSkillTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCurrentSkillTextField.h; sourceTree = "<group>"; };
-		BFADFD4115DD54FB005D082D /* VGCurrentSkillTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCurrentSkillTextField.m; sourceTree = "<group>"; };
 		BFADFD4315DD5801005D082D /* VGCharacterSkillQueueCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterSkillQueueCellView.h; sourceTree = "<group>"; };
 		BFADFD4415DD5801005D082D /* VGCharacterSkillQueueCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterSkillQueueCellView.m; sourceTree = "<group>"; };
+		BFB6E37415E3BC52004A9EE4 /* VGManagerTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGManagerTableCellView.h; sourceTree = "<group>"; };
+		BFB6E37515E3BC52004A9EE4 /* VGManagerTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGManagerTableCellView.m; sourceTree = "<group>"; };
 		BFDD80B715CC728000116A65 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
 		BFDD80B815CC728000116A65 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
 		BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -129,19 +120,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BF590EA215DB972B0036E10A /* Value Transformers */ = {
-			isa = PBXGroup;
-			children = (
-				BF590EA415DB97660036E10A /* VGCharacterIDToImageValueTransformer.h */,
-				BF590EA515DB97660036E10A /* VGCharacterIDToImageValueTransformer.m */,
-				BFADFD1A15DD2140005D082D /* VGCharacterIDToCurrentSkillNameValueTransformer.h */,
-				BFADFD1B15DD2141005D082D /* VGCharacterIDToCurrentSkillNameValueTransformer.m */,
-				BF3A2A0E15E26A2B007EE82C /* VGCharacterIDToTimeRemainingValueTransformer.h */,
-				BF3A2A0F15E26A2B007EE82C /* VGCharacterIDToTimeRemainingValueTransformer.m */,
-			);
-			name = "Value Transformers";
-			sourceTree = "<group>";
-		};
 		BF590EA315DB97360036E10A /* Window/View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,8 +129,6 @@
 				BF4A829715DBF742003AD68C /* VGSkillQueueViewController.h */,
 				BF4A829815DBF742003AD68C /* VGSkillQueueViewController.m */,
 				BF4A829915DBF742003AD68C /* VGSkillQueueViewController.xib */,
-				BF3A2A1515E26DC8007EE82C /* VGCharacterTableCellView.h */,
-				BF3A2A1615E26DC8007EE82C /* VGCharacterTableCellView.m */,
 				BF3A2A0315E24209007EE82C /* VGSkillDetailViewController.h */,
 				BF3A2A0415E24209007EE82C /* VGSkillDetailViewController.m */,
 				BF3A2A0515E24209007EE82C /* VGSkillDetailViewController.xib */,
@@ -235,6 +211,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BFB6E37815E3BF9E004A9EE4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BFADFD4315DD5801005D082D /* VGCharacterSkillQueueCellView.h */,
+				BFADFD4415DD5801005D082D /* VGCharacterSkillQueueCellView.m */,
+				BFB6E37415E3BC52004A9EE4 /* VGManagerTableCellView.h */,
+				BFB6E37515E3BC52004A9EE4 /* VGManagerTableCellView.m */,
+				BF3A2A1515E26DC8007EE82C /* VGCharacterTableCellView.h */,
+				BF3A2A1615E26DC8007EE82C /* VGCharacterTableCellView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		BFDD80B115CC60F300116A65 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,11 +244,7 @@
 		BFDD80D015CC76A200116A65 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				BFADFD4015DD54FB005D082D /* VGCurrentSkillTextField.h */,
-				BFADFD4115DD54FB005D082D /* VGCurrentSkillTextField.m */,
-				BFADFD4315DD5801005D082D /* VGCharacterSkillQueueCellView.h */,
-				BFADFD4415DD5801005D082D /* VGCharacterSkillQueueCellView.m */,
-				BF590EA215DB972B0036E10A /* Value Transformers */,
+				BFB6E37815E3BF9E004A9EE4 /* Views */,
 				BF590EA315DB97360036E10A /* Window/View Controllers */,
 			);
 			name = UI;
@@ -399,20 +384,17 @@
 				BFDD80FC15CC929400116A65 /* Character.m in Sources */,
 				BFDD80FD15CC929400116A65 /* Corporation.m in Sources */,
 				BF590E8C15DAAFC70036E10A /* VGSkillTree.m in Sources */,
-				BF590EA615DB97660036E10A /* VGCharacterIDToImageValueTransformer.m in Sources */,
 				BF4A829A15DBF742003AD68C /* VGSkillQueueViewController.m in Sources */,
-				BFADFD1C15DD2141005D082D /* VGCharacterIDToCurrentSkillNameValueTransformer.m in Sources */,
 				BFADFD3915DD2F4F005D082D /* Queue+VGEVE.m in Sources */,
 				BFADFD3C15DD2FCF005D082D /* QueueElement+VGEVE.m in Sources */,
 				BFADFD3F15DD3AF3005D082D /* VGSkillQueueQuery.m in Sources */,
-				BFADFD4215DD54FB005D082D /* VGCurrentSkillTextField.m in Sources */,
 				BFADFD4515DD5801005D082D /* VGCharacterSkillQueueCellView.m in Sources */,
 				BF3A2A0615E24209007EE82C /* VGSkillDetailViewController.m in Sources */,
 				BF3A2A0A15E25AAC007EE82C /* QueueElement.m in Sources */,
 				BF3A2A0D15E25AAD007EE82C /* Queue.m in Sources */,
-				BF3A2A1015E26A2B007EE82C /* VGCharacterIDToTimeRemainingValueTransformer.m in Sources */,
 				BF3A2A1715E26DC8007EE82C /* VGCharacterTableCellView.m in Sources */,
 				BF3A2A1A15E28A53007EE82C /* VGUserNotificationController.m in Sources */,
+				BFB6E37615E3BC52004A9EE4 /* VGManagerTableCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
