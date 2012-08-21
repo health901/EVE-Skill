@@ -188,7 +188,13 @@
 
 - (void)skillQueueReloadTimerAction:(NSTimer*)theTimer
 {
-    [_apiController refreshQueueForCharacterEnabled:YES];
+    
+    dispatch_async(_apiController.dispatchQueue, ^{
+        [_apiController refreshQueueForCharacterEnabled:YES];
+    });
+    dispatch_async(_userNotificationController.dispatchQueue, ^{
+        [_userNotificationController reloadAllNotifications];
+    });
 }
 
 #pragma mark -

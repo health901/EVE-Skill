@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VGUserNotificationController : NSObject
+@interface VGUserNotificationController : NSObject <NSUserNotificationCenterDelegate>
 
 @property (nonatomic, readonly) dispatch_queue_t dispatchQueue;
 

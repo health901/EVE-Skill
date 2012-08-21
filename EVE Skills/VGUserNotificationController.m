@@ -42,6 +42,9 @@
 
 @implementation VGUserNotificationController
 
+static NSString *kUserNotificationCharacterID = @"kUserNotificationCharacterID";
+static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
+
 #pragma mark -
 #pragma mark - Initialization
 
@@ -53,6 +56,7 @@
                                                DISPATCH_QUEUE_SERIAL);
         
         _defaultCenter = [NSUserNotificationCenter defaultUserNotificationCenter];
+        _defaultCenter.delegate = self;
         
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextObjectsDidChangeNotification object:self.appDelegate.coreDataController.mainThreadContext queue:nil usingBlock:^(NSNotification *note) {
@@ -221,6 +225,8 @@
     userNotification.subtitle = character.characterName;
     userNotification.informativeText = [NSString stringWithFormat:@"The skill queue of %@ is empty !", character.characterName];
     userNotification.deliveryDate = [NSDate dateWithTimeIntervalSinceNow:60];
+    userNotification.soundName = NSUserNotificationDefaultSoundName;
+    userNotification.userInfo = @{ kUserNotificationCharacterID : characterID, kUserNotificationIsSkillEnd : @NO };
     
     [_defaultCenter scheduleNotification:userNotification];
 
@@ -243,6 +249,8 @@
     userNotification.subtitle = character.characterName;
     userNotification.informativeText = [NSString stringWithFormat:@"%@ finished training %@ %@", character.characterName, skill.skillName, queueElement.skillLevel];
     userNotification.deliveryDate = queueElement.endTime;
+    userNotification.soundName = NSUserNotificationDefaultSoundName;
+    userNotification.userInfo = @{ kUserNotificationCharacterID : characterID, kUserNotificationIsSkillEnd : @YES };
     
     [_defaultCenter scheduleNotification:userNotification];
     
@@ -354,6 +362,37 @@
     }];
     
     return skill;
+}
+
+#pragma mark -
+#pragma mark - NSUserNotificationCenterDelegate
+
+- (void)userNotificationCenter:(NSUserNotificationCenter *)center
+        didDeliverNotification:(NSUserNotification *)notification
+{
+    NSLog(@"userNotificationCenter:didDeliverNotification:");
+    
+    if (notification.userInfo[kUserNotificationIsSkillEnd] == @YES) {
+        // Reload the skill queue of the character
+        dispatch_async(_appDelegate.apiController.dispatchQueue, ^{
+            [_appDelegate.apiController addQueueWithCharacterID:notification.userInfo[kUserNotificationCharacterID]];
+        });
+    }
+}
+
+
+- (void)userNotificationCenter:(NSUserNotificationCenter *)center
+       didActivateNotification:(NSUserNotification *)notification
+{
+    NSLog(@"userNotificationCenter:didActivateNotification:");
+    
+    [_defaultCenter removeDeliveredNotification:notification];
+}
+
+- (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center
+     shouldPresentNotification:(NSUserNotification *)notification
+{
+    return YES;
 }
 
 @end
