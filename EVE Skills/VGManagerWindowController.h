@@ -13,6 +13,7 @@
 
 // GUI
 @property (strong) IBOutlet NSTableView *characterTableView;
+@property (strong) IBOutlet NSTextField *hyperlinkTextField;
 
 // Core Data
 @property (nonatomic, strong, readonly) CoreDataController *coreDataController;

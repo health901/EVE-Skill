@@ -10,6 +10,32 @@
 #import "VGAppDelegate.h"
 #import "VGAppNotifications.h"
 
+@interface NSAttributedString (Hyperlink)
++(id)hyperlinkFromString:(NSString*)inString withURL:(NSURL*)aURL;
+@end
+
+@implementation NSAttributedString (Hyperlink)
++(id)hyperlinkFromString:(NSString*)inString withURL:(NSURL*)aURL
+{
+    NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString: inString];
+    NSRange range = NSMakeRange(0, [attrString length]);
+    
+    [attrString beginEditing];
+    [attrString addAttribute:NSLinkAttributeName value:[aURL absoluteString] range:range];
+    
+    // make the text appear in blue
+    [attrString addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:range];
+    
+    // next make the text appear with an underline
+    [attrString addAttribute:
+     NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSSingleUnderlineStyle] range:range];
+    
+    [attrString endEditing];
+    
+    return attrString;
+}
+@end
+
 @interface VGManagerWindowController () {
     VGAppDelegate *_appDelegate;
 }
@@ -18,6 +44,7 @@
 
 @implementation VGManagerWindowController
 @synthesize characterTableView = _characterTableView;
+@synthesize hyperlinkTextField = _hyperlinkTextField;
 @synthesize coreDataController = _coreDataController;
 @synthesize tableSortDescriptors = _tableSortDescriptors;
 @synthesize keyID = _keyID;
@@ -45,6 +72,19 @@
     // UI defaults
     self.authErrorHidden = YES;
     
+    // EVE API link
+    // both are needed, otherwise hyperlink won't accept mousedown
+    [self.hyperlinkTextField setAllowsEditingTextAttributes: YES];
+    [self.hyperlinkTextField setSelectable: YES];
+    
+    NSURL* url = [NSURL URLWithString:@"https://support.eveonline.com/api/"];
+    
+    NSMutableAttributedString* string = [[NSMutableAttributedString alloc] init];
+    [string appendAttributedString: [NSAttributedString hyperlinkFromString:@"EVE Online API" withURL:url]];
+    
+    // set the attributed string to the NSTextField
+    [self.hyperlinkTextField setAttributedStringValue: string];
+    
     // Notifications
     [[NSNotificationCenter defaultCenter] addObserverForName:APICALL_QUERY_DID_START_NOTIFICATION
                                                       object:nil
@@ -66,6 +106,22 @@
                                                   usingBlock:^(NSNotification *note) {
         [self.characterTableView reloadData];
     }];
+}
+
+
+-(void)setHyperlinkWithTextField:(NSTextField*)inTextField
+{
+    // both are needed, otherwise hyperlink won't accept mousedown
+    [inTextField setAllowsEditingTextAttributes: YES];
+    [inTextField setSelectable: YES];
+    
+    NSURL* url = [NSURL URLWithString:@"https://support.eveonline.com/api"];
+    
+    NSMutableAttributedString* string = [[NSMutableAttributedString alloc] init];
+    [string appendAttributedString: [NSAttributedString hyperlinkFromString:@"EVE Online API" withURL:url]];
+    
+    // set the attributed string to the NSTextField
+    [inTextField setAttributedStringValue: string];
 }
 
 #pragma mark -
