@@ -234,8 +234,8 @@
 		BFDD80B615CC728000116A65 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				BFDD80E215CC924100116A65 /* Core Data */,
 				BFDD80E115CC922A00116A65 /* API Controller & Call */,
+				BFDD80E215CC924100116A65 /* Core Data */,
 				BFDD80DD15CC906F00116A65 /* Query parsers */,
 			);
 			path = Shared;

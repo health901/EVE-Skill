@@ -28,6 +28,8 @@
 @property (strong, nonatomic) NSManagedObjectContext *moc;
 @property (strong, nonatomic) NSArray *queueElementArrayOrdered;
 
+@property (strong, nonatomic) NSMutableDictionary *skillDict;
+
 @end
 
 @implementation VGCharacterSkillQueueCellView
@@ -104,32 +106,38 @@
                     _skillDetailViewController.queueElement = nil;
                     
                     // Search for the skill
-                    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-                    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Skill" inManagedObjectContext:_moc];
-                    [fetchRequest setEntity:entity];
+                    _skillDetailViewController.skill = self.skillDict[queueElement.skillID];
                     
-                    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"skillID == %@", queueElement.skillID];
-                    [fetchRequest setPredicate:predicate];
-                    
-                    NSError *error = nil;
-                    NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
-                    if (fetchedObjects == nil) {
-                        NSLog(@"Error fetching skill with skillID = '%@' : %@, %@",
-                              queueElement.skillID, error, [error userInfo]);
+                    if (self.skillDict[queueElement.skillID] == nil) {
+                        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+                        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Skill" inManagedObjectContext:_moc];
+                        [fetchRequest setEntity:entity];
+                        
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"skillID == %@", queueElement.skillID];
+                        [fetchRequest setPredicate:predicate];
+                        
+                        NSError *error = nil;
+                        NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
+                        if (fetchedObjects == nil) {
+                            NSLog(@"Error fetching skill with skillID = '%@' : %@, %@",
+                                  queueElement.skillID, error, [error userInfo]);
+                        }
+                        
+                        if (fetchedObjects.count == 0) {
+                            dispatch_sync(dispatch_get_main_queue(), ^{
+                                NSAlert *alert = [NSAlert alertWithMessageText:@"Skill not found in DB"
+                                                                 defaultButton:@"OK"
+                                                               alternateButton:nil
+                                                                   otherButton:nil
+                                                     informativeTextWithFormat:@"skillID == '%@'", queueElement.skillID];
+                                [alert runModal];
+                            });
+                        }
+                        
+                        self.skillDict[queueElement.skillID] = fetchedObjects.lastObject;
+                        _skillDetailViewController.skill = fetchedObjects.lastObject;
                     }
                     
-                    if (fetchedObjects.count == 0) {
-                        dispatch_sync(dispatch_get_main_queue(), ^{
-                            NSAlert *alert = [NSAlert alertWithMessageText:@"Skill not found in DB"
-                                                             defaultButton:@"OK"
-                                                           alternateButton:nil
-                                                               otherButton:nil
-                                                 informativeTextWithFormat:@"skillID == '%@'", queueElement.skillID];
-                            [alert runModal];
-                        });
-                    }
-                    
-                    _skillDetailViewController.skill = fetchedObjects.lastObject;
                     _skillDetailViewController.queueElement = queueElement;
                     
                     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -192,6 +200,15 @@
     }
     
     return _queueElementArrayOrdered;
+}
+
+- (NSMutableDictionary *)skillDict
+{
+    if (_skillDict == nil) {
+        _skillDict = [@{} mutableCopy];
+    }
+    
+    return _skillDict;
 }
 
 #pragma mark -
