@@ -175,7 +175,7 @@
 												</object>
 											</object>
 											<double key="NSRowHeight">48</double>
-											<int key="NSTvFlags">-566231040</int>
+											<int key="NSTvFlags">-557842432</int>
 											<reference key="NSDelegate"/>
 											<reference key="NSDataSource"/>
 											<int key="NSColumnAutoresizingStyle">4</int>

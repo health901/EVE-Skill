@@ -76,7 +76,6 @@
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
-    NSLog(@"mouseEntered");
     // Search for the Skill and QueueElement under the mouse pointer
     if (self.queue != nil && self.queue.elements != nil && self.queue.elements.count > 0 && self.queueElementArrayOrdered){
         
@@ -160,8 +159,6 @@
 
 - (void)mouseExited:(NSEvent *)theEvent
 {
-    NSLog(@"mouseExited");
-    
     [_skillDetailPopover performClose:self];
 }
 

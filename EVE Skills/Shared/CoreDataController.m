@@ -95,6 +95,9 @@
 
 #import "CoreDataController.h"
 #import "VGAppDelegate.h"
+#import "API.h"
+#import "Character.h"
+#import "Corporation.h"
 
 NSString * kiCloudPersistentStoreFilename = @"iCloudStore.sqlite";
 NSString * kFallbackPersistentStoreFilename = @"fallbackStore.sqlite"; //used when iCloud is not available
@@ -104,7 +107,7 @@ NSString * kSkillStoreFilename = @"skillStore.sqlite"; //holds the skill and gro
 NSString * test = @"test";
 
 #define SEED_ICLOUD_STORE NO
-//#define FORCE_FALLBACK_STORE
+#define FORCE_FALLBACK_STORE
 
 static NSOperationQueue *_presentedItemOperationQueue;
 
@@ -242,18 +245,18 @@ static NSOperationQueue *_presentedItemOperationQueue;
     if (NO == [fm fileExistsAtPath:[storeURL path]]) {
         // TODO maybe download the skill store here ?
         
-//        NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"skillStore"
-//                                                   withExtension:@"sqlite"];
-//        if (nil == bundleURL) {
-//            NSLog(@"Local store not found in bundle, this is likely a build issue, make sure the store file is being copied as a bundle resource.");
-//            abort();
-//        }
-//        
-//        success = [fm copyItemAtURL:bundleURL toURL:storeURL error:&localError];
-//        if (NO == success) {
-//            NSLog(@"Trouble copying the local store file from the bundle: %@", localError);
-//            abort();
-//        }
+        NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"skillStore"
+                                                   withExtension:@"sqlite"];
+        if (nil == bundleURL) {
+            NSLog(@"Local store not found in bundle, this is likely a build issue, make sure the store file is being copied as a bundle resource.");
+            abort();
+        }
+        
+        success = [fm copyItemAtURL:bundleURL toURL:storeURL error:&localError];
+        if (NO == success) {
+            NSLog(@"Trouble copying the local store file from the bundle: %@", localError);
+            abort();
+        }
     }
     
     _skillStore = [_psc addPersistentStoreWithType:NSSQLiteStoreType
@@ -389,6 +392,7 @@ static NSOperationQueue *_presentedItemOperationQueue;
             
             //check to see if we need to seed or migrate data from the fallback store
             NSFileManager *fm = [[NSFileManager alloc] init];
+            NSLog(@"%@", [[self fallbackStoreURL] path]);
             if ([fm fileExistsAtPath:[[self fallbackStoreURL] path]]) {
                 //migrate data from the fallback store to the iCloud store
                 //there is no reason to do this synchronously since no other peer should have this data
@@ -512,78 +516,156 @@ static NSOperationQueue *_presentedItemOperationQueue;
         NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] init];
         [moc setPersistentStoreCoordinator:_psc];
 
-        NSFetchRequest *fr = [[NSFetchRequest alloc] initWithEntityName:@"Person"];
+        NSFetchRequest *fr = [[NSFetchRequest alloc] initWithEntityName:@"API"];
         [fr setIncludesPendingChanges:NO]; //distinct has to go down to the db, not implemented for in memory filtering
         [fr setFetchBatchSize:1000]; //protect thy memory
         
-        NSExpression *countExpr = [NSExpression expressionWithFormat:@"count:(emailAddress)"];
+        NSExpression *countExpr = [NSExpression expressionWithFormat:@"count:(keyID)"];
         NSExpressionDescription *countExprDesc = [[NSExpressionDescription alloc] init];
         [countExprDesc setName:@"count"];
         [countExprDesc setExpression:countExpr];
         [countExprDesc setExpressionResultType:NSInteger64AttributeType];
         
-        NSAttributeDescription *emailAttr = [[[_psc managedObjectModel] entitiesByName][@"Person"] propertiesByName][@"emailAddress"];
-        [fr setPropertiesToFetch:@[emailAttr, countExprDesc]];
-        [fr setPropertiesToGroupBy:@[emailAttr]];
+        NSAttributeDescription *keyIDAttr = [[[_psc managedObjectModel] entitiesByName][@"API"] propertiesByName][@"keyID"];
+        [fr setPropertiesToFetch:@[keyIDAttr, countExprDesc]];
+        [fr setPropertiesToGroupBy:@[keyIDAttr]];
         
         [fr setResultType:NSDictionaryResultType];
         
         NSArray *countDictionaries = [moc executeFetchRequest:fr error:&error];
-        NSMutableArray *emailsWithDupes = [[NSMutableArray alloc] init];
+        NSMutableArray *apisWithDupes = [[NSMutableArray alloc] init];
         for (NSDictionary *dict in countDictionaries) {
             NSNumber *count = dict[@"count"];
             if ([count integerValue] > 1) {
-                [emailsWithDupes addObject:dict[@"emailAddress"]];
+                [apisWithDupes addObject:dict[@"keyID"]];
             }
         }
         
-        NSLog(@"Emails with dupes: %@", emailsWithDupes);
+        NSLog(@"APIs with dupes: %@", apisWithDupes);
         
         //fetch out all the duplicate records
-        fr = [NSFetchRequest fetchRequestWithEntityName:@"Person"];
+        fr = [NSFetchRequest fetchRequestWithEntityName:@"API"];
         [fr setIncludesPendingChanges:NO];
         
         
-        NSPredicate *p = [NSPredicate predicateWithFormat:@"emailAddress IN (%@)", emailsWithDupes];
+        NSPredicate *p = [NSPredicate predicateWithFormat:@"keyID IN (%@)", apisWithDupes];
         [fr setPredicate:p];
         
-        NSSortDescriptor *emailSort = [NSSortDescriptor sortDescriptorWithKey:@"emailAddress" ascending:YES];
-        [fr setSortDescriptors:@[emailSort]];
+        NSSortDescriptor *idSort = [NSSortDescriptor sortDescriptorWithKey:@"keyID" ascending:YES];
+        [fr setSortDescriptors:@[idSort]];
         
         NSUInteger batchSize = 500; //can be set 100-10000 objects depending on individual object size and available device memory
         [fr setFetchBatchSize:batchSize];
-//        NSArray *dupes = [moc executeFetchRequest:fr error:&error];
-//        
-//        Person *prevPerson = nil;
-//        
-//        NSUInteger i = 1;
-//        for (Person *person in dupes) {
-//            if (prevPerson) {
-//                if ([person.emailAddress isEqualToString:prevPerson.emailAddress]) {
-//                    if ([person.recordUUID compare:prevPerson.recordUUID] == NSOrderedAscending) {
-//                        [moc deleteObject:person];
-//                    } else {
-//                        [moc deleteObject:prevPerson];
-//                        prevPerson = person;
-//                    }
-//                } else {
-//                    prevPerson = person;
-//                }
-//            } else {
-//                prevPerson = person;
-//            }
-//            
-//            if (0 == (i % batchSize)) {
-//                //save the changes after each batch, this helps control memory pressure by turning previously examined objects back in to faults
-//                if ([moc save:&error]) {
-//                    NSLog(@"Saved successfully after uniquing");
-//                } else {
-//                    NSLog(@"Error saving unique results: %@", error);
-//                }
-//            }
-//            
-//            i++;
-//        }
+        NSArray *dupes = [moc executeFetchRequest:fr error:&error];
+        
+        API *prevAPI = nil;
+        
+        NSUInteger i = 1;
+        for (API *api in dupes) {
+            if (prevAPI) {
+                if ([api.keyID isEqualToString:prevAPI.keyID]) {
+                    if ([api.timestamp compare:prevAPI.timestamp] == NSOrderedAscending) {
+                        [moc deleteObject:api];
+                    } else {
+                        [moc deleteObject:prevAPI];
+                        prevAPI = api;
+                    }
+                } else {
+                    prevAPI = api;
+                }
+            } else {
+                prevAPI = api;
+            }
+            
+            if (0 == (i % batchSize)) {
+                //save the changes after each batch, this helps control memory pressure by turning previously examined objects back in to faults
+                if ([moc save:&error]) {
+                    NSLog(@"Saved successfully after uniquing");
+                } else {
+                    NSLog(@"Error saving unique results: %@", error);
+                }
+            }
+            
+            i++;
+        }
+        
+        // Now we have to deDupe the Corporation objects
+        fr = [[NSFetchRequest alloc] initWithEntityName:@"Corporation"];
+        [fr setIncludesPendingChanges:NO]; //distinct has to go down to the db, not implemented for in memory filtering
+        [fr setFetchBatchSize:1000]; //protect thy memory
+        
+        countExpr = [NSExpression expressionWithFormat:@"count:(corporationID)"];
+        countExprDesc = [[NSExpressionDescription alloc] init];
+        [countExprDesc setName:@"count"];
+        [countExprDesc setExpression:countExpr];
+        [countExprDesc setExpressionResultType:NSInteger64AttributeType];
+        
+        NSAttributeDescription *corporationIDAttr = [[[_psc managedObjectModel] entitiesByName][@"Corporation"] propertiesByName][@"corporationID"];
+        [fr setPropertiesToFetch:@[corporationIDAttr, countExprDesc]];
+        [fr setPropertiesToGroupBy:@[corporationIDAttr]];
+        
+        [fr setResultType:NSDictionaryResultType];
+        
+        countDictionaries = [moc executeFetchRequest:fr error:&error];
+        NSMutableArray *corporationsWithDupes = [[NSMutableArray alloc] init];
+        for (NSDictionary *dict in countDictionaries) {
+            NSNumber *count = dict[@"count"];
+            if ([count integerValue] > 1) {
+                [corporationsWithDupes addObject:dict[@"corporationID"]];
+            }
+        }
+        
+        NSLog(@"Corporations with dupes: %@", corporationsWithDupes);
+        
+        //fetch out all the duplicate records
+        fr = [NSFetchRequest fetchRequestWithEntityName:@"API"];
+        [fr setIncludesPendingChanges:NO];
+        
+        
+        p = [NSPredicate predicateWithFormat:@"corporationID IN (%@)", corporationsWithDupes];
+        [fr setPredicate:p];
+        
+        idSort = [NSSortDescriptor sortDescriptorWithKey:@"corporationID" ascending:YES];
+        [fr setSortDescriptors:@[idSort]];
+        
+        batchSize = 500; //can be set 100-10000 objects depending on individual object size and available device memory
+        [fr setFetchBatchSize:batchSize];
+        dupes = [moc executeFetchRequest:fr error:&error];
+        
+        i = 1;
+        
+        Corporation *prevCorp = nil;
+        
+        for (Corporation *corp in dupes) {
+            if (prevCorp) {
+                if ([corp.corporationID isEqualToString:prevCorp.corporationID]) {
+                    if ([corp.timestamp compare:prevCorp.timestamp] == NSOrderedAscending) {
+                        [prevCorp addCharacters:corp.characters];
+                        [moc deleteObject:corp];
+                    } else {
+                        [corp addCharacters:prevCorp.characters];
+                        [moc deleteObject:prevCorp];
+                        prevCorp = corp;
+                    }
+                } else {
+                    prevCorp = corp;
+                }
+            } else {
+                prevCorp = corp;
+            }
+            
+            if (0 == (i % batchSize)) {
+                //save the changes after each batch, this helps control memory pressure by turning previously examined objects back in to faults
+                if ([moc save:&error]) {
+                    NSLog(@"Saved successfully after uniquing");
+                } else {
+                    NSLog(@"Error saving unique results: %@", error);
+                }
+            }
+            
+            i++;
+        }
+        
         
         if ([moc save:&error]) {
             NSLog(@"Saved successfully after uniquing");
@@ -608,6 +690,51 @@ static NSOperationQueue *_presentedItemOperationQueue;
 //    [moc assignObject:newPerson toPersistentStore:store];
 //}
 
+- (void)addAPI:(API *)api toStore:(NSPersistentStore *)store withContext:(NSManagedObjectContext *)moc
+{
+    // Add the API
+    NSEntityDescription *entity = [api entity];
+    
+    API *newAPI = [[API alloc] initWithEntity:entity insertIntoManagedObjectContext:moc];
+    
+    newAPI.keyID = api.keyID;
+    newAPI.vCode = api.vCode;
+    newAPI.accessMask = api.accessMask;
+    newAPI.expires = api.expires;
+    newAPI.timestamp = api.timestamp;
+    
+    // Add all Character and Corporation associated with API
+    NSMutableDictionary *corpDict = [[NSMutableDictionary alloc] init];
+    for (Character *character in api.characters) {
+        entity = [character entity];
+        
+        Character *newCharacter = [[Character alloc] initWithEntity:entity insertIntoManagedObjectContext:moc];
+        
+        newCharacter.characterID = character.characterID;
+        newCharacter.characterName = character.characterName;
+        newCharacter.enabled = character.enabled;
+        newCharacter.timestamp = character.timestamp;
+        
+        newCharacter.api = newAPI;
+        
+        // Add the Corporation
+        Corporation *newCorporation = corpDict[character.corporation.corporationID];
+        if (newCorporation == nil) {
+            entity = [character.corporation entity];
+            
+            newCorporation = [[Corporation alloc] initWithEntity:entity insertIntoManagedObjectContext:moc];
+            
+            newCorporation.corporationID = character.corporation.corporationID;
+            newCorporation.corporationName = character.corporation.corporationName;
+            newCorporation.timestamp = character.corporation.timestamp;
+            
+            corpDict[character.corporation.corporationID] = newCorporation;
+        }
+        
+        newCharacter.corporation = newCorporation;
+    }
+}
+
 - (BOOL)seedStore:(NSPersistentStore *)store withPersistentStoreAtURL:(NSURL *)seedStoreURL error:(NSError * __autoreleasing *)error {
     BOOL success = YES;
     NSError *localError = nil;
@@ -624,35 +751,36 @@ static NSOperationQueue *_presentedItemOperationQueue;
         NSManagedObjectContext *seedMOC = [[NSManagedObjectContext alloc] init];
         [seedMOC setPersistentStoreCoordinator:seedPSC];
         
-        //fetch all the person objects, use a batched fetch request to control memory usage
-        NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:@"Person"];
+        //fetch all the API objects, use a batched fetch request to control memory usage
+        NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:@"API"];
         NSUInteger batchSize = 5000;
         [fr setFetchBatchSize:batchSize];
         
-//        NSArray *people = [seedMOC executeFetchRequest:fr error:&localError];
+        NSArray *apis = [seedMOC executeFetchRequest:fr error:&localError];
         NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         [moc setPersistentStoreCoordinator:_psc];
-//        NSUInteger i = 1;
-//        for (Person *person in people) {
-//            [self addPerson:person toStore:store withContext:moc];
-//            if (0 == (i % batchSize)) {
-//                success = [moc save:&localError];
-//                if (success) {
-//                    /*
-//                     Reset the managed object context to free the memory for the inserted objects
-//                     The faulting array used for the fetch request will automatically free objects
-//                     with each batch, but inserted objects remain in the managed object context for
-//                     the lifecycle of the context
-//                     */
-//                    [moc reset];
-//                } else {
-//                    NSLog(@"Error saving during seed: %@", localError);
-//                    break;
-//                }
-//            }
-//            
-//            i++;
-//        }
+        NSUInteger i = 1;
+        for (API *api in apis) {
+            [self addAPI:api toStore:store withContext:moc];
+            
+            if (0 == (i % batchSize)) {
+                success = [moc save:&localError];
+                if (success) {
+                    /*
+                     Reset the managed object context to free the memory for the inserted objects
+                     The faulting array used for the fetch request will automatically free objects
+                     with each batch, but inserted objects remain in the managed object context for
+                     the lifecycle of the context
+                     */
+                    [moc reset];
+                } else {
+                    NSLog(@"Error saving during seed: %@", localError);
+                    break;
+                }
+            }
+            
+            i++;
+        }
         
         //one last save
         if ([moc hasChanges]) {

@@ -27,6 +27,7 @@
 		BFADFD3F15DD3AF3005D082D /* VGSkillQueueQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD3E15DD3AF3005D082D /* VGSkillQueueQuery.m */; };
 		BFADFD4515DD5801005D082D /* VGCharacterSkillQueueCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD4415DD5801005D082D /* VGCharacterSkillQueueCellView.m */; };
 		BFB6E37615E3BC52004A9EE4 /* VGManagerTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6E37515E3BC52004A9EE4 /* VGManagerTableCellView.m */; };
+		BFC6D2D815E4D1B2008676BE /* skillStore.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BFC6D2D715E4D1B2008676BE /* skillStore.sqlite */; };
 		BFDD80BE15CC728000116A65 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B815CC728000116A65 /* CoreDataController.m */; };
 		BFDD80BF15CC728000116A65 /* DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */; };
 		BFDD80C015CC728000116A65 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80BB15CC728000116A65 /* Group.m */; };
@@ -84,6 +85,7 @@
 		BFADFD4415DD5801005D082D /* VGCharacterSkillQueueCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterSkillQueueCellView.m; sourceTree = "<group>"; };
 		BFB6E37415E3BC52004A9EE4 /* VGManagerTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGManagerTableCellView.h; sourceTree = "<group>"; };
 		BFB6E37515E3BC52004A9EE4 /* VGManagerTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGManagerTableCellView.m; sourceTree = "<group>"; };
+		BFC6D2D715E4D1B2008676BE /* skillStore.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = skillStore.sqlite; sourceTree = "<group>"; };
 		BFD5DFC615E3D05E004D4E5A /* EVE Skills.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EVE Skills.entitlements"; sourceTree = "<group>"; };
 		BFDD80B715CC728000116A65 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
 		BFDD80B815CC728000116A65 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 		BFDD80B115CC60F300116A65 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BFC6D2D715E4D1B2008676BE /* skillStore.sqlite */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				BFDD80D515CC76BA00116A65 /* VGManagerWindowController.xib in Resources */,
 				BF4A829B15DBF742003AD68C /* VGSkillQueueViewController.xib in Resources */,
 				BF3A2A0715E24209007EE82C /* VGSkillDetailViewController.xib in Resources */,
+				BFC6D2D815E4D1B2008676BE /* skillStore.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

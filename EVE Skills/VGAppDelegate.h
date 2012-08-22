@@ -20,4 +20,6 @@
 
 - (void)openManagerWindow;
 
+- (void)showMenuBarMenu;
+
 @end

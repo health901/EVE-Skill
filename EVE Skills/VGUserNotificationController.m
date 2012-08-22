@@ -167,6 +167,7 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
 
 - (void)removeAllNotifications
 {
+    [_defaultCenter removeAllDeliveredNotifications];
     for (NSArray *notificationArray in self.notificationDict.allValues) {
         for (NSUserNotification *userNotification in notificationArray) {
             [_defaultCenter removeScheduledNotification:userNotification];
@@ -224,7 +225,7 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
     userNotification.title = @"Skill queue empty !";
     userNotification.subtitle = character.characterName;
     userNotification.informativeText = [NSString stringWithFormat:@"The skill queue of %@ is empty !", character.characterName];
-    userNotification.deliveryDate = [NSDate dateWithTimeIntervalSinceNow:60];
+    userNotification.deliveryDate = [NSDate date];
     userNotification.soundName = NSUserNotificationDefaultSoundName;
     userNotification.userInfo = @{ kUserNotificationCharacterID : characterID, kUserNotificationIsSkillEnd : @NO };
     
@@ -371,6 +372,8 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
         didDeliverNotification:(NSUserNotification *)notification
 {
     NSLog(@"userNotificationCenter:didDeliverNotification:");
+    NSLog(@"%@, %@, %@", notification.title, notification.subtitle, notification.informativeText);
+    NSLog(@"%@", notification.deliveryDate);
     
     if (notification.userInfo[kUserNotificationIsSkillEnd] == @YES) {
         // Reload the skill queue of the character
@@ -386,7 +389,13 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
 {
     NSLog(@"userNotificationCenter:didActivateNotification:");
     
-    [_defaultCenter removeDeliveredNotification:notification];
+    // Opens the menu
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.appDelegate showMenuBarMenu];
+    });
+    
+    // Not sure if I should dismiss the notification.
+//    [_defaultCenter removeDeliveredNotification:notification];
 }
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center

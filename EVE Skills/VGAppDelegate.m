@@ -174,7 +174,14 @@
         _managerWindowController = [[VGManagerWindowController alloc] initWithWindowNibName:@"VGManagerWindowController"];
     }
     
-    [_managerWindowController.window makeKeyAndOrderFront:nil];
+    [_managerWindowController.window makeKeyAndOrderFront:self];
+}
+
+- (void)showMenuBarMenu
+{
+    if (_statusItem != nil) {
+        [_statusItem popUpStatusItemMenu:_menu];
+    }
 }
 
 #pragma mark -
@@ -303,6 +310,11 @@
     }];
     
     return reply;
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification
+{
+    [_coreDataController applicationResumed];
 }
 
 @end
