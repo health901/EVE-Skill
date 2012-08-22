@@ -793,19 +793,23 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: objectValue.corporation.corporationName</string>
+						<string key="label">value: self.corporation.corporationName</string>
 						<reference key="source" ref="663687936"/>
 						<reference key="destination" ref="598732390"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="663687936"/>
 							<reference key="NSDestination" ref="598732390"/>
-							<string key="NSLabel">value: objectValue.corporation.corporationName</string>
+							<string key="NSLabel">value: self.corporation.corporationName</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">objectValue.corporation.corporationName</string>
+							<string key="NSKeyPath">self.corporation.corporationName</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSNullPlaceholder</string>
+								<string key="NS.object.0">Corporation not in DB</string>
+							</object>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">108</int>
+					<int key="connectionID">222</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -822,6 +826,22 @@
 						</object>
 					</object>
 					<int key="connectionID">107</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: self.portrait.image</string>
+						<reference key="source" ref="1023476061"/>
+						<reference key="destination" ref="598732390"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="1023476061"/>
+							<reference key="NSDestination" ref="598732390"/>
+							<string key="NSLabel">value: self.portrait.image</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">self.portrait.image</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">224</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -2536,7 +2556,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">217</int>
+			<int key="maxID">224</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

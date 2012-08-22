@@ -589,84 +589,6 @@ static NSOperationQueue *_presentedItemOperationQueue;
             i++;
         }
         
-        // Now we have to deDupe the Corporation objects
-        fr = [[NSFetchRequest alloc] initWithEntityName:@"Corporation"];
-        [fr setIncludesPendingChanges:NO]; //distinct has to go down to the db, not implemented for in memory filtering
-        [fr setFetchBatchSize:1000]; //protect thy memory
-        
-        countExpr = [NSExpression expressionWithFormat:@"count:(corporationID)"];
-        countExprDesc = [[NSExpressionDescription alloc] init];
-        [countExprDesc setName:@"count"];
-        [countExprDesc setExpression:countExpr];
-        [countExprDesc setExpressionResultType:NSInteger64AttributeType];
-        
-        NSAttributeDescription *corporationIDAttr = [[[_psc managedObjectModel] entitiesByName][@"Corporation"] propertiesByName][@"corporationID"];
-        [fr setPropertiesToFetch:@[corporationIDAttr, countExprDesc]];
-        [fr setPropertiesToGroupBy:@[corporationIDAttr]];
-        
-        [fr setResultType:NSDictionaryResultType];
-        
-        countDictionaries = [moc executeFetchRequest:fr error:&error];
-        NSMutableArray *corporationsWithDupes = [[NSMutableArray alloc] init];
-        for (NSDictionary *dict in countDictionaries) {
-            NSNumber *count = dict[@"count"];
-            if ([count integerValue] > 1) {
-                [corporationsWithDupes addObject:dict[@"corporationID"]];
-            }
-        }
-        
-        NSLog(@"Corporations with dupes: %@", corporationsWithDupes);
-        
-        //fetch out all the duplicate records
-        fr = [NSFetchRequest fetchRequestWithEntityName:@"API"];
-        [fr setIncludesPendingChanges:NO];
-        
-        
-        p = [NSPredicate predicateWithFormat:@"corporationID IN (%@)", corporationsWithDupes];
-        [fr setPredicate:p];
-        
-        idSort = [NSSortDescriptor sortDescriptorWithKey:@"corporationID" ascending:YES];
-        [fr setSortDescriptors:@[idSort]];
-        
-        batchSize = 500; //can be set 100-10000 objects depending on individual object size and available device memory
-        [fr setFetchBatchSize:batchSize];
-        dupes = [moc executeFetchRequest:fr error:&error];
-        
-        i = 1;
-        
-        Corporation *prevCorp = nil;
-        
-        for (Corporation *corp in dupes) {
-            if (prevCorp) {
-                if ([corp.corporationID isEqualToString:prevCorp.corporationID]) {
-                    if ([corp.timestamp compare:prevCorp.timestamp] == NSOrderedAscending) {
-                        [prevCorp addCharacters:corp.characters];
-                        [moc deleteObject:corp];
-                    } else {
-                        [corp addCharacters:prevCorp.characters];
-                        [moc deleteObject:prevCorp];
-                        prevCorp = corp;
-                    }
-                } else {
-                    prevCorp = corp;
-                }
-            } else {
-                prevCorp = corp;
-            }
-            
-            if (0 == (i % batchSize)) {
-                //save the changes after each batch, this helps control memory pressure by turning previously examined objects back in to faults
-                if ([moc save:&error]) {
-                    NSLog(@"Saved successfully after uniquing");
-                } else {
-                    NSLog(@"Error saving unique results: %@", error);
-                }
-            }
-            
-            i++;
-        }
-        
-        
         if ([moc save:&error]) {
             NSLog(@"Saved successfully after uniquing");
         } else {
@@ -716,22 +638,6 @@ static NSOperationQueue *_presentedItemOperationQueue;
         newCharacter.timestamp = character.timestamp;
         
         newCharacter.api = newAPI;
-        
-        // Add the Corporation
-        Corporation *newCorporation = corpDict[character.corporation.corporationID];
-        if (newCorporation == nil) {
-            entity = [character.corporation entity];
-            
-            newCorporation = [[Corporation alloc] initWithEntity:entity insertIntoManagedObjectContext:moc];
-            
-            newCorporation.corporationID = character.corporation.corporationID;
-            newCorporation.corporationName = character.corporation.corporationName;
-            newCorporation.timestamp = character.corporation.timestamp;
-            
-            corpDict[character.corporation.corporationID] = newCorporation;
-        }
-        
-        newCharacter.corporation = newCorporation;
     }
 }
 

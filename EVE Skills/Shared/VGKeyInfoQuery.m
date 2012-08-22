@@ -224,25 +224,22 @@
         // fill the attributes of the object
         _currentCharacter.characterID   = attributeDict[@"characterID"];
         _currentCharacter.characterName = attributeDict[@"characterName"];
+        _currentCharacter.corporationID = attributeDict[@"corporationID"];
         _currentCharacter.timestamp     = [NSDate date];
         _currentCharacter.api           = _currentAPI;
         
-        // is this Character's Corporation already in the MOC
-        _currentCorporation = [self corporationWithCorporationID:attributeDict[@"corporationID"]];
-        
-        if (!_currentCorporation) {
-            // this Character's Corporation is not in the MOC, we create it
-            _currentCorporation = [NSEntityDescription insertNewObjectForEntityForName:@"Corporation"
-                                                                inManagedObjectContext:_moc];
-        }
-        
-        // fill the attributes of the object
-        _currentCorporation.corporationID   = attributeDict[@"corporationID"];
-        _currentCorporation.corporationName = attributeDict[@"corporationName"];
-        _currentCorporation.timestamp       = [NSDate date];
-        
-        // set the Character's Corporation
-        _currentCharacter.corporation = _currentCorporation;
+//        // is this Character's Corporation already in the MOC
+//        _currentCorporation = [self corporationWithCorporationID:attributeDict[@"corporationID"]];
+//        
+//        if (!_currentCorporation) {
+//            // this Character's Corporation is not in the MOC, we create it
+//            _currentCorporation = [NSEntityDescription insertNewObjectForEntityForName:@"Corporation"
+//                                                                inManagedObjectContext:_moc];
+//        }
+//        
+//        // fill the attributes of the object
+//        _currentCorporation.corporationID   = attributeDict[@"corporationID"];
+//        _currentCorporation.corporationName = attributeDict[@"corporationName"];
     }
 }
 

@@ -7,7 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Portrait.h"
+#import "Corporation.h"
 
 @interface VGManagerTableCellView : NSTableCellView
+
+@property (strong) Corporation *corporation;
+@property (strong) Portrait *portrait;
 
 @end

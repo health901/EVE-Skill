@@ -10,10 +10,9 @@
 #import "VGAppDelegate.h"
 #import "VGKeyInfoQuery.h"
 #import "VGSkillQueueQuery.h"
-
+#import "VGCharacterInfoQuery.h"
 #import "API.h"
 #import "Character.h"
-#import "Portrait.h"
 
 @interface VGAPIController () {
     BOOL _initialized;
@@ -285,7 +284,7 @@
 }
 
 - (void)addPortraitForCharacterID:(NSString *)characterID
-                completionHandler:(void (^)(NSError *error, NSImage *image))completionHandler
+                completionHandler:(void (^)(NSError *error, Portrait *portrait))completionHandler
 {
     NSLog(@"addPortraitForCharacterID:%@", characterID);
     
@@ -302,28 +301,12 @@
     if (!data) return;
     
     // get Character managed object
-    __block Character *character = nil;
-    [_apiControllerContext performBlockAndWait:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character" inManagedObjectContext:_apiControllerContext];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", characterID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_apiControllerContext executeFetchRequest:fetchRequest error:&error];
-        if (fetchedObjects == nil) {
-            NSLog(@"Error while fetching Character with characterID = '%@' : %@, %@", characterID, error, [error userInfo]);
-        }
-        
-        character = [fetchedObjects lastObject];
-    }];
+    Character *character = [self characterWithCharacterID:characterID];
     
     // add character portrait to the DB
-    __block NSImage *image = nil;
+    Portrait *portrait = nil;
     if (character) {
-        Portrait *portrait = nil;
+        
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Portrait" inManagedObjectContext:_apiControllerContext];
@@ -348,7 +331,7 @@
         }
         
         // Set image for portrait
-        image = [[NSImage alloc] initWithData:data];
+        NSImage *image = [[NSImage alloc] initWithData:data];
         portrait.image = image;
         portrait.characterID = character.characterID;
     }
@@ -365,7 +348,71 @@
         }
     }];
     
-    completionHandler(completionError, image);
+    completionHandler(completionError, portrait);
+}
+
+- (void)addCorporationForCharacterID:(NSString *)characterID
+                   completionHandler:(void (^)(NSError *error, Corporation *corporation))completionHandler
+{
+    NSLog(@"addCorporationForCharacterID:%@", characterID);
+    
+    __block NSError *completionError = nil;
+    
+    // create the variables dictionnary
+    NSDictionary *dictionary = @{ @"characterID": characterID,
+                                  @"apiURL": API_CHARACTERINFO_QUERY };
+    
+    NSData *data = [self callAPIWithDictionaryAsync:dictionary];
+    
+    if (!data) return;
+    
+    NSLog(@"apiCallHandler data = '%@'", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        
+    // create the handling block
+    void (^characterInfoQueryHandler)(NSError*, Corporation *);
+    
+    characterInfoQueryHandler = ^(NSError *error, Corporation *corporation) {
+        // handle the returned NSError
+        if (error) {
+            NSLog(@"Error skillQueueQueryHandler : %@, %@", error, [error userInfo]);
+            NSAlert *alert = nil;
+            
+            if (data) {
+                alert = [NSAlert alertWithMessageText:@"API Call error"
+                                        defaultButton:@"OK"
+                                      alternateButton:nil
+                                          otherButton:nil
+                            informativeTextWithFormat:@"%@",
+                         [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+            } else {
+                alert = [NSAlert alertWithError:error];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [alert runModal];
+            });
+        }
+        
+        // save the MOC
+        [_apiControllerContext performBlockAndWait:^{
+            NSError *saveError = nil;
+            if (![_apiControllerContext save:&saveError]) {
+                NSLog(@"Error saving context : %@, %@", saveError, [saveError userInfo]);
+                NSAlert *alert = [NSAlert alertWithError:saveError];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [alert runModal];
+                });
+            }
+        }];
+        
+        completionHandler(completionError, corporation);
+    };
+    
+    VGCharacterInfoQuery *characterInfoQuery = [[VGCharacterInfoQuery alloc] initWithData:data];
+    
+    [characterInfoQuery readAndInsertDataInContext:_apiControllerContext
+                                 completionHandler:characterInfoQueryHandler];
+    
 }
 
 - (void)refreshQueueForCharacterEnabled:(BOOL)enabled

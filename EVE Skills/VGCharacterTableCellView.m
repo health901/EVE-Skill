@@ -9,7 +9,6 @@
 #import "VGCharacterTableCellView.h"
 #import "VGAppDelegate.h"
 #import "Character.h"
-#import "Portrait.h"
 #import "Queue+VGEVE.h"
 #import "QueueElement+VGEVE.h"
 #import "Skill.h"
@@ -18,7 +17,6 @@
     
     // Managed Objects
     Character *_character;
-    Portrait *_portrait;
     Queue *_queue;
     QueueElement *_currentQueueElement;
     Skill *_currentSkill;
@@ -138,18 +136,13 @@
         if (fetchedObjects.count == 0) {
             // No portrait in DB, download the portrait
             dispatch_async(_appDelegate.apiController.dispatchQueue, ^{
-                [_appDelegate.apiController addPortraitForCharacterID:_character.characterID completionHandler:^(NSError *error, NSImage *image) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.imageView.image = image;
-                    });
+                [_appDelegate.apiController addPortraitForCharacterID:_character.characterID completionHandler:^(NSError *error, Portrait *portrait) {
+                    self.portrait = portrait;
                 }];
             });
         } else {
             // Portrait in the DB
-            _portrait = fetchedObjects.lastObject;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.imageView.image = _portrait.image;
-            });
+            self.portrait = fetchedObjects.lastObject;
         }
     }];
 }

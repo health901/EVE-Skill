@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "VGAPICall.h"
+#import "Portrait.h"
+#import "Corporation.h"
 
 @interface VGAPIController : NSObject
 
@@ -27,7 +29,12 @@
 
 // Downloads and creates/replaces the Portrait associated with characterID
 - (void)addPortraitForCharacterID:(NSString *)characterID
-                completionHandler:(void (^)(NSError *error, NSImage *image))completionHandler;
+                completionHandler:(void (^)(NSError *error, Portrait *portrait))completionHandler;
+
+// Downloads and creates/replaces the Corporation associated with corporationID
+- (void)addCorporationForCharacterID:(NSString *)characterID
+                   completionHandler:(void (^)(NSError *error, Corporation *corporation))completionHandler;
+
 
 /* 
  Downloads and creates/replaces the Queue and QueueElement for all Character

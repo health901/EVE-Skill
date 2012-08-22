@@ -438,6 +438,22 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: self.portrait.image</string>
+						<reference key="source" ref="98622331"/>
+						<reference key="destination" ref="449812473"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="98622331"/>
+							<reference key="NSDestination" ref="449812473"/>
+							<string key="NSLabel">value: self.portrait.image</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">self.portrait.image</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">246</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: objectValue.characterName</string>
 						<reference key="source" ref="753767914"/>
 						<reference key="destination" ref="449812473"/>
@@ -1206,7 +1222,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">244</int>
+			<int key="maxID">246</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

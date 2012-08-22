@@ -8,10 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 #import "VGCharacterSkillQueueCellView.h"
+#import "Portrait.h"
 
 @interface VGCharacterTableCellView : NSTableCellView
 
 // KVO
+@property (strong) Portrait *portrait;
+
 @property (strong) NSString *currentSkillName;
 @property (strong) NSString *timeRemaining;
 

@@ -15,6 +15,7 @@
 // API URLs
 #define API_KEYINFO_QUERY       @"https://api.eveonline.com/account/APIKeyInfo.xml.aspx"
 #define API_SKILLQUEUE_QUERY    @"https://api.eveonline.com/char/SkillQueue.xml.aspx"
+#define API_CHARACTERINFO_QUERY @"https://api.eveonline.com/eve/CharacterInfo.xml.aspx"
 #define API_IMAGE_QUERY         @"http://image.eveonline.com/"
 
 @interface VGAPICall : NSObject

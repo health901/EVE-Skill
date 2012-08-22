@@ -28,6 +28,9 @@
 		BFADFD4515DD5801005D082D /* VGCharacterSkillQueueCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD4415DD5801005D082D /* VGCharacterSkillQueueCellView.m */; };
 		BFB6E37615E3BC52004A9EE4 /* VGManagerTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6E37515E3BC52004A9EE4 /* VGManagerTableCellView.m */; };
 		BFC6D2D815E4D1B2008676BE /* skillStore.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BFC6D2D715E4D1B2008676BE /* skillStore.sqlite */; };
+		BFC6D2DB15E4E362008676BE /* Corporation.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC6D2DA15E4E362008676BE /* Corporation.m */; };
+		BFC6D2DE15E4E363008676BE /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC6D2DD15E4E363008676BE /* Character.m */; };
+		BFC6D2E115E4EB75008676BE /* VGCharacterInfoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC6D2E015E4EB75008676BE /* VGCharacterInfoQuery.m */; };
 		BFDD80BE15CC728000116A65 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B815CC728000116A65 /* CoreDataController.m */; };
 		BFDD80BF15CC728000116A65 /* DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */; };
 		BFDD80C015CC728000116A65 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80BB15CC728000116A65 /* Group.m */; };
@@ -38,8 +41,6 @@
 		BFDD80DB15CC839500116A65 /* VGAPIController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80DA15CC839500116A65 /* VGAPIController.m */; };
 		BFDD80E015CC909A00116A65 /* VGKeyInfoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80DF15CC909A00116A65 /* VGKeyInfoQuery.m */; };
 		BFDD80FB15CC929400116A65 /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80F615CC929400116A65 /* API.m */; };
-		BFDD80FC15CC929400116A65 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80F815CC929400116A65 /* Character.m */; };
-		BFDD80FD15CC929400116A65 /* Corporation.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80FA15CC929400116A65 /* Corporation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,12 @@
 		BFB6E37415E3BC52004A9EE4 /* VGManagerTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGManagerTableCellView.h; sourceTree = "<group>"; };
 		BFB6E37515E3BC52004A9EE4 /* VGManagerTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGManagerTableCellView.m; sourceTree = "<group>"; };
 		BFC6D2D715E4D1B2008676BE /* skillStore.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = skillStore.sqlite; sourceTree = "<group>"; };
+		BFC6D2D915E4E362008676BE /* Corporation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Corporation.h; sourceTree = "<group>"; };
+		BFC6D2DA15E4E362008676BE /* Corporation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Corporation.m; sourceTree = "<group>"; };
+		BFC6D2DC15E4E363008676BE /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		BFC6D2DD15E4E363008676BE /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
+		BFC6D2DF15E4EB74008676BE /* VGCharacterInfoQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterInfoQuery.h; sourceTree = "<group>"; };
+		BFC6D2E015E4EB75008676BE /* VGCharacterInfoQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterInfoQuery.m; sourceTree = "<group>"; };
 		BFD5DFC615E3D05E004D4E5A /* EVE Skills.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EVE Skills.entitlements"; sourceTree = "<group>"; };
 		BFDD80B715CC728000116A65 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
 		BFDD80B815CC728000116A65 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
@@ -105,10 +112,6 @@
 		BFDD80DF15CC909A00116A65 /* VGKeyInfoQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGKeyInfoQuery.m; sourceTree = "<group>"; };
 		BFDD80F515CC929400116A65 /* API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
 		BFDD80F615CC929400116A65 /* API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = API.m; sourceTree = "<group>"; };
-		BFDD80F715CC929400116A65 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
-		BFDD80F815CC929400116A65 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
-		BFDD80F915CC929400116A65 /* Corporation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Corporation.h; sourceTree = "<group>"; };
-		BFDD80FA15CC929400116A65 /* Corporation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Corporation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +265,8 @@
 				BFDD80DF15CC909A00116A65 /* VGKeyInfoQuery.m */,
 				BFADFD3D15DD3AF3005D082D /* VGSkillQueueQuery.h */,
 				BFADFD3E15DD3AF3005D082D /* VGSkillQueueQuery.m */,
+				BFC6D2DF15E4EB74008676BE /* VGCharacterInfoQuery.h */,
+				BFC6D2E015E4EB75008676BE /* VGCharacterInfoQuery.m */,
 			);
 			name = "Query parsers";
 			sourceTree = "<group>";
@@ -280,6 +285,10 @@
 		BFDD80E215CC924100116A65 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				BFC6D2DC15E4E363008676BE /* Character.h */,
+				BFC6D2DD15E4E363008676BE /* Character.m */,
+				BFC6D2D915E4E362008676BE /* Corporation.h */,
+				BFC6D2DA15E4E362008676BE /* Corporation.m */,
 				BF3A2A0B15E25AAD007EE82C /* Queue.h */,
 				BF3A2A0C15E25AAD007EE82C /* Queue.m */,
 				BF3A2A0815E25AAC007EE82C /* QueueElement.h */,
@@ -290,12 +299,8 @@
 				BFADFD3B15DD2FCF005D082D /* QueueElement+VGEVE.m */,
 				BFDD80F515CC929400116A65 /* API.h */,
 				BFDD80F615CC929400116A65 /* API.m */,
-				BFDD80F715CC929400116A65 /* Character.h */,
-				BFDD80F815CC929400116A65 /* Character.m */,
 				BF590E8715DAA9470036E10A /* Portrait.h */,
 				BF590E8815DAA9470036E10A /* Portrait.m */,
-				BFDD80F915CC929400116A65 /* Corporation.h */,
-				BFDD80FA15CC929400116A65 /* Corporation.m */,
 				BFDD80B715CC728000116A65 /* CoreDataController.h */,
 				BFDD80B815CC728000116A65 /* CoreDataController.m */,
 				BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */,
@@ -387,8 +392,6 @@
 				BFDD80DB15CC839500116A65 /* VGAPIController.m in Sources */,
 				BFDD80E015CC909A00116A65 /* VGKeyInfoQuery.m in Sources */,
 				BFDD80FB15CC929400116A65 /* API.m in Sources */,
-				BFDD80FC15CC929400116A65 /* Character.m in Sources */,
-				BFDD80FD15CC929400116A65 /* Corporation.m in Sources */,
 				BF590E8C15DAAFC70036E10A /* VGSkillTree.m in Sources */,
 				BF4A829A15DBF742003AD68C /* VGSkillQueueViewController.m in Sources */,
 				BFADFD3915DD2F4F005D082D /* Queue+VGEVE.m in Sources */,
@@ -401,6 +404,9 @@
 				BF3A2A1715E26DC8007EE82C /* VGCharacterTableCellView.m in Sources */,
 				BF3A2A1A15E28A53007EE82C /* VGUserNotificationController.m in Sources */,
 				BFB6E37615E3BC52004A9EE4 /* VGManagerTableCellView.m in Sources */,
+				BFC6D2DB15E4E362008676BE /* Corporation.m in Sources */,
+				BFC6D2DE15E4E363008676BE /* Character.m in Sources */,
+				BFC6D2E115E4EB75008676BE /* VGCharacterInfoQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

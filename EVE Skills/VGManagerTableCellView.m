@@ -14,7 +14,6 @@
 @interface VGManagerTableCellView () {
     // Managed Objects
     Character *_character;
-    Portrait *_portrait;
 }
 
 @property (strong, nonatomic) VGAppDelegate *appDelegate;
@@ -59,6 +58,7 @@
     if (objectValue != nil && objectValue != _character) {
         _character = objectValue;
         [self loadPortrait];
+        [self loadCorporation];
     }
 }
 
@@ -107,18 +107,44 @@
         if (fetchedObjects.count == 0) {
             // No portrait in DB, download the portrait
             dispatch_async(_appDelegate.apiController.dispatchQueue, ^{
-                [_appDelegate.apiController addPortraitForCharacterID:_character.characterID completionHandler:^(NSError *error, NSImage *image) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.imageView.image = image;
-                    });
+                [_appDelegate.apiController addPortraitForCharacterID:_character.characterID completionHandler:^(NSError *error, Portrait *portrait) {
+                    self.portrait = portrait;
                 }];
             });
         } else {
             // Portrait in the DB
-            _portrait = fetchedObjects.lastObject;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.imageView.image = _portrait.image;
+            self.portrait = fetchedObjects.lastObject;
+        }
+    }];
+}
+
+- (void)loadCorporation
+{
+    if (_character == nil) return;
+    
+    [self.moc performBlock:^{
+        NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:@"Corporation"];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"corporationID = %@", _character.corporationID];
+        fr.predicate = predicate;
+        
+        NSError *error = nil;
+        NSArray *fetchedObjects = [_moc executeFetchRequest:fr error:&error];
+        if (fetchedObjects == nil) {
+            NSLog(@"Error fetching Corporation with corporationID = '%@' : %@, %@",
+                  _character.corporationID, error, [error userInfo]);
+        }
+        
+        if (fetchedObjects.count == 0) {
+            // Corporation not in DB, download it
+            dispatch_async(_appDelegate.apiController.dispatchQueue, ^{
+                [_appDelegate.apiController addCorporationForCharacterID:_character.characterID completionHandler:^(NSError *error, Corporation *corporation) {
+                    self.corporation = corporation;
+                }];
             });
+        } else {
+            // Corporation in DB
+            self.corporation = fetchedObjects.lastObject;
         }
     }];
 }
