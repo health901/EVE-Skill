@@ -235,7 +235,7 @@
     if (!data) return;
     
     // log the recieved data
-    NSLog(@"apiCallHandler data = '%@'", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+//    NSLog(@"apiCallHandler data = '%@'", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     
     // create the handling block
     void (^skillQueueQueryHandler)(NSError*);
@@ -415,7 +415,7 @@
     
 }
 
-- (void)refreshQueueForCharacterEnabled:(BOOL)enabled
+- (void)refreshQueueForCharacterEnabled:(BOOL)enabled completionBlock:(void (^)())completionBlock
 {
     // Fetch the Characters
     [_apiControllerContext performBlock:^{
@@ -445,10 +445,11 @@
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            NSLog(@"-refreshQueueForCharacterEnabled: Waiting for the end of dispatchGroup...");
+//            NSLog(@"-refreshQueueForCharacterEnabled: Waiting for the end of dispatchGroup...");
             dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER);
-            NSLog(@"-refreshQueueForCharacterEnabled: dispatchGroup empty !");
+//            NSLog(@"-refreshQueueForCharacterEnabled: dispatchGroup empty !");
             
+            completionBlock();
         });
     }];
 }

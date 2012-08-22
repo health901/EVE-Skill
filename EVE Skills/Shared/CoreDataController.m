@@ -404,6 +404,7 @@ static NSOperationQueue *_presentedItemOperationQueue;
                                                  error:&blockError];
                     if (seedSuccess) {
                         NSLog(@"Successfully seeded iCloud Store from Fallback Store");
+                        [self deDupe:nil];
                     } else {
                         NSLog(@"Error seeding iCloud Store from fallback store: %@", error);
                         abort();

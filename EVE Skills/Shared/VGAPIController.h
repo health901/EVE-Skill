@@ -43,6 +43,6 @@
     - If enabled == NO, then all Character will have their associated Queue and QueueElement
     refreshed (ie created/replaced)
  */
-- (void)refreshQueueForCharacterEnabled:(BOOL)enabled;
+- (void)refreshQueueForCharacterEnabled:(BOOL)enabled completionBlock:(void (^)())completionBlock;
 
 @end

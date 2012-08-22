@@ -60,37 +60,38 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
         
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextObjectsDidChangeNotification object:self.appDelegate.coreDataController.mainThreadContext queue:nil usingBlock:^(NSNotification *note) {
-//            NSLog(@"note.userInfo[NSInsertedObjectsKey] : %@", note.userInfo[NSInsertedObjectsKey]);
-//            NSLog(@"note.userInfo[NSUpdatedObjectsKey] : %@", note.userInfo[NSUpdatedObjectsKey]);
-//            NSLog(@"note.userInfo[NSDeletedObjectsKey] : %@", note.userInfo[NSDeletedObjectsKey]);
-            
-            // Find the modified Queue objects
-            [(NSSet *)note.userInfo[NSInsertedObjectsKey] enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
-                if ([obj isKindOfClass:[Queue class]]) {
-                    NSLog(@"Inserted : Queue %@", ((Queue *)obj).objectID);
-                    dispatch_async(self.dispatchQueue, ^{
-                        [self addNotificationsWithQueue:(Queue *)[self.moc objectWithID:((Queue *)obj).objectID]];
-                    });
-                }
-            }];
-            
-            [(NSSet *)note.userInfo[NSUpdatedObjectsKey] enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
-                if ([obj isKindOfClass:[Queue class]]) {
-                    NSLog(@"Updated : Queue %@", ((Queue *)obj).objectID);
-                    dispatch_async(self.dispatchQueue, ^{
-                        [self addNotificationsWithQueue:(Queue *)[self.moc objectWithID:((Queue *)obj).objectID]];
-                    });
-                }
-            }];
-            
-            [(NSSet *)note.userInfo[NSDeletedObjectsKey] enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
-                if ([obj isKindOfClass:[Queue class]]) {
-                    NSLog(@"Deleted : Queue %@", ((Queue *)obj).objectID);
-                    dispatch_async(self.dispatchQueue, ^{
-                        [self removeNotificationsWithQueue:(Queue *)[self.moc objectWithID:((Queue *)obj).objectID]];
-                    });
-                }
-            }];
+            NSLog(@"note.userInfo[NSInsertedObjectsKey] : %@", note.userInfo[NSInsertedObjectsKey]);
+            NSLog(@"note.userInfo[NSUpdatedObjectsKey] : %@", note.userInfo[NSUpdatedObjectsKey]);
+            NSLog(@"note.userInfo[NSDeletedObjectsKey] : %@", note.userInfo[NSDeletedObjectsKey]);
+            dispatch_async(self.dispatchQueue, ^{
+                // Find the modified Queue objects
+                [(NSSet *)note.userInfo[NSInsertedObjectsKey] enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+                    if ([obj isKindOfClass:[Queue class]]) {
+                        NSLog(@"Inserted : Queue %@", ((Queue *)obj).objectID);
+                        dispatch_async(self.dispatchQueue, ^{
+                            [self addNotificationsWithQueue:(Queue *)[self.moc objectWithID:((Queue *)obj).objectID]];
+                        });
+                    }
+                }];
+                
+                [(NSSet *)note.userInfo[NSUpdatedObjectsKey] enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+                    if ([obj isKindOfClass:[Queue class]]) {
+                        NSLog(@"Updated : Queue %@", ((Queue *)obj).objectID);
+                        dispatch_async(self.dispatchQueue, ^{
+                            [self addNotificationsWithQueue:(Queue *)[self.moc objectWithID:((Queue *)obj).objectID]];
+                        });
+                    }
+                }];
+                
+                [(NSSet *)note.userInfo[NSDeletedObjectsKey] enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+                    if ([obj isKindOfClass:[Queue class]]) {
+                        NSLog(@"Deleted : Queue %@", ((Queue *)obj).objectID);
+                        dispatch_async(self.dispatchQueue, ^{
+                            [self removeNotificationsWithQueue:(Queue *)[self.moc objectWithID:((Queue *)obj).objectID]];
+                        });
+                    }
+                }];
+            });
         }];
     }
     return self;
