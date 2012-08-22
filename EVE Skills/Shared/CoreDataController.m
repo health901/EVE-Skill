@@ -107,7 +107,7 @@ NSString * kSkillStoreFilename = @"skillStore.sqlite"; //holds the skill and gro
 NSString * test = @"test";
 
 #define SEED_ICLOUD_STORE NO
-#define FORCE_FALLBACK_STORE
+//#define FORCE_FALLBACK_STORE
 
 static NSOperationQueue *_presentedItemOperationQueue;
 
@@ -625,8 +625,9 @@ static NSOperationQueue *_presentedItemOperationQueue;
     newAPI.expires = api.expires;
     newAPI.timestamp = api.timestamp;
     
+    [moc assignObject:newAPI toPersistentStore:store];
+    
     // Add all Character and Corporation associated with API
-    NSMutableDictionary *corpDict = [[NSMutableDictionary alloc] init];
     for (Character *character in api.characters) {
         entity = [character entity];
         
@@ -634,10 +635,13 @@ static NSOperationQueue *_presentedItemOperationQueue;
         
         newCharacter.characterID = character.characterID;
         newCharacter.characterName = character.characterName;
+        newCharacter.corporationID = character.corporationID;
         newCharacter.enabled = character.enabled;
         newCharacter.timestamp = character.timestamp;
         
         newCharacter.api = newAPI;
+        
+        [moc assignObject:newCharacter toPersistentStore:store];
     }
 }
 
