@@ -211,11 +211,11 @@
             if (fetchedObjects.count == 0) {
                 // No skill in DB, download the queue
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    NSAlert *alert = [NSAlert alertWithMessageText:@"Skill not in DB"
-                                                     defaultButton:@"OK"
+                    NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"skillNotFoundError", nil)
+                                                     defaultButton:NSLocalizedString(@"OK", nil)
                                                    alternateButton:nil
                                                        otherButton:nil
-                                         informativeTextWithFormat:@"skillID = '%@'", _currentQueueElement.skillID];
+                                         informativeTextWithFormat:NSLocalizedString(@"skillNotFoundErrorMessage", nil), _currentQueueElement.skillID];
                     [alert runModal];
                 });
             }

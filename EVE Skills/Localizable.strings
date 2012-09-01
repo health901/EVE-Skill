@@ -1,0 +1,60 @@
+/* 
+  Localizable.strings
+  EVE Skills
+
+  Created by Vincent Garrigues on 01/09/12.
+  Copyright (c) 2012 Vincent Garrigues. All rights reserved.
+*/
+
+/*
+ Misc.
+ */
+"Quit"      = "Quit";
+"Cancel"    = "Cancel";
+"OK"        = "OK";
+
+/*
+ Notifications
+ */
+"notificationQueueEmptyTitle"   = "Skill queue empty !";
+"notificationQueueEmptyInfo"    = "The skill queue of %@ is empty.";
+
+"notificationSkillTitle"        = "%@ %@ completed !";
+"notificationSkillInfo"         = "%@ finished training %@ %@";
+
+/*
+ Toolbar menu
+ */
+"menuTooltipTitle"      = "EVE Skills";
+"menuTitle"             = "EVE Skills";
+"menuRefresh"           = "Refresh";
+"menuCharacterManager"  = "Character manager";
+"menuQuit"              = "Quit";
+
+/*
+ Saving error
+ */
+"savingErrorMessage" = "Could not save changes while quitting. Quit anyway?";
+
+/*
+ API error messages
+ */
+"serverError"       = "Server error";
+"htmlStatusCode"    = "HTML status code %lu";
+"apiCallError"      = "API Call error";
+
+/*
+ Skill error messages
+ */
+"skillNotFoundError"        = "Skill not found in DB";
+"skillNotFoundErrorMessage" = "skillID = '%@'";
+
+/*
+ Character error message
+ */
+"characterNotFoundError"        = "Character not found in DB";
+"characterNotFoundErrorMessage" = "characterID = '%@'";
+
+
+
+

@@ -129,6 +129,12 @@
  - Unique
  */
 - (void)loadPersistentStores;
+- (void)loadPersistentStores:(void (^)())completionBlock;
+
+/*
+ Delete all objects in the local store
+ */
+//- (void)deleteLocalStore:(void (^)())completionBlock;
 
 #pragma mark Debugging Methods
 /*

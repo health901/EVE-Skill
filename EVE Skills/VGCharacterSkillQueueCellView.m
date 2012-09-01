@@ -124,11 +124,11 @@
                         
                         if (fetchedObjects.count == 0) {
                             dispatch_sync(dispatch_get_main_queue(), ^{
-                                NSAlert *alert = [NSAlert alertWithMessageText:@"Skill not found in DB"
-                                                                 defaultButton:@"OK"
+                                NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"skillNotFoundError", nil)
+                                                                 defaultButton:NSLocalizedString(@"OK", nil)
                                                                alternateButton:nil
                                                                    otherButton:nil
-                                                     informativeTextWithFormat:@"skillID == '%@'", queueElement.skillID];
+                                                     informativeTextWithFormat:NSLocalizedString(@"skillNotFoundErrorMessage", nil), queueElement.skillID];
                                 [alert runModal];
                             });
                         }

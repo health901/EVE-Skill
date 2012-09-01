@@ -107,7 +107,7 @@ NSString * kSkillStoreFilename = @"skillStore.sqlite"; //holds the skill and gro
 NSString * test = @"test";
 
 #define SEED_ICLOUD_STORE NO
-//#define FORCE_FALLBACK_STORE
+#define FORCE_FALLBACK_STORE
 
 static NSOperationQueue *_presentedItemOperationQueue;
 
@@ -213,6 +213,13 @@ static NSOperationQueue *_presentedItemOperationQueue;
 
 #pragma mark Managing the Persistent Stores
 - (void)loadPersistentStores {
+    [self loadPersistentStores:^{
+        
+    }];
+}
+
+- (void)loadPersistentStores:(void (^)())completionBlock
+{
     dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(globalQueue, ^{
         BOOL locked = NO;
@@ -224,6 +231,9 @@ static NSOperationQueue *_presentedItemOperationQueue;
             if (locked) {
                 [_loadingLock unlock];
                 locked = NO;
+            }
+            if (completionBlock) {
+                completionBlock();
             }
         }
     });
@@ -405,6 +415,15 @@ static NSOperationQueue *_presentedItemOperationQueue;
                     if (seedSuccess) {
                         NSLog(@"Successfully seeded iCloud Store from Fallback Store");
                         [self deDupe:nil];
+                        
+                        NSError *deleteError = nil;
+                        
+                        if ([fm removeItemAtPath:[[self fallbackStoreURL] path] error:&deleteError]) {
+                            NSLog(@"Fallback store deleted !");
+                        } else {
+                            NSLog(@"Error deleting fallback store : %@, %@", error, [error userInfo]);
+                        }
+                        
                     } else {
                         NSLog(@"Error seeding iCloud Store from fallback store: %@", error);
                         abort();
@@ -423,8 +442,39 @@ static NSOperationQueue *_presentedItemOperationQueue;
         if ([self loadFallbackStore:&error]) {
             NSLog(@"Added fallback store: %@", self.fallbackStore);
             
-            //you can seed the fallback store if you want to examine seeding performance without iCloud enabled
-            //check to see if we need to seed data from the seed store
+            //check to see if we need to seed or migrate data from the iCloud store
+            NSFileManager *fm = [[NSFileManager alloc] init];
+            NSLog(@"%@", [[self iCloudStoreURL] path]);
+            
+            if ([fm fileExistsAtPath:[[self iCloudStoreURL] path]]) {
+                //migrate data from the iCloud store to the fallback store
+                //there is no reason to do this synchronously since no other peer should have this data
+                dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                dispatch_async(globalQueue, ^{
+                    NSError *blockError = nil;
+                    BOOL seedSuccess = [self seedStore:_fallbackStore
+                              withPersistentStoreAtURL:[self iCloudStoreURL]
+                                                 error:&blockError];
+                    if (seedSuccess) {
+                        NSLog(@"Successfully seeded fallback store from iCloud store");
+                        [self deDupe:nil];
+                        
+                        NSError *deleteError = nil;
+                        
+                        if ([fm removeItemAtPath:[[self iCloudStoreURL] path] error:&deleteError]) {
+                            NSLog(@"iCloud store deleted !");
+                        } else {
+                            NSLog(@"Error deleting iCloud store : %@, %@", error, [error userInfo]);
+                        }
+                        
+                    } else {
+                        NSLog(@"Error seeding fallback store from iCloud store: %@", error);
+                        abort();
+                    }
+                });
+            }
+            
+            
             if (SEED_ICLOUD_STORE) {
                 //do this synchronously
                 BOOL seedSuccess = [self seedStore:_fallbackStore

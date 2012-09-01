@@ -60,9 +60,9 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
         
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextObjectsDidChangeNotification object:self.appDelegate.coreDataController.mainThreadContext queue:nil usingBlock:^(NSNotification *note) {
-            NSLog(@"note.userInfo[NSInsertedObjectsKey] : %@", note.userInfo[NSInsertedObjectsKey]);
-            NSLog(@"note.userInfo[NSUpdatedObjectsKey] : %@", note.userInfo[NSUpdatedObjectsKey]);
-            NSLog(@"note.userInfo[NSDeletedObjectsKey] : %@", note.userInfo[NSDeletedObjectsKey]);
+//            NSLog(@"note.userInfo[NSInsertedObjectsKey] : %@", note.userInfo[NSInsertedObjectsKey]);
+//            NSLog(@"note.userInfo[NSUpdatedObjectsKey] : %@", note.userInfo[NSUpdatedObjectsKey]);
+//            NSLog(@"note.userInfo[NSDeletedObjectsKey] : %@", note.userInfo[NSDeletedObjectsKey]);
             dispatch_async(self.dispatchQueue, ^{
                 // Find the modified Queue objects
                 [(NSSet *)note.userInfo[NSInsertedObjectsKey] enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
@@ -186,7 +186,7 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
     
     // If the queue is empty, add a queue empty notification
     if (queue.elements == nil || queue.elements.count == 0) {
-        [self.notificationDict setObject:@[[self userNotificationEmptyQueueWithCharacterID:queue.characterID]]
+        [self.notificationDict setObject:@[ [self userNotificationEmptyQueueWithCharacterID:queue.characterID] ]
                                   forKey:queue.characterID];
         return;
     }
@@ -223,12 +223,13 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
     
     if (character == nil) return nil;
     
-    userNotification.title = @"Skill queue empty !";
-    userNotification.subtitle = character.characterName;
-    userNotification.informativeText = [NSString stringWithFormat:@"The skill queue of %@ is empty !", character.characterName];
-    userNotification.deliveryDate = [NSDate date];
-    userNotification.soundName = NSUserNotificationDefaultSoundName;
-    userNotification.userInfo = @{ kUserNotificationCharacterID : characterID, kUserNotificationIsSkillEnd : @NO };
+    userNotification.title              = NSLocalizedString(@"notificationQueueEmptyTitle", nil);
+    userNotification.subtitle           = character.characterName;
+    userNotification.informativeText    = [NSString stringWithFormat:NSLocalizedString(@"notificationQueueEmptyInfo", nil), character.characterName];
+    userNotification.deliveryDate       = [NSDate date];
+    userNotification.soundName          = NSUserNotificationDefaultSoundName;
+    userNotification.userInfo           = @{ kUserNotificationCharacterID : characterID,
+                                             kUserNotificationIsSkillEnd  : @NO };
     
     [_defaultCenter scheduleNotification:userNotification];
 
@@ -247,12 +248,13 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
     
     if (character == nil || skill == nil) return nil;
     
-    userNotification.title = [NSString stringWithFormat:@"%@ %@ completed !", skill.skillName, queueElement.skillLevel];
-    userNotification.subtitle = character.characterName;
-    userNotification.informativeText = [NSString stringWithFormat:@"%@ finished training %@ %@", character.characterName, skill.skillName, queueElement.skillLevel];
-    userNotification.deliveryDate = queueElement.endTime;
-    userNotification.soundName = NSUserNotificationDefaultSoundName;
-    userNotification.userInfo = @{ kUserNotificationCharacterID : characterID, kUserNotificationIsSkillEnd : @YES };
+    userNotification.title              = [NSString stringWithFormat:NSLocalizedString(@"notificationSkillTitle", nil), skill.skillName, queueElement.skillLevel];
+    userNotification.subtitle           = character.characterName;
+    userNotification.informativeText    = [NSString stringWithFormat:NSLocalizedString(@"notificationSkillInfo", nil), character.characterName, skill.skillName, queueElement.skillLevel];
+    userNotification.deliveryDate       = queueElement.endTime;
+    userNotification.soundName          = NSUserNotificationDefaultSoundName;
+    userNotification.userInfo           = @{ kUserNotificationCharacterID : characterID,
+                                             kUserNotificationIsSkillEnd  : @YES };
     
     [_defaultCenter scheduleNotification:userNotification];
     
@@ -313,11 +315,11 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
         
         if (fetchedObjects.count == 0) {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                NSAlert *alert = [NSAlert alertWithMessageText:@"Character not in DB"
-                                                 defaultButton:@"OK"
+                NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"characterNotFoundError", nil)
+                                                 defaultButton:NSLocalizedString(@"OK", nil)
                                                alternateButton:nil
                                                    otherButton:nil
-                                     informativeTextWithFormat:@"characterID = '%@'", characterID];
+                                     informativeTextWithFormat:NSLocalizedString(@"characterNotFoundErrorMessage", nil), characterID];
                 [alert runModal];
             });
         } else {
@@ -350,11 +352,11 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
         
         if (fetchedObjects.count == 0) {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                NSAlert *alert = [NSAlert alertWithMessageText:@"Skill not in DB"
-                                                 defaultButton:@"OK"
+                NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"skillNotFoundError", nil)
+                                                 defaultButton:NSLocalizedString(@"OK", nil)
                                                alternateButton:nil
                                                    otherButton:nil
-                                     informativeTextWithFormat:@"skillID = '%@'", skillID];
+                                     informativeTextWithFormat:NSLocalizedString(@"skillNotFoundErrorMessage", nil), skillID];
                 [alert runModal];
             });
         } else {

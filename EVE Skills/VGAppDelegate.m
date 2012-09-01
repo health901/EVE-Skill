@@ -68,48 +68,47 @@
     
     // Initializing Core Data
     _coreDataController = [[CoreDataController alloc] init];
-    [_coreDataController loadPersistentStores];
-    
-    // Initializing API Controller
-    _apiController = [[VGAPIController alloc] init];
-    dispatch_async(_apiController.dispatchQueue, ^{
-        [_apiController initialize];
+    [_coreDataController loadPersistentStores:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Initializing API Controller
+            _apiController = [[VGAPIController alloc] init];
+            dispatch_async(_apiController.dispatchQueue, ^{
+                [_apiController initialize];
+                
+                
+            });
+            
+            // Initializing user notification controller
+            _userNotificationController = [[VGUserNotificationController alloc] init];
+//        dispatch_async(_userNotificationController.dispatchQueue, ^{
+//            [_userNotificationController reloadAllNotifications];
+//        });
+            
+            // MenuBarController
+            [self setupMenu];
+            
+            // Timers
+            _skillQueueReloadTimer = [NSTimer timerWithTimeInterval:1.0*60*60 target:self selector:@selector(skillQueueReloadTimerAction:) userInfo:nil repeats:YES];
+            [[NSRunLoop mainRunLoop] addTimer:_skillQueueReloadTimer forMode:NSRunLoopCommonModes];
+            
+            _skillQueueTimeTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(skillQueueTimeTimerAction:) userInfo:nil repeats:YES];
+            [[NSRunLoop mainRunLoop] addTimer:_skillQueueTimeTimer forMode:NSRunLoopCommonModes];
+            
+            [_skillQueueReloadTimer fire];
+            [_skillQueueTimeTimer fire];
+            
+            // Notifications
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(apiControllerContextDidSave:)
+                                                         name:NSManagedObjectContextDidSaveNotification
+                                                       object:_apiController.apiControllerContext];
+            
+            [[NSNotificationCenter defaultCenter] addObserverForName:NSPersistentStoreCoordinatorStoresDidChangeNotification object:_coreDataController.psc queue:nil usingBlock:^(NSNotification *note) {
+                NSLog(@"NSPersistentStoreCoordinatorStoresDidChangeNotification");
+            }];
+        });
         
-        
-    });
-    
-    // Initializing user notification controller
-    _userNotificationController = [[VGUserNotificationController alloc] init];
-    dispatch_async(_userNotificationController.dispatchQueue, ^{
-        [_userNotificationController reloadAllNotifications];
-    });
-    
-    // MenuBarController
-    [self setupMenu];
-    
-    // Timers
-    _skillQueueReloadTimer = [NSTimer timerWithTimeInterval:1.0*60*60 target:self selector:@selector(skillQueueReloadTimerAction:) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:_skillQueueReloadTimer forMode:NSRunLoopCommonModes];
-    
-    _skillQueueTimeTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(skillQueueTimeTimerAction:) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:_skillQueueTimeTimer forMode:NSRunLoopCommonModes];
-    
-    [_skillQueueReloadTimer fire];
-    [_skillQueueTimeTimer fire];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:NSPersistentStoreCoordinatorStoresDidChangeNotification object:_coreDataController.psc queue:nil usingBlock:^(NSNotification *note) {
-        NSLog(@"NSPersistentStoreCoordinatorStoresDidChangeNotification");
     }];
-    
-    
-    
-    // Notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(apiControllerContextDidSave:)
-                                                 name:NSManagedObjectContextDidSaveNotification
-                                               object:_apiController.apiControllerContext];
-    
-    
     
     // Check if there are characters in the DB
 //    [_coreDataController.mainThreadContext performBlock:^{
@@ -170,7 +169,7 @@
 }
 
 #pragma mark -
-#pragma mark - Private methods
+#pragma mark - Core Data notifications handler
 
 - (void)apiControllerContextDidSave:(NSNotification *)note
 {
@@ -201,6 +200,7 @@
 
 - (void)skillQueueTimeTimerAction:(NSTimer*)theTimer
 {
+    // Send the notification
     [[NSNotificationCenter defaultCenter] postNotificationName:EVE_SKILLS_TIMER_TICK
                                                         object:self];
 }
@@ -223,7 +223,7 @@
     // status item
     _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [_statusItem setTitle:@"EVE"];
-    [_statusItem setToolTip:@"EVE Skills"];
+    [_statusItem setToolTip:NSLocalizedString(@"menuTooltipTitle", nil)];
     [_statusItem setEnabled:YES];
     [_statusItem setHighlightMode:YES];
     [_statusItem setTarget:self];
@@ -240,15 +240,15 @@
     _skillQueueMenuItem.view = _skillQueueViewController.view;
     
     // menu items
-    _refreshMenuItem = [[NSMenuItem alloc] initWithTitle:@"Refresh"
+    _refreshMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"menuRefresh", nil)
                                                   action:@selector(refreshAction)
                                            keyEquivalent:@""];
     
-    _managerMenuItem = [[NSMenuItem alloc] initWithTitle:@"Character manager"
+    _managerMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"menuCharacterManager", nil)
                                                   action:@selector(managerAction)
                                            keyEquivalent:@""];
     
-    _quitMenuItem = [[NSMenuItem alloc] initWithTitle:@"Quit"
+    _quitMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"menuQuit", nil)
                                                action:@selector(quitAction)
                                         keyEquivalent:@""];
     
@@ -264,7 +264,7 @@
     [_menu addItem:_skillQueueMenuItem];
     [_menu addItem:[NSMenuItem separatorItem]];
     [_menu addItem:_managerMenuItem];
-    [_menu addItem:_refreshMenuItem];
+//    [_menu addItem:_refreshMenuItem];
     [_menu addItem:[NSMenuItem separatorItem]];
     [_menu addItem:_quitMenuItem];
 }
@@ -272,9 +272,12 @@
 - (void)refreshAction
 {
     NSLog(@"refreshAction");
-    [_apiController refreshQueueForCharacterEnabled:YES completionBlock:^{
-        NSLog(@"refreshAction - DONE");
-    }];
+//    [_coreDataController deleteLocalStore:^{
+//        NSLog(@"refreshAction - DONE");
+//        [_apiController refreshQueueForCharacterEnabled:YES completionBlock:^{
+//            
+//        }];
+//    }];
 }
 
 - (void)managerAction
@@ -291,6 +294,16 @@
 
 #pragma mark -
 #pragma mark - Application lifecycle
+
+- (void)applicationWillBecomeActive:(NSNotification *)notification
+{
+    NSLog(@"applicationWillBecomeActive");
+}
+
+- (void)applicationDidResignActive:(NSNotification *)notification
+{
+    NSLog(@"applicationDidResignActive");
+}
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
@@ -309,9 +322,9 @@
                         reply = NSTerminateCancel;
                     }  else {
                         NSInteger alertReturn = NSRunAlertPanel(nil,
-                                                          @"Could not save changes while quitting. Quit anyway?",
-                                                          @"Quit",
-                                                          @"Cancel",
+                                                          NSLocalizedString(@"savingErrorMessage", nil),
+                                                          NSLocalizedString(@"Quit", nil),
+                                                          NSLocalizedString(@"Cancel", nil),
                                                           nil);
                         if (alertReturn == NSAlertAlternateReturn) {
                             reply = NSTerminateCancel;

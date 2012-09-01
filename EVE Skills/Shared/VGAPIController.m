@@ -92,11 +92,11 @@
     if ([response statusCode] != 200) {
         NSLog(@"[response statusCode] = %lu", [response statusCode]);
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSAlert *alert = [NSAlert alertWithMessageText:@"Server error"
-                                             defaultButton:@"OK"
+            NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"serverError", nil)
+                                             defaultButton:NSLocalizedString(@"OK", nil)
                                            alternateButton:nil
                                                otherButton:nil
-                                 informativeTextWithFormat:@"HTML status code %lu", [response statusCode]];
+                                 informativeTextWithFormat:NSLocalizedString(@"htmlStatusCode", nil), [response statusCode]];
             [alert runModal];
         });
         return nil;
@@ -171,8 +171,8 @@
             NSAlert *alert = nil;
             
             if (data) {
-                alert = [NSAlert alertWithMessageText:@"API Call error"
-                                        defaultButton:@"OK"
+                alert = [NSAlert alertWithMessageText:NSLocalizedString(@"apiCallError", nil)
+                                        defaultButton:NSLocalizedString(@"OK", nil)
                                       alternateButton:nil
                                           otherButton:nil
                             informativeTextWithFormat:@"%@",
@@ -247,8 +247,8 @@
             NSAlert *alert = nil;
             
             if (data) {
-                alert = [NSAlert alertWithMessageText:@"API Call error"
-                                        defaultButton:@"OK"
+                alert = [NSAlert alertWithMessageText:NSLocalizedString(@"apiCallError", nil)
+                                        defaultButton:NSLocalizedString(@"OK", nil)
                                       alternateButton:nil
                                           otherButton:nil
                             informativeTextWithFormat:@"%@",
@@ -378,8 +378,8 @@
             NSAlert *alert = nil;
             
             if (data) {
-                alert = [NSAlert alertWithMessageText:@"API Call error"
-                                        defaultButton:@"OK"
+                alert = [NSAlert alertWithMessageText:NSLocalizedString(@"API Call error", nil)
+                                        defaultButton:NSLocalizedString(@"OK", nil)
                                       alternateButton:nil
                                           otherButton:nil
                             informativeTextWithFormat:@"%@",

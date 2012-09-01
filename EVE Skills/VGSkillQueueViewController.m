@@ -102,12 +102,12 @@
     
     // Notifications
     [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextObjectsDidChangeNotification object:_appDelegate.coreDataController.mainThreadContext queue:nil usingBlock:^(NSNotification *note) {
-//        [self resizeToFitEnabledCharacters];
+        [self resizeToFitEnabledCharacters];
     }];
     
     [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification object:_appDelegate.coreDataController.mainThreadContext queue:nil usingBlock:^(NSNotification *note) {
         [self resizeToFitEnabledCharacters];
-        [self.characterTableView reloadData];
+//        [self.characterTableView reloadData];
     }];
     
 //    [[NSNotificationCenter defaultCenter] addObserverForName:SKILL_QUEUE_SHOULD_RELOAD_DATA_NOTIFICATION
@@ -151,8 +151,8 @@
         return _tableSortDescriptors;
     }
     
-    _tableSortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"api.keyID" ascending:YES],
-                             [NSSortDescriptor sortDescriptorWithKey:@"characterName" ascending:YES]];
+    _tableSortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"api.keyID" ascending:YES],
+                               [NSSortDescriptor sortDescriptorWithKey:@"characterName" ascending:YES] ];
     
     return _tableSortDescriptors;
 }
