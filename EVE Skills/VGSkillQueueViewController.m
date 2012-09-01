@@ -50,22 +50,9 @@
 {
     // First get the number of enabled characters
     [_appDelegate.coreDataController.mainThreadContext performBlock:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character" inManagedObjectContext:_appDelegate.coreDataController.mainThreadContext];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"enabled == %@", @YES];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_appDelegate.coreDataController.mainThreadContext executeFetchRequest:fetchRequest error:&error];
-        if (fetchedObjects == nil) {
-            NSLog(@"Error fetching enabled Characters: %@, %@", error, [error userInfo]);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSAlert *alert = [NSAlert alertWithError:error];
-                [alert runModal];
-            });
-        }
+        NSArray *fetchedObjects = [CoreDataController characterEnabled:@YES
+                                                             inContext:_appDelegate.coreDataController.mainThreadContext
+                                                       notifyUserIfNil:NO];
         
         NSUInteger characterCount = [fetchedObjects count];
         

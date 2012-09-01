@@ -30,8 +30,6 @@
     void (^_completionHandler)(NSError *);
 }
 
-- (Queue *)queueWithCharacterID:(NSString *)characterID;
-
 @end
 
 @implementation VGSkillQueueQuery
@@ -70,42 +68,6 @@
 }
 
 #pragma mark -
-#pragma mark - Private methods
-
-- (Queue *)queueWithCharacterID:(NSString *)characterID
-{
-    __block Queue *queue = nil;
-    
-    [_moc performBlockAndWait:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Queue"
-                                                  inManagedObjectContext:_moc];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", characterID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
-        
-        if (fetchedObjects == nil) {
-            NSLog(@"queueWithCharacterID: '%@' error fetching objects: %@, %@",
-                  characterID, error, [error userInfo]);
-            return;
-        }
-        
-        if ([fetchedObjects count] == 0) {
-            NSLog(@"No Queue in DB with characterID = '%@'", characterID);
-            return;
-        }
-        
-        queue = [fetchedObjects lastObject];
-    }];
-    
-    return queue;
-}
-
-#pragma mark -
 #pragma mark - NSXMLParserDelegate
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser
@@ -120,7 +82,9 @@
 {
     // The rowset element represents the queue
     if ([elementName isEqualToString:@"rowset"]) {
-        _currentQueue = [self queueWithCharacterID:self.characterID];
+        _currentQueue = [CoreDataController queueWithCharacterID:self.characterID
+                                                       inContext:_moc
+                                          notifyUserIfEmptyOrNil:NO];
         
         if (!_currentQueue) {
             // The queue for this characterID is not in the DB, we create it

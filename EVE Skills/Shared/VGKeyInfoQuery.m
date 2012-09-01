@@ -31,10 +31,6 @@
     void (^_completionHandler)(NSError *);
 }
 
-- (API *)apiWithKeyID:(NSString *)keyID;
-- (Character *)characterWithCharacterID:(NSString *)characterID;
-- (Corporation *)corporationWithCorporationID:(NSString *)corporationID;
-
 @end
 
 @implementation VGKeyInfoQuery
@@ -74,110 +70,6 @@
 }
 
 #pragma mark -
-#pragma mark - Private methods
-
-- (API *)apiWithKeyID:(NSString *)keyID
-{
-    __block API *api = nil;
-    
-    [_moc performBlockAndWait:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"API"
-                                                  inManagedObjectContext:_moc];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"keyID == %@", keyID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
-        
-        if (fetchedObjects == nil) {
-            NSLog(@"apiWithKeyID: '%@' error fetching objects: %@, %@",
-                  keyID, error, [error userInfo]);
-            return;
-        }
-        
-        if ([fetchedObjects count] == 0) {
-            NSLog(@"No API in DB with keyID = '%@'", keyID);
-            return;
-        }
-        
-        api = [fetchedObjects lastObject];
-    }];
-    
-    
-    
-    return api;
-}
-
-- (Character *)characterWithCharacterID:(NSString *)characterID
-{
-    __block Character *character = nil;
-    
-    [_moc performBlockAndWait:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character"
-                                                  inManagedObjectContext:_moc];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", characterID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
-        
-        if (fetchedObjects == nil) {
-            NSLog(@"characterWithCharacterID: '%@' error fetching objects: %@, %@",
-                  characterID, error, [error userInfo]);
-            return;
-        }
-        
-        if ([fetchedObjects count] == 0) {
-            NSLog(@"No Character in DB with characterID = '%@'", characterID);
-            return;
-        }
-        
-        character = [fetchedObjects lastObject];
-    }];
-    
-    return character;
-}
-
-- (Corporation *)corporationWithCorporationID:(NSString *)corporationID
-{
-    __block Corporation *corporation = nil;
-    
-    [_moc performBlockAndWait:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Corporation"
-                                                  inManagedObjectContext:_moc];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"corporationID == %@", corporationID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
-        
-        if (fetchedObjects == nil) {
-            NSLog(@"corporationWithCorporationID: '%@' error fetching objects: %@, %@",
-                  corporationID, error, [error userInfo]);
-            return;
-        }
-        
-        if ([fetchedObjects count] == 0) {
-            NSLog(@"No corporation in DB with corporationID = '%@'", corporationID);
-            return;
-        }
-        
-        corporation = [fetchedObjects lastObject];
-    }];
-    
-    return corporation;
-}
-
-#pragma mark -
 #pragma mark - NSXMLParserDelegate
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser
@@ -192,7 +84,9 @@
 {
     if ([elementName isEqualToString:@"key"]) {
         // is this API already in the MOC
-        _currentAPI = [self apiWithKeyID:self.keyID];
+        _currentAPI = [CoreDataController apiWithKeyID:self.keyID
+                                             inContext:_moc
+                                notifyUserIfEmptyOrNil:NO];
         
         if (!_currentAPI) {
             // this API is not in the MOC, we create it
@@ -213,7 +107,9 @@
     // each 'row' element represents a character associated with this API
     if ([elementName isEqualToString:@"row"]) {
         // is this Character already in the MOC
-        _currentCharacter = [self characterWithCharacterID:attributeDict[@"characterID"]];
+        _currentCharacter = [CoreDataController characterWithCharacterID:attributeDict[@"characterID"]
+                                                               inContext:_moc
+                                                  notifyUserIfEmptyOrNil:NO];
         
         if (!_currentCharacter) {
             // this Character is not in the MOC, we create it
@@ -227,19 +123,7 @@
         _currentCharacter.corporationID = attributeDict[@"corporationID"];
         _currentCharacter.timestamp     = [NSDate date];
         _currentCharacter.api           = _currentAPI;
-        
-//        // is this Character's Corporation already in the MOC
-//        _currentCorporation = [self corporationWithCorporationID:attributeDict[@"corporationID"]];
-//        
-//        if (!_currentCorporation) {
-//            // this Character's Corporation is not in the MOC, we create it
-//            _currentCorporation = [NSEntityDescription insertNewObjectForEntityForName:@"Corporation"
-//                                                                inManagedObjectContext:_moc];
-//        }
-//        
-//        // fill the attributes of the object
-//        _currentCorporation.corporationID   = attributeDict[@"corporationID"];
-//        _currentCorporation.corporationName = attributeDict[@"corporationName"];
+
     }
 }
 

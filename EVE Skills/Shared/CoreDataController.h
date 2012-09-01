@@ -95,6 +95,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "API.h"
+#import "Character.h"
+#import "Skill.h"
+#import "Queue.h"
+#import "Portrait.h"
+#import "Corporation.h"
+
 @interface CoreDataController : NSObject <NSFilePresenter> 
 
 @property (nonatomic, readonly) NSPersistentStoreCoordinator *psc;
@@ -135,6 +142,40 @@
  Delete all objects in the local store
  */
 //- (void)deleteLocalStore:(void (^)())completionBlock;
+
+#pragma mark Fetch methods
+
++ (API *)   apiWithKeyID:(NSString *)keyID
+               inContext:(NSManagedObjectContext *)context
+  notifyUserIfEmptyOrNil:(BOOL)notifyUser;
+
++ (Character *)characterWithCharacterID:(NSString *)characterID
+                              inContext:(NSManagedObjectContext *)context
+                 notifyUserIfEmptyOrNil:(BOOL)notifyUser;
+
++ (Skill *)skillWithSkillID:(NSString *)skillID
+                  inContext:(NSManagedObjectContext *)context
+     notifyUserIfEmptyOrNil:(BOOL)notifyUser;
+
++ (Group *)groupWithGroupID:(NSString *)groupID
+                  inContext:(NSManagedObjectContext *)context
+     notifyUserIfEmptyOrNil:(BOOL)notifyUser;
+
++ (Corporation *)corporationlWithCorporationID:(NSString *)corporationID
+                                     inContext:(NSManagedObjectContext *)context
+                        notifyUserIfEmptyOrNil:(BOOL)notifyUser;
+
++ (Queue *)queueWithCharacterID:(NSString *)characterID
+                      inContext:(NSManagedObjectContext *)context
+         notifyUserIfEmptyOrNil:(BOOL)notifyUser;
+
++ (Portrait *)portraitWithCharacterID:(NSString *)characterID
+                            inContext:(NSManagedObjectContext *)context
+               notifyUserIfEmptyOrNil:(BOOL)notifyUser;
+
++ (NSArray *)characterEnabled:(NSNumber *)enabled
+                    inContext:(NSManagedObjectContext *)context
+              notifyUserIfNil:(BOOL)notifyUser;
 
 #pragma mark Debugging Methods
 /*

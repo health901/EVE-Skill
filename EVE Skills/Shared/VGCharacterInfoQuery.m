@@ -72,42 +72,6 @@
 }
 
 #pragma mark -
-#pragma mark - Core Data
-
-- (Corporation *)corporationWithCorporationID:(NSString *)corporationID
-{
-    __block Corporation *corporation = nil;
-    
-    [_moc performBlockAndWait:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Corporation"
-                                                  inManagedObjectContext:_moc];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"corporationID == %@", corporationID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
-        
-        if (fetchedObjects == nil) {
-            NSLog(@"corporationWithCorporationID: '%@' error fetching objects: %@, %@",
-                  corporationID, error, [error userInfo]);
-            return;
-        }
-        
-        if ([fetchedObjects count] == 0) {
-            NSLog(@"No corporation in DB with corporationID = '%@'", corporationID);
-            return;
-        }
-        
-        corporation = [fetchedObjects lastObject];
-    }];
-    
-    return corporation;
-}
-
-#pragma mark -
 #pragma mark - NSXMLParserDelegate
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser
@@ -137,7 +101,9 @@
     }
     
     if ([elementName isEqualToString:@"corporationID"]) {
-        _currentCorporation = [self corporationWithCorporationID:[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+        _currentCorporation = [CoreDataController corporationlWithCorporationID:[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
+                                                                      inContext:_moc
+                                                         notifyUserIfEmptyOrNil:NO];
         
         if (_currentCorporation == nil) {
             _currentCorporation = [NSEntityDescription insertNewObjectForEntityForName:@"Corporation"

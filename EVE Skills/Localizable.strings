@@ -44,16 +44,13 @@
 "apiCallError"      = "API Call error";
 
 /*
- Skill error messages
+ Database fetch error
+    %1 is the entity name
+    %2 is the entity parameter
+    %3 is the entity parameter value
  */
-"skillNotFoundError"        = "Skill not found in DB";
-"skillNotFoundErrorMessage" = "skillID = '%@'";
-
-/*
- Character error message
- */
-"characterNotFoundError"        = "Character not found in DB";
-"characterNotFoundErrorMessage" = "characterID = '%@'";
+"entityNotFoundErrorMessage"            = "%1 not found in DB";
+"entityNotFoundErrorInformativeText"    = "%2 = '%3'";
 
 
 

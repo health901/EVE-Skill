@@ -95,9 +95,6 @@
 
 #import "CoreDataController.h"
 #import "VGAppDelegate.h"
-#import "API.h"
-#import "Character.h"
-#import "Corporation.h"
 
 NSString * kiCloudPersistentStoreFilename = @"iCloudStore.sqlite";
 NSString * kFallbackPersistentStoreFilename = @"fallbackStore.sqlite"; //used when iCloud is not available
@@ -987,6 +984,223 @@ static NSOperationQueue *_presentedItemOperationQueue;
             NSLog(@"mainThreadContext saved !");
         }
     }];
+}
+
+#pragma mark -
+#pragma mark - Fetch requests
+
++ (API *)   apiWithKeyID:(NSString *)keyID
+               inContext:(NSManagedObjectContext *)context
+  notifyUserIfEmptyOrNil:(BOOL)notifyUser
+{
+    return [CoreDataController fetchEntityWithName:@"API"
+                                      predicateKey:@"keyID"
+                                   predicateObject:keyID
+                                         inContext:context
+                            notifyUserIfEmptyOrNil:notifyUser];
+}
+
++ (Character *)characterWithCharacterID:(NSString *)characterID
+                              inContext:(NSManagedObjectContext *)context
+                 notifyUserIfEmptyOrNil:(BOOL)notifyUser
+{
+    return [CoreDataController fetchEntityWithName:@"Character"
+                                      predicateKey:@"characterID"
+                                   predicateObject:characterID
+                                         inContext:context
+                            notifyUserIfEmptyOrNil:notifyUser];
+}
+
++ (Skill *)skillWithSkillID:(NSString *)skillID
+                  inContext:(NSManagedObjectContext *)context
+     notifyUserIfEmptyOrNil:(BOOL)notifyUser
+{
+    return [CoreDataController fetchEntityWithName:@"Skill"
+                                      predicateKey:@"skillID"
+                                   predicateObject:skillID
+                                         inContext:context
+                            notifyUserIfEmptyOrNil:notifyUser];
+}
+
++ (Group *)groupWithGroupID:(NSString *)groupID
+                  inContext:(NSManagedObjectContext *)context
+     notifyUserIfEmptyOrNil:(BOOL)notifyUser
+{
+    return [CoreDataController fetchEntityWithName:@"Group"
+                                      predicateKey:@"groupID"
+                                   predicateObject:groupID
+                                         inContext:context
+                            notifyUserIfEmptyOrNil:notifyUser];
+}
+
++ (Corporation *)corporationlWithCorporationID:(NSString *)corporationID
+                                     inContext:(NSManagedObjectContext *)context
+                        notifyUserIfEmptyOrNil:(BOOL)notifyUser
+{
+    return [CoreDataController fetchEntityWithName:@"Corporation"
+                                      predicateKey:@"corporationID"
+                                   predicateObject:corporationID
+                                         inContext:context
+                            notifyUserIfEmptyOrNil:notifyUser];
+}
+
++ (Queue *)queueWithCharacterID:(NSString *)characterID
+                      inContext:(NSManagedObjectContext *)context
+         notifyUserIfEmptyOrNil:(BOOL)notifyUser
+{
+    return [CoreDataController fetchEntityWithName:@"Queue"
+                                      predicateKey:@"characterID"
+                                   predicateObject:characterID
+                                         inContext:context
+                            notifyUserIfEmptyOrNil:notifyUser];
+}
+
++ (Portrait *)portraitWithCharacterID:(NSString *)characterID
+                            inContext:(NSManagedObjectContext *)context
+               notifyUserIfEmptyOrNil:(BOOL)notifyUser
+{
+    return [CoreDataController fetchEntityWithName:@"Portrait"
+                                      predicateKey:@"characterID"
+                                   predicateObject:characterID
+                                         inContext:context
+                            notifyUserIfEmptyOrNil:notifyUser];
+}
+
++ (id)fetchEntityWithName:(NSString *)entityName
+             predicateKey:(NSString *)predicateKey
+          predicateObject:(id)predicateObj
+                inContext:(NSManagedObjectContext *)context
+   notifyUserIfEmptyOrNil:(BOOL)notifyUser
+{
+    id fetchedObject = nil;
+    
+    NSArray *fetchedObjects = [CoreDataController fetchEntitiesWithName:entityName
+                                                           predicatekey:predicateKey
+                                                        predicateObject:predicateObj
+                                                      sortDescriptorKey:nil
+                                                sortDescriptorAscending:nil
+                                                              inContext:context
+                                                        notifyUserIfNil:NO];
+    
+    if (fetchedObjects == nil) {
+        // Do nothing
+    } else if (fetchedObjects.count == 0) {
+        NSLog(@"No %@ with %@ = '%@' found in DB", entityName, predicateKey, predicateObj);
+    } else {
+        fetchedObject = fetchedObjects.lastObject;
+    }
+    
+    if (notifyUser && fetchedObject == nil) {
+        [CoreDataController promptUserWithErrorMessageWithEntityName:entityName
+                                                        predicatekey:predicateKey
+                                                     predicateObject:predicateObj];
+    }
+    
+    return fetchedObject;
+}
+
++ (NSArray *)characterEnabled:(NSNumber *)enabled
+                    inContext:(NSManagedObjectContext *)context
+              notifyUserIfNil:(BOOL)notifyUser
+{
+    return [CoreDataController fetchEntitiesWithName:@"Character"
+                                        predicatekey:(enabled == nil ? nil : @"enabled")
+                                     predicateObject:enabled
+                                   sortDescriptorKey:nil
+                             sortDescriptorAscending:nil
+                                           inContext:context
+                                     notifyUserIfNil:notifyUser];
+}
+
++ (NSArray *)fetchEntitiesWithName:(NSString *)entityName
+                      predicatekey:(NSString *)predicateKey
+                   predicateObject:(id)predicateObj
+                 sortDescriptorKey:(NSString *)sortDescriptorKey
+           sortDescriptorAscending:(NSNumber *)sortDescriptorAscending
+                         inContext:(NSManagedObjectContext *)context
+                   notifyUserIfNil:(BOOL)notifyUser
+{
+    NSAssert(context,       @"context can't be nil");
+    NSAssert(entityName,    @"entityName can't be nil");
+    
+    __block NSArray *fetchedObjects = nil;
+    
+    [context performBlockAndWait:^{
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
+        
+        if (predicateKey != nil) {
+            NSString *formatString = [NSString stringWithFormat:@"%@ == %%@", predicateKey];
+            request.predicate = [NSPredicate predicateWithFormat:formatString, predicateObj];
+        }
+        
+        if (sortDescriptorKey != nil) {
+            request.sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:sortDescriptorKey
+                                                                       ascending:[sortDescriptorAscending boolValue]] ];
+        }
+        
+        NSError *error = nil;
+        
+        fetchedObjects = [context executeFetchRequest:request error:&error];
+        
+        
+        if (error) {
+            NSLog(@"Error fetching %@ with %@ = '%@'", entityName, predicateKey, predicateObj);
+        }
+        
+        if (notifyUser && fetchedObjects == nil) {
+            [CoreDataController promptUserWithErrorMessageWithEntityName:entityName
+                                                            predicatekey:predicateKey
+                                                         predicateObject:predicateObj];
+        }
+    }];
+    
+    return fetchedObjects;
+}
+
++ (void)promptUserWithErrorMessageWithEntityName:(NSString *)entityName
+                                    predicatekey:(NSString *)predicateKey
+                                 predicateObject:(id)predicateObj
+                                    
+{
+    // Create the placeholder strings
+    NSMutableString *alertMessage = [NSMutableString stringWithString:NSLocalizedString(@"entityNotFoundErrorMessage", nil)];
+    NSMutableString *alertInformativeText = [NSMutableString stringWithString:NSLocalizedString(@"entityNotFoundErrorInformativeText", nil)];
+    
+    // Add the entity's name and other values to the strings
+    [alertMessage replaceOccurrencesOfString:@"%1"
+                                  withString:(entityName == nil ? @"nil" : entityName)
+                                     options:0
+                                       range:NSMakeRange(0, [alertMessage length])];
+    [alertMessage replaceOccurrencesOfString:@"%2"
+                                  withString:(predicateKey == nil ? @"nil" : predicateKey)
+                                     options:0
+                                       range:NSMakeRange(0, [alertMessage length])];
+    [alertMessage replaceOccurrencesOfString:@"%3"
+                                  withString:(predicateObj == nil ? @"nil" : predicateObj)
+                                     options:0
+                                       range:NSMakeRange(0, [alertMessage length])];
+    
+    [alertInformativeText replaceOccurrencesOfString:@"%1"
+                                          withString:(entityName == nil ? @"nil" : entityName)
+                                             options:0
+                                               range:NSMakeRange(0, [alertInformativeText length])];
+    [alertInformativeText replaceOccurrencesOfString:@"%2"
+                                          withString:(predicateKey == nil ? @"nil" : predicateKey)
+                                             options:0
+                                               range:NSMakeRange(0, [alertInformativeText length])];
+    [alertInformativeText replaceOccurrencesOfString:@"%3"
+                                          withString:(predicateObj == nil ? @"nil" : predicateObj)
+                                             options:0
+                                               range:NSMakeRange(0, [alertInformativeText length])];
+    
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        NSAlert *alert = [NSAlert alertWithMessageText:alertMessage
+                                         defaultButton:NSLocalizedString(@"OK", nil)
+                                       alternateButton:nil
+                                           otherButton:nil
+                             informativeTextWithFormat:@"%@", alertInformativeText];
+        [alert runModal];
+    });
 }
 
 #pragma mark -

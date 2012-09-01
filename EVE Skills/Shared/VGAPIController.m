@@ -25,8 +25,6 @@
 
 - (NSData *)callAPIWithDictionaryAsync:(NSDictionary *)dict;
 
-- (Character *)characterWithCharacterID:(NSString *)characterID;
-
 @end
 
 @implementation VGAPIController
@@ -109,36 +107,6 @@
     return data;
 }
 
-- (Character *)characterWithCharacterID:(NSString *)characterID
-{
-    __block Character *character = nil;
-    
-    [_apiControllerContext performBlockAndWait:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character" inManagedObjectContext:_apiControllerContext];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", characterID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_apiControllerContext executeFetchRequest:fetchRequest error:&error];
-        if (fetchedObjects == nil) {
-            NSLog(@"Error fetching Character with characterID == '%@' : %@, %@",
-                  characterID, error, [error userInfo]);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSAlert *alert = [NSAlert alertWithError:error];
-                [alert runModal];
-            });
-        }
-        if ([fetchedObjects count] > 0) {
-            character = [fetchedObjects lastObject];
-        }
-    }];
-    
-    return character;
-}
-
 #pragma mark -
 #pragma mark - API calls
 
@@ -216,10 +184,11 @@
     NSLog(@"addQueueWithCharacterID:%@", characterID);
     
     // First, retrieve the Character
-    Character *character = [self characterWithCharacterID:characterID];
+    Character *character = [CoreDataController characterWithCharacterID:characterID
+                                                              inContext:self.apiControllerContext
+                                                 notifyUserIfEmptyOrNil:NO];
     
     if (!character) {
-        NSLog(@"No character in DB with characterID = '%@'", characterID);
         return;
     }
     
@@ -301,31 +270,20 @@
     if (!data) return;
     
     // get Character managed object
-    Character *character = [self characterWithCharacterID:characterID];
+    Character *character = [CoreDataController characterWithCharacterID:characterID
+                                                              inContext:self.apiControllerContext
+                                                 notifyUserIfEmptyOrNil:YES];
     
     // add character portrait to the DB
     Portrait *portrait = nil;
     if (character) {
         
+        portrait = [CoreDataController portraitWithCharacterID:character.characterID
+                                                     inContext:self.apiControllerContext
+                                        notifyUserIfEmptyOrNil:NO];
         
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Portrait" inManagedObjectContext:_apiControllerContext];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", character.characterID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_apiControllerContext executeFetchRequest:fetchRequest error:&error];
-        if (fetchedObjects == nil) {
-            NSLog(@"Error while fetching portrait for characterID = '%@' : %@, %@", characterID, error, [error userInfo]);
-        }
-        
-        // Is there a portrait in the DB, if not we create a new one
-        if ([fetchedObjects count] > 0) {
-            NSLog(@"Portrait already in DB");
-            portrait = [fetchedObjects lastObject];
-        } else {
+        // If there is no Portrait in the DB, create it
+        if (portrait == nil) {
             portrait = [NSEntityDescription insertNewObjectForEntityForName:@"Portrait"
                                                      inManagedObjectContext:self.apiControllerContext];
         }
@@ -419,18 +377,11 @@
 {
     // Fetch the Characters
     [_apiControllerContext performBlock:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character" inManagedObjectContext:_apiControllerContext];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"enabled == %@", @YES];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_apiControllerContext executeFetchRequest:fetchRequest error:&error];
+        NSArray *fetchedObjects = [CoreDataController characterEnabled:@YES
+                                                             inContext:self.apiControllerContext
+                                                       notifyUserIfNil:NO];
         
         if (fetchedObjects == nil) {
-            NSLog(@"Error fetching Character : %@, %@", error, [error userInfo]);
             return;
         }
         

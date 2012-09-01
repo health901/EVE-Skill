@@ -106,28 +106,25 @@
             [[NSNotificationCenter defaultCenter] addObserverForName:NSPersistentStoreCoordinatorStoresDidChangeNotification object:_coreDataController.psc queue:nil usingBlock:^(NSNotification *note) {
                 NSLog(@"NSPersistentStoreCoordinatorStoresDidChangeNotification");
             }];
+            
+            // Check if there are characters in the DB
+//            [_coreDataController.mainThreadContext performBlock:^{
+//                NSArray *fetchedObjects = [CoreDataController characterEnabled:nil
+//                                                                     inContext:_coreDataController.mainThreadContext
+//                                                               notifyUserIfNil:NO];
+//                if (fetchedObjects == nil) {
+//                    NSLog(@"fetchedObjects == nil");
+//                } else if ([fetchedObjects count] > 0){
+//                    for (Character *character in fetchedObjects) {
+//                        NSLog(@"%@ | %@", character.characterName, ([character.enabled boolValue] ? @"YES" : @"NO"));
+//                    }
+//                } else {
+//                    NSLog(@"No characters in DB");
+//                }
+//            }];
         });
         
     }];
-    
-    // Check if there are characters in the DB
-//    [_coreDataController.mainThreadContext performBlock:^{
-//        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-//        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character" inManagedObjectContext:_coreDataController.mainThreadContext];
-//        [fetchRequest setEntity:entity];
-//        
-//        NSError *error = nil;
-//        NSArray *fetchedObjects = [_coreDataController.mainThreadContext executeFetchRequest:fetchRequest error:&error];
-//        if (fetchedObjects == nil) {
-//            NSLog(@"fetchedObjects == nil");
-//        } else if ([fetchedObjects count] > 0){
-//            for (Character *character in fetchedObjects) {
-//                NSLog(@"%@ | %@", character.characterName, ([character.enabled boolValue] ? @"YES" : @"NO"));
-//            }
-//        } else {
-//            NSLog(@"No characters in DB");
-//        }
-//    }];
     
     
     

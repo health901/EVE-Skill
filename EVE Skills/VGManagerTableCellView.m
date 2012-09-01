@@ -90,21 +90,11 @@
     
     // Fetch the Portrait associated with _character
     [self.moc performBlock:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Portrait" inManagedObjectContext:_moc];
-        [fetchRequest setEntity:entity];
+        Portrait *portrait = [CoreDataController portraitWithCharacterID:_character.characterID
+                                                               inContext:_moc
+                                                  notifyUserIfEmptyOrNil:NO];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", _character.characterID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
-        if (fetchedObjects == nil) {
-            NSLog(@"Error fetching Portrait with characterID = '%@' : %@, %@",
-                  _character.characterID, error, [error userInfo]);
-        }
-        
-        if (fetchedObjects.count == 0) {
+        if (portrait == nil) {
             // No portrait in DB, download the portrait
             dispatch_async(_appDelegate.apiController.dispatchQueue, ^{
                 [_appDelegate.apiController addPortraitForCharacterID:_character.characterID completionHandler:^(NSError *error, Portrait *portrait) {
@@ -113,7 +103,7 @@
             });
         } else {
             // Portrait in the DB
-            self.portrait = fetchedObjects.lastObject;
+            self.portrait = portrait;
         }
     }];
 }
@@ -123,19 +113,11 @@
     if (_character == nil) return;
     
     [self.moc performBlock:^{
-        NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:@"Corporation"];
+        Corporation *corporation = [CoreDataController corporationlWithCorporationID:_character.corporationID
+                                                                           inContext:_moc
+                                                              notifyUserIfEmptyOrNil:NO];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"corporationID = %@", _character.corporationID];
-        fr.predicate = predicate;
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_moc executeFetchRequest:fr error:&error];
-        if (fetchedObjects == nil) {
-            NSLog(@"Error fetching Corporation with corporationID = '%@' : %@, %@",
-                  _character.corporationID, error, [error userInfo]);
-        }
-        
-        if (fetchedObjects.count == 0) {
+        if (corporation == nil) {
             // Corporation not in DB, download it
             dispatch_async(_appDelegate.apiController.dispatchQueue, ^{
                 [_appDelegate.apiController addCorporationForCharacterID:_character.characterID completionHandler:^(NSError *error, Corporation *corporation) {
@@ -144,7 +126,7 @@
             });
         } else {
             // Corporation in DB
-            self.corporation = fetchedObjects.lastObject;
+            self.corporation = corporation;
         }
     }];
 }

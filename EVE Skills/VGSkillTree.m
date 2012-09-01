@@ -34,12 +34,6 @@
     void (^_completionHandler)(NSError *);
 }
 
-// returns the skill group with groupID or nil in _moc
-- (Group *)groupWithGroupID:(NSString *)groupID;
-
-// returns the skill with skillID or nil in _moc
-- (Skill *)skillWithSkillID:(NSString *)skillID;
-
 @end
 
 @implementation VGSkillTree
@@ -95,61 +89,6 @@
 }
 
 #pragma mark -
-#pragma mark - Private methods
-
-- (Group *)groupWithGroupID:(NSString *)groupID {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Group"
-                                              inManagedObjectContext:_skillTreeMOC];
-    [fetchRequest setEntity:entity];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"groupID == %@", groupID];
-    [fetchRequest setPredicate:predicate];
-    
-    NSError *error = nil;
-    NSArray *fetchedObjects = [_skillTreeMOC executeFetchRequest:fetchRequest error:&error];
-    
-    if (fetchedObjects == nil) {
-        NSLog(@"groupWithGroupID: '%@' error fetching objects: %@, %@",
-              groupID, error, [error userInfo]);
-        return nil;
-    }
-    
-    if ([fetchedObjects count] == 0) {
-        // no objects with specified ID found
-        return nil;
-    }
-    
-    return [fetchedObjects lastObject];
-}
-
-- (Skill *)skillWithSkillID:(NSString *)skillID {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Skill"
-                                              inManagedObjectContext:_skillTreeMOC];
-    [fetchRequest setEntity:entity];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"skillID == %@", skillID];
-    [fetchRequest setPredicate:predicate];
-    
-    NSError *error = nil;
-    NSArray *fetchedObjects = [_skillTreeMOC executeFetchRequest:fetchRequest error:&error];
-    
-    if (fetchedObjects == nil) {
-        NSLog(@"skillWithSkillID: '%@' error fetching objects: %@, %@",
-              skillID, error, [error userInfo]);
-        return nil;
-    }
-    
-    if ([fetchedObjects count] == 0) {
-        // no objects with specified ID found
-        return nil;
-    }
-    
-    return [fetchedObjects lastObject];
-}
-
-#pragma mark -
 #pragma mark - NSXMLParserDelegate
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
@@ -190,7 +129,9 @@
     if ([elementName isEqualToString:@"row"]) {
         if ([_currentRowset isEqualToString:@"skillGroups"]) {
             // is this group already in the MOC
-            _currentGroup = [self groupWithGroupID:attributeDict[@"groupID"]];
+            _currentGroup = [CoreDataController groupWithGroupID:attributeDict[@"groupID"]
+                                                       inContext:_skillTreeMOC
+                                          notifyUserIfEmptyOrNil:NO];
             
             if (!_currentGroup) {
                 // this group is not in the MOC, we create it
@@ -205,7 +146,9 @@
         
         if ([_currentRowset isEqualToString:@"skills"]) {
             // is this skill already in the MOC
-            _currentSkill = [self skillWithSkillID:attributeDict[@"typeID"]];
+            _currentSkill = [CoreDataController skillWithSkillID:attributeDict[@"typeID"]
+                                                       inContext:_skillTreeMOC
+                                          notifyUserIfEmptyOrNil:NO];
             
             if (!_currentSkill) {
                 // this skill is not in the MOC, we create it

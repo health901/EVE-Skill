@@ -108,40 +108,18 @@
                     _skillDetailViewController.skill = self.skillDict[queueElement.skillID];
                     
                     if (self.skillDict[queueElement.skillID] == nil) {
-                        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-                        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Skill" inManagedObjectContext:_moc];
-                        [fetchRequest setEntity:entity];
+                        Skill *skill = [CoreDataController skillWithSkillID:queueElement.skillID
+                                                                  inContext:_moc
+                                                     notifyUserIfEmptyOrNil:YES];
                         
-                        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"skillID == %@", queueElement.skillID];
-                        [fetchRequest setPredicate:predicate];
-                        
-                        NSError *error = nil;
-                        NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
-                        if (fetchedObjects == nil) {
-                            NSLog(@"Error fetching skill with skillID = '%@' : %@, %@",
-                                  queueElement.skillID, error, [error userInfo]);
-                        }
-                        
-                        if (fetchedObjects.count == 0) {
-                            dispatch_sync(dispatch_get_main_queue(), ^{
-                                NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"skillNotFoundError", nil)
-                                                                 defaultButton:NSLocalizedString(@"OK", nil)
-                                                               alternateButton:nil
-                                                                   otherButton:nil
-                                                     informativeTextWithFormat:NSLocalizedString(@"skillNotFoundErrorMessage", nil), queueElement.skillID];
-                                [alert runModal];
-                            });
-                        }
-                        
-                        self.skillDict[queueElement.skillID] = fetchedObjects.lastObject;
-                        _skillDetailViewController.skill = fetchedObjects.lastObject;
+                        self.skillDict[queueElement.skillID] = skill;
+                        _skillDetailViewController.skill = skill;
                     }
                     
                     _skillDetailViewController.queueElement = queueElement;
                     
                     dispatch_sync(dispatch_get_main_queue(), ^{
                         // Display the popover
-                        
                         [_skillDetailPopover showRelativeToRect:CGRectMake(xPos, 0.0, skillWidth, height)
                                                          ofView:self
                                                   preferredEdge:NSMinYEdge];

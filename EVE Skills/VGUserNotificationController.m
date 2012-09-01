@@ -33,11 +33,6 @@
 - (NSUserNotification *)userNotificationEmptyQueueWithCharacterID:(NSString *)characterID;
 - (NSUserNotification *)userNotificationWithCharacterID:(NSString *)characterID queueElement:(QueueElement *)queueElement;
 
-// Core Data
-- (Queue *)queueWithCharacterIDSync:(NSString *)characterID;
-- (Character *)fetchCharacterWithCharacterIDSync:(NSString *)characterID;
-- (Skill *)fetchSkillWithSkillIDSync:(NSString *)skillID;
-
 @end
 
 @implementation VGUserNotificationController
@@ -137,28 +132,14 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
     
     [self removeAllNotifications];
     
-    __block NSArray *characterArray;
-    
-    // Fetch all enabled characters
-    [self.moc performBlockAndWait:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character" inManagedObjectContext:self.moc];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"enabled == %@", @YES];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [self.moc executeFetchRequest:fetchRequest error:&error];
-        if (fetchedObjects == nil) {
-            NSLog(@"Error fetching enabled Character : %@, %@", error, [error userInfo]);
-        }
-        
-        characterArray = fetchedObjects;
-    }];
+    NSArray *characterArray = [CoreDataController characterEnabled:@YES
+                                                         inContext:self.moc
+                                                   notifyUserIfNil:NO];
     
     for (Character *character in characterArray) {
-        Queue *queue = [self queueWithCharacterIDSync:character.characterID];
+        Queue *queue = [CoreDataController queueWithCharacterID:character.characterID
+                                                      inContext:self.moc
+                                         notifyUserIfEmptyOrNil:NO];
 //        NSLog(@"%@ : %@", character.characterName, queue);
         if (queue) {
             [self addNotificationsWithQueue:queue];
@@ -219,7 +200,9 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
 {
     NSUserNotification *userNotification = [[NSUserNotification alloc] init];
     
-    Character *character = [self fetchCharacterWithCharacterIDSync:characterID];
+    Character *character = [CoreDataController characterWithCharacterID:characterID
+                                                              inContext:self.moc
+                                                 notifyUserIfEmptyOrNil:NO];
     
     if (character == nil) return nil;
     
@@ -241,10 +224,14 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
     NSUserNotification *userNotification = [[NSUserNotification alloc] init];
     
     // Fetch the associated Character
-    Character *character = [self fetchCharacterWithCharacterIDSync:characterID];
+    Character *character = [CoreDataController characterWithCharacterID:characterID
+                                                              inContext:self.moc
+                                                 notifyUserIfEmptyOrNil:NO];
     
     // Fetch the associated skill
-    Skill *skill = [self fetchSkillWithSkillIDSync:queueElement.skillID];
+    Skill *skill = [CoreDataController skillWithSkillID:queueElement.skillID
+                                              inContext:self.moc
+                                 notifyUserIfEmptyOrNil:NO];
     
     if (character == nil || skill == nil) return nil;
     
@@ -259,113 +246,6 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
     [_defaultCenter scheduleNotification:userNotification];
     
     return userNotification;
-}
-
-#pragma mark -
-#pragma mark - Core Data
-
-- (Queue *)queueWithCharacterIDSync:(NSString *)characterID
-{
-    __block Queue *queue = nil;
-    
-    [self.moc performBlockAndWait:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Queue" inManagedObjectContext:self.moc];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", characterID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [self.moc executeFetchRequest:fetchRequest error:&error];
-        if (fetchedObjects == nil) {
-            NSLog(@"Error fetching Queue with characterID = '%@' : %@, %@",
-                  characterID, error, [error userInfo]);
-        }
-        
-        if (fetchedObjects.count == 0) {
-            // Not important
-        } else {
-            queue = fetchedObjects.lastObject;
-        }
-        
-    }];
-    
-    return queue;
-}
-
-- (Character *)fetchCharacterWithCharacterIDSync:(NSString *)characterID
-{
-    __block Character *character = nil;
-    
-    [self.moc performBlockAndWait:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Character" inManagedObjectContext:self.moc];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", characterID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [self.moc executeFetchRequest:fetchRequest error:&error];
-        if (fetchedObjects == nil) {
-            NSLog(@"Error fetching Character with characterID = '%@' : %@, %@",
-                  characterID, error, [error userInfo]);
-        }
-        
-        if (fetchedObjects.count == 0) {
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"characterNotFoundError", nil)
-                                                 defaultButton:NSLocalizedString(@"OK", nil)
-                                               alternateButton:nil
-                                                   otherButton:nil
-                                     informativeTextWithFormat:NSLocalizedString(@"characterNotFoundErrorMessage", nil), characterID];
-                [alert runModal];
-            });
-        } else {
-            character = fetchedObjects.lastObject;
-        }
-        
-    }];
-    
-    return character;
-}
-
-- (Skill *)fetchSkillWithSkillIDSync:(NSString *)skillID
-{
-    __block Skill *skill = nil;
-    
-    [self.moc performBlockAndWait:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Skill" inManagedObjectContext:self.moc];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"skillID == %@", skillID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [self.moc executeFetchRequest:fetchRequest error:&error];
-        if (fetchedObjects == nil) {
-            NSLog(@"Error fetching Skill with skillID = '%@' : %@, %@",
-                  skillID, error, [error userInfo]);
-        }
-        
-        if (fetchedObjects.count == 0) {
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"skillNotFoundError", nil)
-                                                 defaultButton:NSLocalizedString(@"OK", nil)
-                                               alternateButton:nil
-                                                   otherButton:nil
-                                     informativeTextWithFormat:NSLocalizedString(@"skillNotFoundErrorMessage", nil), skillID];
-                [alert runModal];
-            });
-        } else {
-            skill = fetchedObjects.lastObject;
-        }
-        
-    }];
-    
-    return skill;
 }
 
 #pragma mark -

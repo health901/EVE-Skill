@@ -119,21 +119,11 @@
     
     // Fetch the Portrait associated with _character
     [self.moc performBlock:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Portrait" inManagedObjectContext:_moc];
-        [fetchRequest setEntity:entity];
+        Portrait *portrait = [CoreDataController portraitWithCharacterID:_character.characterID
+                                                               inContext:self.moc
+                                                  notifyUserIfEmptyOrNil:NO];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", _character.characterID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
-        if (fetchedObjects == nil) {
-            NSLog(@"Error fetching Portrait with characterID = '%@' : %@, %@",
-                  _character.characterID, error, [error userInfo]);
-        }
-        
-        if (fetchedObjects.count == 0) {
+        if (portrait == nil) {
             // No portrait in DB, download the portrait
             dispatch_async(_appDelegate.apiController.dispatchQueue, ^{
                 [_appDelegate.apiController addPortraitForCharacterID:_character.characterID completionHandler:^(NSError *error, Portrait *portrait) {
@@ -142,7 +132,7 @@
             });
         } else {
             // Portrait in the DB
-            self.portrait = fetchedObjects.lastObject;
+            self.portrait = portrait;
         }
     }];
 }
@@ -153,28 +143,17 @@
     
     // Fetch the Queue associated with _character
     [self.moc performBlock:^{
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Queue" inManagedObjectContext:_moc];
-        [fetchRequest setEntity:entity];
+        _queue = [CoreDataController queueWithCharacterID:_character.characterID
+                                                inContext:self.moc
+                                   notifyUserIfEmptyOrNil:NO];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"characterID == %@", _character.characterID];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
-        if (fetchedObjects == nil) {
-            NSLog(@"Error fetching Queue with characterID = '%@' : %@, %@",
-                  _character.characterID, error, [error userInfo]);
-        }
-        
-        if (fetchedObjects.count == 0) {
+        if (_queue == nil) {
             // No queue in DB, download the queue
             dispatch_async(_appDelegate.apiController.dispatchQueue, ^{
                 [_appDelegate.apiController addQueueWithCharacterID:_character.characterID];
             });
         } else {
             // Queue in the DB
-            _queue = fetchedObjects.lastObject;
             self.skillQueueView.queue = _queue;
             
             _currentQueueElement = nil;
@@ -194,33 +173,10 @@
             if (_currentQueueElement == nil) return;
             
             // Get the skill associated with the first element
-            fetchRequest = [[NSFetchRequest alloc] init];
-            entity = [NSEntityDescription entityForName:@"Skill" inManagedObjectContext:_moc];
-            [fetchRequest setEntity:entity];
+            _currentSkill = [CoreDataController skillWithSkillID:_currentQueueElement.skillID
+                                                       inContext:self.moc
+                                          notifyUserIfEmptyOrNil:YES];
             
-            predicate = [NSPredicate predicateWithFormat:@"skillID == %@", _currentQueueElement.skillID];
-            [fetchRequest setPredicate:predicate];
-            
-            error = nil;
-            fetchedObjects = [_moc executeFetchRequest:fetchRequest error:&error];
-            if (fetchedObjects == nil) {
-                NSLog(@"Error fetching Skill with skillID = '%@' : %@, %@",
-                      _currentQueueElement.skillID, error, [error userInfo]);
-            }
-            
-            if (fetchedObjects.count == 0) {
-                // No skill in DB, download the queue
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"skillNotFoundError", nil)
-                                                     defaultButton:NSLocalizedString(@"OK", nil)
-                                                   alternateButton:nil
-                                                       otherButton:nil
-                                         informativeTextWithFormat:NSLocalizedString(@"skillNotFoundErrorMessage", nil), _currentQueueElement.skillID];
-                    [alert runModal];
-                });
-            }
-            
-            _currentSkill = fetchedObjects.lastObject;
             self.currentSkillName = [NSString stringWithFormat:@"%@ %@",
                                      _currentSkill.skillName, _currentQueueElement.skillLevel.stringValue];
         }
