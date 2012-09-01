@@ -8,6 +8,7 @@
 
 #import "Queue+VGEVE.h"
 #import "QueueElement+VGEVE.h"
+#import "NSString+VGEVE.h"
 
 @implementation Queue (VGEVE)
 
@@ -22,45 +23,10 @@
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"position" ascending:YES];
     NSArray *queueElementArray = [self.elements.allObjects sortedArrayUsingDescriptors:@[sortDescriptor]];
     
-    NSDate *date1 = [NSDate date];
-    NSDate *date2 = ((QueueElement *)queueElementArray.lastObject).endTime;
+    NSDate *fromDate = [NSDate date];
+    NSDate *toDate = ((QueueElement *)queueElementArray.lastObject).endTime;
     
-    unsigned int unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSDayCalendarUnit | NSMonthCalendarUnit | NSSecondCalendarUnit;
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    
-    NSDateComponents *dateComponents = [calendar components:unitFlags fromDate:date1  toDate:date2  options:0];
-    
-    NSInteger month = [dateComponents month];
-    NSInteger day = [dateComponents day];
-    NSInteger hour = [dateComponents hour];
-    NSInteger minute = [dateComponents minute];
-    NSInteger second = [dateComponents second];
-    
-    
-    NSMutableString *result = [[NSMutableString alloc] init];
-    
-    if (month > 0) {
-        [result appendFormat:@"%ld %@, ", month, (month > 1 ? @"months" : @"month")];
-    }
-    
-    if (day > 0) {
-        [result appendFormat:@"%ld %@, ", day, (day > 1 ? @"days" : @"day")];
-    }
-    
-    if (hour > 0) {
-        [result appendFormat:@"%ld %@, ", hour, (hour > 1 ? @"hours" : @"hour")];
-    }
-    
-    if (minute > 0) {
-        [result appendFormat:@"%ld %@, ", minute, (minute > 1 ? @"minutes" : @"minute")];
-    }
-    
-    if (month == 0) {
-        [result appendFormat:@"%ld %@", second, (second > 1 ? @"seconds" : @"second")];
-    }
-    
-    return result;
+    return [NSString timeRemainingStringFromDate:fromDate toDate:toDate];
 }
 
 @end

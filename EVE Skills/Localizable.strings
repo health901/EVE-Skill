@@ -32,6 +32,23 @@
 "menuQuit"              = "Quit";
 
 /*
+ Date & time
+ */
+"year"      = "y"; // "year";
+"years"     = "y"; // "years";
+"month"     = "m"; // "month";
+"months"    = "m"; // "months";
+"day"       = "d"; // "day";
+"days"      = "d"; // "days";
+"hour"      = "h"; // "hour";
+"hours"     = "h"; // "hours";
+"minute"    = "m"; // "minute";
+"minutes"   = "m"; // "minutes";
+"second"    = "s"; // "second";
+"seconds"   = "s"; // "seconds";
+
+
+/*
  Saving error
  */
 "savingErrorMessage" = "Could not save changes while quitting. Quit anyway?";
