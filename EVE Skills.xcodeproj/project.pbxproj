@@ -11,14 +11,16 @@
 		BF0A208F15F3AF7B00156E83 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BF0A208E15F3AF7A00156E83 /* icon.icns */; };
 		BF0A209315F3B25500156E83 /* VGAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0A209115F3B25500156E83 /* VGAboutWindowController.m */; };
 		BF0A209415F3B25500156E83 /* VGAboutWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF0A209215F3B25500156E83 /* VGAboutWindowController.xib */; };
-		BF0A209715F3B2F200156E83 /* about_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BF0A209515F3B2F200156E83 /* about_icon.png */; };
-		BF0A209815F3B2F200156E83 /* about_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF0A209615F3B2F200156E83 /* about_icon@2x.png */; };
 		BF0A209B15F3B5A000156E83 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = BF0A209915F3B5A000156E83 /* Credits.rtfd */; };
 		BF0E77C815F3899C00234ABB /* VGLoginStart.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E77C715F3899C00234ABB /* VGLoginStart.m */; };
 		BF1B774D15F3BE8600906C67 /* VGHelpPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1B774B15F3BE8600906C67 /* VGHelpPopoverViewController.m */; };
 		BF1B774E15F3BE8600906C67 /* VGHelpPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF1B774C15F3BE8600906C67 /* VGHelpPopoverViewController.xib */; };
 		BF1B775115F3BEDF00906C67 /* APIHelp.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BF1B774F15F3BEDF00906C67 /* APIHelp.rtf */; };
 		BF1B775315F3C24E00906C67 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF1B775215F3C24E00906C67 /* MainMenu.xib */; };
+		BF1B776415F3CD3B00906C67 /* about_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BF1B776015F3CD3B00906C67 /* about_icon.png */; };
+		BF1B776515F3CD3B00906C67 /* about_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF1B776115F3CD3B00906C67 /* about_icon@2x.png */; };
+		BF1B776615F3CD3B00906C67 /* menu_bar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BF1B776215F3CD3B00906C67 /* menu_bar_icon.png */; };
+		BF1B776715F3CD3B00906C67 /* menu_bar_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF1B776315F3CD3B00906C67 /* menu_bar_icon@2x.png */; };
 		BF3A2A0615E24209007EE82C /* VGSkillDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A0415E24209007EE82C /* VGSkillDetailViewController.m */; };
 		BF3A2A0715E24209007EE82C /* VGSkillDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF3A2A0515E24209007EE82C /* VGSkillDetailViewController.xib */; };
 		BF3A2A0A15E25AAC007EE82C /* QueueElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A0915E25AAC007EE82C /* QueueElement.m */; };
@@ -58,12 +60,10 @@
 
 /* Begin PBXFileReference section */
 		BF0A208C15F39A1E00156E83 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		BF0A208E15F3AF7A00156E83 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		BF0A208E15F3AF7A00156E83 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../icon.icns; sourceTree = "<group>"; };
 		BF0A209015F3B25500156E83 /* VGAboutWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGAboutWindowController.h; sourceTree = "<group>"; };
 		BF0A209115F3B25500156E83 /* VGAboutWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGAboutWindowController.m; sourceTree = "<group>"; };
 		BF0A209215F3B25500156E83 /* VGAboutWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGAboutWindowController.xib; sourceTree = "<group>"; };
-		BF0A209515F3B2F200156E83 /* about_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = about_icon.png; path = icon/about_icon.png; sourceTree = SOURCE_ROOT; };
-		BF0A209615F3B2F200156E83 /* about_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "about_icon@2x.png"; path = "icon/about_icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		BF0A209A15F3B5A000156E83 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = en; path = en.lproj/Credits.rtfd; sourceTree = "<group>"; };
 		BF0E77C615F3899C00234ABB /* VGLoginStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGLoginStart.h; sourceTree = "<group>"; };
 		BF0E77C715F3899C00234ABB /* VGLoginStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGLoginStart.m; sourceTree = "<group>"; };
@@ -72,6 +72,10 @@
 		BF1B774C15F3BE8600906C67 /* VGHelpPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGHelpPopoverViewController.xib; sourceTree = "<group>"; };
 		BF1B775015F3BEDF00906C67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/APIHelp.rtf; sourceTree = "<group>"; };
 		BF1B775215F3C24E00906C67 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		BF1B776015F3CD3B00906C67 /* about_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = about_icon.png; path = icon/about_icon.png; sourceTree = SOURCE_ROOT; };
+		BF1B776115F3CD3B00906C67 /* about_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "about_icon@2x.png"; path = "icon/about_icon@2x.png"; sourceTree = SOURCE_ROOT; };
+		BF1B776215F3CD3B00906C67 /* menu_bar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_bar_icon.png; path = icon/menu_bar_icon.png; sourceTree = SOURCE_ROOT; };
+		BF1B776315F3CD3B00906C67 /* menu_bar_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu_bar_icon@2x.png"; path = "icon/menu_bar_icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		BF3A2A0315E24209007EE82C /* VGSkillDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSkillDetailViewController.h; sourceTree = "<group>"; };
 		BF3A2A0415E24209007EE82C /* VGSkillDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGSkillDetailViewController.m; sourceTree = "<group>"; };
 		BF3A2A0515E24209007EE82C /* VGSkillDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGSkillDetailViewController.xib; sourceTree = "<group>"; };
@@ -247,7 +251,6 @@
 		BF62B5BE15CB274D00190CF6 = {
 			isa = PBXGroup;
 			children = (
-				BF0A208E15F3AF7A00156E83 /* icon.icns */,
 				BF0A208C15F39A1E00156E83 /* README.md */,
 				BF62B5D315CB274D00190CF6 /* EVE Skills */,
 				BF62B5CC15CB274D00190CF6 /* Frameworks */,
@@ -306,10 +309,13 @@
 		BF62B5D415CB274D00190CF6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BF1B776015F3CD3B00906C67 /* about_icon.png */,
+				BF1B776115F3CD3B00906C67 /* about_icon@2x.png */,
+				BF1B776215F3CD3B00906C67 /* menu_bar_icon.png */,
+				BF1B776315F3CD3B00906C67 /* menu_bar_icon@2x.png */,
+				BF0A208E15F3AF7A00156E83 /* icon.icns */,
 				BF1B774F15F3BEDF00906C67 /* APIHelp.rtf */,
 				BF0A209915F3B5A000156E83 /* Credits.rtfd */,
-				BF0A209515F3B2F200156E83 /* about_icon.png */,
-				BF0A209615F3B2F200156E83 /* about_icon@2x.png */,
 				BF62B5D515CB274D00190CF6 /* EVE Skills-Info.plist */,
 				BF62B5D615CB274D00190CF6 /* InfoPlist.strings */,
 				BF62B5D915CB274D00190CF6 /* main.m */,
@@ -455,12 +461,14 @@
 				BF0A208D15F39A1E00156E83 /* README.md in Resources */,
 				BF0A208F15F3AF7B00156E83 /* icon.icns in Resources */,
 				BF0A209415F3B25500156E83 /* VGAboutWindowController.xib in Resources */,
-				BF0A209715F3B2F200156E83 /* about_icon.png in Resources */,
-				BF0A209815F3B2F200156E83 /* about_icon@2x.png in Resources */,
 				BF0A209B15F3B5A000156E83 /* Credits.rtfd in Resources */,
 				BF1B774E15F3BE8600906C67 /* VGHelpPopoverViewController.xib in Resources */,
 				BF1B775115F3BEDF00906C67 /* APIHelp.rtf in Resources */,
 				BF1B775315F3C24E00906C67 /* MainMenu.xib in Resources */,
+				BF1B776415F3CD3B00906C67 /* about_icon.png in Resources */,
+				BF1B776515F3CD3B00906C67 /* about_icon@2x.png in Resources */,
+				BF1B776615F3CD3B00906C67 /* menu_bar_icon.png in Resources */,
+				BF1B776715F3CD3B00906C67 /* menu_bar_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

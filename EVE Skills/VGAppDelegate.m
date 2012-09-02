@@ -87,9 +87,6 @@
             
             // Initializing user notification controller
             _userNotificationController = [[VGUserNotificationController alloc] init];
-//        dispatch_async(_userNotificationController.dispatchQueue, ^{
-//            [_userNotificationController reloadAllNotifications];
-//        });
             
             // MenuBarController
             [self setupMenu];
@@ -99,9 +96,6 @@
             // Start at login
             NSLog(@"appURL       = %@", [self appURL]);
             NSLog(@"startAtLogin = %@", [VGLoginStart willStartAtLogin:[self appURL]] ? @"YES" : @"NO");
-            
-//            SMLoginItemSetEnabled((__bridge CFStringRef)([self appURL].path), YES);
-            
             
             // Characters in DB
 //            [_coreDataController.mainThreadContext performBlock:^{
@@ -254,8 +248,11 @@
 - (void)setupMenu
 {
     // status item
-    _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    [_statusItem setTitle:@"EVE"];
+    _statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"menu_bar_icon"
+                                                     ofType:@"tiff"];
+    NSImage *image = [[NSImage alloc] initWithContentsOfFile:path];
+    _statusItem.image = image;
     [_statusItem setToolTip:NSLocalizedString(@"menuTooltipTitle", nil)];
     [_statusItem setEnabled:YES];
     [_statusItem setHighlightMode:YES];
