@@ -9,6 +9,7 @@
 #import "VGAppDelegate.h"
 #import "VGManagerWindowController.h"
 #import "VGSkillQueueViewController.h"
+#import "VGLoginStart.h"
 
 
 //
@@ -31,6 +32,7 @@
     // Menu items
     NSMenuItem *_skillQueueMenuItem;
     NSMenuItem *_refreshMenuItem;
+    NSMenuItem *_startAtLoginMenuItem;
     NSMenuItem *_managerMenuItem;
     NSMenuItem *_quitMenuItem;
     
@@ -38,6 +40,8 @@
     NSTimer *_skillQueueReloadTimer;    // refresh characters skill queue
     NSTimer *_skillQueueTimeTimer;      // timer for the remaining time counter refresh
 }
+
+@property BOOL startAtLogin;
 
 - (void)apiControllerContextDidSave:(NSNotification *)note;
 
@@ -87,6 +91,31 @@
             // MenuBarController
             [self setupMenu];
             
+            // Log some thing about the app
+            
+            // Start at login
+            NSLog(@"appURL       = %@", [self appURL]);
+            NSLog(@"startAtLogin = %@", [VGLoginStart willStartAtLogin:[self appURL]] ? @"YES" : @"NO");
+            
+//            SMLoginItemSetEnabled((__bridge CFStringRef)([self appURL].path), YES);
+            
+            
+            // Characters in DB
+            [_coreDataController.mainThreadContext performBlock:^{
+                NSArray *fetchedObjects = [CoreDataController characterEnabled:nil
+                                                                     inContext:_coreDataController.mainThreadContext
+                                                               notifyUserIfNil:NO];
+                if (fetchedObjects == nil) {
+                    NSLog(@"fetchedObjects == nil");
+                } else if ([fetchedObjects count] > 0){
+                    for (Character *character in fetchedObjects) {
+                        NSLog(@"%@ | %@", character.characterName, ([character.enabled boolValue] ? @"YES" : @"NO"));
+                    }
+                } else {
+                    NSLog(@"No characters in DB");
+                }
+            }];
+            
             // Timers
             _skillQueueReloadTimer = [NSTimer timerWithTimeInterval:1.0*60*60 target:self selector:@selector(skillQueueReloadTimerAction:) userInfo:nil repeats:YES];
             [[NSRunLoop mainRunLoop] addTimer:_skillQueueReloadTimer forMode:NSRunLoopCommonModes];
@@ -107,21 +136,7 @@
                 NSLog(@"NSPersistentStoreCoordinatorStoresDidChangeNotification");
             }];
             
-            // Check if there are characters in the DB
-//            [_coreDataController.mainThreadContext performBlock:^{
-//                NSArray *fetchedObjects = [CoreDataController characterEnabled:nil
-//                                                                     inContext:_coreDataController.mainThreadContext
-//                                                               notifyUserIfNil:NO];
-//                if (fetchedObjects == nil) {
-//                    NSLog(@"fetchedObjects == nil");
-//                } else if ([fetchedObjects count] > 0){
-//                    for (Character *character in fetchedObjects) {
-//                        NSLog(@"%@ | %@", character.characterName, ([character.enabled boolValue] ? @"YES" : @"NO"));
-//                    }
-//                } else {
-//                    NSLog(@"No characters in DB");
-//                }
-//            }];
+            
         });
         
     }];
@@ -241,6 +256,11 @@
                                                   action:@selector(refreshAction)
                                            keyEquivalent:@""];
     
+    _startAtLoginMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"menuStartAtLogin", nil)
+                                                       action:@selector(startAtLoginAction)
+                                                keyEquivalent:@""];
+    _startAtLoginMenuItem.title = [NSString stringWithFormat:@"%@ | %@", NSLocalizedString(@"menuStartAtLogin", nil), [VGLoginStart willStartAtLogin:[self appURL]] ? @"YES" : @"NO"];
+    
     _managerMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"menuCharacterManager", nil)
                                                   action:@selector(managerAction)
                                            keyEquivalent:@""];
@@ -261,6 +281,7 @@
     [_menu addItem:_skillQueueMenuItem];
     [_menu addItem:[NSMenuItem separatorItem]];
     [_menu addItem:_managerMenuItem];
+    [_menu addItem:_startAtLoginMenuItem];
 //    [_menu addItem:_refreshMenuItem];
     [_menu addItem:[NSMenuItem separatorItem]];
     [_menu addItem:_quitMenuItem];
@@ -281,6 +302,13 @@
 {
     NSLog(@"managerAction");
     [self openManagerWindow];
+}
+
+- (void)startAtLoginAction
+{
+    NSLog(@"startAtLoginAction");
+    [VGLoginStart setStartAtLogin:[self appURL] enabled:![VGLoginStart willStartAtLogin:[self appURL]]];
+    _startAtLoginMenuItem.title = [NSString stringWithFormat:@"%@ | %@", NSLocalizedString(@"menuStartAtLogin", nil), [VGLoginStart willStartAtLogin:[self appURL]] ? @"YES" : @"NO"];
 }
 
 - (void)quitAction
@@ -338,6 +366,14 @@
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
     [_coreDataController applicationResumed];
+}
+
+#pragma mark -
+#pragma mark - Misc.
+
+- (NSURL *)appURL
+{
+    return [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
 }
 
 @end

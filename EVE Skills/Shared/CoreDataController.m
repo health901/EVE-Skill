@@ -930,7 +930,7 @@ static NSOperationQueue *_presentedItemOperationQueue;
 
 - (NSURL *)applicationSandboxStoresDirectory {
     NSURL *storesDirectory = [NSURL fileURLWithPath:[self applicationDocumentsDirectory]];
-    storesDirectory = [storesDirectory URLByAppendingPathComponent:@"SharedCoreDataStores"];
+    storesDirectory = [storesDirectory URLByAppendingPathComponent:@"EVE Skills"];
     
     NSFileManager *fm = [[NSFileManager alloc] init];
     if (NO == [fm fileExistsAtPath:[storesDirectory path]]) {

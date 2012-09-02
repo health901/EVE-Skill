@@ -27,6 +27,7 @@
  */
 "menuTooltipTitle"      = "EVE Skills";
 "menuTitle"             = "EVE Skills";
+"menuStartAtLogin"      = "Start at login";
 "menuRefresh"           = "Refresh";
 "menuCharacterManager"  = "Character manager";
 "menuQuit"              = "Quit";
