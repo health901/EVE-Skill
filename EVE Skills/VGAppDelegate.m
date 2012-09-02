@@ -9,6 +9,7 @@
 #import "VGAppDelegate.h"
 #import "VGManagerWindowController.h"
 #import "VGSkillQueueViewController.h"
+#import "VGAboutWindowController.h"
 #import "VGLoginStart.h"
 
 
@@ -21,6 +22,7 @@
 @interface VGAppDelegate () {
     // Window controllers
     VGManagerWindowController *_managerWindowController;
+    VGAboutWindowController *_aboutWindowController;
     
     // View controllers
     VGSkillQueueViewController *_skillQueueViewController;
@@ -34,6 +36,7 @@
     NSMenuItem *_refreshMenuItem;
     NSMenuItem *_startAtLoginMenuItem;
     NSMenuItem *_managerMenuItem;
+    NSMenuItem *_aboutMenuItem;
     NSMenuItem *_quitMenuItem;
     
     // Timers
@@ -101,20 +104,28 @@
             
             
             // Characters in DB
-            [_coreDataController.mainThreadContext performBlock:^{
-                NSArray *fetchedObjects = [CoreDataController characterEnabled:nil
-                                                                     inContext:_coreDataController.mainThreadContext
-                                                               notifyUserIfNil:NO];
-                if (fetchedObjects == nil) {
-                    NSLog(@"fetchedObjects == nil");
-                } else if ([fetchedObjects count] > 0){
-                    for (Character *character in fetchedObjects) {
-                        NSLog(@"%@ | %@", character.characterName, ([character.enabled boolValue] ? @"YES" : @"NO"));
-                    }
-                } else {
-                    NSLog(@"No characters in DB");
-                }
-            }];
+//            [_coreDataController.mainThreadContext performBlock:^{
+//                NSArray *fetchedObjects = [CoreDataController characterEnabled:nil
+//                                                                     inContext:_coreDataController.mainThreadContext
+//                                                               notifyUserIfNil:NO];
+//                if (fetchedObjects == nil) {
+//                    NSLog(@"fetchedObjects == nil");
+//                } else if ([fetchedObjects count] > 0){
+//                    for (Character *character in fetchedObjects) {
+//                        NSLog(@"%@ | %@", character.characterName, ([character.enabled boolValue] ? @"YES" : @"NO"));
+//                    }
+//                } else {
+//                    NSLog(@"No characters in DB");
+//                }
+//            }];
+            
+            // If there is no enabled character in DB, open the character manager
+            NSArray *fetchedObjects = [CoreDataController characterEnabled:@YES
+                                                                 inContext:_coreDataController.mainThreadContext
+                                                           notifyUserIfNil:NO];
+            if (fetchedObjects.count == 0) {
+                [self openManagerWindow];
+            }
             
             // Timers
             _skillQueueReloadTimer = [NSTimer timerWithTimeInterval:1.0*60*60 target:self selector:@selector(skillQueueReloadTimerAction:) userInfo:nil repeats:YES];
@@ -189,7 +200,7 @@
 }
 
 #pragma mark -
-#pragma mark - Public methods
+#pragma mark - Window & Menu
 
 - (void)openManagerWindow
 {
@@ -198,6 +209,16 @@
     }
     
     [_managerWindowController.window makeKeyAndOrderFront:self];
+}
+
+- (void)openAboutWindow
+{
+    
+    if (!_aboutWindowController) {
+        _aboutWindowController = [[VGAboutWindowController alloc] initWithWindowNibName:@"VGAboutWindowController"];
+    }
+    
+    [_aboutWindowController.window makeKeyAndOrderFront:self];
 }
 
 - (void)showMenuBarMenu
@@ -259,11 +280,15 @@
     _startAtLoginMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"menuStartAtLogin", nil)
                                                        action:@selector(startAtLoginAction)
                                                 keyEquivalent:@""];
-    _startAtLoginMenuItem.title = [NSString stringWithFormat:@"%@ | %@", NSLocalizedString(@"menuStartAtLogin", nil), [VGLoginStart willStartAtLogin:[self appURL]] ? @"YES" : @"NO"];
+    _startAtLoginMenuItem.title = ([VGLoginStart willStartAtLogin:[self appURL]] ? NSLocalizedString(@"menuStartAtLoginYES", nil) : NSLocalizedString(@"menuStartAtLoginNO", nil));
     
     _managerMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"menuCharacterManager", nil)
                                                   action:@selector(managerAction)
                                            keyEquivalent:@""];
+    
+    _aboutMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"menuAbout", nil)
+                                                action:@selector(aboutAction)
+                                         keyEquivalent:@""];
     
     _quitMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"menuQuit", nil)
                                                action:@selector(quitAction)
@@ -283,6 +308,8 @@
     [_menu addItem:_managerMenuItem];
     [_menu addItem:_startAtLoginMenuItem];
 //    [_menu addItem:_refreshMenuItem];
+    [_menu addItem:[NSMenuItem separatorItem]];
+    [_menu addItem:_aboutMenuItem];
     [_menu addItem:[NSMenuItem separatorItem]];
     [_menu addItem:_quitMenuItem];
 }
@@ -307,8 +334,18 @@
 - (void)startAtLoginAction
 {
     NSLog(@"startAtLoginAction");
+    
+    // Add/Remove the app from the login start list
     [VGLoginStart setStartAtLogin:[self appURL] enabled:![VGLoginStart willStartAtLogin:[self appURL]]];
-    _startAtLoginMenuItem.title = [NSString stringWithFormat:@"%@ | %@", NSLocalizedString(@"menuStartAtLogin", nil), [VGLoginStart willStartAtLogin:[self appURL]] ? @"YES" : @"NO"];
+    
+    // Update the UI
+    _startAtLoginMenuItem.title = ([VGLoginStart willStartAtLogin:[self appURL]] ? NSLocalizedString(@"menuStartAtLoginYES", nil) : NSLocalizedString(@"menuStartAtLoginNO", nil));
+}
+
+- (void)aboutAction
+{
+    NSLog(@"aboutAction");
+    [self openAboutWindow];
 }
 
 - (void)quitAction
@@ -334,6 +371,7 @@
 {
     __block int reply = NSTerminateNow;
     
+    // Save the main thread context to disk
     NSManagedObjectContext *moc = _coreDataController.mainThreadContext;
     [moc performBlockAndWait:^{
         NSError *error = nil;

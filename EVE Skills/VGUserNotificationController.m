@@ -53,6 +53,9 @@ static NSString *kUserNotificationIsSkillEnd = @"kUserNotificationIsSkillEnd";
         _defaultCenter = [NSUserNotificationCenter defaultUserNotificationCenter];
         _defaultCenter.delegate = self;
         
+        // Remove all previously scheduled notifications
+        _defaultCenter.scheduledNotifications = @[ ];
+        
         // Notifications
         [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextObjectsDidChangeNotification object:self.appDelegate.coreDataController.mainThreadContext queue:nil usingBlock:^(NSNotification *note) {
 //            NSLog(@"note.userInfo[NSInsertedObjectsKey] : %@", note.userInfo[NSInsertedObjectsKey]);

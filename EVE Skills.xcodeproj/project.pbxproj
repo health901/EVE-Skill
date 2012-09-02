@@ -8,7 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		BF0A208D15F39A1E00156E83 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BF0A208C15F39A1E00156E83 /* README.md */; };
+		BF0A208F15F3AF7B00156E83 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BF0A208E15F3AF7A00156E83 /* icon.icns */; };
+		BF0A209315F3B25500156E83 /* VGAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0A209115F3B25500156E83 /* VGAboutWindowController.m */; };
+		BF0A209415F3B25500156E83 /* VGAboutWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF0A209215F3B25500156E83 /* VGAboutWindowController.xib */; };
+		BF0A209715F3B2F200156E83 /* about_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BF0A209515F3B2F200156E83 /* about_icon.png */; };
+		BF0A209815F3B2F200156E83 /* about_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF0A209615F3B2F200156E83 /* about_icon@2x.png */; };
+		BF0A209B15F3B5A000156E83 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = BF0A209915F3B5A000156E83 /* Credits.rtfd */; };
 		BF0E77C815F3899C00234ABB /* VGLoginStart.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E77C715F3899C00234ABB /* VGLoginStart.m */; };
+		BF1B774D15F3BE8600906C67 /* VGHelpPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1B774B15F3BE8600906C67 /* VGHelpPopoverViewController.m */; };
+		BF1B774E15F3BE8600906C67 /* VGHelpPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF1B774C15F3BE8600906C67 /* VGHelpPopoverViewController.xib */; };
+		BF1B775115F3BEDF00906C67 /* APIHelp.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BF1B774F15F3BEDF00906C67 /* APIHelp.rtf */; };
+		BF1B775315F3C24E00906C67 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF1B775215F3C24E00906C67 /* MainMenu.xib */; };
 		BF3A2A0615E24209007EE82C /* VGSkillDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A0415E24209007EE82C /* VGSkillDetailViewController.m */; };
 		BF3A2A0715E24209007EE82C /* VGSkillDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF3A2A0515E24209007EE82C /* VGSkillDetailViewController.xib */; };
 		BF3A2A0A15E25AAC007EE82C /* QueueElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A0915E25AAC007EE82C /* QueueElement.m */; };
@@ -21,7 +31,6 @@
 		BF62B5CE15CB274D00190CF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF62B5CD15CB274D00190CF6 /* Cocoa.framework */; };
 		BF62B5D815CB274D00190CF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5D615CB274D00190CF6 /* InfoPlist.strings */; };
 		BF62B5DA15CB274D00190CF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5D915CB274D00190CF6 /* main.m */; };
-		BF62B5DE15CB274D00190CF6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5DC15CB274D00190CF6 /* Credits.rtf */; };
 		BF62B5E115CB274D00190CF6 /* VGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */; };
 		BF6DAF4215F1F8AC0044C6E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF6DAF4115F1F8AC0044C6E8 /* Localizable.strings */; };
 		BF6DAF4C15F253430044C6E8 /* NSString+VGEVE.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6DAF4B15F253420044C6E8 /* NSString+VGEVE.m */; };
@@ -49,8 +58,20 @@
 
 /* Begin PBXFileReference section */
 		BF0A208C15F39A1E00156E83 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		BF0A208E15F3AF7A00156E83 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		BF0A209015F3B25500156E83 /* VGAboutWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGAboutWindowController.h; sourceTree = "<group>"; };
+		BF0A209115F3B25500156E83 /* VGAboutWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGAboutWindowController.m; sourceTree = "<group>"; };
+		BF0A209215F3B25500156E83 /* VGAboutWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGAboutWindowController.xib; sourceTree = "<group>"; };
+		BF0A209515F3B2F200156E83 /* about_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = about_icon.png; path = icon/about_icon.png; sourceTree = SOURCE_ROOT; };
+		BF0A209615F3B2F200156E83 /* about_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "about_icon@2x.png"; path = "icon/about_icon@2x.png"; sourceTree = SOURCE_ROOT; };
+		BF0A209A15F3B5A000156E83 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = en; path = en.lproj/Credits.rtfd; sourceTree = "<group>"; };
 		BF0E77C615F3899C00234ABB /* VGLoginStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGLoginStart.h; sourceTree = "<group>"; };
 		BF0E77C715F3899C00234ABB /* VGLoginStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGLoginStart.m; sourceTree = "<group>"; };
+		BF1B774A15F3BE8600906C67 /* VGHelpPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGHelpPopoverViewController.h; sourceTree = "<group>"; };
+		BF1B774B15F3BE8600906C67 /* VGHelpPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGHelpPopoverViewController.m; sourceTree = "<group>"; };
+		BF1B774C15F3BE8600906C67 /* VGHelpPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGHelpPopoverViewController.xib; sourceTree = "<group>"; };
+		BF1B775015F3BEDF00906C67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/APIHelp.rtf; sourceTree = "<group>"; };
+		BF1B775215F3C24E00906C67 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		BF3A2A0315E24209007EE82C /* VGSkillDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSkillDetailViewController.h; sourceTree = "<group>"; };
 		BF3A2A0415E24209007EE82C /* VGSkillDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGSkillDetailViewController.m; sourceTree = "<group>"; };
 		BF3A2A0515E24209007EE82C /* VGSkillDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGSkillDetailViewController.xib; sourceTree = "<group>"; };
@@ -79,7 +100,6 @@
 		BF62B5D715CB274D00190CF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BF62B5D915CB274D00190CF6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BF62B5DB15CB274D00190CF6 /* EVE Skills-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EVE Skills-Prefix.pch"; sourceTree = "<group>"; };
-		BF62B5DD15CB274D00190CF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGAppDelegate.h; sourceTree = "<group>"; };
 		BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGAppDelegate.m; sourceTree = "<group>"; };
 		BF6DAF4115F1F8AC0044C6E8 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -165,6 +185,9 @@
 				BFDD80D115CC76BA00116A65 /* VGManagerWindowController.h */,
 				BFDD80D215CC76BA00116A65 /* VGManagerWindowController.m */,
 				BFDD80D315CC76BA00116A65 /* VGManagerWindowController.xib */,
+				BF0A209015F3B25500156E83 /* VGAboutWindowController.h */,
+				BF0A209115F3B25500156E83 /* VGAboutWindowController.m */,
+				BF0A209215F3B25500156E83 /* VGAboutWindowController.xib */,
 			);
 			name = Window;
 			sourceTree = "<group>";
@@ -205,6 +228,9 @@
 				BF3A2A0315E24209007EE82C /* VGSkillDetailViewController.h */,
 				BF3A2A0415E24209007EE82C /* VGSkillDetailViewController.m */,
 				BF3A2A0515E24209007EE82C /* VGSkillDetailViewController.xib */,
+				BF1B774A15F3BE8600906C67 /* VGHelpPopoverViewController.h */,
+				BF1B774B15F3BE8600906C67 /* VGHelpPopoverViewController.m */,
+				BF1B774C15F3BE8600906C67 /* VGHelpPopoverViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -221,6 +247,7 @@
 		BF62B5BE15CB274D00190CF6 = {
 			isa = PBXGroup;
 			children = (
+				BF0A208E15F3AF7A00156E83 /* icon.icns */,
 				BF0A208C15F39A1E00156E83 /* README.md */,
 				BF62B5D315CB274D00190CF6 /* EVE Skills */,
 				BF62B5CC15CB274D00190CF6 /* Frameworks */,
@@ -279,11 +306,14 @@
 		BF62B5D415CB274D00190CF6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BF1B774F15F3BEDF00906C67 /* APIHelp.rtf */,
+				BF0A209915F3B5A000156E83 /* Credits.rtfd */,
+				BF0A209515F3B2F200156E83 /* about_icon.png */,
+				BF0A209615F3B2F200156E83 /* about_icon@2x.png */,
 				BF62B5D515CB274D00190CF6 /* EVE Skills-Info.plist */,
 				BF62B5D615CB274D00190CF6 /* InfoPlist.strings */,
 				BF62B5D915CB274D00190CF6 /* main.m */,
 				BF62B5DB15CB274D00190CF6 /* EVE Skills-Prefix.pch */,
-				BF62B5DC15CB274D00190CF6 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -322,6 +352,7 @@
 		BFDD80D015CC76A200116A65 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BF1B775215F3C24E00906C67 /* MainMenu.xib */,
 				BFB6E37815E3BF9E004A9EE4 /* Views */,
 				BF0A208A15F3963500156E83 /* Window */,
 				BF590EA315DB97360036E10A /* View Controllers */,
@@ -416,13 +447,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF62B5D815CB274D00190CF6 /* InfoPlist.strings in Resources */,
-				BF62B5DE15CB274D00190CF6 /* Credits.rtf in Resources */,
 				BFDD80D515CC76BA00116A65 /* VGManagerWindowController.xib in Resources */,
 				BF4A829B15DBF742003AD68C /* VGSkillQueueViewController.xib in Resources */,
 				BF3A2A0715E24209007EE82C /* VGSkillDetailViewController.xib in Resources */,
 				BFC6D2D815E4D1B2008676BE /* skillStore.sqlite in Resources */,
 				BF6DAF4215F1F8AC0044C6E8 /* Localizable.strings in Resources */,
 				BF0A208D15F39A1E00156E83 /* README.md in Resources */,
+				BF0A208F15F3AF7B00156E83 /* icon.icns in Resources */,
+				BF0A209415F3B25500156E83 /* VGAboutWindowController.xib in Resources */,
+				BF0A209715F3B2F200156E83 /* about_icon.png in Resources */,
+				BF0A209815F3B2F200156E83 /* about_icon@2x.png in Resources */,
+				BF0A209B15F3B5A000156E83 /* Credits.rtfd in Resources */,
+				BF1B774E15F3BE8600906C67 /* VGHelpPopoverViewController.xib in Resources */,
+				BF1B775115F3BEDF00906C67 /* APIHelp.rtf in Resources */,
+				BF1B775315F3C24E00906C67 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,26 +499,36 @@
 				BFC6D2E115E4EB75008676BE /* VGCharacterInfoQuery.m in Sources */,
 				BF6DAF4C15F253430044C6E8 /* NSString+VGEVE.m in Sources */,
 				BF0E77C815F3899C00234ABB /* VGLoginStart.m in Sources */,
+				BF0A209315F3B25500156E83 /* VGAboutWindowController.m in Sources */,
+				BF1B774D15F3BE8600906C67 /* VGHelpPopoverViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		BF0A209915F3B5A000156E83 /* Credits.rtfd */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF0A209A15F3B5A000156E83 /* en */,
+			);
+			name = Credits.rtfd;
+			sourceTree = "<group>";
+		};
+		BF1B774F15F3BEDF00906C67 /* APIHelp.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF1B775015F3BEDF00906C67 /* en */,
+			);
+			name = APIHelp.rtf;
+			sourceTree = "<group>";
+		};
 		BF62B5D615CB274D00190CF6 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				BF62B5D715CB274D00190CF6 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		BF62B5DC15CB274D00190CF6 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BF62B5DD15CB274D00190CF6 /* en */,
-			);
-			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

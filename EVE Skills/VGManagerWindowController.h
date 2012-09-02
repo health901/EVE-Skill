@@ -29,5 +29,6 @@
 - (IBAction)deleteAction:(id)sender;
 - (IBAction)queryAction:(id)sender;
 - (IBAction)applyAction:(id)sender;
+- (IBAction)showHelpPopover:(id)sender;
 
 @end

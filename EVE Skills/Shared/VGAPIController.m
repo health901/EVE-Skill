@@ -115,6 +115,10 @@
     // this must be called in com.vincentgarrigues.apiControllerQueue
     assert(dispatch_get_current_queue() == self.dispatchQueue);
     
+    if (!keyID || ! vCode) {
+        return;
+    }
+    
     NSLog(@"addAPIWithKeyID:%@ vCode:%@", keyID, vCode);
     
     // create the variables dictionnary
@@ -306,7 +310,9 @@
         }
     }];
     
-    completionHandler(completionError, portrait);
+    if (completionHandler) {
+        completionHandler(completionError, portrait);
+    }
 }
 
 - (void)addCorporationForCharacterID:(NSString *)characterID
@@ -363,7 +369,9 @@
             }
         }];
         
-        completionHandler(completionError, corporation);
+        if (completionHandler) {
+            completionHandler(completionError, corporation);
+        }
     };
     
     VGCharacterInfoQuery *characterInfoQuery = [[VGCharacterInfoQuery alloc] initWithData:data];
@@ -400,7 +408,9 @@
             dispatch_group_wait(dispatchGroup, DISPATCH_TIME_FOREVER);
 //            NSLog(@"-refreshQueueForCharacterEnabled: dispatchGroup empty !");
             
-            completionBlock();
+            if (completionBlock) {
+                completionBlock();
+            }
         });
     }];
 }

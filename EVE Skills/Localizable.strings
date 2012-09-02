@@ -27,9 +27,12 @@
  */
 "menuTooltipTitle"      = "EVE Skills";
 "menuTitle"             = "EVE Skills";
-"menuStartAtLogin"      = "Start at login";
+"menuStartAtLogin"      = "Open at login";
+"menuStartAtLoginNO"    = "Enable open at login";
+"menuStartAtLoginYES"   = "Disable open at login";
 "menuRefresh"           = "Refresh";
 "menuCharacterManager"  = "Character manager";
+"menuAbout"             = "About";
 "menuQuit"              = "Quit";
 
 /*

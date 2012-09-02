@@ -146,9 +146,20 @@
     [request setValue:[NSString stringWithFormat:@"%ld", [postData length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:postData];
     
-    return [NSURLConnection sendSynchronousRequest:request
-                                 returningResponse:response
-                                             error:error];
+    NSData *theData = nil;
+    
+    @try {
+        theData = [NSURLConnection sendSynchronousRequest:request
+                                        returningResponse:response
+                                                    error:error];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"EXCEPTION !");
+        NSLog(@"%@, %@", exception, [exception userInfo]);
+    }
+    @finally {
+        return theData;
+    }
 }
 
 @end

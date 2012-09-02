@@ -9,6 +9,7 @@
 #import "VGManagerWindowController.h"
 #import "VGAppDelegate.h"
 #import "VGAppNotifications.h"
+#import "VGHelpPopoverViewController.h"
 
 @interface NSAttributedString (Hyperlink)
 +(id)hyperlinkFromString:(NSString*)inString withURL:(NSURL*)aURL;
@@ -37,7 +38,12 @@
 @end
 
 @interface VGManagerWindowController () {
+    // App delegate
     VGAppDelegate *_appDelegate;
+    
+    // Help popover
+    NSPopover *_helpPopover;
+    VGHelpPopoverViewController *_helpViewController;
 }
 
 @end
@@ -85,6 +91,12 @@
     // set the attributed string to the NSTextField
     [self.hyperlinkTextField setAttributedStringValue: string];
     
+    // Help popover
+    _helpViewController = [[VGHelpPopoverViewController alloc] initWithNibName:@"VGHelpPopoverViewController" bundle:nil];
+    _helpPopover = [[NSPopover alloc] init];
+    _helpPopover.contentViewController = _helpViewController;
+    _helpPopover.behavior = NSPopoverBehaviorSemitransient;
+    
     // Notifications
     [[NSNotificationCenter defaultCenter] addObserverForName:APICALL_QUERY_DID_START_NOTIFICATION
                                                       object:nil
@@ -115,7 +127,7 @@
     [inTextField setAllowsEditingTextAttributes: YES];
     [inTextField setSelectable: YES];
     
-    NSURL* url = [NSURL URLWithString:@"https://support.eveonline.com/api"];
+    NSURL* url = [NSURL URLWithString:@"https://support.eveonline.com/api/Key/CreatePredefined/17039360"];
     
     NSMutableAttributedString* string = [[NSMutableAttributedString alloc] init];
     [string appendAttributedString: [NSAttributedString hyperlinkFromString:@"EVE Online API" withURL:url]];
@@ -184,7 +196,13 @@
 - (IBAction)applyAction:(id)sender
 {
     [_coreDataController saveMainThreadContext];
+    [_appDelegate.apiController refreshQueueForCharacterEnabled:YES completionBlock:nil];
     [self.window performClose:self];
+}
+
+- (IBAction)showHelpPopover:(id)sender {
+    NSButton *btn = (NSButton *)sender;
+    [_helpPopover showRelativeToRect:btn.bounds ofView:btn preferredEdge:NSMinXEdge];
 }
 
 @end
