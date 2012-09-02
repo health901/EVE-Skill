@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF0A208D15F39A1E00156E83 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BF0A208C15F39A1E00156E83 /* README.md */; };
 		BF0E77C815F3899C00234ABB /* VGLoginStart.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E77C715F3899C00234ABB /* VGLoginStart.m */; };
 		BF3A2A0615E24209007EE82C /* VGSkillDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A0415E24209007EE82C /* VGSkillDetailViewController.m */; };
 		BF3A2A0715E24209007EE82C /* VGSkillDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF3A2A0515E24209007EE82C /* VGSkillDetailViewController.xib */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF0A208C15F39A1E00156E83 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		BF0E77C615F3899C00234ABB /* VGLoginStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGLoginStart.h; sourceTree = "<group>"; };
 		BF0E77C715F3899C00234ABB /* VGLoginStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGLoginStart.m; sourceTree = "<group>"; };
 		BF3A2A0315E24209007EE82C /* VGSkillDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSkillDetailViewController.h; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 		BF62B5BE15CB274D00190CF6 = {
 			isa = PBXGroup;
 			children = (
+				BF0A208C15F39A1E00156E83 /* README.md */,
 				BF62B5D315CB274D00190CF6 /* EVE Skills */,
 				BF62B5CC15CB274D00190CF6 /* Frameworks */,
 				BF62B5CA15CB274D00190CF6 /* Products */,
@@ -419,6 +422,7 @@
 				BF3A2A0715E24209007EE82C /* VGSkillDetailViewController.xib in Resources */,
 				BFC6D2D815E4D1B2008676BE /* skillStore.sqlite in Resources */,
 				BF6DAF4215F1F8AC0044C6E8 /* Localizable.strings in Resources */,
+				BF0A208D15F39A1E00156E83 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
