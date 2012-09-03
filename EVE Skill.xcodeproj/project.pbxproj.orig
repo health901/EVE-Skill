@@ -1,0 +1,1218 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+<<<<<<< HEAD
+		BF4F8A6315F4C51C00E81D94 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF4F8A6215F4C51C00E81D94 /* Cocoa.framework */; };
+		BF4F8A6D15F4C51C00E81D94 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF4F8A6B15F4C51C00E81D94 /* InfoPlist.strings */; };
+		BF4F8A6F15F4C51C00E81D94 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F8A6E15F4C51C00E81D94 /* main.m */; };
+		BF4F8A7315F4C51C00E81D94 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BF4F8A7115F4C51C00E81D94 /* Credits.rtf */; };
+		BF4F8A7615F4C51C00E81D94 /* VGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4F8A7515F4C51C00E81D94 /* VGAppDelegate.m */; };
+		BF4F8A7915F4C51D00E81D94 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF4F8A7715F4C51D00E81D94 /* MainMenu.xib */; };
+		BF4F8A8415F4C53300E81D94 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BF4F8A8315F4C53300E81D94 /* README.md */; };
+		BF4F8A9315F4C59000E81D94 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BF4F8A9215F4C59000E81D94 /* icon.icns */; };
+		BF4F8A9815F4C5A300E81D94 /* about_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BF4F8A9415F4C5A300E81D94 /* about_icon.png */; };
+		BF4F8A9915F4C5A300E81D94 /* about_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF4F8A9515F4C5A300E81D94 /* about_icon@2x.png */; };
+		BF4F8A9A15F4C5A300E81D94 /* menu_bar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BF4F8A9615F4C5A300E81D94 /* menu_bar_icon.png */; };
+		BF4F8A9D15F4C5B000E81D94 /* menu_bar_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF4F8A9C15F4C5B000E81D94 /* menu_bar_icon@2x.png */; };
+		BF4F8AA015F4C5C800E81D94 /* APIHelp.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BF4F8A9E15F4C5C800E81D94 /* APIHelp.rtf */; };
+		BF6E207E15F4C672007EAA8C /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E204015F4C671007EAA8C /* API.m */; };
+		BF6E207F15F4C672007EAA8C /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E204215F4C671007EAA8C /* Character.m */; };
+		BF6E208015F4C672007EAA8C /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E204415F4C671007EAA8C /* CoreDataController.m */; };
+		BF6E208115F4C672007EAA8C /* Corporation.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E204615F4C671007EAA8C /* Corporation.m */; };
+		BF6E208215F4C672007EAA8C /* EVE_Skill.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = BF6E204715F4C671007EAA8C /* EVE_Skill.xcdatamodel */; };
+		BF6E208315F4C672007EAA8C /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E204915F4C671007EAA8C /* Group.m */; };
+		BF6E208415F4C672007EAA8C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF6E204A15F4C671007EAA8C /* Localizable.strings */; };
+		BF6E208515F4C672007EAA8C /* NSString+VGEVE.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E204C15F4C671007EAA8C /* NSString+VGEVE.m */; };
+		BF6E208615F4C672007EAA8C /* Portrait.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E204E15F4C671007EAA8C /* Portrait.m */; };
+		BF6E208715F4C672007EAA8C /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E205015F4C671007EAA8C /* Queue.m */; };
+		BF6E208815F4C672007EAA8C /* Queue+VGEVE.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E205215F4C671007EAA8C /* Queue+VGEVE.m */; };
+		BF6E208915F4C672007EAA8C /* QueueElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E205415F4C671007EAA8C /* QueueElement.m */; };
+		BF6E208A15F4C672007EAA8C /* QueueElement+VGEVE.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E205615F4C671007EAA8C /* QueueElement+VGEVE.m */; };
+		BF6E208B15F4C672007EAA8C /* Skill.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E205815F4C671007EAA8C /* Skill.m */; };
+		BF6E208C15F4C672007EAA8C /* skillStore.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BF6E205915F4C671007EAA8C /* skillStore.sqlite */; };
+		BF6E208D15F4C672007EAA8C /* VGAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E205B15F4C671007EAA8C /* VGAPICall.m */; };
+		BF6E208E15F4C672007EAA8C /* VGAPIController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E205D15F4C671007EAA8C /* VGAPIController.m */; };
+		BF6E208F15F4C672007EAA8C /* VGCharacterInfoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E206015F4C671007EAA8C /* VGCharacterInfoQuery.m */; };
+		BF6E209015F4C672007EAA8C /* VGCharacterSkillQueueCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E206215F4C671007EAA8C /* VGCharacterSkillQueueCellView.m */; };
+		BF6E209115F4C672007EAA8C /* VGCharacterTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E206415F4C671007EAA8C /* VGCharacterTableCellView.m */; };
+		BF6E209215F4C672007EAA8C /* VGHelpPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E206615F4C672007EAA8C /* VGHelpPopoverViewController.m */; };
+		BF6E209315F4C672007EAA8C /* VGHelpPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF6E206715F4C672007EAA8C /* VGHelpPopoverViewController.xib */; };
+		BF6E209415F4C672007EAA8C /* VGKeyInfoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E206915F4C672007EAA8C /* VGKeyInfoQuery.m */; };
+		BF6E209515F4C672007EAA8C /* VGManagerTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E206B15F4C672007EAA8C /* VGManagerTableCellView.m */; };
+		BF6E209615F4C672007EAA8C /* VGManagerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E206D15F4C672007EAA8C /* VGManagerWindowController.m */; };
+		BF6E209715F4C672007EAA8C /* VGManagerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF6E206E15F4C672007EAA8C /* VGManagerWindowController.xib */; };
+		BF6E209815F4C672007EAA8C /* VGPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E207015F4C672007EAA8C /* VGPreferencesWindowController.m */; };
+		BF6E209915F4C672007EAA8C /* VGPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF6E207115F4C672007EAA8C /* VGPreferencesWindowController.xib */; };
+		BF6E209A15F4C672007EAA8C /* VGSkillDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E207315F4C672007EAA8C /* VGSkillDetailViewController.m */; };
+		BF6E209B15F4C672007EAA8C /* VGSkillDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF6E207415F4C672007EAA8C /* VGSkillDetailViewController.xib */; };
+		BF6E209C15F4C672007EAA8C /* VGSkillQueueQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E207615F4C672007EAA8C /* VGSkillQueueQuery.m */; };
+		BF6E209D15F4C672007EAA8C /* VGSkillQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E207815F4C672007EAA8C /* VGSkillQueueViewController.m */; };
+		BF6E209E15F4C672007EAA8C /* VGSkillQueueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF6E207915F4C672007EAA8C /* VGSkillQueueViewController.xib */; };
+		BF6E209F15F4C672007EAA8C /* VGSkillTree.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E207B15F4C672007EAA8C /* VGSkillTree.m */; };
+		BF6E20A015F4C672007EAA8C /* VGUserNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6E207D15F4C672007EAA8C /* VGUserNotificationController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BF4F8A5E15F4C51C00E81D94 /* EVE Skill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EVE Skill.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF4F8A6215F4C51C00E81D94 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		BF4F8A6515F4C51C00E81D94 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		BF4F8A6615F4C51C00E81D94 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BF4F8A6715F4C51C00E81D94 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BF4F8A6A15F4C51C00E81D94 /* EVE Skill-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EVE Skill-Info.plist"; sourceTree = "<group>"; };
+		BF4F8A6C15F4C51C00E81D94 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BF4F8A6E15F4C51C00E81D94 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BF4F8A7015F4C51C00E81D94 /* EVE Skill-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EVE Skill-Prefix.pch"; sourceTree = "<group>"; };
+		BF4F8A7215F4C51C00E81D94 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		BF4F8A7415F4C51C00E81D94 /* VGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGAppDelegate.h; sourceTree = "<group>"; };
+		BF4F8A7515F4C51C00E81D94 /* VGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGAppDelegate.m; sourceTree = "<group>"; };
+		BF4F8A7815F4C51D00E81D94 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		BF4F8A8215F4C52700E81D94 /* EVE Skill.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EVE Skill.entitlements"; sourceTree = "<group>"; };
+		BF4F8A8315F4C53300E81D94 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		BF4F8A9215F4C59000E81D94 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../icon.icns; sourceTree = "<group>"; };
+		BF4F8A9415F4C5A300E81D94 /* about_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = about_icon.png; path = icon/about_icon.png; sourceTree = SOURCE_ROOT; };
+		BF4F8A9515F4C5A300E81D94 /* about_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "about_icon@2x.png"; path = "icon/about_icon@2x.png"; sourceTree = SOURCE_ROOT; };
+		BF4F8A9615F4C5A300E81D94 /* menu_bar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_bar_icon.png; path = icon/menu_bar_icon.png; sourceTree = SOURCE_ROOT; };
+		BF4F8A9C15F4C5B000E81D94 /* menu_bar_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu_bar_icon@2x.png"; path = "icon/menu_bar_icon@2x.png"; sourceTree = SOURCE_ROOT; };
+		BF4F8A9F15F4C5C800E81D94 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/APIHelp.rtf; sourceTree = "<group>"; };
+		BF6E203F15F4C671007EAA8C /* API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
+		BF6E204015F4C671007EAA8C /* API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = API.m; sourceTree = "<group>"; };
+		BF6E204115F4C671007EAA8C /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		BF6E204215F4C671007EAA8C /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
+		BF6E204315F4C671007EAA8C /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
+		BF6E204415F4C671007EAA8C /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
+		BF6E204515F4C671007EAA8C /* Corporation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Corporation.h; sourceTree = "<group>"; };
+		BF6E204615F4C671007EAA8C /* Corporation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Corporation.m; sourceTree = "<group>"; };
+		BF6E204715F4C671007EAA8C /* EVE_Skill.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EVE_Skill.xcdatamodel; sourceTree = "<group>"; };
+		BF6E204815F4C671007EAA8C /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		BF6E204915F4C671007EAA8C /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		BF6E204A15F4C671007EAA8C /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		BF6E204B15F4C671007EAA8C /* NSString+VGEVE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+VGEVE.h"; sourceTree = "<group>"; };
+		BF6E204C15F4C671007EAA8C /* NSString+VGEVE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+VGEVE.m"; sourceTree = "<group>"; };
+		BF6E204D15F4C671007EAA8C /* Portrait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Portrait.h; sourceTree = "<group>"; };
+		BF6E204E15F4C671007EAA8C /* Portrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Portrait.m; sourceTree = "<group>"; };
+		BF6E204F15F4C671007EAA8C /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
+		BF6E205015F4C671007EAA8C /* Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Queue.m; sourceTree = "<group>"; };
+		BF6E205115F4C671007EAA8C /* Queue+VGEVE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Queue+VGEVE.h"; sourceTree = "<group>"; };
+		BF6E205215F4C671007EAA8C /* Queue+VGEVE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Queue+VGEVE.m"; sourceTree = "<group>"; };
+		BF6E205315F4C671007EAA8C /* QueueElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueueElement.h; sourceTree = "<group>"; };
+		BF6E205415F4C671007EAA8C /* QueueElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueueElement.m; sourceTree = "<group>"; };
+		BF6E205515F4C671007EAA8C /* QueueElement+VGEVE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QueueElement+VGEVE.h"; sourceTree = "<group>"; };
+		BF6E205615F4C671007EAA8C /* QueueElement+VGEVE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QueueElement+VGEVE.m"; sourceTree = "<group>"; };
+		BF6E205715F4C671007EAA8C /* Skill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skill.h; sourceTree = "<group>"; };
+		BF6E205815F4C671007EAA8C /* Skill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Skill.m; sourceTree = "<group>"; };
+		BF6E205915F4C671007EAA8C /* skillStore.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = skillStore.sqlite; sourceTree = "<group>"; };
+		BF6E205A15F4C671007EAA8C /* VGAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGAPICall.h; sourceTree = "<group>"; };
+		BF6E205B15F4C671007EAA8C /* VGAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGAPICall.m; sourceTree = "<group>"; };
+		BF6E205C15F4C671007EAA8C /* VGAPIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGAPIController.h; sourceTree = "<group>"; };
+		BF6E205D15F4C671007EAA8C /* VGAPIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGAPIController.m; sourceTree = "<group>"; };
+		BF6E205E15F4C671007EAA8C /* VGAppNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGAppNotifications.h; sourceTree = "<group>"; };
+		BF6E205F15F4C671007EAA8C /* VGCharacterInfoQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterInfoQuery.h; sourceTree = "<group>"; };
+		BF6E206015F4C671007EAA8C /* VGCharacterInfoQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterInfoQuery.m; sourceTree = "<group>"; };
+		BF6E206115F4C671007EAA8C /* VGCharacterSkillQueueCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterSkillQueueCellView.h; sourceTree = "<group>"; };
+		BF6E206215F4C671007EAA8C /* VGCharacterSkillQueueCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterSkillQueueCellView.m; sourceTree = "<group>"; };
+		BF6E206315F4C671007EAA8C /* VGCharacterTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterTableCellView.h; sourceTree = "<group>"; };
+		BF6E206415F4C671007EAA8C /* VGCharacterTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterTableCellView.m; sourceTree = "<group>"; };
+		BF6E206515F4C671007EAA8C /* VGHelpPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGHelpPopoverViewController.h; sourceTree = "<group>"; };
+		BF6E206615F4C672007EAA8C /* VGHelpPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGHelpPopoverViewController.m; sourceTree = "<group>"; };
+		BF6E206715F4C672007EAA8C /* VGHelpPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGHelpPopoverViewController.xib; sourceTree = "<group>"; };
+		BF6E206815F4C672007EAA8C /* VGKeyInfoQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGKeyInfoQuery.h; sourceTree = "<group>"; };
+		BF6E206915F4C672007EAA8C /* VGKeyInfoQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGKeyInfoQuery.m; sourceTree = "<group>"; };
+		BF6E206A15F4C672007EAA8C /* VGManagerTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGManagerTableCellView.h; sourceTree = "<group>"; };
+		BF6E206B15F4C672007EAA8C /* VGManagerTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGManagerTableCellView.m; sourceTree = "<group>"; };
+		BF6E206C15F4C672007EAA8C /* VGManagerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGManagerWindowController.h; sourceTree = "<group>"; };
+		BF6E206D15F4C672007EAA8C /* VGManagerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGManagerWindowController.m; sourceTree = "<group>"; };
+		BF6E206E15F4C672007EAA8C /* VGManagerWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGManagerWindowController.xib; sourceTree = "<group>"; };
+		BF6E206F15F4C672007EAA8C /* VGPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGPreferencesWindowController.h; sourceTree = "<group>"; };
+		BF6E207015F4C672007EAA8C /* VGPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGPreferencesWindowController.m; sourceTree = "<group>"; };
+		BF6E207115F4C672007EAA8C /* VGPreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGPreferencesWindowController.xib; sourceTree = "<group>"; };
+		BF6E207215F4C672007EAA8C /* VGSkillDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSkillDetailViewController.h; sourceTree = "<group>"; };
+		BF6E207315F4C672007EAA8C /* VGSkillDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGSkillDetailViewController.m; sourceTree = "<group>"; };
+		BF6E207415F4C672007EAA8C /* VGSkillDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGSkillDetailViewController.xib; sourceTree = "<group>"; };
+		BF6E207515F4C672007EAA8C /* VGSkillQueueQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSkillQueueQuery.h; sourceTree = "<group>"; };
+		BF6E207615F4C672007EAA8C /* VGSkillQueueQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGSkillQueueQuery.m; sourceTree = "<group>"; };
+		BF6E207715F4C672007EAA8C /* VGSkillQueueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSkillQueueViewController.h; sourceTree = "<group>"; };
+		BF6E207815F4C672007EAA8C /* VGSkillQueueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGSkillQueueViewController.m; sourceTree = "<group>"; };
+		BF6E207915F4C672007EAA8C /* VGSkillQueueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGSkillQueueViewController.xib; sourceTree = "<group>"; };
+		BF6E207A15F4C672007EAA8C /* VGSkillTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSkillTree.h; sourceTree = "<group>"; };
+		BF6E207B15F4C672007EAA8C /* VGSkillTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGSkillTree.m; sourceTree = "<group>"; };
+		BF6E207C15F4C672007EAA8C /* VGUserNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGUserNotificationController.h; sourceTree = "<group>"; };
+		BF6E207D15F4C672007EAA8C /* VGUserNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGUserNotificationController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF4F8A5B15F4C51C00E81D94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF4F8A6315F4C51C00E81D94 /* Cocoa.framework in Frameworks */,
+=======
+		BF0A208D15F39A1E00156E83 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BF0A208C15F39A1E00156E83 /* README.md */; };
+		BF0A208F15F3AF7B00156E83 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BF0A208E15F3AF7A00156E83 /* icon.icns */; };
+		BF0A209B15F3B5A000156E83 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = BF0A209915F3B5A000156E83 /* Credits.rtfd */; };
+		BF0E77C815F3899C00234ABB /* VGLoginStart.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E77C715F3899C00234ABB /* VGLoginStart.m */; };
+		BF1B774D15F3BE8600906C67 /* VGHelpPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1B774B15F3BE8600906C67 /* VGHelpPopoverViewController.m */; };
+		BF1B774E15F3BE8600906C67 /* VGHelpPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF1B774C15F3BE8600906C67 /* VGHelpPopoverViewController.xib */; };
+		BF1B775115F3BEDF00906C67 /* APIHelp.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BF1B774F15F3BEDF00906C67 /* APIHelp.rtf */; };
+		BF1B775315F3C24E00906C67 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF1B775215F3C24E00906C67 /* MainMenu.xib */; };
+		BF1B776415F3CD3B00906C67 /* about_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BF1B776015F3CD3B00906C67 /* about_icon.png */; };
+		BF1B776515F3CD3B00906C67 /* about_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF1B776115F3CD3B00906C67 /* about_icon@2x.png */; };
+		BF1B776615F3CD3B00906C67 /* menu_bar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BF1B776215F3CD3B00906C67 /* menu_bar_icon.png */; };
+		BF1B776715F3CD3B00906C67 /* menu_bar_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF1B776315F3CD3B00906C67 /* menu_bar_icon@2x.png */; };
+		BF3A2A0615E24209007EE82C /* VGSkillDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A0415E24209007EE82C /* VGSkillDetailViewController.m */; };
+		BF3A2A0715E24209007EE82C /* VGSkillDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF3A2A0515E24209007EE82C /* VGSkillDetailViewController.xib */; };
+		BF3A2A0A15E25AAC007EE82C /* QueueElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A0915E25AAC007EE82C /* QueueElement.m */; };
+		BF3A2A0D15E25AAD007EE82C /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A0C15E25AAD007EE82C /* Queue.m */; };
+		BF3A2A1715E26DC8007EE82C /* VGCharacterTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A1615E26DC8007EE82C /* VGCharacterTableCellView.m */; };
+		BF3A2A1A15E28A53007EE82C /* VGUserNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF3A2A1915E28A53007EE82C /* VGUserNotificationController.m */; };
+		BF4A829A15DBF742003AD68C /* VGSkillQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF4A829815DBF742003AD68C /* VGSkillQueueViewController.m */; };
+		BF4A829B15DBF742003AD68C /* VGSkillQueueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF4A829915DBF742003AD68C /* VGSkillQueueViewController.xib */; };
+		BF590E8C15DAAFC70036E10A /* VGSkillTree.m in Sources */ = {isa = PBXBuildFile; fileRef = BF590E8B15DAAFC40036E10A /* VGSkillTree.m */; };
+		BF62B5CE15CB274D00190CF6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF62B5CD15CB274D00190CF6 /* Cocoa.framework */; };
+		BF62B5D815CB274D00190CF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF62B5D615CB274D00190CF6 /* InfoPlist.strings */; };
+		BF62B5DA15CB274D00190CF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5D915CB274D00190CF6 /* main.m */; };
+		BF62B5E115CB274D00190CF6 /* VGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */; };
+		BF6DAF4215F1F8AC0044C6E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF6DAF4115F1F8AC0044C6E8 /* Localizable.strings */; };
+		BF6DAF4C15F253430044C6E8 /* NSString+VGEVE.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6DAF4B15F253420044C6E8 /* NSString+VGEVE.m */; };
+		BF9A5D8115F46EC4001EA5D5 /* VGPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9A5D7F15F46EC3001EA5D5 /* VGPreferencesWindowController.m */; };
+		BF9A5D8215F46EC4001EA5D5 /* VGPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF9A5D8015F46EC3001EA5D5 /* VGPreferencesWindowController.xib */; };
+		BFADFD3915DD2F4F005D082D /* Queue+VGEVE.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD3815DD2F4F005D082D /* Queue+VGEVE.m */; };
+		BFADFD3C15DD2FCF005D082D /* QueueElement+VGEVE.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD3B15DD2FCF005D082D /* QueueElement+VGEVE.m */; };
+		BFADFD3F15DD3AF3005D082D /* VGSkillQueueQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD3E15DD3AF3005D082D /* VGSkillQueueQuery.m */; };
+		BFADFD4515DD5801005D082D /* VGCharacterSkillQueueCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFADFD4415DD5801005D082D /* VGCharacterSkillQueueCellView.m */; };
+		BFB2A03F15F391D500AB6A06 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB2A03E15F391D500AB6A06 /* ServiceManagement.framework */; };
+		BFB6E37615E3BC52004A9EE4 /* VGManagerTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB6E37515E3BC52004A9EE4 /* VGManagerTableCellView.m */; };
+		BFC6D2D815E4D1B2008676BE /* skillStore.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BFC6D2D715E4D1B2008676BE /* skillStore.sqlite */; };
+		BFC6D2DB15E4E362008676BE /* Corporation.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC6D2DA15E4E362008676BE /* Corporation.m */; };
+		BFC6D2DE15E4E363008676BE /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC6D2DD15E4E363008676BE /* Character.m */; };
+		BFC6D2E115E4EB75008676BE /* VGCharacterInfoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC6D2E015E4EB75008676BE /* VGCharacterInfoQuery.m */; };
+		BFDD80BE15CC728000116A65 /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B815CC728000116A65 /* CoreDataController.m */; };
+		BFDD80BF15CC728000116A65 /* DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */; };
+		BFDD80C015CC728000116A65 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80BB15CC728000116A65 /* Group.m */; };
+		BFDD80C115CC728000116A65 /* Skill.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80BD15CC728000116A65 /* Skill.m */; };
+		BFDD80D415CC76BA00116A65 /* VGManagerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80D215CC76BA00116A65 /* VGManagerWindowController.m */; };
+		BFDD80D515CC76BA00116A65 /* VGManagerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFDD80D315CC76BA00116A65 /* VGManagerWindowController.xib */; };
+		BFDD80D815CC804500116A65 /* VGAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80D715CC804500116A65 /* VGAPICall.m */; };
+		BFDD80DB15CC839500116A65 /* VGAPIController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80DA15CC839500116A65 /* VGAPIController.m */; };
+		BFDD80E015CC909A00116A65 /* VGKeyInfoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80DF15CC909A00116A65 /* VGKeyInfoQuery.m */; };
+		BFDD80FB15CC929400116A65 /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD80F615CC929400116A65 /* API.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BF0A208C15F39A1E00156E83 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		BF0A208E15F3AF7A00156E83 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../icon.icns; sourceTree = "<group>"; };
+		BF0A209A15F3B5A000156E83 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = en; path = en.lproj/Credits.rtfd; sourceTree = "<group>"; };
+		BF0E77C615F3899C00234ABB /* VGLoginStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGLoginStart.h; sourceTree = "<group>"; };
+		BF0E77C715F3899C00234ABB /* VGLoginStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGLoginStart.m; sourceTree = "<group>"; };
+		BF1B774A15F3BE8600906C67 /* VGHelpPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGHelpPopoverViewController.h; sourceTree = "<group>"; };
+		BF1B774B15F3BE8600906C67 /* VGHelpPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGHelpPopoverViewController.m; sourceTree = "<group>"; };
+		BF1B774C15F3BE8600906C67 /* VGHelpPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGHelpPopoverViewController.xib; sourceTree = "<group>"; };
+		BF1B775015F3BEDF00906C67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/APIHelp.rtf; sourceTree = "<group>"; };
+		BF1B775215F3C24E00906C67 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		BF1B776015F3CD3B00906C67 /* about_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = about_icon.png; path = icon/about_icon.png; sourceTree = SOURCE_ROOT; };
+		BF1B776115F3CD3B00906C67 /* about_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "about_icon@2x.png"; path = "icon/about_icon@2x.png"; sourceTree = SOURCE_ROOT; };
+		BF1B776215F3CD3B00906C67 /* menu_bar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_bar_icon.png; path = icon/menu_bar_icon.png; sourceTree = SOURCE_ROOT; };
+		BF1B776315F3CD3B00906C67 /* menu_bar_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu_bar_icon@2x.png"; path = "icon/menu_bar_icon@2x.png"; sourceTree = SOURCE_ROOT; };
+		BF3A2A0315E24209007EE82C /* VGSkillDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSkillDetailViewController.h; sourceTree = "<group>"; };
+		BF3A2A0415E24209007EE82C /* VGSkillDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGSkillDetailViewController.m; sourceTree = "<group>"; };
+		BF3A2A0515E24209007EE82C /* VGSkillDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGSkillDetailViewController.xib; sourceTree = "<group>"; };
+		BF3A2A0815E25AAC007EE82C /* QueueElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueueElement.h; sourceTree = "<group>"; };
+		BF3A2A0915E25AAC007EE82C /* QueueElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueueElement.m; sourceTree = "<group>"; };
+		BF3A2A0B15E25AAD007EE82C /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
+		BF3A2A0C15E25AAD007EE82C /* Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Queue.m; sourceTree = "<group>"; };
+		BF3A2A1515E26DC8007EE82C /* VGCharacterTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterTableCellView.h; sourceTree = "<group>"; };
+		BF3A2A1615E26DC8007EE82C /* VGCharacterTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterTableCellView.m; sourceTree = "<group>"; };
+		BF3A2A1815E28A52007EE82C /* VGUserNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGUserNotificationController.h; sourceTree = "<group>"; };
+		BF3A2A1915E28A53007EE82C /* VGUserNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGUserNotificationController.m; sourceTree = "<group>"; };
+		BF4A829515DBEC69003AD68C /* VGAppNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGAppNotifications.h; sourceTree = "<group>"; };
+		BF4A829715DBF742003AD68C /* VGSkillQueueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSkillQueueViewController.h; sourceTree = "<group>"; };
+		BF4A829815DBF742003AD68C /* VGSkillQueueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGSkillQueueViewController.m; sourceTree = "<group>"; };
+		BF4A829915DBF742003AD68C /* VGSkillQueueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGSkillQueueViewController.xib; sourceTree = "<group>"; };
+		BF590E8715DAA9470036E10A /* Portrait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Portrait.h; sourceTree = "<group>"; };
+		BF590E8815DAA9470036E10A /* Portrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Portrait.m; sourceTree = "<group>"; };
+		BF590E8A15DAAFC40036E10A /* VGSkillTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGSkillTree.h; sourceTree = "<group>"; };
+		BF590E8B15DAAFC40036E10A /* VGSkillTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGSkillTree.m; sourceTree = "<group>"; };
+		BF62B5C915CB274D00190CF6 /* EVE Skill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EVE Skill.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF62B5CD15CB274D00190CF6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		BF62B5D015CB274D00190CF6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		BF62B5D115CB274D00190CF6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BF62B5D215CB274D00190CF6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BF62B5D515CB274D00190CF6 /* EVE Skill-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EVE Skill-Info.plist"; sourceTree = "<group>"; };
+		BF62B5D715CB274D00190CF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BF62B5D915CB274D00190CF6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BF62B5DB15CB274D00190CF6 /* EVE Skill-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EVE Skill-Prefix.pch"; sourceTree = "<group>"; };
+		BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VGAppDelegate.h; sourceTree = "<group>"; };
+		BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VGAppDelegate.m; sourceTree = "<group>"; };
+		BF6DAF4115F1F8AC0044C6E8 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		BF6DAF4A15F253420044C6E8 /* NSString+VGEVE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+VGEVE.h"; sourceTree = "<group>"; };
+		BF6DAF4B15F253420044C6E8 /* NSString+VGEVE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+VGEVE.m"; sourceTree = "<group>"; };
+		BF9A5D7E15F46EC3001EA5D5 /* VGPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGPreferencesWindowController.h; sourceTree = "<group>"; };
+		BF9A5D7F15F46EC3001EA5D5 /* VGPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGPreferencesWindowController.m; sourceTree = "<group>"; };
+		BF9A5D8015F46EC3001EA5D5 /* VGPreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGPreferencesWindowController.xib; sourceTree = "<group>"; };
+		BF9A5D8315F49406001EA5D5 /* EVE Skill.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EVE Skill.entitlements"; sourceTree = "<group>"; };
+		BFADFD3715DD2F4F005D082D /* Queue+VGEVE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Queue+VGEVE.h"; sourceTree = "<group>"; };
+		BFADFD3815DD2F4F005D082D /* Queue+VGEVE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Queue+VGEVE.m"; sourceTree = "<group>"; };
+		BFADFD3A15DD2FCF005D082D /* QueueElement+VGEVE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QueueElement+VGEVE.h"; sourceTree = "<group>"; };
+		BFADFD3B15DD2FCF005D082D /* QueueElement+VGEVE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QueueElement+VGEVE.m"; sourceTree = "<group>"; };
+		BFADFD3D15DD3AF3005D082D /* VGSkillQueueQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGSkillQueueQuery.h; sourceTree = "<group>"; };
+		BFADFD3E15DD3AF3005D082D /* VGSkillQueueQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGSkillQueueQuery.m; sourceTree = "<group>"; };
+		BFADFD4315DD5801005D082D /* VGCharacterSkillQueueCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterSkillQueueCellView.h; sourceTree = "<group>"; };
+		BFADFD4415DD5801005D082D /* VGCharacterSkillQueueCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterSkillQueueCellView.m; sourceTree = "<group>"; };
+		BFB2A03E15F391D500AB6A06 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		BFB6E37415E3BC52004A9EE4 /* VGManagerTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGManagerTableCellView.h; sourceTree = "<group>"; };
+		BFB6E37515E3BC52004A9EE4 /* VGManagerTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGManagerTableCellView.m; sourceTree = "<group>"; };
+		BFC6D2D715E4D1B2008676BE /* skillStore.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = skillStore.sqlite; sourceTree = "<group>"; };
+		BFC6D2D915E4E362008676BE /* Corporation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Corporation.h; sourceTree = "<group>"; };
+		BFC6D2DA15E4E362008676BE /* Corporation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Corporation.m; sourceTree = "<group>"; };
+		BFC6D2DC15E4E363008676BE /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		BFC6D2DD15E4E363008676BE /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
+		BFC6D2DF15E4EB74008676BE /* VGCharacterInfoQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterInfoQuery.h; sourceTree = "<group>"; };
+		BFC6D2E015E4EB75008676BE /* VGCharacterInfoQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterInfoQuery.m; sourceTree = "<group>"; };
+		BFDD80B715CC728000116A65 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataController.h; path = Shared/CoreDataController.h; sourceTree = "<group>"; };
+		BFDD80B815CC728000116A65 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataController.m; path = Shared/CoreDataController.m; sourceTree = "<group>"; };
+		BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		BFDD80BA15CC728000116A65 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		BFDD80BB15CC728000116A65 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		BFDD80BC15CC728000116A65 /* Skill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skill.h; sourceTree = "<group>"; };
+		BFDD80BD15CC728000116A65 /* Skill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Skill.m; sourceTree = "<group>"; };
+		BFDD80D115CC76BA00116A65 /* VGManagerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGManagerWindowController.h; sourceTree = "<group>"; };
+		BFDD80D215CC76BA00116A65 /* VGManagerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGManagerWindowController.m; sourceTree = "<group>"; };
+		BFDD80D315CC76BA00116A65 /* VGManagerWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGManagerWindowController.xib; sourceTree = "<group>"; };
+		BFDD80D615CC804500116A65 /* VGAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGAPICall.h; sourceTree = "<group>"; };
+		BFDD80D715CC804500116A65 /* VGAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGAPICall.m; sourceTree = "<group>"; };
+		BFDD80D915CC839500116A65 /* VGAPIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VGAPIController.h; path = Shared/VGAPIController.h; sourceTree = "<group>"; };
+		BFDD80DA15CC839500116A65 /* VGAPIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VGAPIController.m; path = Shared/VGAPIController.m; sourceTree = "<group>"; };
+		BFDD80DE15CC909A00116A65 /* VGKeyInfoQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGKeyInfoQuery.h; sourceTree = "<group>"; };
+		BFDD80DF15CC909A00116A65 /* VGKeyInfoQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGKeyInfoQuery.m; sourceTree = "<group>"; };
+		BFDD80F515CC929400116A65 /* API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
+		BFDD80F615CC929400116A65 /* API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = API.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF62B5C615CB274D00190CF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFB2A03F15F391D500AB6A06 /* ServiceManagement.framework in Frameworks */,
+				BF62B5CE15CB274D00190CF6 /* Cocoa.framework in Frameworks */,
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+<<<<<<< HEAD
+		BF4F8A5315F4C51C00E81D94 = {
+			isa = PBXGroup;
+			children = (
+				BF4F8A8315F4C53300E81D94 /* README.md */,
+				BF4F8A6815F4C51C00E81D94 /* EVE Skill */,
+				BF4F8A6115F4C51C00E81D94 /* Frameworks */,
+				BF4F8A5F15F4C51C00E81D94 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BF4F8A5F15F4C51C00E81D94 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF4F8A5E15F4C51C00E81D94 /* EVE Skill.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF4F8A6115F4C51C00E81D94 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF4F8A6215F4C51C00E81D94 /* Cocoa.framework */,
+				BF4F8A6415F4C51C00E81D94 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF4F8A6415F4C51C00E81D94 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF4F8A6515F4C51C00E81D94 /* AppKit.framework */,
+				BF4F8A6615F4C51C00E81D94 /* CoreData.framework */,
+				BF4F8A6715F4C51C00E81D94 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		BF4F8A6815F4C51C00E81D94 /* EVE Skill */ = {
+			isa = PBXGroup;
+			children = (
+				BF6E20A915F4C989007EAA8C /* Cocoa additions */,
+				BF4F8A8215F4C52700E81D94 /* EVE Skill.entitlements */,
+				BF6E205E15F4C671007EAA8C /* VGAppNotifications.h */,
+				BF4F8A7415F4C51C00E81D94 /* VGAppDelegate.h */,
+				BF4F8A7515F4C51C00E81D94 /* VGAppDelegate.m */,
+				BF6E20AC15F4C9CB007EAA8C /* Controllers */,
+				BF6E20AA15F4C996007EAA8C /* EVE Online API */,
+				BF6E20A815F4C97D007EAA8C /* Core Data */,
+				BF6E20A415F4C914007EAA8C /* UI */,
+				BF6E20A615F4C944007EAA8C /* Images */,
+				BF6E20A515F4C933007EAA8C /* Resources */,
+				BF4F8A6915F4C51C00E81D94 /* Supporting Files */,
+			);
+			path = "EVE Skill";
+			sourceTree = "<group>";
+		};
+		BF4F8A6915F4C51C00E81D94 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BF4F8A6A15F4C51C00E81D94 /* EVE Skill-Info.plist */,
+				BF4F8A6B15F4C51C00E81D94 /* InfoPlist.strings */,
+				BF4F8A6E15F4C51C00E81D94 /* main.m */,
+				BF4F8A7015F4C51C00E81D94 /* EVE Skill-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BF6E20A115F4C8CA007EAA8C /* View controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BF6E206515F4C671007EAA8C /* VGHelpPopoverViewController.h */,
+				BF6E206615F4C672007EAA8C /* VGHelpPopoverViewController.m */,
+				BF6E206715F4C672007EAA8C /* VGHelpPopoverViewController.xib */,
+				BF6E207215F4C672007EAA8C /* VGSkillDetailViewController.h */,
+				BF6E207315F4C672007EAA8C /* VGSkillDetailViewController.m */,
+				BF6E207415F4C672007EAA8C /* VGSkillDetailViewController.xib */,
+				BF6E207715F4C672007EAA8C /* VGSkillQueueViewController.h */,
+				BF6E207815F4C672007EAA8C /* VGSkillQueueViewController.m */,
+				BF6E207915F4C672007EAA8C /* VGSkillQueueViewController.xib */,
+			);
+			name = "View controllers";
+			sourceTree = "<group>";
+		};
+		BF6E20A215F4C8F3007EAA8C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BF6E206115F4C671007EAA8C /* VGCharacterSkillQueueCellView.h */,
+				BF6E206215F4C671007EAA8C /* VGCharacterSkillQueueCellView.m */,
+				BF6E206315F4C671007EAA8C /* VGCharacterTableCellView.h */,
+				BF6E206415F4C671007EAA8C /* VGCharacterTableCellView.m */,
+				BF6E206A15F4C672007EAA8C /* VGManagerTableCellView.h */,
+				BF6E206B15F4C672007EAA8C /* VGManagerTableCellView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		BF6E20A315F4C905007EAA8C /* WindowControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BF6E206C15F4C672007EAA8C /* VGManagerWindowController.h */,
+				BF6E206D15F4C672007EAA8C /* VGManagerWindowController.m */,
+				BF6E206E15F4C672007EAA8C /* VGManagerWindowController.xib */,
+				BF6E206F15F4C672007EAA8C /* VGPreferencesWindowController.h */,
+				BF6E207015F4C672007EAA8C /* VGPreferencesWindowController.m */,
+				BF6E207115F4C672007EAA8C /* VGPreferencesWindowController.xib */,
+			);
+			name = WindowControllers;
+			sourceTree = "<group>";
+		};
+		BF6E20A415F4C914007EAA8C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				BF4F8A7715F4C51D00E81D94 /* MainMenu.xib */,
+				BF6E20A215F4C8F3007EAA8C /* Views */,
+				BF6E20A115F4C8CA007EAA8C /* View controllers */,
+				BF6E20A315F4C905007EAA8C /* WindowControllers */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		BF6E20A515F4C933007EAA8C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BF6E204A15F4C671007EAA8C /* Localizable.strings */,
+				BF6E205915F4C671007EAA8C /* skillStore.sqlite */,
+				BF4F8A7115F4C51C00E81D94 /* Credits.rtf */,
+				BF4F8A9E15F4C5C800E81D94 /* APIHelp.rtf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		BF6E20A615F4C944007EAA8C /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				BF4F8A9415F4C5A300E81D94 /* about_icon.png */,
+				BF4F8A9515F4C5A300E81D94 /* about_icon@2x.png */,
+				BF4F8A9615F4C5A300E81D94 /* menu_bar_icon.png */,
+				BF4F8A9C15F4C5B000E81D94 /* menu_bar_icon@2x.png */,
+				BF4F8A9215F4C59000E81D94 /* icon.icns */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		BF6E20A715F4C969007EAA8C /* Managed Objects */ = {
+			isa = PBXGroup;
+			children = (
+				BF6E203F15F4C671007EAA8C /* API.h */,
+				BF6E204015F4C671007EAA8C /* API.m */,
+				BF6E204115F4C671007EAA8C /* Character.h */,
+				BF6E204215F4C671007EAA8C /* Character.m */,
+				BF6E204515F4C671007EAA8C /* Corporation.h */,
+				BF6E204615F4C671007EAA8C /* Corporation.m */,
+				BF6E204815F4C671007EAA8C /* Group.h */,
+				BF6E204915F4C671007EAA8C /* Group.m */,
+				BF6E204D15F4C671007EAA8C /* Portrait.h */,
+				BF6E204E15F4C671007EAA8C /* Portrait.m */,
+				BF6E204F15F4C671007EAA8C /* Queue.h */,
+				BF6E205015F4C671007EAA8C /* Queue.m */,
+				BF6E205115F4C671007EAA8C /* Queue+VGEVE.h */,
+				BF6E205215F4C671007EAA8C /* Queue+VGEVE.m */,
+				BF6E205315F4C671007EAA8C /* QueueElement.h */,
+				BF6E205415F4C671007EAA8C /* QueueElement.m */,
+				BF6E205515F4C671007EAA8C /* QueueElement+VGEVE.h */,
+				BF6E205615F4C671007EAA8C /* QueueElement+VGEVE.m */,
+				BF6E205715F4C671007EAA8C /* Skill.h */,
+				BF6E205815F4C671007EAA8C /* Skill.m */,
+			);
+			name = "Managed Objects";
+			sourceTree = "<group>";
+		};
+		BF6E20A815F4C97D007EAA8C /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				BF6E20A715F4C969007EAA8C /* Managed Objects */,
+				BF6E204715F4C671007EAA8C /* EVE_Skill.xcdatamodel */,
+			);
+			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		BF6E20A915F4C989007EAA8C /* Cocoa additions */ = {
+			isa = PBXGroup;
+			children = (
+				BF6E204B15F4C671007EAA8C /* NSString+VGEVE.h */,
+				BF6E204C15F4C671007EAA8C /* NSString+VGEVE.m */,
+			);
+			name = "Cocoa additions";
+			sourceTree = "<group>";
+		};
+		BF6E20AA15F4C996007EAA8C /* EVE Online API */ = {
+			isa = PBXGroup;
+			children = (
+				BF6E205A15F4C671007EAA8C /* VGAPICall.h */,
+				BF6E205B15F4C671007EAA8C /* VGAPICall.m */,
+				BF6E207A15F4C672007EAA8C /* VGSkillTree.h */,
+				BF6E207B15F4C672007EAA8C /* VGSkillTree.m */,
+				BF6E20AB15F4C9AB007EAA8C /* Query parsers */,
+			);
+			name = "EVE Online API";
+			sourceTree = "<group>";
+		};
+		BF6E20AB15F4C9AB007EAA8C /* Query parsers */ = {
+			isa = PBXGroup;
+			children = (
+				BF6E205F15F4C671007EAA8C /* VGCharacterInfoQuery.h */,
+				BF6E206015F4C671007EAA8C /* VGCharacterInfoQuery.m */,
+				BF6E206815F4C672007EAA8C /* VGKeyInfoQuery.h */,
+				BF6E206915F4C672007EAA8C /* VGKeyInfoQuery.m */,
+				BF6E207515F4C672007EAA8C /* VGSkillQueueQuery.h */,
+				BF6E207615F4C672007EAA8C /* VGSkillQueueQuery.m */,
+=======
+		BF0A208815F395DA00156E83 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BFDD80D915CC839500116A65 /* VGAPIController.h */,
+				BFDD80DA15CC839500116A65 /* VGAPIController.m */,
+				BFDD80B715CC728000116A65 /* CoreDataController.h */,
+				BFDD80B815CC728000116A65 /* CoreDataController.m */,
+				BF3A2A1815E28A52007EE82C /* VGUserNotificationController.h */,
+				BF3A2A1915E28A53007EE82C /* VGUserNotificationController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		BF0A208915F3961700156E83 /* Start at login */ = {
+			isa = PBXGroup;
+			children = (
+				BF0E77C615F3899C00234ABB /* VGLoginStart.h */,
+				BF0E77C715F3899C00234ABB /* VGLoginStart.m */,
+			);
+			name = "Start at login";
+			sourceTree = "<group>";
+		};
+		BF0A208A15F3963500156E83 /* Window */ = {
+			isa = PBXGroup;
+			children = (
+				BFDD80D115CC76BA00116A65 /* VGManagerWindowController.h */,
+				BFDD80D215CC76BA00116A65 /* VGManagerWindowController.m */,
+				BFDD80D315CC76BA00116A65 /* VGManagerWindowController.xib */,
+				BF9A5D7E15F46EC3001EA5D5 /* VGPreferencesWindowController.h */,
+				BF9A5D7F15F46EC3001EA5D5 /* VGPreferencesWindowController.m */,
+				BF9A5D8015F46EC3001EA5D5 /* VGPreferencesWindowController.xib */,
+			);
+			name = Window;
+			sourceTree = "<group>";
+		};
+		BF0A208B15F3966600156E83 /* Managed objects */ = {
+			isa = PBXGroup;
+			children = (
+				BFC6D2DC15E4E363008676BE /* Character.h */,
+				BFC6D2DD15E4E363008676BE /* Character.m */,
+				BFC6D2D915E4E362008676BE /* Corporation.h */,
+				BFC6D2DA15E4E362008676BE /* Corporation.m */,
+				BF3A2A0B15E25AAD007EE82C /* Queue.h */,
+				BF3A2A0C15E25AAD007EE82C /* Queue.m */,
+				BF3A2A0815E25AAC007EE82C /* QueueElement.h */,
+				BF3A2A0915E25AAC007EE82C /* QueueElement.m */,
+				BFADFD3715DD2F4F005D082D /* Queue+VGEVE.h */,
+				BFADFD3815DD2F4F005D082D /* Queue+VGEVE.m */,
+				BFADFD3A15DD2FCF005D082D /* QueueElement+VGEVE.h */,
+				BFADFD3B15DD2FCF005D082D /* QueueElement+VGEVE.m */,
+				BFDD80F515CC929400116A65 /* API.h */,
+				BFDD80F615CC929400116A65 /* API.m */,
+				BF590E8715DAA9470036E10A /* Portrait.h */,
+				BF590E8815DAA9470036E10A /* Portrait.m */,
+				BFDD80BA15CC728000116A65 /* Group.h */,
+				BFDD80BB15CC728000116A65 /* Group.m */,
+				BFDD80BC15CC728000116A65 /* Skill.h */,
+				BFDD80BD15CC728000116A65 /* Skill.m */,
+			);
+			name = "Managed objects";
+			sourceTree = "<group>";
+		};
+		BF590EA315DB97360036E10A /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BF4A829715DBF742003AD68C /* VGSkillQueueViewController.h */,
+				BF4A829815DBF742003AD68C /* VGSkillQueueViewController.m */,
+				BF4A829915DBF742003AD68C /* VGSkillQueueViewController.xib */,
+				BF3A2A0315E24209007EE82C /* VGSkillDetailViewController.h */,
+				BF3A2A0415E24209007EE82C /* VGSkillDetailViewController.m */,
+				BF3A2A0515E24209007EE82C /* VGSkillDetailViewController.xib */,
+				BF1B774A15F3BE8600906C67 /* VGHelpPopoverViewController.h */,
+				BF1B774B15F3BE8600906C67 /* VGHelpPopoverViewController.m */,
+				BF1B774C15F3BE8600906C67 /* VGHelpPopoverViewController.xib */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		BF590EA715DBA4310036E10A /* Local DB */ = {
+			isa = PBXGroup;
+			children = (
+				BF590E8A15DAAFC40036E10A /* VGSkillTree.h */,
+				BF590E8B15DAAFC40036E10A /* VGSkillTree.m */,
+			);
+			name = "Local DB";
+			sourceTree = "<group>";
+		};
+		BF62B5BE15CB274D00190CF6 = {
+			isa = PBXGroup;
+			children = (
+				BF9A5D8315F49406001EA5D5 /* EVE Skill.entitlements */,
+				BF0A208C15F39A1E00156E83 /* README.md */,
+				BF62B5D315CB274D00190CF6 /* EVE Skills */,
+				BF62B5CC15CB274D00190CF6 /* Frameworks */,
+				BF62B5CA15CB274D00190CF6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BF62B5CA15CB274D00190CF6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF62B5C915CB274D00190CF6 /* EVE Skill.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF62B5CC15CB274D00190CF6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BFB2A03E15F391D500AB6A06 /* ServiceManagement.framework */,
+				BF62B5CD15CB274D00190CF6 /* Cocoa.framework */,
+				BF62B5CF15CB274D00190CF6 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF62B5CF15CB274D00190CF6 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF62B5D015CB274D00190CF6 /* AppKit.framework */,
+				BF62B5D115CB274D00190CF6 /* CoreData.framework */,
+				BF62B5D215CB274D00190CF6 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		BF62B5D315CB274D00190CF6 /* EVE Skills */ = {
+			isa = PBXGroup;
+			children = (
+				BF4A829515DBEC69003AD68C /* VGAppNotifications.h */,
+				BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */,
+				BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */,
+				BF0A208815F395DA00156E83 /* Controllers */,
+				BFDD80E115CC922A00116A65 /* API Call */,
+				BFDD80E215CC924100116A65 /* Core Data */,
+				BFDD80D015CC76A200116A65 /* UI */,
+				BF0A208915F3961700156E83 /* Start at login */,
+				BF6DAF8715F25F6B0044C6E8 /* Cocoa additions */,
+				BF590EA715DBA4310036E10A /* Local DB */,
+				BFDD80B115CC60F300116A65 /* Resources */,
+				BF62B5D415CB274D00190CF6 /* Supporting Files */,
+			);
+			path = "EVE Skills";
+			sourceTree = "<group>";
+		};
+		BF62B5D415CB274D00190CF6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BF1B776015F3CD3B00906C67 /* about_icon.png */,
+				BF1B776115F3CD3B00906C67 /* about_icon@2x.png */,
+				BF1B776215F3CD3B00906C67 /* menu_bar_icon.png */,
+				BF1B776315F3CD3B00906C67 /* menu_bar_icon@2x.png */,
+				BF0A208E15F3AF7A00156E83 /* icon.icns */,
+				BF1B774F15F3BEDF00906C67 /* APIHelp.rtf */,
+				BF0A209915F3B5A000156E83 /* Credits.rtfd */,
+				BF62B5D515CB274D00190CF6 /* EVE Skill-Info.plist */,
+				BF62B5D615CB274D00190CF6 /* InfoPlist.strings */,
+				BF62B5D915CB274D00190CF6 /* main.m */,
+				BF62B5DB15CB274D00190CF6 /* EVE Skill-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BF6DAF8715F25F6B0044C6E8 /* Cocoa additions */ = {
+			isa = PBXGroup;
+			children = (
+				BF6DAF4A15F253420044C6E8 /* NSString+VGEVE.h */,
+				BF6DAF4B15F253420044C6E8 /* NSString+VGEVE.m */,
+			);
+			name = "Cocoa additions";
+			sourceTree = "<group>";
+		};
+		BFB6E37815E3BF9E004A9EE4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BFADFD4315DD5801005D082D /* VGCharacterSkillQueueCellView.h */,
+				BFADFD4415DD5801005D082D /* VGCharacterSkillQueueCellView.m */,
+				BFB6E37415E3BC52004A9EE4 /* VGManagerTableCellView.h */,
+				BFB6E37515E3BC52004A9EE4 /* VGManagerTableCellView.m */,
+				BF3A2A1515E26DC8007EE82C /* VGCharacterTableCellView.h */,
+				BF3A2A1615E26DC8007EE82C /* VGCharacterTableCellView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		BFDD80B115CC60F300116A65 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BFC6D2D715E4D1B2008676BE /* skillStore.sqlite */,
+				BF6DAF4115F1F8AC0044C6E8 /* Localizable.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		BFDD80D015CC76A200116A65 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				BF1B775215F3C24E00906C67 /* MainMenu.xib */,
+				BF0A208A15F3963500156E83 /* Window */,
+				BF590EA315DB97360036E10A /* View Controllers */,
+				BFB6E37815E3BF9E004A9EE4 /* Views */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		BFDD80DD15CC906F00116A65 /* Query parsers */ = {
+			isa = PBXGroup;
+			children = (
+				BFDD80DE15CC909A00116A65 /* VGKeyInfoQuery.h */,
+				BFDD80DF15CC909A00116A65 /* VGKeyInfoQuery.m */,
+				BFADFD3D15DD3AF3005D082D /* VGSkillQueueQuery.h */,
+				BFADFD3E15DD3AF3005D082D /* VGSkillQueueQuery.m */,
+				BFC6D2DF15E4EB74008676BE /* VGCharacterInfoQuery.h */,
+				BFC6D2E015E4EB75008676BE /* VGCharacterInfoQuery.m */,
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			);
+			name = "Query parsers";
+			sourceTree = "<group>";
+		};
+<<<<<<< HEAD
+		BF6E20AC15F4C9CB007EAA8C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BF6E204315F4C671007EAA8C /* CoreDataController.h */,
+				BF6E204415F4C671007EAA8C /* CoreDataController.m */,
+				BF6E205C15F4C671007EAA8C /* VGAPIController.h */,
+				BF6E205D15F4C671007EAA8C /* VGAPIController.m */,
+				BF6E207C15F4C672007EAA8C /* VGUserNotificationController.h */,
+				BF6E207D15F4C672007EAA8C /* VGUserNotificationController.m */,
+			);
+			name = Controllers;
+=======
+		BFDD80E115CC922A00116A65 /* API Call */ = {
+			isa = PBXGroup;
+			children = (
+				BFDD80D615CC804500116A65 /* VGAPICall.h */,
+				BFDD80D715CC804500116A65 /* VGAPICall.m */,
+				BFDD80DD15CC906F00116A65 /* Query parsers */,
+			);
+			name = "API Call";
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		BFDD80E215CC924100116A65 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */,
+				BF0A208B15F3966600156E83 /* Managed objects */,
+			);
+			name = "Core Data";
+			path = Shared;
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+<<<<<<< HEAD
+		BF4F8A5D15F4C51C00E81D94 /* EVE Skill */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF4F8A7F15F4C51D00E81D94 /* Build configuration list for PBXNativeTarget "EVE Skill" */;
+			buildPhases = (
+				BF4F8A5A15F4C51C00E81D94 /* Sources */,
+				BF4F8A5B15F4C51C00E81D94 /* Frameworks */,
+				BF4F8A5C15F4C51C00E81D94 /* Resources */,
+=======
+		BF62B5C815CB274D00190CF6 /* EVE Skill */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF62B5E715CB274D00190CF6 /* Build configuration list for PBXNativeTarget "EVE Skill" */;
+			buildPhases = (
+				BF62B5C515CB274D00190CF6 /* Sources */,
+				BF62B5C615CB274D00190CF6 /* Frameworks */,
+				BF62B5C715CB274D00190CF6 /* Resources */,
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "EVE Skill";
+<<<<<<< HEAD
+			productName = "EVE Skill";
+			productReference = BF4F8A5E15F4C51C00E81D94 /* EVE Skill.app */;
+=======
+			productName = "EVE Skills";
+			productReference = BF62B5C915CB274D00190CF6 /* EVE Skill.app */;
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+<<<<<<< HEAD
+		BF4F8A5515F4C51C00E81D94 /* Project object */ = {
+=======
+		BF62B5C015CB274D00190CF6 /* Project object */ = {
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = VG;
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Vincent Garrigues";
+			};
+<<<<<<< HEAD
+			buildConfigurationList = BF4F8A5815F4C51C00E81D94 /* Build configuration list for PBXProject "EVE Skill" */;
+=======
+			buildConfigurationList = BF62B5C315CB274D00190CF6 /* Build configuration list for PBXProject "EVE Skill" */;
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+<<<<<<< HEAD
+			mainGroup = BF4F8A5315F4C51C00E81D94;
+			productRefGroup = BF4F8A5F15F4C51C00E81D94 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF4F8A5D15F4C51C00E81D94 /* EVE Skill */,
+=======
+			mainGroup = BF62B5BE15CB274D00190CF6;
+			productRefGroup = BF62B5CA15CB274D00190CF6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF62B5C815CB274D00190CF6 /* EVE Skill */,
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+<<<<<<< HEAD
+		BF4F8A5C15F4C51C00E81D94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF4F8A6D15F4C51C00E81D94 /* InfoPlist.strings in Resources */,
+				BF4F8A7315F4C51C00E81D94 /* Credits.rtf in Resources */,
+				BF4F8A7915F4C51D00E81D94 /* MainMenu.xib in Resources */,
+				BF4F8A8415F4C53300E81D94 /* README.md in Resources */,
+				BF4F8A9315F4C59000E81D94 /* icon.icns in Resources */,
+				BF4F8A9815F4C5A300E81D94 /* about_icon.png in Resources */,
+				BF4F8A9915F4C5A300E81D94 /* about_icon@2x.png in Resources */,
+				BF4F8A9A15F4C5A300E81D94 /* menu_bar_icon.png in Resources */,
+				BF4F8A9D15F4C5B000E81D94 /* menu_bar_icon@2x.png in Resources */,
+				BF4F8AA015F4C5C800E81D94 /* APIHelp.rtf in Resources */,
+				BF6E208415F4C672007EAA8C /* Localizable.strings in Resources */,
+				BF6E208C15F4C672007EAA8C /* skillStore.sqlite in Resources */,
+				BF6E209315F4C672007EAA8C /* VGHelpPopoverViewController.xib in Resources */,
+				BF6E209715F4C672007EAA8C /* VGManagerWindowController.xib in Resources */,
+				BF6E209915F4C672007EAA8C /* VGPreferencesWindowController.xib in Resources */,
+				BF6E209B15F4C672007EAA8C /* VGSkillDetailViewController.xib in Resources */,
+				BF6E209E15F4C672007EAA8C /* VGSkillQueueViewController.xib in Resources */,
+=======
+		BF62B5C715CB274D00190CF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF62B5D815CB274D00190CF6 /* InfoPlist.strings in Resources */,
+				BFDD80D515CC76BA00116A65 /* VGManagerWindowController.xib in Resources */,
+				BF4A829B15DBF742003AD68C /* VGSkillQueueViewController.xib in Resources */,
+				BF3A2A0715E24209007EE82C /* VGSkillDetailViewController.xib in Resources */,
+				BFC6D2D815E4D1B2008676BE /* skillStore.sqlite in Resources */,
+				BF6DAF4215F1F8AC0044C6E8 /* Localizable.strings in Resources */,
+				BF0A208D15F39A1E00156E83 /* README.md in Resources */,
+				BF0A208F15F3AF7B00156E83 /* icon.icns in Resources */,
+				BF0A209B15F3B5A000156E83 /* Credits.rtfd in Resources */,
+				BF1B774E15F3BE8600906C67 /* VGHelpPopoverViewController.xib in Resources */,
+				BF1B775115F3BEDF00906C67 /* APIHelp.rtf in Resources */,
+				BF1B775315F3C24E00906C67 /* MainMenu.xib in Resources */,
+				BF1B776415F3CD3B00906C67 /* about_icon.png in Resources */,
+				BF1B776515F3CD3B00906C67 /* about_icon@2x.png in Resources */,
+				BF1B776615F3CD3B00906C67 /* menu_bar_icon.png in Resources */,
+				BF1B776715F3CD3B00906C67 /* menu_bar_icon@2x.png in Resources */,
+				BF9A5D8215F46EC4001EA5D5 /* VGPreferencesWindowController.xib in Resources */,
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+<<<<<<< HEAD
+		BF4F8A5A15F4C51C00E81D94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF4F8A6F15F4C51C00E81D94 /* main.m in Sources */,
+				BF4F8A7615F4C51C00E81D94 /* VGAppDelegate.m in Sources */,
+				BF6E207E15F4C672007EAA8C /* API.m in Sources */,
+				BF6E207F15F4C672007EAA8C /* Character.m in Sources */,
+				BF6E208015F4C672007EAA8C /* CoreDataController.m in Sources */,
+				BF6E208115F4C672007EAA8C /* Corporation.m in Sources */,
+				BF6E208215F4C672007EAA8C /* EVE_Skill.xcdatamodel in Sources */,
+				BF6E208315F4C672007EAA8C /* Group.m in Sources */,
+				BF6E208515F4C672007EAA8C /* NSString+VGEVE.m in Sources */,
+				BF6E208615F4C672007EAA8C /* Portrait.m in Sources */,
+				BF6E208715F4C672007EAA8C /* Queue.m in Sources */,
+				BF6E208815F4C672007EAA8C /* Queue+VGEVE.m in Sources */,
+				BF6E208915F4C672007EAA8C /* QueueElement.m in Sources */,
+				BF6E208A15F4C672007EAA8C /* QueueElement+VGEVE.m in Sources */,
+				BF6E208B15F4C672007EAA8C /* Skill.m in Sources */,
+				BF6E208D15F4C672007EAA8C /* VGAPICall.m in Sources */,
+				BF6E208E15F4C672007EAA8C /* VGAPIController.m in Sources */,
+				BF6E208F15F4C672007EAA8C /* VGCharacterInfoQuery.m in Sources */,
+				BF6E209015F4C672007EAA8C /* VGCharacterSkillQueueCellView.m in Sources */,
+				BF6E209115F4C672007EAA8C /* VGCharacterTableCellView.m in Sources */,
+				BF6E209215F4C672007EAA8C /* VGHelpPopoverViewController.m in Sources */,
+				BF6E209415F4C672007EAA8C /* VGKeyInfoQuery.m in Sources */,
+				BF6E209515F4C672007EAA8C /* VGManagerTableCellView.m in Sources */,
+				BF6E209615F4C672007EAA8C /* VGManagerWindowController.m in Sources */,
+				BF6E209815F4C672007EAA8C /* VGPreferencesWindowController.m in Sources */,
+				BF6E209A15F4C672007EAA8C /* VGSkillDetailViewController.m in Sources */,
+				BF6E209C15F4C672007EAA8C /* VGSkillQueueQuery.m in Sources */,
+				BF6E209D15F4C672007EAA8C /* VGSkillQueueViewController.m in Sources */,
+				BF6E209F15F4C672007EAA8C /* VGSkillTree.m in Sources */,
+				BF6E20A015F4C672007EAA8C /* VGUserNotificationController.m in Sources */,
+=======
+		BF62B5C515CB274D00190CF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF62B5DA15CB274D00190CF6 /* main.m in Sources */,
+				BF62B5E115CB274D00190CF6 /* VGAppDelegate.m in Sources */,
+				BFDD80BE15CC728000116A65 /* CoreDataController.m in Sources */,
+				BFDD80BF15CC728000116A65 /* DataModel.xcdatamodel in Sources */,
+				BFDD80C015CC728000116A65 /* Group.m in Sources */,
+				BFDD80C115CC728000116A65 /* Skill.m in Sources */,
+				BFDD80D415CC76BA00116A65 /* VGManagerWindowController.m in Sources */,
+				BFDD80D815CC804500116A65 /* VGAPICall.m in Sources */,
+				BFDD80DB15CC839500116A65 /* VGAPIController.m in Sources */,
+				BFDD80E015CC909A00116A65 /* VGKeyInfoQuery.m in Sources */,
+				BFDD80FB15CC929400116A65 /* API.m in Sources */,
+				BF590E8C15DAAFC70036E10A /* VGSkillTree.m in Sources */,
+				BF4A829A15DBF742003AD68C /* VGSkillQueueViewController.m in Sources */,
+				BFADFD3915DD2F4F005D082D /* Queue+VGEVE.m in Sources */,
+				BFADFD3C15DD2FCF005D082D /* QueueElement+VGEVE.m in Sources */,
+				BFADFD3F15DD3AF3005D082D /* VGSkillQueueQuery.m in Sources */,
+				BFADFD4515DD5801005D082D /* VGCharacterSkillQueueCellView.m in Sources */,
+				BF3A2A0615E24209007EE82C /* VGSkillDetailViewController.m in Sources */,
+				BF3A2A0A15E25AAC007EE82C /* QueueElement.m in Sources */,
+				BF3A2A0D15E25AAD007EE82C /* Queue.m in Sources */,
+				BF3A2A1715E26DC8007EE82C /* VGCharacterTableCellView.m in Sources */,
+				BF3A2A1A15E28A53007EE82C /* VGUserNotificationController.m in Sources */,
+				BFB6E37615E3BC52004A9EE4 /* VGManagerTableCellView.m in Sources */,
+				BFC6D2DB15E4E362008676BE /* Corporation.m in Sources */,
+				BFC6D2DE15E4E363008676BE /* Character.m in Sources */,
+				BFC6D2E115E4EB75008676BE /* VGCharacterInfoQuery.m in Sources */,
+				BF6DAF4C15F253430044C6E8 /* NSString+VGEVE.m in Sources */,
+				BF0E77C815F3899C00234ABB /* VGLoginStart.m in Sources */,
+				BF1B774D15F3BE8600906C67 /* VGHelpPopoverViewController.m in Sources */,
+				BF9A5D8115F46EC4001EA5D5 /* VGPreferencesWindowController.m in Sources */,
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+<<<<<<< HEAD
+		BF4F8A6B15F4C51C00E81D94 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF4F8A6C15F4C51C00E81D94 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BF4F8A7115F4C51C00E81D94 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF4F8A7215F4C51C00E81D94 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		BF4F8A7715F4C51D00E81D94 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF4F8A7815F4C51D00E81D94 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		BF4F8A9E15F4C5C800E81D94 /* APIHelp.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF4F8A9F15F4C5C800E81D94 /* en */,
+			);
+			name = APIHelp.rtf;
+=======
+		BF0A209915F3B5A000156E83 /* Credits.rtfd */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF0A209A15F3B5A000156E83 /* en */,
+			);
+			name = Credits.rtfd;
+			sourceTree = "<group>";
+		};
+		BF1B774F15F3BEDF00906C67 /* APIHelp.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF1B775015F3BEDF00906C67 /* en */,
+			);
+			name = APIHelp.rtf;
+			sourceTree = "<group>";
+		};
+		BF62B5D615CB274D00190CF6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF62B5D715CB274D00190CF6 /* en */,
+			);
+			name = InfoPlist.strings;
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+<<<<<<< HEAD
+		BF4F8A7D15F4C51D00E81D94 /* Debug */ = {
+=======
+		BF62B5E515CB274D00190CF6 /* Debug */ = {
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+<<<<<<< HEAD
+=======
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+<<<<<<< HEAD
+=======
+				PROVISIONING_PROFILE = "";
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+<<<<<<< HEAD
+		BF4F8A7E15F4C51D00E81D94 /* Release */ = {
+=======
+		BF62B5E615CB274D00190CF6 /* Release */ = {
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+<<<<<<< HEAD
+=======
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+<<<<<<< HEAD
+=======
+				PROVISIONING_PROFILE = "";
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+<<<<<<< HEAD
+		BF4F8A8015F4C51D00E81D94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "EVE Skill/EVE Skill.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer: Vincent Garrigues (RWWDC7VMQ9)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EVE Skill/EVE Skill-Prefix.pch";
+				INFOPLIST_FILE = "EVE Skill/EVE Skill-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "21B2FBC1-C469-4ECF-9C12-05EB95D276FD";
+=======
+		BF62B5E815CB274D00190CF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "EVE Skill.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EVE Skills/EVE Skill-Prefix.pch";
+				INFOPLIST_FILE = "EVE Skills/EVE Skill-Info.plist";
+				PRODUCT_NAME = "EVE Skill";
+				PROVISIONING_PROFILE = "";
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+<<<<<<< HEAD
+		BF4F8A8115F4C51D00E81D94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "EVE Skill/EVE Skill.entitlements";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Vincent Garrigues";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EVE Skill/EVE Skill-Prefix.pch";
+				INFOPLIST_FILE = "EVE Skill/EVE Skill-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "F7E3807D-4D66-4246-8C6C-B8104974A730";
+=======
+		BF62B5E915CB274D00190CF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "EVE Skill.entitlements";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EVE Skills/EVE Skill-Prefix.pch";
+				INFOPLIST_FILE = "EVE Skills/EVE Skill-Info.plist";
+				PRODUCT_NAME = "EVE Skill";
+				PROVISIONING_PROFILE = "";
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+<<<<<<< HEAD
+		BF4F8A5815F4C51C00E81D94 /* Build configuration list for PBXProject "EVE Skill" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF4F8A7D15F4C51D00E81D94 /* Debug */,
+				BF4F8A7E15F4C51D00E81D94 /* Release */,
+=======
+		BF62B5C315CB274D00190CF6 /* Build configuration list for PBXProject "EVE Skill" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF62B5E515CB274D00190CF6 /* Debug */,
+				BF62B5E615CB274D00190CF6 /* Release */,
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+<<<<<<< HEAD
+		BF4F8A7F15F4C51D00E81D94 /* Build configuration list for PBXNativeTarget "EVE Skill" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF4F8A8015F4C51D00E81D94 /* Debug */,
+				BF4F8A8115F4C51D00E81D94 /* Release */,
+=======
+		BF62B5E715CB274D00190CF6 /* Build configuration list for PBXNativeTarget "EVE Skill" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF62B5E815CB274D00190CF6 /* Debug */,
+				BF62B5E915CB274D00190CF6 /* Release */,
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+<<<<<<< HEAD
+	rootObject = BF4F8A5515F4C51C00E81D94 /* Project object */;
+=======
+	rootObject = BF62B5C015CB274D00190CF6 /* Project object */;
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+}

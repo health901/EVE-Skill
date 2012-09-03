@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+<<<<<<< HEAD
+		<key>EVE Skill.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+=======
+		<key>EVE Skills.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+<<<<<<< HEAD
+		<key>BF4F8A5D15F4C51C00E81D94</key>
+=======
+		<key>BF62B5C815CB274D00190CF6</key>
+>>>>>>> 04deb6346537f1e06743367f47649030444748dc
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
