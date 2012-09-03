@@ -199,8 +199,8 @@
     if (!_managerWindowController) {
         _managerWindowController = [[VGManagerWindowController alloc] initWithWindowNibName:@"VGManagerWindowController"];
     }
-    
-    [_managerWindowController.window makeKeyAndOrderFront:self];
+    [NSApp activateIgnoringOtherApps:YES];
+    [_managerWindowController.window makeKeyAndOrderFront:nil];
 }
 
 - (void)openAboutWindow
