@@ -1,7 +1,7 @@
-EVE Skills
-==========
+EVE Skill
+=========
 
-EVE Skills is a menu bar app that tracks an EVE Online characters's skill queue.
+EVE Skill is a menu bar app that tracks an EVE Online characters's skill queue.
 
 Features
 --------
