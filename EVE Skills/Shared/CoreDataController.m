@@ -104,7 +104,7 @@ NSString * kSkillStoreFilename = @"skillStore.sqlite"; //holds the skill and gro
 NSString * test = @"test";
 
 #define SEED_ICLOUD_STORE NO
-#define FORCE_FALLBACK_STORE
+//#define FORCE_FALLBACK_STORE
 
 static NSOperationQueue *_presentedItemOperationQueue;
 
@@ -122,7 +122,6 @@ static NSOperationQueue *_presentedItemOperationQueue;
 
 - (void)deDupe:(NSNotification *)importNotification;
 
-//- (void)addPerson:(Person *)person toStore:(NSPersistentStore *)store withContext:(NSManagedObjectContext *)moc;
 - (BOOL)seedStore:(NSPersistentStore *)store withPersistentStoreAtURL:(NSURL *)seedStoreURL error:(NSError * __autoreleasing *)error;
 
 - (void)copyContainerToSandbox;
@@ -975,6 +974,19 @@ static NSOperationQueue *_presentedItemOperationQueue;
 - (void)saveMainThreadContext
 {
     [self.mainThreadContext performBlock:^{
+        // First update the timestamp attribute on all modified objects
+        for (NSManagedObject *managedObject in self.mainThreadContext.updatedObjects) {
+            if ([managedObject isKindOfClass:[API class]]) {
+                NSLog(@"API modified");
+                [(API *)managedObject setTimestamp:[NSDate date]];
+            }
+            if ([managedObject isKindOfClass:[Character class]]) {
+                NSLog(@"Character modified");
+                [(Character *)managedObject setTimestamp:[NSDate date]];
+            }
+        }
+        
+        // Save the main thread context
         NSError *error = nil;
         if (![self.mainThreadContext save:&error]) {
             NSLog(@"Error while saving main thread context : %@, %@", error, [error userInfo]);
