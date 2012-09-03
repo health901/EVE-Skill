@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		BF0A208D15F39A1E00156E83 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BF0A208C15F39A1E00156E83 /* README.md */; };
 		BF0A208F15F3AF7B00156E83 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BF0A208E15F3AF7A00156E83 /* icon.icns */; };
-		BF0A209315F3B25500156E83 /* VGAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0A209115F3B25500156E83 /* VGAboutWindowController.m */; };
-		BF0A209415F3B25500156E83 /* VGAboutWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF0A209215F3B25500156E83 /* VGAboutWindowController.xib */; };
 		BF0A209B15F3B5A000156E83 /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = BF0A209915F3B5A000156E83 /* Credits.rtfd */; };
 		BF0E77C815F3899C00234ABB /* VGLoginStart.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0E77C715F3899C00234ABB /* VGLoginStart.m */; };
 		BF1B774D15F3BE8600906C67 /* VGHelpPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1B774B15F3BE8600906C67 /* VGHelpPopoverViewController.m */; };
@@ -61,9 +59,6 @@
 /* Begin PBXFileReference section */
 		BF0A208C15F39A1E00156E83 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		BF0A208E15F3AF7A00156E83 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../icon.icns; sourceTree = "<group>"; };
-		BF0A209015F3B25500156E83 /* VGAboutWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGAboutWindowController.h; sourceTree = "<group>"; };
-		BF0A209115F3B25500156E83 /* VGAboutWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGAboutWindowController.m; sourceTree = "<group>"; };
-		BF0A209215F3B25500156E83 /* VGAboutWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VGAboutWindowController.xib; sourceTree = "<group>"; };
 		BF0A209A15F3B5A000156E83 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = en; path = en.lproj/Credits.rtfd; sourceTree = "<group>"; };
 		BF0E77C615F3899C00234ABB /* VGLoginStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGLoginStart.h; sourceTree = "<group>"; };
 		BF0E77C715F3899C00234ABB /* VGLoginStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGLoginStart.m; sourceTree = "<group>"; };
@@ -109,6 +104,7 @@
 		BF6DAF4115F1F8AC0044C6E8 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		BF6DAF4A15F253420044C6E8 /* NSString+VGEVE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+VGEVE.h"; sourceTree = "<group>"; };
 		BF6DAF4B15F253420044C6E8 /* NSString+VGEVE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+VGEVE.m"; sourceTree = "<group>"; };
+		BF9A5D7D15F40B73001EA5D5 /* EVE Skills.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EVE Skills.entitlements"; sourceTree = "<group>"; };
 		BFADFD3715DD2F4F005D082D /* Queue+VGEVE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Queue+VGEVE.h"; sourceTree = "<group>"; };
 		BFADFD3815DD2F4F005D082D /* Queue+VGEVE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Queue+VGEVE.m"; sourceTree = "<group>"; };
 		BFADFD3A15DD2FCF005D082D /* QueueElement+VGEVE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QueueElement+VGEVE.h"; sourceTree = "<group>"; };
@@ -127,7 +123,6 @@
 		BFC6D2DD15E4E363008676BE /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
 		BFC6D2DF15E4EB74008676BE /* VGCharacterInfoQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGCharacterInfoQuery.h; sourceTree = "<group>"; };
 		BFC6D2E015E4EB75008676BE /* VGCharacterInfoQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VGCharacterInfoQuery.m; sourceTree = "<group>"; };
-		BFD5DFC615E3D05E004D4E5A /* EVE Skills.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "EVE Skills.entitlements"; sourceTree = "<group>"; };
 		BFDD80B715CC728000116A65 /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataController.h; path = Shared/CoreDataController.h; sourceTree = "<group>"; };
 		BFDD80B815CC728000116A65 /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataController.m; path = Shared/CoreDataController.m; sourceTree = "<group>"; };
 		BFDD80B915CC728000116A65 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -189,9 +184,6 @@
 				BFDD80D115CC76BA00116A65 /* VGManagerWindowController.h */,
 				BFDD80D215CC76BA00116A65 /* VGManagerWindowController.m */,
 				BFDD80D315CC76BA00116A65 /* VGManagerWindowController.xib */,
-				BF0A209015F3B25500156E83 /* VGAboutWindowController.h */,
-				BF0A209115F3B25500156E83 /* VGAboutWindowController.m */,
-				BF0A209215F3B25500156E83 /* VGAboutWindowController.xib */,
 			);
 			name = Window;
 			sourceTree = "<group>";
@@ -289,7 +281,7 @@
 		BF62B5D315CB274D00190CF6 /* EVE Skills */ = {
 			isa = PBXGroup;
 			children = (
-				BFD5DFC615E3D05E004D4E5A /* EVE Skills.entitlements */,
+				BF9A5D7D15F40B73001EA5D5 /* EVE Skills.entitlements */,
 				BF4A829515DBEC69003AD68C /* VGAppNotifications.h */,
 				BF62B5DF15CB274D00190CF6 /* VGAppDelegate.h */,
 				BF62B5E015CB274D00190CF6 /* VGAppDelegate.m */,
@@ -460,7 +452,6 @@
 				BF6DAF4215F1F8AC0044C6E8 /* Localizable.strings in Resources */,
 				BF0A208D15F39A1E00156E83 /* README.md in Resources */,
 				BF0A208F15F3AF7B00156E83 /* icon.icns in Resources */,
-				BF0A209415F3B25500156E83 /* VGAboutWindowController.xib in Resources */,
 				BF0A209B15F3B5A000156E83 /* Credits.rtfd in Resources */,
 				BF1B774E15F3BE8600906C67 /* VGHelpPopoverViewController.xib in Resources */,
 				BF1B775115F3BEDF00906C67 /* APIHelp.rtf in Resources */,
@@ -507,7 +498,6 @@
 				BFC6D2E115E4EB75008676BE /* VGCharacterInfoQuery.m in Sources */,
 				BF6DAF4C15F253430044C6E8 /* NSString+VGEVE.m in Sources */,
 				BF0E77C815F3899C00234ABB /* VGLoginStart.m in Sources */,
-				BF0A209315F3B25500156E83 /* VGAboutWindowController.m in Sources */,
 				BF1B774D15F3BE8600906C67 /* VGHelpPopoverViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

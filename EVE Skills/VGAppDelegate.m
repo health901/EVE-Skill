@@ -9,7 +9,6 @@
 #import "VGAppDelegate.h"
 #import "VGManagerWindowController.h"
 #import "VGSkillQueueViewController.h"
-#import "VGAboutWindowController.h"
 #import "VGLoginStart.h"
 
 
@@ -22,7 +21,6 @@
 @interface VGAppDelegate () {
     // Window controllers
     VGManagerWindowController *_managerWindowController;
-    VGAboutWindowController *_aboutWindowController;
     
     // View controllers
     VGSkillQueueViewController *_skillQueueViewController;
@@ -207,12 +205,7 @@
 
 - (void)openAboutWindow
 {
-    
-    if (!_aboutWindowController) {
-        _aboutWindowController = [[VGAboutWindowController alloc] initWithWindowNibName:@"VGAboutWindowController"];
-    }
-    
-    [_aboutWindowController.window makeKeyAndOrderFront:self];
+    [NSApp orderFrontStandardAboutPanel:self];
 }
 
 - (void)showMenuBarMenu
