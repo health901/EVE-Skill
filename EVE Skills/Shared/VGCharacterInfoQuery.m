@@ -98,6 +98,7 @@
     if ([elementName isEqualToString:@"error"]) {
         // the API query returned an error
         NSLog(@"The API query returned an error : %@", _currentString);
+        [VGAPIController presentAPIErrorMessage:[[_currentString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] copy]];
     }
     
     if ([elementName isEqualToString:@"corporationID"]) {

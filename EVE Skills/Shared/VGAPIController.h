@@ -17,6 +17,8 @@
 @property (strong) dispatch_group_t dispatchGroup;
 @property (nonatomic, readonly) NSManagedObjectContext *apiControllerContext;
 
++ (void)presentAPIErrorMessage:(NSString *)message;
+
 // this function must be called in the controller's dispatch queue
 // it creates the MOC
 - (void)initialize;

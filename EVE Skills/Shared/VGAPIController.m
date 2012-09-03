@@ -63,6 +63,21 @@
 }
 
 #pragma mark -
+#pragma mark - Static method
+
++ (void)presentAPIErrorMessage:(NSString *)message
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"apiAlertMessage", nil)
+                                         defaultButton:NSLocalizedString(@"OK", nil)
+                                       alternateButton:nil
+                                           otherButton:nil
+                             informativeTextWithFormat:NSLocalizedString(@"apiAlertInformativeText", nil), message];
+        [alert runModal];
+    });
+}
+
+#pragma mark -
 #pragma mark - Private methods
 
 - (NSData *)callAPIWithDictionaryAsync:(NSDictionary *)dict

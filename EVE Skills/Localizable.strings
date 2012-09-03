@@ -58,6 +58,13 @@
 "iCloudAlertInformativeText"    = "The changes will take effect on next application launch";
 
 /*
+ API Alert
+ */
+"apiAlertMessage"            = "EVE Online API";
+"apiAlertInformativeText"    = "The API query returned an error: \n%@";
+
+
+/*
  Saving error
  */
 "savingErrorMessage" = "Could not save changes while quitting. Quit anyway?";
