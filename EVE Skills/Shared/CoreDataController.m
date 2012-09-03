@@ -181,7 +181,7 @@ static NSOperationQueue *_presentedItemOperationQueue;
 #ifdef FORCE_FALLBACK_STORE
     BOOL available = NO;
 #else
-    BOOL available = (_currentUbiquityToken != nil);
+    BOOL available = (_currentUbiquityToken != nil && [[[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsICloudEnabled] boolValue]);
 #endif
     return available;
 }
@@ -603,18 +603,25 @@ static NSOperationQueue *_presentedItemOperationQueue;
         
         NSUInteger batchSize = 500; //can be set 100-10000 objects depending on individual object size and available device memory
         [fr setFetchBatchSize:batchSize];
+        error = nil;
         NSArray *dupes = [moc executeFetchRequest:fr error:&error];
+        if (error) {
+            NSLog(@"Error fetching dupes: %@, %@", error, [error userInfo]);
+        }
+        
+        NSLog(@"dupes.count = %lu", dupes.count);
         
         API *prevAPI = nil;
-        
         NSUInteger i = 1;
         for (API *api in dupes) {
             if (prevAPI) {
                 if ([api.keyID isEqualToString:prevAPI.keyID]) {
                     if ([api.timestamp compare:prevAPI.timestamp] == NSOrderedAscending) {
-                        [moc deleteObject:api];
+                        NSLog(@"deleted : %@", api);
+                        [self deleteAPI:api inContext:moc];
                     } else {
-                        [moc deleteObject:prevAPI];
+                        NSLog(@"deleted : %@", prevAPI);
+                        [self deleteAPI:prevAPI inContext:moc];
                         prevAPI = api;
                     }
                 } else {
@@ -636,12 +643,24 @@ static NSOperationQueue *_presentedItemOperationQueue;
             i++;
         }
         
+        if ([moc hasChanges]) {
+            NSLog(@"[moc hasChanges] : %@", moc.deletedObjects);
+        }
+        
         if ([moc save:&error]) {
             NSLog(@"Saved successfully after uniquing");
         } else {
             NSLog(@"Error saving unique results: %@", error);
         }
     }
+}
+
+- (void)deleteAPI:(API *)api inContext:(NSManagedObjectContext *)moc
+{
+    for (Character *character in api.characters) {
+        [moc deleteObject:character];
+    }
+    [moc deleteObject:api];
 }
 
 #pragma mark -

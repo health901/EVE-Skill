@@ -16,8 +16,6 @@
     VGAppDelegate *_appDelegate;
 }
 
-- (void)resizeToFitEnabledCharacters;
-
 @end
 
 @implementation VGSkillQueueViewController

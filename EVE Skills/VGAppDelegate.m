@@ -8,6 +8,7 @@
 
 #import "VGAppDelegate.h"
 #import "VGManagerWindowController.h"
+#import "VGPreferencesWindowController.h"
 #import "VGSkillQueueViewController.h"
 #import "VGLoginStart.h"
 
@@ -21,6 +22,7 @@
 @interface VGAppDelegate () {
     // Window controllers
     VGManagerWindowController *_managerWindowController;
+    VGPreferencesWindowController *_preferencesWindowController;
     
     // View controllers
     VGSkillQueueViewController *_skillQueueViewController;
@@ -34,6 +36,7 @@
     NSMenuItem *_refreshMenuItem;
     NSMenuItem *_startAtLoginMenuItem;
     NSMenuItem *_managerMenuItem;
+    NSMenuItem *_preferencesMenuItem;
     NSMenuItem *_aboutMenuItem;
     NSMenuItem *_quitMenuItem;
     
@@ -92,8 +95,8 @@
             // Log some thing about the app
             
             // Start at login
-            NSLog(@"appURL       = %@", [self appURL]);
-            NSLog(@"startAtLogin = %@", [VGLoginStart willStartAtLogin:[self appURL]] ? @"YES" : @"NO");
+//            NSLog(@"appURL       = %@", [self appURL]);
+//            NSLog(@"startAtLogin = %@", [VGLoginStart willStartAtLogin:[self appURL]] ? @"YES" : @"NO");
             
             // Characters in DB
 //            [_coreDataController.mainThreadContext performBlock:^{
@@ -175,12 +178,54 @@
 
 - (void)loadAppDefaultPreferences
 {
+    [NSUserDefaults resetStandardUserDefaults];
+    
     NSDictionary *appDefaults = @{@"colorSkill1": [NSArchiver archivedDataWithRootObject:[NSColor colorWithCalibratedRed:58.0/255 green:139.0/255 blue:176.0/255 alpha:1.0]],
                                  @"colorSkill2": [NSArchiver archivedDataWithRootObject:[NSColor colorWithCalibratedRed:34.0/255 green:112.0/255 blue:157.0/255 alpha:1.0]],
                                  @"colorWarning": [NSArchiver archivedDataWithRootObject:[NSColor yellowColor]],
-                                 @"colorError": [NSArchiver archivedDataWithRootObject:[NSColor redColor]]};
+                                 @"colorError": [NSArchiver archivedDataWithRootObject:[NSColor redColor]],
+    kUserDefaultsICloudEnabled : @NO,
+    kUserDefaultsAppOpenAtLogin : @NO};
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    
+    [self observePreference:kUserDefaultsICloudEnabled];
+    [self observePreference:kUserDefaultsAppOpenAtLogin];
+}
+
+// http://stackoverflow.com/questions/1141388/cocoa-notification-on-nsuserdefaults-value-change
+- (void)observePreference:(NSString *)pref
+{
+    [[NSUserDefaults standardUserDefaults] addObserver:self
+                                            forKeyPath:pref
+                                               options:NSKeyValueObservingOptionNew
+                                               context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if ([object isEqual:[NSUserDefaults standardUserDefaults]]) {
+        if ([keyPath isEqualToString:kUserDefaultsICloudEnabled]) {
+            // iCloud change
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"iCloudAlertMessage", nil)
+                                                 defaultButton:NSLocalizedString(@"OK", nil)
+                                               alternateButton:nil
+                                                   otherButton:nil
+                                     informativeTextWithFormat:@"%@", NSLocalizedString(@"iCloudAlertInformativeText", nil)];
+                [alert runModal];
+            });
+        } else if ([keyPath isEqualToString:kUserDefaultsAppOpenAtLogin]) {
+            // open at login change
+            BOOL enabled = [[[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsAppOpenAtLogin] boolValue];
+            [VGLoginStart setStartAtLogin:[self appURL] enabled:enabled];
+        }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 #pragma mark -
@@ -201,6 +246,15 @@
     }
     [NSApp activateIgnoringOtherApps:YES];
     [_managerWindowController.window makeKeyAndOrderFront:nil];
+}
+
+- (void)openPreferencesWindow
+{
+    if (!_preferencesWindowController) {
+        _preferencesWindowController = [[VGPreferencesWindowController alloc] initWithWindowNibName:@"VGPreferencesWindowController"];
+    }
+    [NSApp activateIgnoringOtherApps:YES];
+    [_preferencesWindowController.window makeKeyAndOrderFront:nil];
 }
 
 - (void)openAboutWindow
@@ -267,14 +321,13 @@
                                                   action:@selector(refreshAction)
                                            keyEquivalent:@""];
     
-    _startAtLoginMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"menuStartAtLogin", nil)
-                                                       action:@selector(startAtLoginAction)
-                                                keyEquivalent:@""];
-    _startAtLoginMenuItem.title = ([VGLoginStart willStartAtLogin:[self appURL]] ? NSLocalizedString(@"menuStartAtLoginYES", nil) : NSLocalizedString(@"menuStartAtLoginNO", nil));
-    
     _managerMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"menuCharacterManager", nil)
                                                   action:@selector(managerAction)
                                            keyEquivalent:@""];
+    
+    _preferencesMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"menuPreferences", nil)
+                                                      action:@selector(preferencesAction)
+                                               keyEquivalent:@""];
     
     _aboutMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"menuAbout", nil)
                                                 action:@selector(aboutAction)
@@ -296,9 +349,10 @@
     [_menu addItem:_skillQueueMenuItem];
     [_menu addItem:[NSMenuItem separatorItem]];
     [_menu addItem:_managerMenuItem];
-    [_menu addItem:_startAtLoginMenuItem];
+//    [_menu addItem:_startAtLoginMenuItem];
 //    [_menu addItem:_refreshMenuItem];
     [_menu addItem:[NSMenuItem separatorItem]];
+    [_menu addItem:_preferencesMenuItem];
     [_menu addItem:_aboutMenuItem];
     [_menu addItem:[NSMenuItem separatorItem]];
     [_menu addItem:_quitMenuItem];
@@ -307,12 +361,6 @@
 - (void)refreshAction
 {
     NSLog(@"refreshAction");
-//    [_coreDataController deleteLocalStore:^{
-//        NSLog(@"refreshAction - DONE");
-//        [_apiController refreshQueueForCharacterEnabled:YES completionBlock:^{
-//            
-//        }];
-//    }];
 }
 
 - (void)managerAction
@@ -321,15 +369,10 @@
     [self openManagerWindow];
 }
 
-- (void)startAtLoginAction
+- (void)preferencesAction
 {
-    NSLog(@"startAtLoginAction");
-    
-    // Add/Remove the app from the login start list
-    [VGLoginStart setStartAtLogin:[self appURL] enabled:![VGLoginStart willStartAtLogin:[self appURL]]];
-    
-    // Update the UI
-    _startAtLoginMenuItem.title = ([VGLoginStart willStartAtLogin:[self appURL]] ? NSLocalizedString(@"menuStartAtLoginYES", nil) : NSLocalizedString(@"menuStartAtLoginNO", nil));
+    NSLog(@"preferencesAction");
+    [self openPreferencesWindow];
 }
 
 - (void)aboutAction

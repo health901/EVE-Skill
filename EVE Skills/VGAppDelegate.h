@@ -12,7 +12,12 @@
 #import "VGAppNotifications.h"
 #import "VGUserNotificationController.h"
 
+// User default keys
+static NSString *kUserDefaultsICloudEnabled = @"iCloudEnabled";
+static NSString *kUserDefaultsAppOpenAtLogin = @"appOpenAtLogin";
+
 @interface VGAppDelegate : NSObject <NSApplicationDelegate>
+
 
 @property (nonatomic, strong, readonly) CoreDataController *coreDataController;
 @property (nonatomic, strong, readonly) VGAPIController *apiController;

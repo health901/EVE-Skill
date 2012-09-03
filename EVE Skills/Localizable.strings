@@ -28,9 +28,8 @@
 "menuTooltipTitle"      = "EVE Skills";
 "menuTitle"             = "EVE Skills";
 "menuStartAtLogin"      = "Open at login";
-"menuStartAtLoginNO"    = "Enable open at login";
-"menuStartAtLoginYES"   = "Disable open at login";
 "menuRefresh"           = "Refresh";
+"menuPreferences"       = "Preferences";
 "menuCharacterManager"  = "Character manager";
 "menuAbout"             = "About";
 "menuQuit"              = "Quit";
@@ -51,6 +50,12 @@
 "second"    = "s"; // "second";
 "seconds"   = "s"; // "seconds";
 
+
+/*
+ iCloud Alert
+ */
+"iCloudAlertMessage"            = "iCloud support";
+"iCloudAlertInformativeText"    = "The changes will take effect on next application launch";
 
 /*
  Saving error

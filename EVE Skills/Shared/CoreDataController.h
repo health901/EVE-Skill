@@ -138,6 +138,8 @@
 - (void)loadPersistentStores;
 - (void)loadPersistentStores:(void (^)())completionBlock;
 
+- (void)dropStores;
+
 /*
  Delete all objects in the local store
  */
